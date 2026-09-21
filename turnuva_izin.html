@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Haydarpaşa Lisesi - Turnuva ve Egzersiz Veli İzin Belgesi</title>
+<style>
+  @page { size: A4 portrait; margin: 15mm; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    color: #0f172a;
+    background: #525659;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .toolbar {
+    width: 210mm;
+    max-width: 100%;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1e293b;
+    padding: 10px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  .toolbar span { color: white; font-weight: 700; font-size: 13px; }
+  .btn-print {
+    background: #c40018;
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-weight: 800;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    background: white;
+    padding: 18mm 20mm;
+    box-sizing: border-box;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    border-radius: 4px;
+    font-size: 9pt;
+    line-height: 1.35;
+  }
+  .header { text-align: center; border-bottom: 2px solid #990012; padding-bottom: 8px; margin-bottom: 10px; }
+  .school-title { font-size: 14pt; font-weight: 900; color: #990012; margin: 0; }
+  .doc-title { font-size: 9.5pt; font-weight: 800; color: #0f172a; margin: 4px 0 0 0; }
+  .info-table { width: 100%; border-collapse: collapse; margin-bottom: 8px; font-size: 8.5pt; background: #f8fafc; border: 1px solid #cbd5e1; }
+  .info-table td { padding: 4px 8px; border: 1px solid #cbd5e1; }
+  .directorate { font-weight: 800; font-size: 9.5pt; text-align: center; margin: 10px 0 6px 0; color: #990012; }
+  .body-text { font-size: 8.5pt; color: #1e293b; margin-bottom: 8px; text-align: justify; }
+  .sec-title { font-size: 9pt; font-weight: 800; color: #990012; margin: 8px 0 3px 0; }
+  ul { margin: 0 0 8px 0; padding-left: 15px; }
+  li { font-size: 8.5pt; color: #1e293b; margin-bottom: 3px; text-align: justify; }
+  .sign-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 8.5pt; background: #f8fafc; border: 1px solid #cbd5e1; }
+  .sign-table td { padding: 6px 10px; border: 1px solid #cbd5e1; vertical-align: top; width: 50%; }
+  .footer-note { font-size: 7.5pt; color: #64748b; margin-top: 12px; text-align: center; font-style: italic; }
+  @media print {
+    body { background: white; padding: 0; }
+    .toolbar { display: none; }
+    .page { box-shadow: none; padding: 10mm 15mm; width: 100%; min-height: auto; }
+  }
+</style>
+</head>
+<body>
+  <div class="toolbar">
+    <span>📄 TURNUVA VE EGZERSİZ VELİ İZİN BELGESİ</span>
+    <button class="btn-print" onclick="window.print()">🖨️ Yazdır / PDF Olarak Kaydet</button>
+  </div>
+
+  <div class="page">
+    <div class="header">
+      <div class="school-title">HAYDARPAŞA LİSESİ</div>
+      <div class="doc-title">OKUL İÇİ / İL-İLÇE TURNUVALARI VE EGZERSİZ ANTRENMANLARI VELİ İZİN BELGESİ</div>
+    </div>
+
+    <table class="info-table">
+      <tr>
+        <td><b>Öğrencinin Adı Soyadı:</b> .................................................</td>
+        <td><b>Sınıfı / Şubesi:</b> .......................</td>
+      </tr>
+      <tr>
+        <td><b>T.C. Kimlik No:</b> .............................................................</td>
+        <td><b>Okul Numarası:</b> .......................</td>
+      </tr>
+      <tr>
+        <td><b>Spor Branşı / Faaliyet:</b> ...............................................</td>
+        <td><b>Doğum Tarihi:</b> .......................</td>
+      </tr>
+    </table>
+
+    <div class="directorate">HAYDARPAŞA LİSESİ MÜDÜRLÜĞÜNE</div>
+
+    <div class="body-text">
+      Velisi bulunduğum yukarıda açık kimlik bilgileri yazılı okulunuz öğrencisinin; 2026-2027 Eğitim-Öğretim Yılı süresince okulunuz bünyesinde yürütülen okul içi turnuvalar, ders dışı egzersiz antrenmanları ile il ve ilçe genelinde düzenlenecek tüm spor müsabakalarına ve hazırlık çalışmalarına katılmasına izin veriyorum[cite: 5].
+    </div>
+
+    <div class="sec-title">BEYAN VE KABUL EDİLEN HUSUSLAR</div>
+    <ul>
+      <li>Öğrencimin spor ve egzersiz faaliyetlerine katılmasına engel teşkil edecek herhangi bir sağlık probleminin bulunmadığını,[cite: 5]</li>
+      <li>Antrenman, ders dışı egzersiz ve yerel müsabakalar süresince görevli öğretmenlerin belirlediği çalışma programına, güvenlik ve disiplin kurallarına uyacağını,[cite: 5]</li>
+      <li>Çocuğumun sağlık durumunda bir değişiklik olması halinde Beden Eğitimi zümresine ve okul idaresine yazılı olarak bildireceğimi kabul ve taahhüt ederim.[cite: 5]</li>
+    </ul>
+
+    <table class="sign-table">
+      <tr>
+        <td>
+          <b>VELİ BİLGİLERİ VE ONAY</b><br><br>
+          <b>Adı ve Soyadı:</b> ....................................................<br>
+          <b>Yakınlık Derecesi:</b> (Anne / Baba / Vasi)[cite: 5]<br>
+          <b>Telefon (Cep):</b> ....................................................<br>
+          <b>Acil Durum Tel:</b> ...................................................
+        </td>
+        <td>
+          <br>
+          <b>Tarih:</b> ..... / ..... / 2026<br><br><br>
+          <b>İmza:</b> ...................................................................
+        </td>
+      </tr>
+    </table>
+
+    <div class="footer-note">
+      *Bu izin belgesi, öğrencinin egzersiz çalışma listeleri ve okul/il/ilçe müsabaka katılımları için Beden Eğitimi ve Spor Zümresi tarafından muhafaza edilecektir.[cite: 5]
+    </div>
+  </div>
+</body>
+</html>

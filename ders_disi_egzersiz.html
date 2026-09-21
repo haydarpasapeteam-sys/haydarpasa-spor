@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Haydarpaşa Lisesi - Ders Dışı Egzersiz Veli İzin Belgesi</title>
+<style>
+  @page { size: A4 portrait; margin: 15mm; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    color: #0f172a;
+    background: #525659;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .toolbar {
+    width: 210mm;
+    max-width: 100%;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1e293b;
+    padding: 10px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  .toolbar span { color: white; font-weight: 700; font-size: 13px; }
+  .btn-print {
+    background: #c40018;
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-weight: 800;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    background: white;
+    padding: 18mm 20mm;
+    box-sizing: border-box;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    border-radius: 4px;
+    font-size: 9pt;
+    line-height: 1.35;
+  }
+  .header { text-align: center; border-bottom: 2px solid #990012; padding-bottom: 8px; margin-bottom: 12px; }
+  .school-title { font-size: 14pt; font-weight: 900; color: #990012; margin: 0; }
+  .doc-title { font-size: 10pt; font-weight: 800; color: #0f172a; margin: 4px 0 0 0; }
+  .info-table { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 9pt; background: #f8fafc; border: 1px solid #cbd5e1; }
+  .info-table td { padding: 5px 8px; border: 1px solid #cbd5e1; }
+  .directorate { font-weight: 800; font-size: 9.5pt; text-align: center; margin: 12px 0 8px 0; color: #990012; }
+  .body-text { font-size: 8.5pt; color: #1e293b; margin-bottom: 10px; text-align: justify; }
+  .sec-title { font-size: 9pt; font-weight: 800; color: #990012; margin: 8px 0 3px 0; }
+  ul { margin: 0 0 10px 0; padding-left: 15px; }
+  li { font-size: 8.5pt; color: #1e293b; margin-bottom: 3px; text-align: justify; }
+  .sign-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 9pt; background: #f8fafc; border: 1px solid #cbd5e1; }
+  .sign-table td { padding: 8px 12px; border: 1px solid #cbd5e1; vertical-align: top; width: 50%; }
+  .footer-note { font-size: 7.5pt; color: #64748b; margin-top: 15px; text-align: center; font-style: italic; }
+  @media print {
+    body { background: white; padding: 0; }
+    .toolbar { display: none; }
+    .page { box-shadow: none; padding: 10mm 15mm; width: 100%; min-height: auto; }
+  }
+</style>
+</head>
+<body>
+  <div class="toolbar">
+    <span>📄 DERS DIŞI EĞİTİM VE EGZERSİZ VELİ İZİN BELGESİ</span>
+    <button class="btn-print" onclick="window.print()">🖨️ Yazdır / PDF Olarak Kaydet</button>
+  </div>
+
+  <div class="page">
+    <div class="header">
+      <div class="school-title">HAYDARPAŞA LİSESİ</div>
+      <div class="doc-title">DERS DIŞI EĞİTİM VE EGZERSİZ ÇALIŞMALARI VELİ İZİN BELGESİ</div>
+    </div>
+
+    <table class="info-table">
+      <tr>
+        <td><b>Öğrencinin Adı Soyadı:</b> .................................................</td>
+        <td><b>Sınıfı / Şubesi:</b> .......................</td>
+      </tr>
+      <tr>
+        <td><b>T.C. Kimlik No:</b> .............................................................</td>
+        <td><b>Okul Numarası:</b> .......................</td>
+      </tr>
+      <tr>
+        <td><b>Egzersiz / Spor Branşı:</b> ...............................................</td>
+        <td><b>Çalışma Gün / Saati:</b> ...................</td>
+      </tr>
+    </table>
+
+    <div class="directorate">HAYDARPAŞA LİSESİ MÜDÜRLÜĞÜNE</div>
+
+    <div class="body-text">
+      Velisi bulunduğum yukarıda açık kimlik bilgileri yazılı okulunuz öğrencisinin; 2026-2027 Eğitim-Öğretim Yılı süresince okulunuz Beden Eğitimi ve Spor Bölümü koordinasyonunda ders saatleri dışında (hafta içi ders bitimi veya hafta sonu) yürütülecek olan Ders Dışı Eğitim ve Egzersiz (antrenman/hazırlık) çalışmalarına katılmasına izin veriyorum.
+    </div>
+
+    <div class="sec-title">VELİ BEYANI VE ULAŞIM TAAHHÜTNAMESİ</div>
+    <ul>
+      <li>Öğrencimin ders dışı egzersiz ve spor faaliyetlerine katılmasına engel teşkil edecek herhangi bir sağlık probleminin bulunmadığını,</li>
+      <li>Çalışmalar süresince görevli öğretmen ve antrenörlerin belirlediği çalışma programına, okul güvenliği ve disiplin kurallarına uyacağını,</li>
+      <li>Egzersiz/antrenman bitiminde öğrencimin okuldan ayrılışı ve evine intikalinin kendi imkânlarıyla (toplu taşıma/yaya/kendi ulaşımı ile) sağlanacağını, okul çıkışından itibaren ulaşım ve yol güvenliği konusundaki tüm sorumluluğun tarafıma (veliye) ait olduğunu,</li>
+      <li>Öğrencimin sağlık durumunda oluşabilecek herhangi bir değişikliği okul idaresine ve ders öğretmenine yazılı olarak derhal bildireceğimi kabul ve taahhüt ederim.</li>
+    </ul>
+
+    <table class="sign-table">
+      <tr>
+        <td>
+          <b>VELİ BİLGİLERİ VE ONAY</b><br><br>
+          <b>Veli Adı ve Soyadı:</b> .........................................<br>
+          <b>Yakınlık Derecesi:</b> ( Anne / Baba / Vasi )<br>
+          <b>Telefon (Cep):</b> .............................................<br>
+          <b>Acil Durum Tel:</b> ...........................................
+        </td>
+        <td>
+          <br><br>
+          <b>Tarih:</b> ..... / ..... / 2026<br><br>
+          <b>İmza:</b> ...........................................................
+        </td>
+      </tr>
+    </table>
+
+    <div class="footer-note">
+      *Bu belge, ders dışı egzersiz çalışma planı onay dosyası ve öğrenci devam takip çizelgelerine eklenmek üzere Beden Eğitimi ve Spor Zümresi tarafından muhafaza edilecektir.
+    </div>
+  </div>
+</body>
+</html>
