@@ -395,7 +395,7 @@
 
   <script>
     function showTab(tabName) {
-      document.querySelectorAll('.page-tab').forEach(tab => tab.classList.0 && tab.classList.remove('active'));
+      document.querySelectorAll('.page-tab').forEach(tab =>  tab.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
       const targetTab = document.getElementById('tab-' + tabName);
       const targetBtn = document.getElementById('btn-' + tabName);
