@@ -1,0 +1,22 @@
+{
+  "name": "Haydarpaşa Lisesi Spor Bölümü",
+  "short_name": "HL Spor",
+  "description": "Haydarpaşa Lisesi Beden Eğitimi ve Spor Bölümü Resmi Portalı",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#c40018",
+  "theme_color": "#c40018",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "logo.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
