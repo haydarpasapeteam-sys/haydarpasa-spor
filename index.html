@@ -58,7 +58,7 @@
         <img src="anasayfa.png" alt="Haydarpaşa Lisesi" class="w-full h-auto object-cover block" />
       </section>
 
-   <!-- DUYURULAR / TURNUVALAR PRATİK LİSTE ALANI -->
+      <!-- DUYURULAR / TURNUVALAR PRATİK LİSTE ALANI -->
       <section class="space-y-4">
         <!-- Başlık Kısmı -->
         <div class="flex items-center justify-between px-2 pb-2 border-b border-red-500/30">
@@ -78,11 +78,9 @@
           
           <!-- KART 1: Basketbol -->
           <div class="bg-white rounded-2xl p-4 flex flex-col sm:flex-row gap-4 shadow-xl border-l-4 border-l-amber-500 hover:scale-[1.01] transition-transform">
-            <!-- Sol Küçük Görsel -->
             <div class="w-full sm:w-32 h-32 shrink-0 rounded-xl overflow-hidden bg-slate-900 border border-slate-100">
               <img src="ChatGPT Image 21 Eyl 2026 18_06_30.png" alt="Basketbol" class="w-full h-full object-cover" />
             </div>
-            <!-- Sağ İçerik -->
             <div class="flex flex-col justify-between flex-1">
               <div>
                 <div class="flex items-center justify-between mb-1">
@@ -178,7 +176,7 @@
             </div>
           </div>
 
-        <!-- CANLI FUTSAL SKOR TABLOSU (CANVA EMBED) -->
+          <!-- KART 5: CANLI FUTSAL SKOR TABLOSU (CANVA EMBED) -->
           <div class="rounded-2xl overflow-hidden shadow-xl border-2 border-amber-300/40 bg-slate-900 flex flex-col justify-between">
             <div style="position: relative; width: 100%; height: 0; padding-top: 50%; overflow: hidden; will-change: transform;">
               <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;"
@@ -187,8 +185,8 @@
             </div>
           </div>
 
-          <!-- KART 6: Dijital Evrak Portalı -->
-         <div class="rounded-2xl p-5 shadow-2xl border-2 border-indigo-500/40 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 flex flex-col justify-between">
+          <!-- KART 6: DİJİTAL EVRAK PORTALI & MOBİL ERİŞİM (Sağ) -->
+          <div class="rounded-2xl p-5 shadow-2xl border-2 border-indigo-500/40 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-3 border-b border-indigo-400/20 pb-2">
                 <span class="text-xs font-black uppercase text-indigo-300 flex items-center gap-2">
@@ -345,7 +343,7 @@
       </section>
     </div>
 
-  <!-- 4. TAKIMLAR (CANVA CANLI GÖRÜNÜM) -->
+    <!-- 4. TAKIMLAR (CANVA CANLI GÖRÜNÜM) -->
     <div id="tab-takimlar" class="page-tab space-y-8">
       <section class="rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl bg-white p-2">
         <div style="position: relative; width: 100%; height: 0; padding-top: 56.25%; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 0; margin-bottom: 0; overflow: hidden; border-radius: 16px; will-change: transform;">
@@ -473,8 +471,25 @@
       }
     }
 
+    // Güvenli Ziyaretçi Sayacı
+    function initCounter() {
+      let count = localStorage.getItem('hpl_ziyaretci_sayisi');
+      if (!count) {
+        count = 1420; // Başlangıç taban sayısı
+      } else {
+        count = parseInt(count, 10);
+      }
+      count += 1;
+      localStorage.setItem('hpl_ziyaretci_sayisi', count);
+      const counterEl = document.getElementById('ziyaretciSayisi');
+      if (counterEl) {
+        counterEl.textContent = count.toLocaleString('tr-TR');
+      }
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
+      initCounter();
     });
   </script>
 </body>
