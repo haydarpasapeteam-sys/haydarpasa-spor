@@ -41,7 +41,6 @@
         </div>
       </div>
 
-      <!-- ÜST MENÜ SEKMELERİ -->
       <nav class="flex items-center justify-center gap-1.5 sm:gap-3 py-2.5 overflow-x-auto text-xs sm:text-sm font-bold no-scrollbar">
         <button onclick="showTab('anasayfa')" id="btn-anasayfa" class="tab-btn active px-3.5 py-2 rounded-xl transition flex items-center gap-1.5"><i data-lucide="home" class="w-4 h-4"></i><span>ANA SAYFA</span></button>
         <button onclick="showTab('rehber')" id="btn-rehber" class="tab-btn px-3.5 py-2 rounded-xl hover:bg-red-800/60 transition flex items-center gap-1.5"><i data-lucide="book-open" class="w-4 h-4"></i><span>EĞİTİM & REHBER</span></button>
@@ -56,7 +55,7 @@
   <!-- MAIN -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex-1 w-full space-y-8">
 
-    <!-- 1. SEKME: ANA SAYFA -->
+    <!-- 1. ANA SAYFA -->
     <div id="tab-anasayfa" class="page-tab active space-y-8">
       
       <!-- Banner -->
@@ -64,8 +63,9 @@
         <img src="anasayfa.png" alt="Haydarpaşa Lisesi" class="w-full h-auto object-cover block" />
       </section>
 
-      <!-- DUYURULAR PANOSU -->
+      <!-- DUYURULAR / TURNUVALAR PRATİK LİSTE ALANI -->
       <section class="space-y-4">
+        <!-- Başlık Kısmı -->
         <div class="flex items-center justify-between px-2 pb-2 border-b border-red-500/30">
           <div class="flex items-center gap-3">
             <div class="p-2 rounded-xl bg-amber-400 text-slate-900 shadow-md">
@@ -76,19 +76,10 @@
               <p class="text-[11px] sm:text-xs text-red-100 mt-1 font-semibold">Takım seçmeleri ve güncel turnuvalar</p>
             </div>
           </div>
-          <!-- Kaydırma Okları -->
-          <div class="flex items-center gap-1.5">
-            <button onclick="scrollCards('left')" aria-label="Geri" class="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition backdrop-blur-sm">
-              <i data-lucide="chevron-left" class="w-4 h-4"></i>
-            </button>
-            <button onclick="scrollCards('right')" aria-label="İleri" class="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition backdrop-blur-sm">
-              <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            </button>
-          </div>
         </div>
 
-        <!-- SAĞA DOĞRU AKICI KAYAN DUYURU ŞERİDİ (5 KART) -->
-        <div id="duyuruContainer" class="flex gap-4 overflow-x-auto pb-4 pt-1 snap-x snap-mandatory scroll-smooth w-full no-scrollbar" style="-webkit-overflow-scrolling: touch;">
+    <!-- SAĞA DOĞRU AKICI KAYAN DUYURU ŞERİDİ (5 KART) -->
+        <div class="flex gap-4 overflow-x-auto pb-4 pt-1 snap-x snap-mandatory scroll-smooth w-full" style="-webkit-overflow-scrolling: touch;">
           
           <!-- KART 1: Pickleball -->
           <div class="w-[300px] shrink-0 snap-start bg-white rounded-2xl p-4 flex flex-col justify-between shadow-lg border-t-4 border-t-lime-500 hover:shadow-xl transition">
@@ -100,12 +91,12 @@
                 <span class="font-black text-lime-700 bg-lime-50 px-2 py-0.5 rounded-md">🏓 SEÇMELER</span>
                 <span class="text-slate-400 font-bold">30 Eyl • 12.00</span>
               </div>
-              <h3 class="text-sm font-black text-slate-900">Pickleball Okul Takımı</h3>
-              <p class="text-xs text-slate-500 mt-1 leading-snug">Tenis kortunda buluşuyoruz. Enerji, takım ruhu ve yeni bir deneyim için sen de katıl!</p>
+              <h3 class="text-sm font-black text-slate-900">Pickleball Takım Seçimi</h3>
+              <p class="text-xs text-slate-500 mt-1 leading-snug">Tenis kortunda buluşuyoruz. Enerji ve takım ruhu için sen de katıl!</p>
             </div>
             <div class="flex gap-2 mt-4 pt-3 border-t border-slate-100">
               <a href="https://docs.google.com/forms/d/e/1FAIpQLScI2VCayu5gGfFIkQmezeztRWjfEQEmPxYaFTKIYL40zD7Thw/viewform?usp=header" target="_blank" class="flex-1 py-1.5 px-3 rounded-lg bg-lime-600 hover:bg-lime-700 text-white font-bold text-xs text-center transition">
-                Başvuru Formu
+                Başvuru
               </a>
               <a href="pickleball.png" target="_blank" class="py-1.5 px-3 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs text-center transition">
                 Afiş
@@ -124,11 +115,11 @@
                 <span class="text-slate-400 font-bold">25 Eyl • 12.00</span>
               </div>
               <h3 class="text-sm font-black text-slate-900">Basketbol Okul Takımı</h3>
-              <p class="text-xs text-slate-500 mt-1 leading-snug">Hazırlık ve 9. sınıflar için spor salonunda seçmeler yapılacaktır.</p>
+              <p class="text-xs text-slate-500 mt-1 leading-snug">Hazırlık ve 9. sınıflar için spor salonunda yapılacaktır.</p>
             </div>
             <div class="flex gap-2 mt-4 pt-3 border-t border-slate-100">
               <a href="https://forms.gle/vRLhL45pMhG55e1W8" target="_blank" class="flex-1 py-1.5 px-3 rounded-lg bg-red-600 hover:bg-red-700 text-white font-bold text-xs text-center transition">
-                İzin Dilekçesi
+                İzin Belgesi
               </a>
               <a href="ChatGPT Image 21 Eyl 2026 18_06_30.png" target="_blank" class="py-1.5 px-3 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs text-center transition">
                 Afiş
@@ -150,8 +141,8 @@
               <p class="text-xs text-slate-500 mt-1 leading-snug">Spor salonunda uygun spor kıyafetiyle katılım sağlanmalıdır.</p>
             </div>
             <div class="flex gap-2 mt-4 pt-3 border-t border-slate-100">
-              <a href="https://docs.google.com/forms/d/e/1FAIpQLSfav-UBj3jUEG2RiOJELR-N3DpY_oSjpXyClurtsZw6U-PVhA/viewform?usp=header" target="_blank" class="flex-1 py-1.5 px-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs text-center transition">
-                Başvuru Formu
+             https://docs.google.com/forms/d/e/1FAIpQLSfav-UBj3jUEG2RiOJELR-N3DpY_oSjpXyClurtsZw6U-PVhA/viewform?usp=header
+                Başvuru
               </a>
               <a href="ogrenci_taahhutnamesi.pdf" target="_blank" class="py-1.5 px-3 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs text-center transition">
                 Veli İzni
@@ -170,11 +161,11 @@
                 <span class="text-slate-400 font-bold">2 Eki • 12.00</span>
               </div>
               <h3 class="text-sm font-black text-slate-900">Kız Voleybol Takımı</h3>
-              <p class="text-xs text-slate-500 mt-1 leading-snug">"Bir Takım Daha Fazlasıdır" — Tüm öğrencilerimizi bekliyoruz.</p>
+              <p class="text-xs text-slate-500 mt-1 leading-snug">"Bir Takım Daha Fazlasıdır" — Tüm öğrencileri bekliyoruz.</p>
             </div>
             <div class="flex gap-2 mt-4 pt-3 border-t border-slate-100">
               <a href="https://docs.google.com/forms/d/e/1FAIpQLSc4DfWhC0wkvuSsyG5k1l6HMdy8Nykycv7qy4NYp2p2CXSrWg/viewform?usp=header" target="_blank" class="flex-1 py-1.5 px-3 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs text-center transition">
-                Veli İzni Formu
+                Veli İzni / Başvuru
               </a>
               <a href="kızvoleybol.png" target="_blank" class="py-1.5 px-3 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs text-center transition">
                 Afiş
@@ -182,7 +173,7 @@
             </div>
           </div>
 
-          <!-- KART 5: Futsal Turnuvası -->
+          <!-- KART 5: Futsal Turnuvası (Geri Eklendi) -->
           <div class="w-[300px] shrink-0 snap-start bg-white rounded-2xl p-4 flex flex-col justify-between shadow-lg border-t-4 border-t-red-600 hover:shadow-xl transition">
             <div>
               <div class="w-full h-36 rounded-xl overflow-hidden bg-slate-900 border border-slate-100 mb-3 shadow-inner">
@@ -193,7 +184,7 @@
                 <span class="text-emerald-600 font-bold">Aktif Kayıt</span>
               </div>
               <h3 class="text-sm font-black text-slate-900">Futsal All–Star Turnuvası</h3>
-              <p class="text-xs text-slate-500 mt-1 leading-snug">Sınıflararası geleneksel futsal heyecanı başladı! Takımını kur, kayıt ol.</p>
+              <p class="text-xs text-slate-500 mt-1 leading-snug">Sınıflararası futsal şöleni başlıyor! Takımını kur, kayıt ol.</p>
             </div>
             <div class="flex gap-2 mt-4 pt-3 border-t border-slate-100">
               <a href="https://forms.gle/QXvR7VJhbEYzdGJv9" target="_blank" class="flex-1 py-1.5 px-3 rounded-lg bg-red-600 hover:bg-red-700 text-white font-bold text-xs text-center transition">
@@ -206,8 +197,7 @@
           </div>
 
         </div>
-
-        <!-- KART 6: CANLI FUTSAL SKOR TABLOSU (KÜÇÜLTÜLMÜŞ & ORTALANMIŞ) -->
+          <!-- KART 5: CANLI FUTSAL SKOR TABLOSU (KÜÇÜLTÜLMÜŞ & ORTALANMIŞ) -->
         <div class="max-w-3xl mx-auto w-full mt-4 rounded-xl overflow-hidden shadow-lg border border-amber-300/40 bg-slate-900">
           <div style="position: relative; width: 100%; height: 0; padding-top: 42%; overflow: hidden;">
             <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;"
@@ -216,41 +206,45 @@
           </div>
         </div>
 
-        <!-- KART 7: DİJİTAL EVRAK PORTALI & MOBİL ERİŞİM -->
-        <div class="rounded-2xl p-5 shadow-2xl border-2 border-indigo-500/40 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-3 border-b border-indigo-400/20 pb-2">
-              <span class="text-xs font-black uppercase text-indigo-300 flex items-center gap-2">
-                📁 DİJİTAL EVRAK & HIZLI ERİŞİM
-              </span>
-              <span class="text-[10px] font-bold text-emerald-300 bg-emerald-950/80 border border-emerald-500/40 px-2 py-0.5 rounded-full">
-                AKTİF
-              </span>
+          <!-- KART 6: DİJİTAL EVRAK PORTALI & MOBİL ERİŞİM (Sağ) -->
+          <div class="rounded-2xl p-5 shadow-2xl border-2 border-indigo-500/40 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3 border-b border-indigo-400/20 pb-2">
+                <span class="text-xs font-black uppercase text-indigo-300 flex items-center gap-2">
+                  📁 DİJİTAL EVRAK & HIZLI ERİŞİM
+                </span>
+                <span class="text-[10px] font-bold text-emerald-300 bg-emerald-950/80 border border-emerald-500/40 px-2 py-0.5 rounded-full">
+                  AKTİF
+                </span>
+              </div>
+              
+              <div class="flex items-center gap-4 mt-2">
+                <!-- Linktree Karekod -->
+                <div class="w-24 h-24 bg-white p-1.5 rounded-xl shadow-md shrink-0 flex items-center justify-center">
+                  <img src="haydarpasabedenegitimivespor.png" alt="Linktree QR" class="w-full h-full object-contain">
+                </div>
+                <!-- Açıklama -->
+                <div>
+                  <h4 class="text-white text-sm font-bold leading-tight">Mobil Hızlı Başvuru</h4>
+                  <p class="text-slate-300 text-xs mt-1 leading-relaxed">
+                    Kameranızla okutarak veli izin belgeleri, turnuva kayıtları ve takım formlarına tek ekrandan ulaşın.
+                  </p>
+                </div>
+              </div>
             </div>
-            
-            <div class="flex items-center gap-4 mt-2">
-              <div class="w-24 h-24 bg-white p-1.5 rounded-xl shadow-md shrink-0 flex items-center justify-center">
-                <img src="haydarpasabedenegitimivespor.png" alt="Linktree QR" class="w-full h-full object-contain">
-              </div>
-              <div>
-                <h4 class="text-white text-sm font-bold leading-tight">Mobil Hızlı Başvuru</h4>
-                <p class="text-slate-300 text-xs mt-1 leading-relaxed">
-                  Kameranızla okutarak veli izin belgeleri, turnuva kayıtları ve takım formlarına tek ekrandan ulaşın.
-                </p>
-              </div>
+
+            <!-- Butonlar -->
+            <div class="grid grid-cols-2 gap-2 mt-4">
+              <a href="https://linktr.ee/haydarpasabedenegitimivespor" target="_blank" class="py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs text-center transition shadow-lg flex items-center justify-center gap-1.5">
+                🔗 Tüm Formlar
+              </a>
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header" target="_blank" class="py-2.5 px-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs text-center transition shadow-lg flex items-center justify-center gap-1.5">
+                📄 Evrak Yükle
+              </a>
             </div>
           </div>
 
-          <div class="grid grid-cols-2 gap-2 mt-4">
-            <a href="https://linktr.ee/haydarpasabedenegitimivespor" target="_blank" class="py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs text-center transition shadow-lg flex items-center justify-center gap-1.5">
-              🔗 Tüm Formlar
-            </a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header" target="_blank" class="py-2.5 px-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs text-center transition shadow-lg flex items-center justify-center gap-1.5">
-              📄 Evrak Yükle
-            </a>
-          </div>
         </div>
-
       </section>
 
       <!-- ZORUNLU EVRAKLAR BÖLÜMÜ -->
@@ -350,7 +344,7 @@
       </div>
     </div>
 
-    <!-- 2. SEKME: EĞİTİM & REHBER -->
+    <!-- 2. EĞİTİM & REHBER -->
     <div id="tab-rehber" class="page-tab space-y-8">
       <section class="rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl bg-white">
         <img src="hareket_bilimi.png" alt="Hareket Bilimi" class="w-full h-auto object-cover block" />
@@ -360,7 +354,7 @@
       </section>
     </div>
 
-    <!-- 3. SEKME: KURUMSAL -->
+    <!-- 3. KURUMSAL -->
     <div id="tab-kurumsal" class="page-tab space-y-8">
       <section class="rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl bg-white">
         <img src="vizyonumuz.png" alt="Vizyonumuz" class="w-full h-auto object-cover block" />
@@ -370,7 +364,7 @@
       </section>
     </div>
 
-    <!-- 4. SEKME: TAKIMLAR -->
+    <!-- 4. TAKIMLAR (CANVA CANLI GÖRÜNÜM) -->
     <div id="tab-takimlar" class="page-tab space-y-8">
       <section class="rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl bg-white p-2">
         <div style="position: relative; width: 100%; height: 0; padding-top: 56.25%; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 0; margin-bottom: 0; overflow: hidden; border-radius: 16px; will-change: transform;">
@@ -381,7 +375,7 @@
       </section>
     </div>
 
-    <!-- 5. SEKME: SPORFEST -->
+    <!-- 5. SPORFEST -->
     <div id="tab-sporfest" class="page-tab space-y-8">
       <section class="p-6 sm:p-8 rounded-3xl bg-white text-slate-800 shadow-2xl border-2 border-white space-y-6">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-slate-100 pb-6">
@@ -438,7 +432,7 @@
       </section>
     </div>
 
-    <!-- 6. SEKME: İLETİŞİM -->
+    <!-- 6. İLETİŞİM -->
     <div id="tab-iletisim" class="page-tab space-y-8">
       <div class="rounded-3xl bg-white text-slate-800 p-6 sm:p-8 shadow-2xl space-y-6 border-2 border-white">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
@@ -480,25 +474,17 @@
     function showTab(tabName) {
       document.querySelectorAll('.page-tab').forEach(tab => tab.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      
       const targetTab = document.getElementById('tab-' + tabName);
       const targetBtn = document.getElementById('btn-' + tabName);
-      
       if (targetTab) targetTab.classList.add('active');
       if (targetBtn) targetBtn.classList.add('active');
-      
       window.scrollTo({ top: 0, behavior: 'smooth' });
-
-      // Sekme değiştiğinde ikonları yeniden render et
-      if (window.lucide) {
-        lucide.createIcons();
-      }
     }
 
     function scrollCards(direction) {
       const container = document.getElementById('duyuruContainer');
       if (container) {
-        const scrollAmount = 320;
+        const scrollAmount = 460;
         container.scrollBy({
           left: direction === 'left' ? -scrollAmount : scrollAmount,
           behavior: 'smooth'
@@ -506,10 +492,11 @@
       }
     }
 
+    // Güvenli Ziyaretçi Sayacı
     function initCounter() {
       let count = localStorage.getItem('hpl_ziyaretci_sayisi');
       if (!count) {
-        count = 1420;
+        count = 1420; // Başlangıç taban sayısı
       } else {
         count = parseInt(count, 10);
       }
@@ -522,9 +509,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      if (window.lucide) {
-        lucide.createIcons();
-      }
+      lucide.createIcons();
       initCounter();
     });
   </script>
