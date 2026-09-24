@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AnnouncementCard from '../../components/announcements/AnnouncementCard.astro';
+import Icon from '../../components/ui/Icon.astro';
+import { getActiveAnnouncements, getArchivedAnnouncements } from '../../lib/queries';
+
+const active = await getActiveAnnouncements();
+const archived = (await getArchivedAnnouncements()).filter((e) => !active.some((a) => a.id === e.id));
+---
+<BaseLayout title="Duyurular" description="Haydarpaşa Lisesi Beden Eğitimi ve Spor Bölümü güncel duyuruları." path="/duyurular/">
+  <div class="container page-stack">
+    <header class="page-header">
+      <Icon name="bell-ring" class="page-header-icon" />
+      <div>
+        <h1>Duyurular Panosu</h1>
+        <p>Takım seçmeleri, turnuva kayıtları ve güncel duyurular</p>
+      </div>
+    </header>
+
+    {active.length > 0 ? (
+      <div class="grid-cards">
+        {active.map((entry) => <AnnouncementCard entry={entry} />)}
+      </div>
+    ) : (
+      <p class="empty-state">Şu anda aktif bir duyuru bulunmuyor.</p>
+    )}
+
+    {archived.length > 0 && (
+      <details class="archive-block">
+        <summary>Geçmiş Duyurular Arşivi ({archived.length})</summary>
+        <div class="grid-cards" style="margin-top:1rem;">
+          {archived.map((entry) => <AnnouncementCard entry={entry} />)}
+        </div>
+      </details>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .page-stack {
+    padding-block: 1.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .page-header {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+  .page-header-icon {
+    width: 30px;
+    height: 30px;
+    background: var(--color-amber-light);
+    color: #1e293b;
+    padding: 0.5rem;
+    border-radius: var(--radius-card-sm);
+  }
+  .page-header h1 {
+    font-size: 1.4rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .page-header p {
+    font-size: 0.78rem;
+    color: #ffdede;
+    margin: 0.2rem 0 0;
+  }
+  .grid-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  @media (min-width: 768px) {
+    .grid-cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1024px) {
+    .grid-cards {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .empty-state {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-card-sm);
+    padding: 1.5rem;
+    text-align: center;
+    color: #ffdede;
+  }
+  .archive-block {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-card-sm);
+    padding: 1rem 1.25rem;
+  }
+  .archive-block summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+</style>

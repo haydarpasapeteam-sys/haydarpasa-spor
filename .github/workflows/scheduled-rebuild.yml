@@ -1,0 +1,82 @@
+name: Scheduled rebuild
+
+# Static sites cannot execute server code at request time, so scheduled
+# publishing/expiry (spec §10) works by rebuilding periodically: each run
+# re-evaluates every announcement's publishAt/expiresAt against "now" and
+# regenerates the static pages accordingly. This means publication and
+# expiry are only as timely as this schedule — not second-level precise.
+# Runs are also idempotent no-ops when nothing has crossed a publish/expiry
+# boundary since the last build (content is unchanged, so the rebuilt
+# output is identical and the deploy step just republishes the same site).
+
+on:
+  schedule:
+    - cron: '*/30 * * * *' # every 30 minutes
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Rebuild for time-sensitive content
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Enable pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install dependencies (frozen lockfile)
+        run: pnpm install --frozen-lockfile
+
+      - name: Cache generated image derivatives
+        uses: actions/cache@v4
+        with:
+          path: public/media/images/_derived
+          key: img-derived-${{ hashFiles('public/media/images/**/*.png', 'public/media/images/**/*.jpg', 'public/media/images/**/*.jpeg') }}
+          restore-keys: |
+            img-derived-
+
+      - name: Validate content, links, documents
+        run: pnpm run validate
+
+      - name: Optimize images
+        run: pnpm run optimize:images
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Build (re-evaluates publishAt/expiresAt against current time)
+        run: pnpm run build:unsafe
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

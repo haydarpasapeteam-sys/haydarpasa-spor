@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ResponsiveImage from '../../components/ui/ResponsiveImage.astro';
+import Icon from '../../components/ui/Icon.astro';
+import { getActiveSports } from '../../lib/queries';
+
+const sports = await getActiveSports();
+
+const fitnessTests = [
+  'Postür Analizi',
+  'Şınav Testi (Push-Up)',
+  'Mekik Testi (Sit-Up)',
+  '20 Metre Koşu Testi',
+  'Flamingo Denge Testi',
+  'Otur-Eriş (Sit and Reach) Testi',
+];
+---
+<BaseLayout
+  title="Eğitim & Rehber"
+  description="Haydarpaşa Lisesi Beden Eğitimi ve Spor Bölümü ders içeriği rehberi, branşlar ve hareket bilimi."
+  path="/egitim-ve-rehber/"
+>
+  <div class="container page-stack">
+    <header class="page-header">
+      <Icon name="book-open" class="page-header-icon" />
+      <div>
+        <h1>Eğitim &amp; Rehber</h1>
+        <p>Ders içeriği rehberi, branşlarımız ve hareket bilimi</p>
+      </div>
+    </header>
+
+    <section class="card text-section">
+      <h2>Hareket Bilimi ve Sağlıklı Yaşam</h2>
+      <p>
+        Haydarpaşa Lisesi Beden Eğitimi ve Spor Bölümü olarak, öğrencilerimize sadece sportif beceriler değil;
+        hareket biliminin temel ilkelerini, anatomik farkındalığı ve sağlıklı yaşam alışkanlıklarını
+        kazandırıyoruz. Doğru egzersiz teknikleri, dengeli beslenme ve düzenli hareket bilinciyle öğrencilerimizi
+        hayat boyu zinde ve sağlıklı bireyler olmaya hazırlıyoruz.
+      </p>
+      <ul class="fitness-test-list">
+        {fitnessTests.map((test) => (
+          <li><Icon name="check" class="check-icon" /> {test}</li>
+        ))}
+      </ul>
+      <div class="supporting-image">
+        <ResponsiveImage
+          src="/media/images/egitim/hareket-bilimi-ve-saglikli-yasam.png"
+          alt="Hareket Bilimi ve Sağlıklı Yaşam — fiziksel uygunluk testleri rehberi"
+          sizes="100vw"
+        />
+      </div>
+    </section>
+
+    <section class="card text-section">
+      <h2>2026-2027 Ders İçerik Rehberi — Branşlarımız</h2>
+      <p>
+        Beden Eğitimi ve Spor derslerimizde, öğrencilerimizin hem bireysel yeteneklerini hem de takım
+        koordinasyonunu geliştirmeyi hedefleyen kapsamlı bir müfredat uygulanmaktadır.
+      </p>
+      <ul class="sport-list">
+        {sports.map((sport) => (
+          <li>
+            <Icon name={sport.data.icon === 'raket' ? 'racket' : sport.data.icon === 'hedef' ? 'target' : 'circle'} class="sport-icon" />
+            <div>
+              <strong>{sport.data.name}</strong>
+              <p>{sport.data.description}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <div class="supporting-image">
+        <ResponsiveImage
+          src="/media/images/egitim/brans-rehberimiz.png"
+          alt="2026-2027 Eğitim ve Öğretim Yılı Ders İçerik Rehberi — branş görsel rehberleri"
+          sizes="100vw"
+        />
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-stack { padding-block: 1.5rem 3rem; display: flex; flex-direction: column; gap: 1.5rem; }
+  .page-header { display: flex; align-items: center; gap: 0.85rem; }
+  .page-header-icon { width: 30px; height: 30px; background: var(--color-amber-light); color: #1e293b; padding: 0.5rem; border-radius: var(--radius-card-sm); }
+  .page-header h1 { font-size: 1.4rem; font-weight: 900; text-transform: uppercase; margin: 0; }
+  .page-header p { font-size: 0.78rem; color: #ffdede; margin: 0.2rem 0 0; }
+  .text-section { padding: 1.5rem; }
+  .text-section h2 { font-size: 1.15rem; font-weight: 900; margin: 0 0 0.6rem; color: var(--color-primary); }
+  .text-section > p { font-size: 0.9rem; line-height: 1.6; color: var(--color-ink-soft); }
+  .fitness-test-list { list-style: none; margin: 1rem 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+  @media (min-width: 640px) { .fitness-test-list { grid-template-columns: 1fr 1fr 1fr; } }
+  .fitness-test-list li { display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; font-weight: 600; background: #f8fafc; border-radius: 0.5rem; padding: 0.5rem 0.6rem; }
+  .check-icon { width: 16px; height: 16px; color: #16a34a; flex-shrink: 0; }
+  .sport-list { list-style: none; margin: 1rem 0; padding: 0; display: grid; gap: 0.6rem; }
+  @media (min-width: 768px) { .sport-list { grid-template-columns: 1fr 1fr; } }
+  .sport-list li { display: flex; gap: 0.6rem; background: #f8fafc; border-radius: var(--radius-card-sm); padding: 0.75rem; }
+  .sport-icon { width: 22px; height: 22px; color: var(--color-primary); flex-shrink: 0; }
+  .sport-list li strong { font-size: 0.85rem; }
+  .sport-list li p { margin: 0.2rem 0 0; font-size: 0.75rem; color: var(--color-muted); line-height: 1.4; }
+  .supporting-image { margin-top: 1.25rem; border-radius: var(--radius-card-sm); overflow: hidden; }
+</style>

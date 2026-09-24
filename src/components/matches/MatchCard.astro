@@ -1,0 +1,103 @@
+---
+import { withBase } from '../../lib/url';
+import { computeMatchWinner } from '../../lib/matches';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'matches'>;
+}
+const { entry } = Astro.props;
+const { title, homeTeam, awayTeam, dateTime, venue, status, homeScore, awayScore, competition } = entry.data;
+const winner = computeMatchWinner({ status, homeScore, awayScore });
+const dateLabel = new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Istanbul' }).format(dateTime);
+
+const statusLabels: Record<string, string> = {
+  Planlandı: 'Planlandı',
+  Canlı: 'Canlı',
+  Tamamlandı: 'Tamamlandı',
+  Ertelendi: 'Ertelendi',
+  'İptal Edildi': 'İptal Edildi',
+};
+---
+<a href={withBase(`/maclar/${entry.id}/`)} class="match-card">
+  <div class="match-card-top">
+    <span class="pill match-status" data-status={status}>{statusLabels[status]}</span>
+    <span class="match-date">{dateLabel}</span>
+  </div>
+  <h3 class="match-title">{title}</h3>
+  <div class="match-teams">
+    <span class:list={['match-team', { winner: winner === 'home' }]}>{homeTeam}</span>
+    <span class="match-score">
+      {homeScore !== undefined && awayScore !== undefined ? `${homeScore} - ${awayScore}` : 'vs'}
+    </span>
+    <span class:list={['match-team', { winner: winner === 'away' }]}>{awayTeam}</span>
+  </div>
+  <p class="match-meta">{competition} · {venue}</p>
+</a>
+
+<style>
+  .match-card {
+    display: block;
+    background: #fff;
+    color: var(--color-ink);
+    border-radius: var(--radius-card-sm);
+    box-shadow: var(--shadow-card);
+    padding: 1rem;
+    text-decoration: none;
+    transition: transform 0.15s ease;
+  }
+  .match-card:hover {
+    transform: translateY(-2px);
+  }
+  .match-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  .match-status {
+    background: #f1f5f9;
+    color: var(--color-ink-soft);
+  }
+  .match-status[data-status='Tamamlandı'] { background: #dcfce7; color: #166534; }
+  .match-status[data-status='Canlı'] { background: #fee2e2; color: #991b1b; }
+  .match-status[data-status='İptal Edildi'] { background: #fee2e2; color: #991b1b; }
+  .match-date {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--color-muted);
+  }
+  .match-title {
+    font-size: 0.9rem;
+    font-weight: 800;
+    margin: 0 0 0.5rem;
+  }
+  .match-teams {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+  .match-team {
+    flex: 1;
+    text-align: center;
+  }
+  .match-team.winner {
+    color: var(--color-primary);
+  }
+  .match-score {
+    font-weight: 900;
+    font-size: 1rem;
+    padding: 0.2rem 0.6rem;
+    background: #f1f5f9;
+    border-radius: 0.5rem;
+  }
+  .match-meta {
+    margin: 0.5rem 0 0;
+    font-size: 0.72rem;
+    color: var(--color-muted);
+    text-align: center;
+  }
+</style>

@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ResponsiveImage from '../../components/ui/ResponsiveImage.astro';
+import Icon from '../../components/ui/Icon.astro';
+import { withBase } from '../../lib/url';
+import site from '../../data/site.json';
+
+const mapEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(site.mapQuery)}&t=&z=16&ie=UTF8&iwloc=&output=embed`;
+---
+<BaseLayout title="İletişim" description="Haydarpaşa Lisesi Beden Eğitimi ve Spor Bölümü iletişim bilgileri ve konum." path="/iletisim/">
+  <div class="container page-stack">
+    <header class="page-header">
+      <Icon name="mail" class="page-header-icon" />
+      <div>
+        <h1>İletişim</h1>
+        <p>Beden Eğitimi Zümresi iletişim ve konum bilgileri</p>
+      </div>
+    </header>
+
+    <section class="card contact-card">
+      <div class="contact-top">
+        <div>
+          <h2><Icon name="map-pin" class="inline-icon" /> Beden Eğitimi Zümresi</h2>
+          <p class="address">{site.address}</p>
+        </div>
+        <div class="contact-actions">
+          <a href={site.officialSchoolWebsite} target="_blank" rel="noopener noreferrer" class="btn touch-target" style="background:#b91c1c; color:#fff;">
+            <Icon name="globe" class="btn-icon" /> Resmi Okul Sitesi
+          </a>
+          <a href={site.instagramUrl} target="_blank" rel="noopener noreferrer" class="btn touch-target" style="background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045); color:#fff;">
+            <Icon name="instagram" class="btn-icon" /> @haydarpasaspor
+          </a>
+          <a href={`mailto:${site.publicEmail}`} class="btn touch-target" style="background:#0f172a; color:#fff;">
+            <Icon name="mail" class="btn-icon" /> E-posta
+          </a>
+        </div>
+      </div>
+
+      <div class="map-wrap">
+        <iframe
+          src={mapEmbedUrl}
+          title={`${site.schoolName} konum haritası — ${site.address}`}
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </section>
+
+    <section class="card hub-card">
+      <div class="hub-qr">
+        <ResponsiveImage src="/media/images/branding/linktree-qr.png" alt="Haydarpaşa Beden Eğitimi ve Spor Linktree QR kodu" sizes="96px" />
+      </div>
+      <div class="hub-text">
+        <h3>Mobil Hızlı Başvuru</h3>
+        <p>Kameranızla okutarak veli izin belgeleri, turnuva kayıtları ve takım formlarına tek ekrandan ulaşın.</p>
+        <div class="hub-actions">
+          <a href={site.linktreeUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary touch-target">Tüm Formlar</a>
+          <a href={withBase('/belgeler/')} class="btn btn-secondary touch-target">Belgeler Sayfası</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-stack { padding-block: 1.5rem 3rem; display: flex; flex-direction: column; gap: 1.5rem; }
+  .page-header { display: flex; align-items: center; gap: 0.85rem; }
+  .page-header-icon { width: 30px; height: 30px; background: var(--color-amber-light); color: #1e293b; padding: 0.5rem; border-radius: var(--radius-card-sm); }
+  .page-header h1 { font-size: 1.4rem; font-weight: 900; text-transform: uppercase; margin: 0; }
+  .page-header p { font-size: 0.78rem; color: #ffdede; margin: 0.2rem 0 0; }
+  .contact-card { padding: 1.5rem; }
+  .contact-top { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border-soft); }
+  @media (min-width: 768px) { .contact-top { flex-direction: row; justify-content: space-between; align-items: center; } }
+  .contact-top h2 { display: flex; align-items: center; gap: 0.5rem; font-size: 1.15rem; font-weight: 900; color: var(--color-primary); margin: 0; }
+  .inline-icon { width: 22px; height: 22px; }
+  .address { font-size: 0.85rem; color: var(--color-muted); margin: 0.3rem 0 0; }
+  .contact-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .map-wrap { border-radius: var(--radius-card-sm); overflow: hidden; border: 2px solid #fecaca; height: 22rem; }
+  .map-wrap iframe { width: 100%; height: 100%; border: 0; }
+  .hub-card { display: flex; gap: 1rem; padding: 1.25rem; align-items: center; }
+  .hub-qr { width: 80px; height: 80px; flex-shrink: 0; background: #fff; border-radius: var(--radius-card-sm); padding: 6px; }
+  .hub-text h3 { font-size: 0.95rem; font-weight: 800; margin: 0 0 0.3rem; }
+  .hub-text p { font-size: 0.8rem; color: var(--color-muted); margin: 0 0 0.6rem; }
+  .hub-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+</style>

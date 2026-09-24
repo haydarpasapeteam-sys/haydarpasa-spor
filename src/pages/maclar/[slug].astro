@@ -1,0 +1,62 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ResponsiveImage from '../../components/ui/ResponsiveImage.astro';
+import Icon from '../../components/ui/Icon.astro';
+import { withBase, isSafeExternalUrl } from '../../lib/url';
+import { getPublishedMatches } from '../../lib/queries';
+import { computeMatchWinner } from '../../lib/matches';
+
+export async function getStaticPaths() {
+  const entries = await getPublishedMatches();
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { title, homeTeam, awayTeam, dateTime, venue, status, homeScore, awayScore, competition, season, coverImage, coverImageAlt, galleryUrl } = entry.data;
+const winner = computeMatchWinner({ status, homeScore, awayScore });
+const dateLabel = new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Istanbul' }).format(dateTime);
+---
+<BaseLayout title={title} description={`${homeTeam} - ${awayTeam} (${competition})`} path={`/maclar/${entry.id}`}>
+  <div class="container detail-stack">
+    <a href={withBase('/maclar/')} class="back-link"><Icon name="chevron-left" /> Tüm Maçlar</a>
+    <article class="card detail-card">
+      {coverImage && (
+        <div class="detail-media">
+          <ResponsiveImage src={coverImage} alt={coverImageAlt ?? ''} priority sizes="(min-width: 1024px) 800px, 100vw" />
+        </div>
+      )}
+      <div class="detail-body">
+        <p class="match-meta-line">{competition} · {season} · {venue} · {dateLabel}</p>
+        <h1>{title}</h1>
+        <div class="score-row">
+          <span class:list={['score-team', { winner: winner === 'home' }]}>{homeTeam}</span>
+          <span class="score-value">{homeScore !== undefined && awayScore !== undefined ? `${homeScore} - ${awayScore}` : status}</span>
+          <span class:list={['score-team', { winner: winner === 'away' }]}>{awayTeam}</span>
+        </div>
+        <div class="detail-content"><Content /></div>
+        {galleryUrl && isSafeExternalUrl(galleryUrl) && (
+          <a href={galleryUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary touch-target" style="margin-top:1rem;">
+            <Icon name="external-link" class="btn-icon" /> Fotoğraf Galerisi
+          </a>
+        )}
+      </div>
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .detail-stack { padding-block: 1.5rem 3rem; display: flex; flex-direction: column; gap: 1.25rem; max-width: 56rem; margin-inline: auto; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.3rem; color: #ffdede; text-decoration: none; font-size: 0.8rem; font-weight: 700; }
+  .detail-media { aspect-ratio: 16/9; overflow: hidden; border-radius: var(--radius-card) var(--radius-card) 0 0; }
+  .detail-media :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .detail-body { padding: 1.5rem; }
+  .match-meta-line { font-size: 0.75rem; color: var(--color-muted); font-weight: 700; margin: 0 0 0.4rem; }
+  .detail-body h1 { font-size: 1.4rem; font-weight: 900; margin: 0 0 1rem; }
+  .score-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; background: #f8fafc; border-radius: var(--radius-card-sm); padding: 1rem; margin-bottom: 1rem; }
+  .score-team { flex: 1; text-align: center; font-weight: 800; }
+  .score-team.winner { color: var(--color-primary); }
+  .score-value { font-size: 1.4rem; font-weight: 900; }
+  .detail-content { font-size: 0.92rem; line-height: 1.7; color: var(--color-ink-soft); }
+</style>

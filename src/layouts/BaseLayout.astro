@@ -1,0 +1,59 @@
+---
+import Seo from '../components/layout/Seo.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import { canonicalUrl } from '../lib/url';
+import site from '../data/site.json';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  path: string;
+  noindex?: boolean;
+  bodyClass?: string;
+}
+
+const { title, description, path, noindex = false, bodyClass = '' } = Astro.props;
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'EducationalOrganization',
+  name: `${site.schoolName} — ${site.departmentName}`,
+  url: canonicalUrl('/'),
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.address,
+    addressLocality: 'Üsküdar / İstanbul',
+    addressCountry: 'TR',
+  },
+  email: site.publicEmail,
+  sameAs: [site.instagramUrl, site.officialSchoolWebsite].filter(Boolean),
+};
+---
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#c40018" />
+    <Seo title={title} description={description} path={path} noindex={noindex} />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    <slot name="head" />
+  </head>
+  <body class={bodyClass}>
+    <a href="#main-content" class="skip-link">İçeriğe geç</a>
+    <Header currentPath={path} />
+    <main id="main-content" class="site-main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .site-main {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+</style>

@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/ui/Icon.astro';
+import { withBase } from '../lib/url';
+---
+<BaseLayout title="Sayfa Bulunamadı" description="Aradığınız sayfa bulunamadı." path="/404/" noindex={true}>
+  <div class="container not-found">
+    <Icon name="image-off" class="not-found-icon" />
+    <h1>404 — Sayfa Bulunamadı</h1>
+    <p>Aradığınız sayfa taşınmış, kaldırılmış ya da hiç var olmamış olabilir.</p>
+    <a href={withBase('/')} class="btn btn-primary touch-target">
+      <Icon name="home" class="btn-icon" /> Ana Sayfaya Dön
+    </a>
+  </div>
+</BaseLayout>
+
+<style>
+  .not-found {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 1rem;
+    padding-block: 4rem;
+  }
+  .not-found-icon {
+    width: 64px;
+    height: 64px;
+    color: var(--color-amber-light);
+  }
+  .not-found h1 {
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin: 0;
+  }
+  .not-found p {
+    color: #ffdede;
+    margin: 0;
+    max-width: 28rem;
+  }
+</style>

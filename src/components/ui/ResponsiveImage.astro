@@ -1,0 +1,88 @@
+---
+/**
+ * Renders a <picture> with AVIF/WebP srcset from the manifest produced by
+ * scripts/optimize-images.mjs, with explicit width/height (no layout
+ * shift) and lazy-loading by default. Falls back to the plain original
+ * (still correctly base-pathed) if the manifest has no entry yet — e.g.
+ * a brand-new Pages CMS upload before the next scheduled/CI rebuild runs
+ * `pnpm run optimize:images` — so a missing derivative never breaks the
+ * build or the page.
+ */
+import { readFileSync } from 'node:fs';
+import { withBase } from '../../lib/url';
+
+interface Variant {
+  width: number;
+  format: 'avif' | 'webp';
+  path: string;
+}
+interface ManifestEntry {
+  width: number;
+  height: number;
+  variants: Variant[];
+}
+
+let manifest: Record<string, ManifestEntry> = {};
+try {
+  const manifestUrl = new URL('../../../public/media/images/_manifest.json', import.meta.url);
+  manifest = JSON.parse(readFileSync(manifestUrl, 'utf8'));
+} catch {
+  manifest = {};
+}
+
+interface Props {
+  src: string; // e.g. "/media/images/duyurular/basketbol-secmeleri.png"
+  alt: string;
+  class?: string;
+  priority?: boolean;
+  sizes?: string;
+  imgClass?: string;
+}
+
+const { src, alt, class: className = '', priority = false, sizes = '100vw', imgClass = '' } = Astro.props;
+const entry = manifest[src];
+
+function byFormat(format: 'avif' | 'webp') {
+  return (entry?.variants ?? []).filter((v) => v.format === format).sort((a, b) => a.width - b.width);
+}
+
+const avif = byFormat('avif');
+const webp = byFormat('webp');
+const width = entry?.width ?? 1200;
+const height = entry?.height ?? 800;
+// Universal <img> fallback (browsers with no <picture>/AVIF/WebP support at
+// all): use the largest WebP derivative rather than the original upload —
+// still visibly smaller than a multi-megabyte PNG/JPEG original.
+const fallbackSrc = webp.length > 0 ? webp[webp.length - 1]!.path : src;
+---
+{entry ? (
+  <picture class={className}>
+    {avif.length > 0 && (
+      <source type="image/avif" sizes={sizes} srcset={avif.map((v) => `${withBase(v.path)} ${v.width}w`).join(', ')} />
+    )}
+    {webp.length > 0 && (
+      <source type="image/webp" sizes={sizes} srcset={webp.map((v) => `${withBase(v.path)} ${v.width}w`).join(', ')} />
+    )}
+    <img
+      src={withBase(fallbackSrc)}
+      alt={alt}
+      width={width}
+      height={height}
+      class={imgClass}
+      loading={priority ? 'eager' : 'lazy'}
+      decoding={priority ? 'sync' : 'async'}
+      fetchpriority={priority ? 'high' : 'auto'}
+    />
+  </picture>
+) : (
+  <img
+    src={withBase(src)}
+    alt={alt}
+    width={width}
+    height={height}
+    class={imgClass || className}
+    loading={priority ? 'eager' : 'lazy'}
+    decoding={priority ? 'sync' : 'async'}
+    fetchpriority={priority ? 'high' : 'auto'}
+  />
+)}

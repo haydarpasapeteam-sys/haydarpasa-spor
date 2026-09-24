@@ -1,0 +1,581 @@
+# Pages CMS configuration (https://pagescms.org) — single source of truth
+# for the editor-facing interface. The editor (a PE teacher, not a
+# developer) signs in to the hosted Pages CMS app with their GitHub
+# account, picks this repository, and every save here becomes a Git
+# commit — GitHub Actions then validates and rebuilds the site (see
+# .github/workflows/validate.yml and deploy.yml).
+#
+# Sidebar order below intentionally follows spec §8's grouping:
+#   1. Hızlı İçerik      -> Duyurular, Maçlar, Turnuvalar
+#   2. Takımlar/Branşlar -> Takımlar, Branşlar
+#   3. Belgeler
+#   4. Galeriler
+#   5. Site Ayarları
+#   (Medya sources are configured separately below and appear as the
+#   built-in Pages CMS media picker, not a content collection.)
+
+content:
+  # ---------------------------------------------------------------------
+  # 1. Hızlı İçerik
+  # ---------------------------------------------------------------------
+  - name: announcements
+    label: "Duyurular"
+    path: src/content/announcements
+    format: yaml-frontmatter
+    subfolders: false
+    view:
+      fields: [title, category, status, publishAt, expiresAt, featured]
+      sort: [{ field: publishAt, direction: desc }]
+      search: [title, summary]
+      default:
+        field: publishAt
+        direction: desc
+    create: true
+    delete: false # Arşivle: durumu "Arşivlendi" yap, silme.
+    fields:
+      - name: title
+        label: "Başlık"
+        type: string
+        required: true
+      - name: slug
+        label: "Bağlantı Adı (Slug)"
+        type: string
+        required: true
+        description: "Küçük harf, rakam ve tire (-) kullanın. Örnek: basketbol-takimi-secmeleri. Kaydettikten sonra değiştirmeyin — sayfanın adresini değiştirir."
+      - name: summary
+        label: "Özet"
+        type: text
+        required: true
+        description: "Kart görünümünde gösterilen kısa özet (en fazla 300 karakter)."
+      - name: category
+        label: "Kategori"
+        type: select
+        required: true
+        options: ["Duyuru", "Takım Seçmeleri", "Turnuva", "Maç Sonucu", "Belge", "Etkinlik"]
+      - name: status
+        label: "Durum"
+        type: select
+        required: true
+        options: ["Taslak", "Yayınlandı", "Arşivlendi"]
+        description: "Taslak: sitede görünmez. Yayınlandı: Yayın Tarihi geldiğinde görünür. Arşivlendi: aktif listede görünmez, arşivde kalır."
+      - name: publishAt
+        label: "Yayın Tarihi"
+        type: datetime
+        required: true
+      - name: expiresAt
+        label: "Yayından Kalkma Tarihi"
+        type: datetime
+        description: "Boş bırakılırsa duyuru süresiz aktif kalır. Yayın Tarihinden önce olamaz."
+      - name: featured
+        label: "Öne Çıkar"
+        type: boolean
+        default: false
+      - name: priority
+        label: "Öncelik (0-100)"
+        type: number
+        default: 0
+        description: "Öne çıkan duyurular arasında sıralama için — büyük sayı daha önde gösterilir."
+      - name: coverImage
+        label: "Kapak Görseli"
+        type: image
+        options:
+          source: images
+      - name: coverImageAlt
+        label: "Görsel Açıklaması"
+        type: string
+        description: "Kapak Görseli varsa ZORUNLUDUR. Görseli göremeyen ziyaretçiler için görseli anlatan kısa bir açıklama yazın."
+      - name: relatedUrl
+        label: "İlgili Bağlantı"
+        type: string
+        description: "Google Form, Drive vb. dış bağlantı (https:// ile başlamalı)."
+      - name: relatedDocument
+        label: "İlgili Belge"
+        type: reference
+        options:
+          collection: documents
+      - name: relatedMatch
+        label: "İlgili Maç"
+        type: reference
+        options:
+          collection: matches
+      - name: relatedTournament
+        label: "İlgili Turnuva"
+        type: reference
+        options:
+          collection: tournaments
+      - name: body
+        label: "İçerik"
+        type: rich-text
+
+  - name: matches
+    label: "Maçlar"
+    path: src/content/matches
+    format: yaml-frontmatter
+    view:
+      fields: [dateTime, sport, homeTeam, awayTeam, homeScore, awayScore, status]
+      sort: [{ field: dateTime, direction: desc }]
+      search: [title, homeTeam, awayTeam]
+    create: true
+    delete: false # Sonucu düzelt veya durumu "İptal Edildi" yap, silme.
+    fields:
+      - name: title
+        label: "Başlık"
+        type: string
+        required: true
+      - name: slug
+        label: "Bağlantı Adı (Slug)"
+        type: string
+        required: true
+      - name: sport
+        label: "Branş"
+        type: reference
+        required: true
+        options:
+          collection: sports
+      - name: competition
+        label: "Müsabaka / Lig"
+        type: string
+        required: true
+      - name: season
+        label: "Sezon"
+        type: string
+        required: true
+        description: "Örnek: 2025-2026"
+      - name: homeTeam
+        label: "Ev Sahibi Takım"
+        type: string
+        required: true
+      - name: awayTeam
+        label: "Konuk Takım"
+        type: string
+        required: true
+        description: "Ev Sahibi Takım ile aynı olamaz."
+      - name: dateTime
+        label: "Maç Tarihi ve Saati"
+        type: datetime
+        required: true
+      - name: venue
+        label: "Mekân"
+        type: string
+        required: true
+      - name: status
+        label: "Maç Sonucu / Durumu"
+        type: select
+        required: true
+        options: ["Planlandı", "Canlı", "Tamamlandı", "Ertelendi", "İptal Edildi"]
+      - name: homeScore
+        label: "Ev Sahibi Skoru"
+        type: number
+        description: "Yalnızca Tamamlandı durumundaki maçlarda zorunludur."
+      - name: awayScore
+        label: "Konuk Skoru"
+        type: number
+        description: "Yalnızca Tamamlandı durumundaki maçlarda zorunludur."
+      - name: summary
+        label: "Özet"
+        type: text
+      - name: coverImage
+        label: "Kapak Görseli"
+        type: image
+        options:
+          source: images
+      - name: coverImageAlt
+        label: "Görsel Açıklaması"
+        type: string
+        description: "Kapak Görseli varsa ZORUNLUDUR."
+      - name: galleryUrl
+        label: "Fotoğraf Galerisi Bağlantısı"
+        type: string
+      - name: featured
+        label: "Öne Çıkar"
+        type: boolean
+        default: false
+      - name: published
+        label: "Yayınla"
+        type: boolean
+        default: true
+      - name: body
+        label: "İçerik"
+        type: rich-text
+
+  - name: tournaments
+    label: "Turnuvalar"
+    path: src/content/tournaments
+    format: yaml-frontmatter
+    view:
+      fields: [title, sport, status, startDate, endDate, published]
+      sort: [{ field: startDate, direction: desc }]
+      search: [title, summary]
+    create: true
+    delete: false # Durumu "İptal Edildi" yap, silme.
+    fields:
+      - name: title
+        label: "Başlık"
+        type: string
+        required: true
+      - name: slug
+        label: "Bağlantı Adı (Slug)"
+        type: string
+        required: true
+      - name: sport
+        label: "Branş"
+        type: reference
+        required: true
+        options:
+          collection: sports
+      - name: season
+        label: "Sezon"
+        type: string
+        required: true
+      - name: status
+        label: "Durum"
+        type: select
+        required: true
+        options: ["Yaklaşan", "Başvurular Açık", "Devam Ediyor", "Tamamlandı", "İptal Edildi"]
+      - name: startDate
+        label: "Başlangıç Tarihi"
+        type: datetime
+        description: "Tarih henüz belli değilse boş bırakılabilir."
+      - name: endDate
+        label: "Bitiş Tarihi"
+        type: datetime
+      - name: applicationStart
+        label: "Başvuru Başlangıcı"
+        type: datetime
+      - name: applicationEnd
+        label: "Başvuru Bitişi"
+        type: datetime
+      - name: summary
+        label: "Özet"
+        type: text
+        required: true
+      - name: coverImage
+        label: "Kapak Görseli"
+        type: image
+        options:
+          source: images
+      - name: coverImageAlt
+        label: "Görsel Açıklaması"
+        type: string
+        description: "Kapak Görseli varsa ZORUNLUDUR."
+      - name: fixtureDocument
+        label: "Fikstür Belgesi"
+        type: reference
+        options:
+          collection: documents
+      - name: applicationUrl
+        label: "Başvuru Formu Bağlantısı"
+        type: string
+      - name: staffApplicationUrl
+        label: "Görevli/Personel Başvuru Bağlantısı"
+        type: string
+      - name: resultsUrl
+        label: "Sonuçlar Bağlantısı"
+        type: string
+      - name: published
+        label: "Yayınla"
+        type: boolean
+        default: true
+      - name: body
+        label: "İçerik"
+        type: rich-text
+
+  # ---------------------------------------------------------------------
+  # 2. Takımlar ve Branşlar
+  # ---------------------------------------------------------------------
+  - name: teams
+    label: "Takımlar"
+    path: src/content/teams
+    format: yaml-frontmatter
+    view:
+      fields: [name, sport, season, active, order]
+      sort: [{ field: order, direction: asc }]
+      search: [name]
+    create: true
+    delete: false # Aktif değilse "active" alanını kapatın, silmeyin.
+    fields:
+      - name: name
+        label: "Takım Adı"
+        type: string
+        required: true
+      - name: slug
+        label: "Bağlantı Adı (Slug)"
+        type: string
+        required: true
+      - name: sport
+        label: "Branş"
+        type: reference
+        required: true
+        options:
+          collection: sports
+      - name: season
+        label: "Sezon"
+        type: string
+        required: true
+      - name: ageOrClassGroup
+        label: "Yaş / Sınıf Kategorisi"
+        type: string
+        required: true
+      - name: summary
+        label: "Özet"
+        type: text
+        required: true
+      - name: coachOrTeacher
+        label: "Sorumlu Öğretmen / Antrenör"
+        type: string
+      - name: coverImage
+        label: "Kapak Görseli"
+        type: image
+        options:
+          source: images
+      - name: coverImageAlt
+        label: "Görsel Açıklaması"
+        type: string
+        description: "Kapak Görseli varsa ZORUNLUDUR."
+      - name: active
+        label: "Aktif"
+        type: boolean
+        default: true
+      - name: order
+        label: "Sıra"
+        type: number
+        default: 0
+      - name: body
+        label: "İçerik"
+        type: rich-text
+
+  - name: sports
+    label: "Branşlar"
+    path: src/content/sports
+    format: yaml-frontmatter
+    view:
+      fields: [name, icon, order, active]
+      sort: [{ field: order, direction: asc }]
+    create: true
+    delete: true
+    fields:
+      - name: name
+        label: "Branş Adı"
+        type: string
+        required: true
+      - name: slug
+        label: "Bağlantı Adı (Slug)"
+        type: string
+        required: true
+      - name: icon
+        label: "Simge"
+        type: select
+        required: true
+        options: ["top", "raket", "hedef"]
+        description: "top: takım/topla oynanan sporlar, raket: raket sporları, hedef: isabet sporları (dart vb.)"
+      - name: description
+        label: "Açıklama"
+        type: text
+        required: true
+      - name: order
+        label: "Sıra"
+        type: number
+        default: 0
+      - name: active
+        label: "Aktif"
+        type: boolean
+        default: true
+
+  # ---------------------------------------------------------------------
+  # 3. Belgeler
+  # ---------------------------------------------------------------------
+  - name: documents
+    label: "Belgeler"
+    path: src/content/documents
+    format: yaml-frontmatter
+    view:
+      fields: [title, category, versionDate, status, approved]
+      sort: [{ field: order, direction: asc }]
+      search: [title, summary]
+    create: true
+    delete: false # "Dosya Bekleniyor" veya "Güncelliğini Kaybetti" durumunu kullanın, silmeyin.
+    fields:
+      - name: title
+        label: "Belge Adı"
+        type: string
+        required: true
+      - name: slug
+        label: "Bağlantı Adı (Slug)"
+        type: string
+        required: true
+      - name: category
+        label: "Kategori"
+        type: select
+        required: true
+        options: ["İzin Belgesi", "Sağlık Beyanı", "Taahhütname", "İSG Talimatı", "Diğer"]
+      - name: summary
+        label: "Özet"
+        type: text
+        required: true
+      - name: file
+        label: "PDF Dosyası"
+        type: file
+        required: true
+        options:
+          source: documents
+      - name: printablePage
+        label: "Sitedeki Görüntüleme Sayfası"
+        type: string
+        description: "Geliştirici tarafından oluşturulan sayfa yolu (örnek: /belgeler/saglik-durumu-beyan-formu). Bilmiyorsanız boş bırakın."
+      - name: versionDate
+        label: "Belge Sürüm Tarihi"
+        type: date
+        required: true
+      - name: schoolYear
+        label: "Eğitim-Öğretim Yılı"
+        type: string
+        required: true
+        description: "Örnek: 2026-2027"
+      - name: status
+        label: "Durum"
+        type: select
+        required: true
+        options: ["Taslak", "Aktif", "Güncelliğini Kaybetti", "Dosya Bekleniyor"]
+        description: "Yalnızca Aktif ve onaylanmış (approved) belgeler sitede yayınlanır."
+      - name: approved
+        label: "Onaylandı"
+        type: boolean
+        default: false
+      - name: order
+        label: "Sıra"
+        type: number
+        default: 0
+
+  # ---------------------------------------------------------------------
+  # 4. Galeriler
+  # ---------------------------------------------------------------------
+  - name: galleries
+    label: "Galeriler"
+    path: src/content/galleries
+    format: yaml-frontmatter
+    view:
+      fields: [title, year, event, published]
+      sort: [{ field: order, direction: asc }]
+    create: true
+    delete: true
+    fields:
+      - name: title
+        label: "Başlık"
+        type: string
+        required: true
+      - name: slug
+        label: "Bağlantı Adı (Slug)"
+        type: string
+        required: true
+      - name: year
+        label: "Yıl"
+        type: number
+        required: true
+      - name: event
+        label: "Etkinlik Adı"
+        type: string
+        required: true
+      - name: coverImage
+        label: "Kapak Görseli"
+        type: image
+        options:
+          source: images
+      - name: coverImageAlt
+        label: "Görsel Açıklaması"
+        type: string
+        description: "Kapak Görseli varsa ZORUNLUDUR."
+      - name: description
+        label: "Açıklama"
+        type: text
+        required: true
+      - name: externalUrl
+        label: "Albüm Bağlantısı (Drive / Linktree)"
+        type: string
+      - name: order
+        label: "Sıra"
+        type: number
+        default: 0
+      - name: published
+        label: "Yayınla"
+        type: boolean
+        default: true
+
+  # ---------------------------------------------------------------------
+  # 5. Site Ayarları (tekil dosya — silinemez)
+  # ---------------------------------------------------------------------
+  - name: site-settings
+    label: "Site Ayarları"
+    type: file
+    path: src/data/site.json
+    format: json
+    delete: false
+    fields:
+      - name: schoolName
+        label: "Okul Adı"
+        type: string
+        required: true
+      - name: departmentName
+        label: "Bölüm Adı"
+        type: string
+        required: true
+      - name: academicYear
+        label: "Eğitim-Öğretim Yılı"
+        type: string
+        required: true
+      - name: address
+        label: "Adres"
+        type: string
+        required: true
+      - name: mapQuery
+        label: "Harita Arama Sorgusu"
+        type: string
+        description: "Google Haritalar gömme bağlantısı için kullanılan adres metni."
+      - name: publicEmail
+        label: "Genel E-posta"
+        type: string
+        required: true
+      - name: officialSchoolWebsite
+        label: "Resmî Okul Web Sitesi"
+        type: string
+        required: true
+      - name: instagramUrl
+        label: "Instagram Bağlantısı"
+        type: string
+      - name: linktreeUrl
+        label: "Linktree Bağlantısı"
+        type: string
+      - name: footerText
+        label: "Alt Bilgi (Footer) Metni"
+        type: string
+      - name: maintenanceNotice
+        label: "Bakım Duyurusu"
+        type: text
+        description: "Sitede geçici bir bildirim göstermek isterseniz buraya yazın; boşsa hiçbir şey gösterilmez."
+      - name: defaultSeoTitle
+        label: "Varsayılan SEO Başlığı"
+        type: string
+        required: true
+      - name: defaultSeoDescription
+        label: "Varsayılan SEO Açıklaması"
+        type: text
+        required: true
+        description: "Not: Marka renkleri ve yazı tipi buradan düzenlenemez — bunlar kod seviyesinde sabittir."
+
+# ---------------------------------------------------------------------------
+# Medya kaynakları — Pages CMS'in görsel/dosya seçici arayüzü.
+# Görseller ve belgeler ayrı klasörlerde, ayrı izin verilen uzantılarla
+# tutulur; çalıştırılabilir dosya veya arşiv (.zip, .exe vb.) YÜKLENEMEZ.
+# ---------------------------------------------------------------------------
+media:
+  - name: images
+    label: "Görseller"
+    input: public/media/images
+    output: /media/images
+    extensions: ["png", "jpg", "jpeg", "webp", "avif"]
+    categories: ["image"]
+  - name: documents
+    label: "Belge Dosyaları (PDF)"
+    input: public/media/documents
+    output: /media/documents
+    extensions: ["pdf"]
+    categories: ["document"]

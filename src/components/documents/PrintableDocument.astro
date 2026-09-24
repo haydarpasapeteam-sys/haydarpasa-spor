@@ -1,0 +1,180 @@
+---
+/**
+ * Shared responsive + print layout for the health/permission forms and
+ * İSG safety posters (spec §12 "Mobile documents" fix). On screen this is
+ * a normal fluid, scrollable card; A4 dimensions only apply inside
+ * `@media print`. Ported 1:1 from the legacy HTML with two changes:
+ * a real viewport-responsive container, and every stray citation-marker
+ * artifact removed — the legal/institutional wording itself is untouched.
+ */
+interface Props {
+  docTitle: string;
+  accentColor?: string;
+}
+const { docTitle, accentColor = '#c40018' } = Astro.props;
+---
+<div class="doc-toolbar">
+  <span>{docTitle}</span>
+  <button type="button" class="btn btn-primary touch-target" onclick="window.print()">
+    🖨️ Yazdır / PDF Olarak Kaydet
+  </button>
+</div>
+
+<div class="doc-page" style={`--accent: ${accentColor}`}>
+  <slot />
+</div>
+
+<style>
+  .doc-toolbar {
+    max-width: 210mm;
+    margin: 0 auto 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+    justify-content: space-between;
+    background: #1e293b;
+    color: #fff;
+    padding: 0.75rem 1.1rem;
+    border-radius: var(--radius-card-sm);
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+
+  .doc-page {
+    background: #ffffff;
+    color: #0f172a;
+    max-width: 210mm;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1.1rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow-card);
+    font-size: 0.82rem;
+    line-height: 1.4;
+  }
+
+  .doc-page :global(.doc-header) {
+    text-align: center;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .doc-page :global(.doc-school-title) {
+    font-size: 1.05rem;
+    font-weight: 900;
+    color: var(--accent);
+    margin: 0;
+  }
+  .doc-page :global(.doc-title) {
+    font-size: 0.8rem;
+    font-weight: 800;
+    margin: 0.25rem 0 0;
+  }
+  .doc-page :global(.doc-directorate) {
+    font-weight: 800;
+    font-size: 0.8rem;
+    text-align: center;
+    margin: 0.75rem 0 0.5rem;
+    color: var(--accent);
+  }
+  .doc-page :global(.doc-body-text) {
+    font-size: 0.78rem;
+    margin-bottom: 0.6rem;
+    text-align: justify;
+  }
+  .doc-page :global(.doc-sec-title) {
+    font-size: 0.78rem;
+    font-weight: 800;
+    color: var(--accent);
+    margin: 0.6rem 0 0.25rem;
+  }
+  .doc-page :global(ul.doc-list) {
+    margin: 0 0 0.6rem;
+    padding-left: 1.1rem;
+  }
+  .doc-page :global(ul.doc-list li) {
+    font-size: 0.78rem;
+    margin-bottom: 0.2rem;
+    text-align: justify;
+  }
+  .doc-page :global(.doc-info-table),
+  .doc-page :global(.doc-sign-table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 0.6rem;
+    font-size: 0.75rem;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+  }
+  .doc-page :global(.doc-info-table td),
+  .doc-page :global(.doc-sign-table td) {
+    padding: 0.35rem 0.5rem;
+    border: 1px solid #cbd5e1;
+    vertical-align: top;
+    /* The blank-line placeholders ("Adı Soyadı: ....................")
+       are long unbroken runs of dots with no natural break opportunity —
+       without this, they force the table (and the whole page) wider than
+       the viewport on narrow phones (320-390px). */
+    overflow-wrap: anywhere;
+  }
+  .doc-page :global(.doc-warning-box) {
+    font-size: 0.7rem;
+    color: #991b1b;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    padding: 0.5rem 0.65rem;
+    border-radius: 6px;
+    margin-bottom: 0.6rem;
+    font-weight: 700;
+  }
+  .doc-page :global(.doc-footer-note) {
+    font-size: 0.68rem;
+    color: #64748b;
+    margin-top: 0.75rem;
+    text-align: center;
+    font-style: italic;
+  }
+
+
+  .doc-page :global(.doc-poster-section) {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+  .doc-page :global(.doc-poster-sec-h) {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--accent);
+    margin: 0 0 0.25rem;
+    text-transform: uppercase;
+  }
+  .doc-page :global(.doc-poster-footer) {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    font-weight: 700;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 0.5rem;
+  }
+
+  @media print {
+    .doc-toolbar {
+      display: none;
+    }
+    .doc-page {
+      box-shadow: none;
+      max-width: none;
+      width: 210mm;
+      min-height: 297mm;
+      padding: 15mm;
+      margin: 0;
+      border-radius: 0;
+      font-size: 9pt;
+    }
+  }
+</style>

@@ -1,0 +1,44 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TournamentCard from '../../components/tournaments/TournamentCard.astro';
+import Icon from '../../components/ui/Icon.astro';
+import { getPublishedTournaments } from '../../lib/queries';
+
+const tournaments = await getPublishedTournaments();
+const withSport = await Promise.all(
+  tournaments.map(async (entry) => ({ entry, sport: await getEntry('sports', entry.data.sport.id) })),
+);
+---
+<BaseLayout title="Turnuvalar" description="Haydarpaşa Lisesi okul içi ve okullar arası turnuvalar." path="/turnuvalar/">
+  <div class="container page-stack">
+    <header class="page-header">
+      <Icon name="flame" class="page-header-icon" />
+      <div>
+        <h1>Turnuvalar</h1>
+        <p>Okul içi ve okullar arası turnuva takvimi</p>
+      </div>
+    </header>
+
+    {tournaments.length > 0 ? (
+      <div class="grid-cards">
+        {withSport.map(({ entry, sport }) => (
+          <TournamentCard entry={entry} sportName={sport?.data.name ?? entry.data.sport.id} />
+        ))}
+      </div>
+    ) : (
+      <p class="empty-state">Henüz yayınlanmış bir turnuva bulunmuyor.</p>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .page-stack { padding-block: 1.5rem 3rem; display: flex; flex-direction: column; gap: 1.5rem; }
+  .page-header { display: flex; align-items: center; gap: 0.85rem; }
+  .page-header-icon { width: 30px; height: 30px; background: var(--color-amber-light); color: #1e293b; padding: 0.5rem; border-radius: var(--radius-card-sm); }
+  .page-header h1 { font-size: 1.4rem; font-weight: 900; text-transform: uppercase; margin: 0; }
+  .page-header p { font-size: 0.78rem; color: #ffdede; margin: 0.2rem 0 0; }
+  .grid-cards { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+  @media (min-width: 768px) { .grid-cards { grid-template-columns: repeat(2, 1fr); } }
+  .empty-state { background: rgba(255,255,255,0.1); border-radius: var(--radius-card-sm); padding: 1.5rem; text-align: center; color: #ffdede; }
+</style>

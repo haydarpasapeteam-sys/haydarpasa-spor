@@ -1,0 +1,87 @@
+name: Validate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate content, types, lint, tests, build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Enable pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Set pnpm cache dir
+        id: pnpm-cache
+        run: echo "STORE_PATH=$(pnpm store path --silent)" >> "$GITHUB_OUTPUT"
+
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: pnpm-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            pnpm-${{ runner.os }}-
+
+      - name: Install dependencies (frozen lockfile)
+        run: pnpm install --frozen-lockfile
+
+      - name: Cache generated image derivatives
+        uses: actions/cache@v4
+        with:
+          path: public/media/images/_derived
+          key: img-derived-${{ hashFiles('public/media/images/**/*.png', 'public/media/images/**/*.jpg', 'public/media/images/**/*.jpeg') }}
+          restore-keys: |
+            img-derived-
+
+      - name: Validate content
+        run: pnpm run validate:content
+
+      - name: Validate local links & references
+        run: pnpm run validate:links
+
+      - name: Validate documents (PDF integrity)
+        run: pnpm run validate:documents
+
+      - name: Typecheck
+        run: pnpm run check
+
+      - name: Lint
+        run: pnpm run lint
+
+      - name: Unit tests
+        run: pnpm run test
+
+      - name: Optimize images
+        run: pnpm run optimize:images
+
+      - name: Build
+        run: pnpm run build:unsafe
+
+      - name: Upload build output (for inspection on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-output
+          path: dist
+          retention-days: 3

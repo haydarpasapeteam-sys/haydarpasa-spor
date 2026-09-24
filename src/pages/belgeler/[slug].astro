@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PrintableDocument from '../../components/documents/PrintableDocument.astro';
+import { ISG_POSTERS } from '../../data/isg-posters';
+
+export function getStaticPaths() {
+  return ISG_POSTERS.map((poster) => ({ params: { slug: poster.slug }, props: { poster } }));
+}
+
+const { poster } = Astro.props;
+const path = `/belgeler/${poster.slug}`;
+---
+<BaseLayout title={poster.title} path={path}>
+  <div class="container" style="padding-block: 1.5rem;">
+    <PrintableDocument docTitle={`📄 ${poster.title}`} accentColor={poster.color}>
+      <div class="doc-header">
+        <div class="doc-school-title">HAYDARPAŞA LİSESİ</div>
+        <p style="font-size:0.7rem; font-weight:600; color:#64748b; margin:0.1rem 0 0.4rem;">
+          Beden Eğitimi ve Spor Bölümü | İSG Rehberi
+        </p>
+        <div class="doc-title" style={`background:${poster.color}; color:#fff; display:inline-block; padding:0.3rem 0.7rem; border-radius:6px;`}>
+          {poster.title}
+        </div>
+      </div>
+
+      {poster.sections.map(([heading, items]: [string, string[]]) => (
+        <div class="doc-poster-section">
+          <div class="doc-poster-sec-h">{heading}</div>
+          <ul class="doc-list">
+            {items.map((item: string) => <li>{item}</li>)}
+          </ul>
+        </div>
+      ))}
+
+      <div class="doc-warning-box">⚠️ {poster.warning}</div>
+
+      <div class="doc-poster-footer">
+        <div>Beden Eğitimi ve Spor Zümresi</div>
+        <div style="text-align:right;">İbrahim SÜSLÜ<br /><span style="font-weight:400; font-size:0.65rem;">Okul Müdürü</span></div>
+      </div>
+    </PrintableDocument>
+  </div>
+</BaseLayout>

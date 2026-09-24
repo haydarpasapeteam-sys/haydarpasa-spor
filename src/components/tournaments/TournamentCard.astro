@@ -1,0 +1,77 @@
+---
+import { isSafeExternalUrl } from '../../lib/url';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'tournaments'>;
+  sportName: string;
+}
+const { entry, sportName } = Astro.props;
+const { title, status, summary, startDate, applicationUrl, resultsUrl } = entry.data;
+const dateLabel = startDate
+  ? new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Istanbul' }).format(startDate)
+  : null;
+
+const statusColors: Record<string, string> = {
+  Yaklaşan: '#1d4ed8',
+  'Başvurular Açık': '#065f46',
+  'Devam Ediyor': '#b45309',
+  Tamamlandı: '#334155',
+  'İptal Edildi': '#991b1b',
+};
+---
+<article class="tournament-card">
+  <div class="tournament-top">
+    <span class="pill" style={`background:${statusColors[status]}1a; color:${statusColors[status]};`}>{status}</span>
+    <span class="pill" style="background:#fef3c7; color:#92400e;">{sportName}</span>
+  </div>
+  <h3 class="tournament-title">{title}</h3>
+  {dateLabel && <p class="tournament-date">{dateLabel}</p>}
+  <p class="tournament-summary">{summary}</p>
+  <div class="tournament-actions">
+    {applicationUrl && isSafeExternalUrl(applicationUrl) && (
+      <a href={applicationUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary touch-target">Başvuru</a>
+    )}
+    {resultsUrl && isSafeExternalUrl(resultsUrl) && (
+      <a href={resultsUrl} target="_blank" rel="noopener noreferrer" class="btn btn-secondary touch-target">Sonuçlar</a>
+    )}
+  </div>
+</article>
+
+<style>
+  .tournament-card {
+    background: #fff;
+    color: var(--color-ink);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    padding: 1.25rem;
+  }
+  .tournament-top {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.6rem;
+  }
+  .tournament-title {
+    font-size: 1.05rem;
+    font-weight: 900;
+    margin: 0 0 0.25rem;
+  }
+  .tournament-date {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-muted);
+    margin: 0 0 0.5rem;
+  }
+  .tournament-summary {
+    font-size: 0.82rem;
+    color: var(--color-muted);
+    margin: 0 0 0.85rem;
+    line-height: 1.4;
+  }
+  .tournament-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+</style>

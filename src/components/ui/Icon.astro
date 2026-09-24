@@ -1,0 +1,64 @@
+---
+/**
+ * Small, tree-shaken inline-SVG icon set. Replaces the legacy
+ * `<script src="https://unpkg.com/lucide@latest">` CDN dependency — no
+ * runtime icon library, no extra network request, no unversioned script.
+ */
+export type IconName =
+  | 'home' | 'bell-ring' | 'trophy' | 'flame' | 'book-open' | 'landmark'
+  | 'file-text' | 'mail' | 'users' | 'calendar' | 'clock' | 'map-pin'
+  | 'globe' | 'instagram' | 'shield-check' | 'folder-open' | 'external-link'
+  | 'chevron-left' | 'chevron-right' | 'menu' | 'check' | 'circle' | 'target'
+  | 'racket' | 'image-off' | 'download' | 'lock';
+
+interface Props {
+  name: IconName;
+  class?: string;
+  'aria-hidden'?: boolean | 'true' | 'false';
+}
+
+const { name, class: className = '', ...rest } = Astro.props;
+
+const paths: Record<IconName, string> = {
+  home: 'M3 11.5 12 4l9 7.5M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9',
+  'bell-ring': 'M18 8a6 6 0 1 0-12 0c0 3.2-1 4.6-2 6h16c-1-1.4-2-2.8-2-6ZM9.5 19a2.5 2.5 0 0 0 5 0M3 6l2-2M21 6l-2-2',
+  trophy: 'M8 4h8v4a4 4 0 0 1-8 0V4ZM6 6H4a2 2 0 0 0 2 4M18 6h2a2 2 0 0 1-2 4M10 15h4v3H10zM8 21h8',
+  flame: 'M12 2c1 4-4 5-4 9a4 4 0 0 0 8 0c1 1.5 1 3 1 3a6 6 0 1 1-11-3c0-4 4-5 6-9Z',
+  'book-open': 'M12 6c-2-1.5-5-2-8-1v13c3-1 6-.5 8 1 2-1.5 5-2 8-1V5c-3-1-6-.5-8 1ZM12 6v14',
+  landmark: 'M3 21h18M4 10h16M12 3 3 8h18L12 3ZM6 10v9M10 10v9M14 10v9M18 10v9',
+  'file-text': 'M7 3h7l4 4v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1ZM14 3v4h4M9 12h6M9 15.5h6M9 9h2',
+  mail: 'M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1ZM3.5 6l8.5 6.5L20.5 6',
+  users: 'M9 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM3 20c0-3.5 2.7-6 6-6s6 2.5 6 6M17 11a3 3 0 1 0 0-6M17.5 14c2.4.4 4.5 2.4 4.5 6',
+  calendar: 'M5 4h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1ZM8 2v4M16 2v4M4 9h16M8 13h2M8 17h2',
+  clock: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM12 7v5l3.5 2',
+  'map-pin': 'M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21ZM12 12a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z',
+  globe: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM3 12h18M12 3c2.5 2.5 3.5 6 3.5 9s-1 6.5-3.5 9c-2.5-2.5-3.5-6-3.5-9s1-6.5 3.5-9Z',
+  instagram: 'M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4ZM12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7ZM17 6.7h.01',
+  'shield-check': 'M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3ZM9 12l2 2 4-4.5',
+  'folder-open': 'M3 8a1 1 0 0 1 1-1h5l2 2h9a1 1 0 0 1 1 1l-2 9a1 1 0 0 1-1 .8H5.5a1 1 0 0 1-1-.8L3 8Z',
+  'external-link': 'M14 4h6v6M20 4 10 14M20 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5',
+  'chevron-left': 'M15 5 8 12l7 7',
+  'chevron-right': 'M9 5l7 7-7 7',
+  menu: 'M4 6h16M4 12h16M4 18h16',
+  check: 'M4 12.5 9.5 18 20 6',
+  circle: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z',
+  target: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM12 12h.01',
+  racket: 'M9 14a5 5 0 1 0 0-10 5 5 0 0 0 0 10ZM7.5 15.5 3 20M9 14l2 2',
+  'image-off': 'M4 4l16 16M5 5v13a1 1 0 0 0 1 1h13M20 16V6a1 1 0 0 0-1-1H9',
+  download: 'M12 3v12m0 0-4-4m4 4 4-4M4 17v2a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-2',
+  lock: 'M6 10V8a6 6 0 1 1 12 0v2M5 10h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1Z',
+};
+---
+<svg
+  class={className}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden={rest['aria-hidden'] ?? 'true'}
+  focusable="false"
+>
+  <path d={paths[name]} />
+</svg>
