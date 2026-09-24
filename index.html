@@ -41,6 +41,7 @@
         </div>
       </div>
 
+      <!-- ÜST MENÜ SEKMELERİ -->
       <nav class="flex items-center justify-center gap-1.5 sm:gap-3 py-2.5 overflow-x-auto text-xs sm:text-sm font-bold no-scrollbar">
         <button onclick="showTab('anasayfa')" id="btn-anasayfa" class="tab-btn active px-3.5 py-2 rounded-xl transition flex items-center gap-1.5"><i data-lucide="home" class="w-4 h-4"></i><span>ANA SAYFA</span></button>
         <button onclick="showTab('rehber')" id="btn-rehber" class="tab-btn px-3.5 py-2 rounded-xl hover:bg-red-800/60 transition flex items-center gap-1.5"><i data-lucide="book-open" class="w-4 h-4"></i><span>EĞİTİM & REHBER</span></button>
@@ -55,7 +56,7 @@
   <!-- MAIN -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex-1 w-full space-y-8">
 
-    <!-- 1. ANA SAYFA -->
+    <!-- 1. SEKME: ANA SAYFA -->
     <div id="tab-anasayfa" class="page-tab active space-y-8">
       
       <!-- Banner -->
@@ -63,7 +64,7 @@
         <img src="anasayfa.png" alt="Haydarpaşa Lisesi" class="w-full h-auto object-cover block" />
       </section>
 
-      <!-- DUYURULAR / TURNUVALAR PRATİK LİSTE ALANI -->
+      <!-- DUYURULAR / SEÇMELER / TURNUVALAR ŞERİDİ -->
       <section class="space-y-4">
         <div class="flex items-center justify-between px-2 pb-2 border-b border-red-500/30">
           <div class="flex items-center gap-3">
@@ -72,34 +73,45 @@
             </div>
             <div>
               <h2 class="text-xl sm:text-2xl font-black tracking-wide text-white uppercase leading-none">Duyurular Panosu</h2>
-              <p class="text-[11px] sm:text-xs text-red-100 mt-1 font-semibold">Takım seçmeleri ve güncel turnuvalar</p>
+              <p class="text-[11px] sm:text-xs text-red-100 mt-1 font-semibold">Takım seçmeleri, sonuçlar ve turnuvalar (Üzerine gelindiğinde durur)</p>
             </div>
+          </div>
+          <!-- Manuel Kaydırma Okları -->
+          <div class="flex items-center gap-1.5">
+            <button onclick="scrollCards('left')" aria-label="Geri" class="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition backdrop-blur-sm">
+              <i data-lucide="chevron-left" class="w-4 h-4"></i>
+            </button>
+            <button onclick="scrollCards('right')" aria-label="İleri" class="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition backdrop-blur-sm">
+              <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </button>
           </div>
         </div>
 
-        <!-- SAĞA DOĞRU AKICI KAYAN DUYURU ŞERİDİ (5 KART) -->
-        <div id="duyuruContainer" class="flex gap-4 overflow-x-auto pb-4 pt-1 snap-x snap-mandatory scroll-smooth w-full" style="-webkit-overflow-scrolling: touch;">
-        <!-- KART 6: Erkek Voleybol Seçme Sonuçları -->
-          <div class="w-[300px] shrink-0 snap-start bg-white rounded-2xl p-4 flex flex-col justify-between shadow-lg border-t-4 border-t-blue-600 hover:shadow-xl transition">
+        <!-- SÜREKLİ VE AKICI KAYAN DUYURU ŞERİDİ (6 KART) -->
+        <div id="duyuruContainer" class="flex gap-4 overflow-x-auto pb-4 pt-1 w-full no-scrollbar" style="-webkit-overflow-scrolling: touch;">
+          
+          <!-- KART 0: Erkek Voleybol Seçme Sonuçları (EN BAŞTA) -->
+          <div class="w-[300px] shrink-0 bg-white rounded-2xl p-4 flex flex-col justify-between shadow-lg border-t-4 border-t-blue-600 hover:shadow-xl transition">
             <div>
-              <div class="w-full h-36 rounded-xl overflow-hidden bg-slate-900 border border-slate-100 mb-3 shadow-inner flex items-center justify-center">
+              <div class="w-full h-36 rounded-xl overflow-hidden bg-slate-900 border border-slate-100 mb-3 shadow-inner">
                 <img src="erkekvoleybol.png" alt="Erkek Voleybol Sonuçları" class="w-full h-full object-cover" />
               </div>
               <div class="flex items-center justify-between text-[11px] mb-1.5">
                 <span class="font-black text-blue-700 bg-blue-50 px-2 py-0.5 rounded-md">🏐 SONUÇLAR</span>
-                <span class="text-emerald-600 font-bold">Açıklandı</span>
+                <span class="text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded-md">Açıklandı</span>
               </div>
               <h3 class="text-sm font-black text-slate-900">Erkek Voleybol Seçme Sonuçları</h3>
               <p class="text-xs text-slate-500 mt-1 leading-snug">Takım seçmeleri tamamlanmıştır. Asil ve yedek liste sonuçlarını inceleyebilirsiniz.</p>
             </div>
             <div class="mt-4 pt-3 border-t border-slate-100">
               <a href="https://www.canva.com/design/DAHWHPOy3CI/r7ocJt5lkWaa1WS59RNB2Q/view" target="_blank" class="w-full block py-2 px-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs text-center transition shadow">
-                📋 Sonuç Listesini Görüntüle
+                📋 Sonuç Listesini Gör
               </a>
             </div>
-          </div>  
+          </div>
+
           <!-- KART 1: Pickleball -->
-          <div class="w-[300px] shrink-0 snap-start bg-white rounded-2xl p-4 flex flex-col justify-between shadow-lg border-t-4 border-t-lime-500 hover:shadow-xl transition">
+          <div class="w-[300px] shrink-0 bg-white rounded-2xl p-4 flex flex-col justify-between shadow-lg border-t-4 border-t-lime-500 hover:shadow-xl transition">
             <div>
               <div class="w-full h-36 rounded-xl overflow-hidden bg-slate-900 border border-slate-100 mb-3 shadow-inner">
                 <img src="pickleball.png" alt="Pickleball" class="w-full h-full object-cover" />
@@ -122,7 +134,7 @@
           </div>
 
           <!-- KART 2: Basketbol -->
-          <div class="w-[300px] shrink-0 snap-start bg-white rounded-2xl p-4 flex flex-col justify-between shadow-lg border-t-4 border-t-amber-500 hover:shadow-xl transition">
+          <div class="w-[300px] shrink-0 bg-white rounded-2xl p-4 flex flex-col justify-between shadow-lg border-t-4 border-t-amber-500 hover:shadow-xl transition">
             <div>
               <div class="w-full h-36 rounded-xl overflow-hidden bg-slate-900 border border-slate-100 mb-3 shadow-inner">
                 <img src="ChatGPT Image 21 Eyl 2026 18_06_30.png" alt="Basketbol" class="w-full h-full object-cover" />
@@ -145,7 +157,7 @@
           </div>
 
           <!-- KART 3: Erkek Voleybol -->
-          <div class="w-[300px] shrink-0 snap-start bg-white rounded-2xl p-4 flex flex-col justify-between shadow-lg border-t-4 border-t-blue-500 hover:shadow-xl transition">
+          <div class="w-[300px] shrink-0 bg-white rounded-2xl p-4 flex flex-col justify-between shadow-lg border-t-4 border-t-blue-500 hover:shadow-xl transition">
             <div>
               <div class="w-full h-36 rounded-xl overflow-hidden bg-slate-900 border border-slate-100 mb-3 shadow-inner">
                 <img src="erkekvoleybol.png" alt="Erkek Voleybol" class="w-full h-full object-cover" />
@@ -168,7 +180,7 @@
           </div>
 
           <!-- KART 4: Kız Voleybol -->
-          <div class="w-[300px] shrink-0 snap-start bg-white rounded-2xl p-4 flex flex-col justify-between shadow-lg border-t-4 border-t-emerald-500 hover:shadow-xl transition">
+          <div class="w-[300px] shrink-0 bg-white rounded-2xl p-4 flex flex-col justify-between shadow-lg border-t-4 border-t-emerald-500 hover:shadow-xl transition">
             <div>
               <div class="w-full h-36 rounded-xl overflow-hidden bg-slate-900 border border-slate-100 mb-3 shadow-inner">
                 <img src="kızvoleybol.png" alt="Kız Voleybol" class="w-full h-full object-cover" />
@@ -191,7 +203,7 @@
           </div>
 
           <!-- KART 5: Futsal Turnuvası -->
-          <div class="w-[300px] shrink-0 snap-start bg-white rounded-2xl p-4 flex flex-col justify-between shadow-lg border-t-4 border-t-red-600 hover:shadow-xl transition">
+          <div class="w-[300px] shrink-0 bg-white rounded-2xl p-4 flex flex-col justify-between shadow-lg border-t-4 border-t-red-600 hover:shadow-xl transition">
             <div>
               <div class="w-full h-36 rounded-xl overflow-hidden bg-slate-900 border border-slate-100 mb-3 shadow-inner">
                 <img src="HPL_Sınıflararası_Futsal_Turnuvası.png" alt="Futsal All-Star" class="w-full h-full object-cover" />
@@ -358,7 +370,7 @@
       </div>
     </div>
 
-    <!-- 2. EĞİTİM & REHBER -->
+    <!-- 2. SEKME: EĞİTİM & REHBER -->
     <div id="tab-rehber" class="page-tab space-y-8">
       <section class="rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl bg-white">
         <img src="hareket_bilimi.png" alt="Hareket Bilimi" class="w-full h-auto object-cover block" />
@@ -368,7 +380,7 @@
       </section>
     </div>
 
-    <!-- 3. KURUMSAL -->
+    <!-- 3. SEKME: KURUMSAL -->
     <div id="tab-kurumsal" class="page-tab space-y-8">
       <section class="rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl bg-white">
         <img src="vizyonumuz.png" alt="Vizyonumuz" class="w-full h-auto object-cover block" />
@@ -378,7 +390,7 @@
       </section>
     </div>
 
-    <!-- 4. TAKIMLAR (CANVA CANLI GÖRÜNÜM) -->
+    <!-- 4. SEKME: TAKIMLAR (CANVA CANLI GÖRÜNÜM) -->
     <div id="tab-takimlar" class="page-tab space-y-8">
       <section class="rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl bg-white p-2">
         <div style="position: relative; width: 100%; height: 0; padding-top: 56.25%; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 0; margin-bottom: 0; overflow: hidden; border-radius: 16px; will-change: transform;">
@@ -389,7 +401,7 @@
       </section>
     </div>
 
-    <!-- 5. SPORFEST -->
+    <!-- 5. SEKME: SPORFEST -->
     <div id="tab-sporfest" class="page-tab space-y-8">
       <section class="p-6 sm:p-8 rounded-3xl bg-white text-slate-800 shadow-2xl border-2 border-white space-y-6">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-slate-100 pb-6">
@@ -446,7 +458,7 @@
       </section>
     </div>
 
-    <!-- 6. İLETİŞİM -->
+    <!-- 6. SEKME: İLETİŞİM -->
     <div id="tab-iletisim" class="page-tab space-y-8">
       <div class="rounded-3xl bg-white text-slate-800 p-6 sm:p-8 shadow-2xl space-y-6 border-2 border-white">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
@@ -460,6 +472,7 @@
             <a href="mailto:haydarpasapeteam@gmail.com" class="px-4 py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold shadow flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4"></i><span>E-posta</span></a>
           </div>
         </div>
+        <!-- Google Harita -->
         <div class="rounded-2xl overflow-hidden border-2 border-red-200 shadow-inner h-96 w-full">
           <iframe src="https://maps.google.com/maps?q=Haydarpa%C5%9Fa%20Lisesi%20Altunizade&t=&z=16&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
@@ -484,6 +497,7 @@
     </div>
   </footer>
 
+  <!-- JAVASCRIPT MOTORU -->
   <script>
     function showTab(tabName) {
       document.querySelectorAll('.page-tab').forEach(tab => tab.classList.remove('active'));
@@ -513,37 +527,53 @@
       }
     }
 
+    // Güvenli Ziyaretçi Sayacı
     function initCounter() {
-      let count = localStorage.getItem('hpl_ziyaretci_sayisi');
-      if (!count) {
-        count = 1420;
-      } else {
-        count = parseInt(count, 10);
-      }
-      count += 1;
-      localStorage.setItem('hpl_ziyaretci_sayisi', count);
-      const counterEl = document.getElementById('ziyaretciSayisi');
-      if (counterEl) {
-        counterEl.textContent = count.toLocaleString('tr-TR');
+      try {
+        let count = localStorage.getItem('hpl_ziyaretci_sayisi');
+        if (!count) {
+          count = 1420;
+        } else {
+          count = parseInt(count, 10);
+        }
+        count += 1;
+        localStorage.setItem('hpl_ziyaretci_sayisi', count);
+        const counterEl = document.getElementById('ziyaretciSayisi');
+        if (counterEl) {
+          counterEl.textContent = count.toLocaleString('tr-TR');
+        }
+      } catch (e) {
+        console.error('Sayaç çalıştırılamadı:', e);
       }
     }
-// OTOMATİK AKICI KAYDIRMA
+
+    // Otomatik Sakin Kayan Şerit Motoru
     let autoScrollTimer = null;
+    let isPaused = false;
+
     function startAutoScroll() {
       const container = document.getElementById('duyuruContainer');
       if (!container) return;
       if (autoScrollTimer) clearInterval(autoScrollTimer);
+
       autoScrollTimer = setInterval(() => {
-        if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 5) {
+        if (isPaused) return;
+
+        // Listenin sonuna gelince başa dön
+        if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 2) {
           container.scrollLeft = 0;
         } else {
           container.scrollLeft += 1;
         }
-      }, 30);
+      }, 30); // Rahatça okunabilecek ideal kayma hızı
     }
 
     function stopAutoScroll() {
-      if (autoScrollTimer) clearInterval(autoScrollTimer);
+      isPaused = true;
+    }
+
+    function resumeAutoScroll() {
+      isPaused = false;
     }
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -555,15 +585,18 @@
       const container = document.getElementById('duyuruContainer');
       if (container) {
         startAutoScroll();
-        // Fare üzerine gelince dursun, çekilince devam etsin
+
+        // Fare kartların üzerine gelince durur, çıkınca devam eder
         container.addEventListener('mouseenter', stopAutoScroll);
-        container.addEventListener('mouseleave', startAutoScroll);
-        // Dokunmatik ekranda basınca dursun, bırakınca devam etsin
-        container.addEventListener('touchstart', stopAutoScroll);
+        container.addEventListener('mouseleave', resumeAutoScroll);
+
+        // Dokunmatik ekranda dokununca durur, parmak çekildikten 2.5 saniye sonra devam eder
+        container.addEventListener('touchstart', stopAutoScroll, { passive: true });
         container.addEventListener('touchend', () => {
-          setTimeout(startAutoScroll, 2000);
-        });
+          setTimeout(resumeAutoScroll, 2500);
+        }, { passive: true });
       }
     });
+  </script>
 </body>
 </html>
