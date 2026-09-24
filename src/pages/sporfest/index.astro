@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GalleryCard from '../../components/galleries/GalleryCard.astro';
+import ResponsiveImage from '../../components/ui/ResponsiveImage.astro';
+import Icon from '../../components/ui/Icon.astro';
+import { getPublishedGalleries } from '../../lib/queries';
+
+const galleries = await getPublishedGalleries();
+---
+<BaseLayout title="SporFest" description="Haydarpaşa SporFest yıl yıl fotoğraf ve etkinlik arşivi." path="/sporfest/">
+  <div class="container page-stack">
+    <header class="page-header">
+      <Icon name="flame" class="page-header-icon" />
+      <div>
+        <h1>SporFest</h1>
+        <p>Haydarpaşa SporFest arşivi — yıl yıl fotoğraf galerisi</p>
+      </div>
+    </header>
+
+    <section class="card text-section">
+      <p>
+        HL Sporfest, Haydarpaşa Lisesi'nin köklü spor geleneğini gençliğin enerjisiyle buluşturan, İstanbul'un
+        seçkin liselerini rekabet ve dostluk çatısı altında bir araya getiren organizasyondur. Futboldan
+        voleybola, basketboldan masa tenisine kadar geniş bir yelpazede düzenlenen turnuvalarımızda centilmenlik,
+        takım ruhu ve yüksek mücadele gücü sahalara yansımaktadır.
+      </p>
+    </section>
+
+    {galleries.length > 0 && (
+      <div class="grid-cards">
+        {galleries.map((entry) => <GalleryCard entry={entry} />)}
+      </div>
+    )}
+
+    <section class="card" style="overflow:hidden;">
+      <ResponsiveImage src="/media/images/sporfest/sporfest-arsiv.png" alt="SporFest yıl yıl etkinlik arşivi ve misafir okullar" sizes="100vw" />
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-stack { padding-block: 1.5rem 3rem; display: flex; flex-direction: column; gap: 1.5rem; }
+  .page-header { display: flex; align-items: center; gap: 0.85rem; }
+  .page-header-icon { width: 30px; height: 30px; background: var(--color-amber-light); color: #1e293b; padding: 0.5rem; border-radius: var(--radius-card-sm); }
+  .page-header h1 { font-size: 1.4rem; font-weight: 900; text-transform: uppercase; margin: 0; }
+  .page-header p { font-size: 0.78rem; color: #ffdede; margin: 0.2rem 0 0; }
+  .text-section { padding: 1.5rem; }
+  .text-section p { font-size: 0.9rem; line-height: 1.6; color: var(--color-ink-soft); margin: 0; }
+  .grid-cards { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+  @media (min-width: 640px) { .grid-cards { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .grid-cards { grid-template-columns: repeat(3, 1fr); } }
+</style>

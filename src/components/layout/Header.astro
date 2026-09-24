@@ -1,0 +1,146 @@
+---
+import { withBase } from '../../lib/url';
+import Nav from '../navigation/Nav.astro';
+import site from '../../data/site.json';
+
+interface Props {
+  currentPath: string;
+}
+const { currentPath } = Astro.props;
+---
+<header class="site-header">
+  <div class="container header-top">
+    <a href={withBase('/')} class="brand" aria-label={`${site.schoolName} — ${site.departmentName}, ana sayfaya dön`}>
+      <img
+        src={withBase('/media/images/branding/spor-kulubu-logosu.jpg')}
+        alt="Haydarpaşa Lisesi Spor Kulübü logosu"
+        class="brand-logo"
+        width="112"
+        height="112"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
+      <span class="brand-text">
+        <span class="brand-title">{site.schoolName.toLocaleUpperCase('tr')}</span>
+        <span class="brand-subtitle">{site.departmentName}</span>
+      </span>
+    </a>
+    <span class="year-badge">
+      <span class="year-dot" aria-hidden="true"></span>
+      <span>{site.academicYear} Dönemi</span>
+    </span>
+  </div>
+  <Nav currentPath={currentPath} />
+</header>
+
+<style>
+  .site-header {
+    background: var(--color-primary);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-block: 0.65rem;
+    border-bottom: 1px solid rgba(255, 100, 100, 0.25);
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    text-decoration: none;
+    color: #fff;
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  /* Mobile logo fix (spec §12): the legacy `w-13 h-13` classes did not
+     produce a real Tailwind size at all, so the logo rendered at an
+     unintended default. Explicit 52x52 on mobile, 56x56 from `sm`,
+     never shrinks, aspect ratio preserved via a square box + object-fit. */
+  .brand-logo {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  }
+
+  @media (min-width: 640px) {
+    .brand-logo {
+      width: 56px;
+      height: 56px;
+    }
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    line-height: 1.15;
+  }
+
+  .brand-title {
+    font-weight: 900;
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+
+  .brand-subtitle {
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: #ffdede;
+    white-space: nowrap;
+  }
+
+  .year-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    background: rgba(153, 27, 27, 0.6);
+    border: 1px solid rgba(248, 113, 113, 0.35);
+    padding: 0.35rem 0.6rem;
+    border-radius: var(--radius-pill);
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .year-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #34d399;
+    flex-shrink: 0;
+  }
+
+  /* Guarantee the title/badge never force horizontal page overflow at the
+     narrowest supported width (spec §12: verify at 320/360/390px). */
+  @media (max-width: 359px) {
+    .brand-title {
+      font-size: 0.82rem;
+    }
+    .brand-subtitle {
+      font-size: 0.58rem;
+    }
+    .year-badge span:last-child {
+      display: none;
+    }
+    .year-badge::after {
+      content: '2026-27';
+    }
+  }
+</style>

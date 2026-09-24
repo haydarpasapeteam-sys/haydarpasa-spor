@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PrintableDocument from '../../components/documents/PrintableDocument.astro';
+const path = '/belgeler/turnuva-ve-egzersiz-izin-belgesi';
+---
+<BaseLayout title="Turnuvalar ve Egzersiz Veli İzin Belgesi" path={path}>
+  <div class="container" style="padding-block: 1.5rem;">
+    <PrintableDocument docTitle="📄 TURNUVA VE EGZERSİZ VELİ İZİN BELGESİ">
+      <div class="doc-header">
+        <div class="doc-school-title">HAYDARPAŞA LİSESİ</div>
+        <div class="doc-title">OKUL İÇİ / İL-İLÇE TURNUVALARI VE EGZERSİZ ANTRENMANLARI VELİ İZİN BELGESİ</div>
+      </div>
+
+      <table class="doc-info-table">
+        <tr>
+          <td><b>Öğrencinin Adı Soyadı:</b> .................................................</td>
+          <td><b>Sınıfı / Şubesi:</b> .......................</td>
+        </tr>
+        <tr>
+          <td><b>T.C. Kimlik No:</b> .............................................................</td>
+          <td><b>Okul Numarası:</b> .......................</td>
+        </tr>
+        <tr>
+          <td><b>Spor Branşı / Faaliyet:</b> ...............................................</td>
+          <td><b>Doğum Tarihi:</b> .......................</td>
+        </tr>
+      </table>
+
+      <div class="doc-directorate">HAYDARPAŞA LİSESİ MÜDÜRLÜĞÜNE</div>
+
+      <p class="doc-body-text">
+        Velisi bulunduğum yukarıda açık kimlik bilgileri yazılı okulunuz öğrencisinin; 2026-2027 Eğitim-Öğretim Yılı
+        süresince okulunuz bünyesinde yürütülen okul içi turnuvalar, ders dışı egzersiz antrenmanları ile il ve ilçe
+        genelinde düzenlenecek tüm spor müsabakalarına ve hazırlık çalışmalarına katılmasına izin veriyorum.
+      </p>
+
+      <div class="doc-sec-title">BEYAN VE KABUL EDİLEN HUSUSLAR</div>
+      <ul class="doc-list">
+        <li>Öğrencimin spor ve egzersiz faaliyetlerine katılmasına engel teşkil edecek herhangi bir sağlık probleminin bulunmadığını,</li>
+        <li>Antrenman, ders dışı egzersiz ve yerel müsabakalar süresince görevli öğretmenlerin belirlediği çalışma programına, güvenlik ve disiplin kurallarına uyacağını,</li>
+        <li>Çocuğumun sağlık durumunda bir değişiklik olması halinde Beden Eğitimi zümresine ve okul idaresine yazılı olarak bildireceğimi kabul ve taahhüt ederim.</li>
+      </ul>
+
+      <table class="doc-sign-table">
+        <tr>
+          <td style="width:50%;">
+            <b>VELİ BİLGİLERİ VE ONAY</b><br /><br />
+            <b>Adı ve Soyadı:</b> ....................................................<br />
+            <b>Yakınlık Derecesi:</b> (Anne / Baba / Vasi)<br />
+            <b>Telefon (Cep):</b> ....................................................<br />
+            <b>Acil Durum Tel:</b> ...................................................
+          </td>
+          <td style="width:50%;">
+            <br />
+            <b>Tarih:</b> ..... / ..... / 2026<br /><br /><br />
+            <b>İmza:</b> ...................................................................
+          </td>
+        </tr>
+      </table>
+
+      <p class="doc-footer-note">
+        *Bu izin belgesi, öğrencinin egzersiz çalışma listeleri ve okul/il/ilçe müsabaka katılımları için Beden
+        Eğitimi ve Spor Zümresi tarafından muhafaza edilecektir.
+      </p>
+    </PrintableDocument>
+  </div>
+</BaseLayout>

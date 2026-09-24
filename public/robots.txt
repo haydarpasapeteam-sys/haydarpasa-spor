@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /yonetim/
+
+Sitemap: https://haydarpasapeteam-sys.github.io/haydarpasa-spor/sitemap-index.xml

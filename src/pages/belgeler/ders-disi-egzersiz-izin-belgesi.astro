@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PrintableDocument from '../../components/documents/PrintableDocument.astro';
+const path = '/belgeler/ders-disi-egzersiz-izin-belgesi';
+---
+<BaseLayout title="Ders Dışı Eğitim ve Egzersiz Veli İzin Belgesi" path={path}>
+  <div class="container" style="padding-block: 1.5rem;">
+    <PrintableDocument docTitle="📄 DERS DIŞI EĞİTİM VE EGZERSİZ VELİ İZİN BELGESİ">
+      <div class="doc-header">
+        <div class="doc-school-title">HAYDARPAŞA LİSESİ</div>
+        <div class="doc-title">DERS DIŞI EĞİTİM VE EGZERSİZ ÇALIŞMALARI VELİ İZİN BELGESİ</div>
+      </div>
+
+      <table class="doc-info-table">
+        <tr>
+          <td><b>Öğrencinin Adı Soyadı:</b> .................................................</td>
+          <td><b>Sınıfı / Şubesi:</b> .......................</td>
+        </tr>
+        <tr>
+          <td><b>T.C. Kimlik No:</b> .............................................................</td>
+          <td><b>Okul Numarası:</b> .......................</td>
+        </tr>
+        <tr>
+          <td><b>Egzersiz / Spor Branşı:</b> ...............................................</td>
+          <td><b>Çalışma Gün / Saati:</b> ...................</td>
+        </tr>
+      </table>
+
+      <div class="doc-directorate">HAYDARPAŞA LİSESİ MÜDÜRLÜĞÜNE</div>
+
+      <p class="doc-body-text">
+        Velisi bulunduğum yukarıda açık kimlik bilgileri yazılı okulunuz öğrencisinin; 2026-2027 Eğitim-Öğretim Yılı
+        süresince okulunuz Beden Eğitimi ve Spor Bölümü koordinasyonunda ders saatleri dışında (hafta içi ders bitimi
+        veya hafta sonu) yürütülecek olan Ders Dışı Eğitim ve Egzersiz (antrenman/hazırlık) çalışmalarına
+        katılmasına izin veriyorum.
+      </p>
+
+      <div class="doc-sec-title">VELİ BEYANI VE ULAŞIM TAAHHÜTNAMESİ</div>
+      <ul class="doc-list">
+        <li>Öğrencimin ders dışı egzersiz ve spor faaliyetlerine katılmasına engel teşkil edecek herhangi bir sağlık probleminin bulunmadığını,</li>
+        <li>Çalışmalar süresince görevli öğretmen ve antrenörlerin belirlediği çalışma programına, okul güvenliği ve disiplin kurallarına uyacağını,</li>
+        <li>Egzersiz/antrenman bitiminde öğrencimin okuldan ayrılışı ve evine intikalinin kendi imkânlarıyla (toplu taşıma/yaya/kendi ulaşımı ile) sağlanacağını, okul çıkışından itibaren ulaşım ve yol güvenliği konusundaki tüm sorumluluğun tarafıma (veliye) ait olduğunu,</li>
+        <li>Öğrencimin sağlık durumunda oluşabilecek herhangi bir değişikliği okul idaresine ve ders öğretmenine yazılı olarak derhal bildireceğimi kabul ve taahhüt ederim.</li>
+      </ul>
+
+      <table class="doc-sign-table">
+        <tr>
+          <td style="width:50%;">
+            <b>VELİ BİLGİLERİ VE ONAY</b><br /><br />
+            <b>Veli Adı ve Soyadı:</b> .........................................<br />
+            <b>Yakınlık Derecesi:</b> ( Anne / Baba / Vasi )<br />
+            <b>Telefon (Cep):</b> .............................................<br />
+            <b>Acil Durum Tel:</b> ...........................................
+          </td>
+          <td style="width:50%;">
+            <br /><br />
+            <b>Tarih:</b> ..... / ..... / 2026<br /><br />
+            <b>İmza:</b> ...........................................................
+          </td>
+        </tr>
+      </table>
+
+      <p class="doc-footer-note">
+        *Bu belge, ders dışı egzersiz çalışma planı onay dosyası ve öğrenci devam takip çizelgelerine eklenmek üzere
+        Beden Eğitimi ve Spor Zümresi tarafından muhafaza edilecektir.
+      </p>
+    </PrintableDocument>
+  </div>
+</BaseLayout>

@@ -1,0 +1,73 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TeamCard from '../../components/teams/TeamCard.astro';
+import ResponsiveImage from '../../components/ui/ResponsiveImage.astro';
+import Icon from '../../components/ui/Icon.astro';
+import { getActiveTeams } from '../../lib/queries';
+
+const teams = await getActiveTeams();
+const teamsWithSport = await Promise.all(
+  teams.map(async (entry) => ({ entry, sport: await getEntry('sports', entry.data.sport.id) })),
+);
+---
+<BaseLayout title="Takımlar" description="Haydarpaşa Lisesi okul takımları." path="/takimlar/">
+  <div class="container page-stack">
+    <header class="page-header">
+      <Icon name="users" class="page-header-icon" />
+      <div>
+        <h1>Takımlarımız</h1>
+        <p>2025-2026 sezonu okul takımlarımız</p>
+      </div>
+    </header>
+
+    <div class="card group-photo">
+      <ResponsiveImage
+        src="/media/images/kurumsal/takimlarimiz-2025-2026.png"
+        alt="2025-2026 okul takımlarımız: futsal, voleybol, masa tenisi ve basketbol takım fotoğrafları"
+        sizes="100vw"
+      />
+    </div>
+
+    <section class="card embed-card">
+      <h2 class="embed-heading">Takımlar — Canlı Görünüm</h2>
+      <div class="embed-wrap">
+        <iframe
+          loading="lazy"
+          title="Haydarpaşa Lisesi okul takımları canlı görünüm panosu (Canva)"
+          src="https://www.canva.com/design/DAHWAkWAw5A/CfJ_aKIxLUIyRcf9XzxXfg/view?embed"
+          allowfullscreen="allowfullscreen"
+          allow="fullscreen"
+        ></iframe>
+      </div>
+    </section>
+
+    {teams.length > 0 ? (
+      <div class="grid-cards">
+        {teamsWithSport.map(({ entry, sport }) => (
+          <TeamCard entry={entry} sportName={sport?.data.name ?? entry.data.sport.id} />
+        ))}
+      </div>
+    ) : (
+      <p class="empty-state">Henüz aktif bir takım kaydı bulunmuyor.</p>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .page-stack { padding-block: 1.5rem 3rem; display: flex; flex-direction: column; gap: 1.5rem; }
+  .page-header { display: flex; align-items: center; gap: 0.85rem; }
+  .page-header-icon { width: 30px; height: 30px; background: var(--color-amber-light); color: #1e293b; padding: 0.5rem; border-radius: var(--radius-card-sm); }
+  .page-header h1 { font-size: 1.4rem; font-weight: 900; text-transform: uppercase; margin: 0; }
+  .page-header p { font-size: 0.78rem; color: #ffdede; margin: 0.2rem 0 0; }
+  .group-photo { overflow: hidden; }
+  .grid-cards { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+  @media (min-width: 768px) { .grid-cards { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .grid-cards { grid-template-columns: repeat(3, 1fr); } }
+  .empty-state { background: rgba(255,255,255,0.1); border-radius: var(--radius-card-sm); padding: 1.5rem; text-align: center; color: #ffdede; }
+  .embed-card { padding: 1.25rem; }
+  .embed-heading { font-size: 0.95rem; font-weight: 800; margin: 0 0 0.75rem; color: var(--color-primary); }
+  .embed-wrap { position: relative; width: 100%; padding-top: 56.25%; border-radius: var(--radius-card-sm); overflow: hidden; background: #0f172a; }
+  .embed-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+
+</style>

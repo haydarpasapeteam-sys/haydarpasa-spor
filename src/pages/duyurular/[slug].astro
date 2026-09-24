@@ -1,0 +1,183 @@
+---
+import { render, getEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ResponsiveImage from '../../components/ui/ResponsiveImage.astro';
+import Icon from '../../components/ui/Icon.astro';
+import { withBase, isSafeExternalUrl } from '../../lib/url';
+import { getArchivedAnnouncements } from '../../lib/queries';
+
+export async function getStaticPaths() {
+  const entries = await getArchivedAnnouncements();
+  return entries.map((entry, index) => ({
+    params: { slug: entry.id },
+    props: {
+      entry,
+      prev: index > 0 ? entries[index - 1] : null,
+      next: index < entries.length - 1 ? entries[index + 1] : null,
+    },
+  }));
+}
+
+const { entry, prev, next } = Astro.props;
+const { Content } = await render(entry);
+const { title, summary, category, coverImage, coverImageAlt, publishAt, expiresAt, relatedUrl, resultsUrl, relatedDocument, relatedMatch, relatedTournament, status } = entry.data;
+
+const relatedDocEntry = relatedDocument ? await getEntry('documents', relatedDocument.id) : null;
+const relatedMatchEntry = relatedMatch ? await getEntry('matches', relatedMatch.id) : null;
+const relatedTournamentEntry = relatedTournament ? await getEntry('tournaments', relatedTournament.id) : null;
+
+const dateLabel = new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Istanbul' }).format(publishAt);
+const isExpired = status === 'Arşivlendi' || (expiresAt ? new Date() >= expiresAt : false);
+---
+<BaseLayout title={title} description={summary} path={`/duyurular/${entry.id}`}>
+  <div class="container detail-stack">
+    <a href={withBase('/duyurular/')} class="back-link"><Icon name="chevron-left" /> Tüm Duyurular</a>
+
+    <article class="detail-card card">
+      {coverImage && (
+        <div class="detail-media">
+          <ResponsiveImage src={coverImage} alt={coverImageAlt ?? ''} priority sizes="(min-width: 1024px) 800px, 100vw" />
+        </div>
+      )}
+      <div class="detail-body">
+        <div class="detail-meta">
+          <span class="pill" style="background:#fee2e2; color:#991b1b;">{category}</span>
+          <span class="detail-date">{dateLabel}</span>
+          {isExpired && <span class="pill" style="background:#f1f5f9; color:#64748b;">Arşiv</span>}
+        </div>
+        <h1>{title}</h1>
+        <p class="detail-summary">{summary}</p>
+        <div class="detail-content">
+          <Content />
+        </div>
+
+        {(relatedUrl || resultsUrl || relatedDocEntry || relatedMatchEntry || relatedTournamentEntry) && (
+          <div class="detail-links">
+            {relatedUrl && isSafeExternalUrl(relatedUrl) && (
+              <a href={relatedUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary touch-target">
+                <Icon name="external-link" class="btn-icon" /> Bağlantıyı Aç
+              </a>
+            )}
+            {resultsUrl && isSafeExternalUrl(resultsUrl) && (
+              <a href={resultsUrl} target="_blank" rel="noopener noreferrer" class="btn btn-secondary touch-target">
+                <Icon name="external-link" class="btn-icon" /> Sonuç Listesini Gör
+              </a>
+            )}
+            {relatedDocEntry && (
+              <a href={withBase(`/belgeler/${relatedDocEntry.id}/`)} class="btn btn-secondary touch-target">
+                <Icon name="file-text" class="btn-icon" /> {relatedDocEntry.data.title}
+              </a>
+            )}
+            {relatedMatchEntry && (
+              <a href={withBase(`/maclar/${relatedMatchEntry.id}/`)} class="btn btn-secondary touch-target">
+                <Icon name="trophy" class="btn-icon" /> {relatedMatchEntry.data.title}
+              </a>
+            )}
+            {relatedTournamentEntry && (
+              <a href={withBase(`/turnuvalar/`)} class="btn btn-secondary touch-target">
+                <Icon name="flame" class="btn-icon" /> {relatedTournamentEntry.data.title}
+              </a>
+            )}
+          </div>
+        )}
+      </div>
+    </article>
+
+    <nav class="prev-next" aria-label="Duyurular arasında gezinme">
+      {prev ? (
+        <a href={withBase(`/duyurular/${prev.id}/`)} class="prev-next-link" aria-label={`Önceki duyuru: ${prev.data.title}`}>
+          <Icon name="chevron-left" /> <span>Önceki Duyuru</span>
+        </a>
+      ) : <span />}
+      {next ? (
+        <a href={withBase(`/duyurular/${next.id}/`)} class="prev-next-link" aria-label={`Sonraki duyuru: ${next.data.title}`}>
+          <span>Sonraki Duyuru</span> <Icon name="chevron-right" />
+        </a>
+      ) : <span />}
+    </nav>
+  </div>
+</BaseLayout>
+
+<style>
+  .detail-stack {
+    padding-block: 1.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    max-width: 56rem;
+    margin-inline: auto;
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: #ffdede;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+  .detail-media {
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    border-radius: var(--radius-card) var(--radius-card) 0 0;
+  }
+  .detail-media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .detail-body {
+    padding: 1.5rem;
+  }
+  .detail-meta {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+  .detail-date {
+    font-size: 0.75rem;
+    color: var(--color-muted);
+    font-weight: 700;
+  }
+  .detail-body h1 {
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin: 0 0 0.5rem;
+  }
+  .detail-summary {
+    font-size: 0.95rem;
+    color: var(--color-muted);
+    margin: 0 0 1rem;
+  }
+  .detail-content {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--color-ink-soft);
+  }
+  .detail-links {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border-soft);
+  }
+  .prev-next {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .prev-next-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.8rem;
+    background: rgba(255, 255, 255, 0.12);
+    padding: 0.6rem 1rem;
+    border-radius: var(--radius-card-sm);
+  }
+</style>

@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/ui/Icon.astro';
+
+const PAGES_CMS_URL = 'https://app.pagescms.org/';
+---
+<BaseLayout
+  title="Yönetim"
+  description="Bu site Pages CMS ile GitHub üzerinden yönetilir."
+  path="/yonetim/"
+  noindex={true}
+>
+  <div class="container page-stack">
+    <header class="page-header">
+      <Icon name="lock" class="page-header-icon" />
+      <div>
+        <h1>Yönetim</h1>
+        <p>Bu sayfa arama motorlarında listelenmez</p>
+      </div>
+    </header>
+
+    <section class="card text-section">
+      <h2>İçerik nasıl yönetilir?</h2>
+      <p>
+        Bu web sitesi bir <strong>statik Astro sitesi</strong>dir — sunucu tarafında çalışan bir veritabanı veya
+        özel bir yönetici panosu yoktur. Tüm duyurular, maç sonuçları, takımlar, turnuvalar, belgeler ve
+        galeriler <strong>GitHub deposunda</strong> düz metin dosyaları olarak saklanır ve
+        <strong>Pages CMS</strong> adlı barındırılan (hosted) bir düzenleme arayüzü ile güncellenir.
+      </p>
+      <ol class="steps">
+        <li>Yetkili öğretmen, Pages CMS uygulamasına kendi GitHub hesabıyla giriş yapar.</li>
+        <li>Bu depoyu (haydarpasapeteam-sys/haydarpasa-spor) seçer.</li>
+        <li>Duyuru, maç, takım, turnuva, belge veya galeri ekler/düzenler.</li>
+        <li>Kaydet dediğinde Pages CMS, GitHub'da otomatik olarak bir <em>commit</em> oluşturur.</li>
+        <li>GitHub Actions içerik doğrulamasını ve derlemeyi otomatik çalıştırır.</li>
+        <li>Doğrulama başarılı olursa site GitHub Pages üzerinde otomatik olarak yeniden yayınlanır.</li>
+      </ol>
+      <a href={PAGES_CMS_URL} target="_blank" rel="noopener noreferrer" class="btn btn-primary touch-target" style="margin-top:0.5rem;">
+        <Icon name="external-link" class="btn-icon" /> Pages CMS'i Aç
+      </a>
+    </section>
+
+    <section class="card text-section">
+      <h2>Kimler düzenleyebilir?</h2>
+      <p>
+        Düzenleme yetkisi, bir üçüncü taraf şifre sistemi değil,
+        <strong>doğrudan bu GitHub deposuna yazma erişimi olan hesaplarla</strong> sınırlıdır. Bir kullanıcı
+        Pages CMS üzerinden bu depoya bağlanabiliyorsa, bunun nedeni GitHub'da o depoya erişim izni verilmiş
+        olmasıdır — yetkilendirme tamamen <strong>GitHub'ın kendi erişim kontrolü</strong> üzerinden yürütülür.
+        Pages CMS; okulun rol/izin sistemine özel, ayrı bir "editör" veya "yönetici" rolleri kümesi sağlamaz.
+      </p>
+      <p>
+        Bu sayfa hiçbir zaman bir jeton (token), şifre, OAuth sırrı veya özel depo bilgisi içermez ve kendisini
+        gömülü/kimliği doğrulanmış bir yönetici paneli olarak sunmaz — yalnızca yukarıdaki barındırılan Pages
+        CMS uygulamasına bir bağlantı sağlar.
+      </p>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-stack { padding-block: 1.5rem 3rem; display: flex; flex-direction: column; gap: 1.5rem; max-width: 48rem; margin-inline: auto; }
+  .page-header { display: flex; align-items: center; gap: 0.85rem; }
+  .page-header-icon { width: 30px; height: 30px; background: var(--color-amber-light); color: #1e293b; padding: 0.5rem; border-radius: var(--radius-card-sm); }
+  .page-header h1 { font-size: 1.4rem; font-weight: 900; text-transform: uppercase; margin: 0; }
+  .page-header p { font-size: 0.78rem; color: #ffdede; margin: 0.2rem 0 0; }
+  .text-section { padding: 1.5rem; }
+  .text-section h2 { font-size: 1.05rem; font-weight: 900; margin: 0 0 0.6rem; color: var(--color-primary); }
+  .text-section p { font-size: 0.88rem; line-height: 1.65; color: var(--color-ink-soft); }
+  .steps { font-size: 0.86rem; line-height: 1.7; color: var(--color-ink-soft); padding-left: 1.2rem; }
+  .steps li { margin-bottom: 0.3rem; }
+</style>

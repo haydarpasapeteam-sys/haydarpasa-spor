@@ -1,0 +1,142 @@
+name: Validate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate content, types, lint, tests, build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      # pnpm must be on PATH before actions/setup-node's own `cache: pnpm`
+      # can shell out to `pnpm store path` to locate what to cache — hence
+      # this runs before, not after, Set up Node.js.
+      - name: Enable pnpm
+        uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4.3.0
+        with:
+          version: 9
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies (frozen lockfile)
+        run: pnpm install --frozen-lockfile
+
+      - name: Cache generated image derivatives
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: public/media/images/_derived
+          key: img-derived-${{ hashFiles('public/media/images/**/*.png', 'public/media/images/**/*.jpg', 'public/media/images/**/*.jpeg') }}
+          restore-keys: |
+            img-derived-
+
+      - name: Validate content
+        run: pnpm run validate:content
+
+      - name: Validate local links & references
+        run: pnpm run validate:links
+
+      - name: Validate documents (PDF integrity)
+        run: pnpm run validate:documents
+
+      - name: Validate Pages CMS config (.pages.yml)
+        run: pnpm run validate:pages-cms
+
+      - name: Typecheck
+        run: pnpm run check
+
+      - name: Lint
+        run: pnpm run lint
+
+      - name: Unit tests
+        run: pnpm run test
+
+      - name: Optimize images
+        run: pnpm run optimize:images
+
+      - name: Build
+        run: pnpm run build:unsafe
+
+      - name: Upload build output (for inspection on failure)
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: build-output
+          path: dist
+          retention-days: 3
+
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+
+      # Only chromium is used (see playwright.config.ts's 6 viewport
+      # projects, all Chromium-based) — installing just that browser keeps
+      # this step, and its cache, small. `--with-deps` is skipped on a
+      # cache hit since the browser binary and its system libs are already
+      # present from the previous run.
+      - name: Install Playwright Chromium
+        run: npx playwright install ${{ steps.playwright-cache.outputs.cache-hit == 'true' && '' || '--with-deps' }} chromium
+
+      - name: Start preview server
+        # `astro preview` cannot be auto-spawned by Playwright's own
+        # webServer feature (see the comment in playwright.config.ts) —
+        # started explicitly here instead, in the background, then polled
+        # for readiness before the test suite runs.
+        run: pnpm run preview &
+
+      - name: Wait for preview server
+        run: |
+          for i in $(seq 1 30); do
+            if curl -sf http://localhost:4321/haydarpasa-spor/ > /dev/null; then
+              echo "Preview server is up."
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Preview server did not become ready in time." >&2
+          exit 1
+
+      - name: E2E + accessibility tests (Playwright, 6 viewports)
+        run: pnpm run test:e2e
+
+      - name: Upload Playwright report (on failure)
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: playwright-report
+          path: playwright-report
+          retention-days: 7
+
+      - name: Lighthouse audit (mobile, real thresholds)
+        # Reuses the same preview server started above — it's the actual
+        # production build, served under /haydarpasa-spor/, not an
+        # estimate. See scripts/lighthouse-check.mjs for the thresholds
+        # and spec §20's targets.
+        run: pnpm run lighthouse
+
+      - name: Upload Lighthouse reports
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: lighthouse-reports
+          path: lighthouse-reports
+          retention-days: 30

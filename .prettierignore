@@ -1,0 +1,9 @@
+dist/
+node_modules/
+.astro/
+public/media/images/_derived/
+public/media/images/_manifest.json
+playwright-report/
+test-results/
+.migration-staging/
+pnpm-lock.yaml

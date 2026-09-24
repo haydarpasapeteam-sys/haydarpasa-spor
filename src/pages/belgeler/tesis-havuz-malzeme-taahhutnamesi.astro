@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PrintableDocument from '../../components/documents/PrintableDocument.astro';
+const path = '/belgeler/tesis-havuz-malzeme-taahhutnamesi';
+
+const sections: [string, string[]][] = [
+  ['1. Spor Salonu, Sahalar ve Ortak Alanların Kullanımı', [
+    'Kapalı spor salonu, futsal sahası, tenis kortu ve açık spor alanlarına yalnızca ders öğretmeni veya antrenör gözetiminde ve izin verilen zaman dilimlerinde gireceğimi,',
+    'Spor alanlarına dışarıda giyilen ayakkabılarla girmeyeceğimi; zemine zarar vermeyen, tabanı temiz ve spor yapmaya uygun spor ayakkabısı kullanacağımı,',
+    'Spor alanlarında ve sahalarda yiyecek, sakız veya şekerli/gazlı içecek tüketmeyeceğimi (yalnızca kapaklı matara/su şişesi bulunduracağımı),',
+    'Zemin, tribün, pota, kale direkleri ve çevre koruma panolarına zarar verebilecek tehlikeli hareketlerden (potaya asılma, tel örgülere tırmanma vb.) kaçınacağımı,',
+  ]],
+  ['2. Yüzme Havuzu ve Islak Alan Güvenlik, Kıyafet ve Hijyen Kuralları', [
+    'Yüzme havuzuna yalnızca ders öğretmeni, antrenör veya cankurtaran eşliğinde ve gözetiminde gireceğimi; yetkili personel olmadan havuz alanına adım atmayacağımı,',
+    'Havuz hijyen ve güvenlik standartları gereği havuza bonesiz kesinlikle girmeyeceğimi; ders/etkinlik süresince boneyi nizami şekilde takılı tutacağımı,',
+    'Havuz alanına girmeden önce uygun yüzme kıyafeti (mayo/şort mayo) giyeceğimi, mutlaka duş alacağımı ve ayak dezenfeksiyon havuzunu kullanacağımı,',
+    'Havuz çevresinde ve ıslak zeminlerde koşmayacağımı; havuz kenarından izinsiz/kontrolsüz atlamayacağımı (balıklama atlama vb.) ve tehlikeli şakalar yapmayacağımı,',
+    'Kulvar iplerine/seperatörlere asılmayacağımı; kullanılan yüzme tahtası, pull buoy ve diğer eğitim materyallerini ders bitiminde toplayıp eksiksiz teslim edeceğimi,',
+    'Açık yara, enfeksiyon veya bulaşıcı bir rahatsızlığım bulunması durumunda havuza girmeyeceğimi ve durumu derhal ders öğretmenime bildireceğimi,',
+  ]],
+  ['3. Soyunma Odaları, Duşlar ve Dolapların Düzeni', [
+    'Soyunma odalarını ders öncesinde ve bitiminde yalnızca kıyafet değişimi ve kişisel hijyen amacıyla kullanacağımı; gereksiz yere bu alanlarda toplanmayacağımı,',
+    'Tarafıma tahsis edilen dolapları ve ortak kullanım alanlarını temiz, düzenli bırakacağımı; çöpleri çöp kutularına atacağımı,',
+    'Soyunma odaları, duşlar ve lavabolardaki tesisat, batarya, ayna, bank ve kapılara hiçbir şekilde zarar vermeyeceğimi, üzerine yazı yazmayacağımı,',
+    'Soyunma odaları ve duş alanlarında cep telefonu veya görüntü/ses kaydedici cihazları kişisel gizlilik ve güvenlik gerekçesiyle kesinlikle kullanmayacağımı ve kamera açmayacağımı,',
+    'Kıymetli eşya, para ve dijital cihazlarımı soyunma odalarında gözetimsiz bırakmayacağımı; bu konuda sorumluluğun şahsıma ait olduğunu bildiğimi,',
+  ]],
+  ['4. Toplar, Raketler, Fileler ve Antrenman Ekipmanları', [
+    'Ders ve etkinliklerde kullanılan toplar, raketler, huniler ve atlama iplerini öğretmenimin talimatına uygun şekilde teslim alıp kullanacağımı,',
+    'Kort ve salon filelerine yaslanmayacağımı, asılmayacağımı ve gergi mekanizmalarına müdahale etmeyeceğimi; raketleri yere veya tellere vurmayacağımı,',
+    'Ders/etkinlik sonunda kullanılan tüm malzemeleri eksiksiz, temiz ve düzenli bir şekilde malzeme odasına öğretmene geri teslim edeceğimi,',
+  ]],
+  ['5. Okul Formaları, Yelekler ve Temsil Kıyafetleri', [
+    'Turnuvalar veya etkinlikler için teslim edilen okul formalarını, antrenman yeleklerini ve spor kıyafetlerini temiz ve özenli kullanacağımı,',
+    'Teslim edilen formaları başkasına devretmeyeceğimi, kaybetmeyeceğimi ve etkinlik bitiminde yıkanmış ve eksiksiz olarak teslim edeceğimi,',
+  ]],
+  ['6. Sorumluluk, Güvenlik ve Hasar Yükümlülüğü', [
+    'Beden Eğitimi ve Spor dersi ile spor tesislerinde kendimin ve arkadaşlarımın can güvenliğini tehlikeye atacak hareket ve davranışlarda bulunmayacağımı,',
+    'Kasıtlı, dikkatsiz veya kurallara aykırı kullanım sonucu havuz, saha, salon, tesis, malzeme, raket, file, dolap veya formalarda meydana gelebilecek hasar ve zayiatın tarafımdan/velim tarafından karşılanacağını,',
+    'Kurallara uymamam halinde okul disiplin yönetmeliği hükümlerinin uygulanacağını beyan ederim.',
+  ]],
+];
+---
+<BaseLayout title="Tesis, Havuz ve Malzeme Kullanım Taahhütnamesi" path={path}>
+  <div class="container" style="padding-block: 1.5rem;">
+    <PrintableDocument docTitle="📄 HAYDARPAŞA LİSESİ RESMİ ÖĞRENCİ TAAHHÜTNAMESİ">
+      <div class="doc-header">
+        <div class="doc-school-title">HAYDARPAŞA LİSESİ</div>
+        <div class="doc-title">BEDEN EĞİTİMİ VE SPOR BÖLÜMÜ ORTAK ALAN, TESİS VE MALZEME KULLANIM TAAHHÜTNAMESİ</div>
+      </div>
+
+      <table class="doc-info-table">
+        <tr>
+          <td><b>Öğrencinin Adı Soyadı:</b> .....................................................</td>
+          <td><b>Tarih:</b> ..... / ..... / 2026</td>
+        </tr>
+        <tr>
+          <td><b>Okul Numarası:</b> ....................... <b>Sınıfı / Şubesi:</b> ............</td>
+          <td><b>İletişim Tel:</b> .....................................................</td>
+        </tr>
+      </table>
+
+      <p class="doc-body-text">
+        Haydarpaşa Lisesi Beden Eğitimi ve Spor dersleri, okul takımı çalışmaları, turnuvalar ve serbest zaman
+        etkinliklerinde; okulumuza ait tüm spor tesisleri, ortak alanlar ve demirbaş malzemelerin düzenli, güvenli
+        ve amacına uygun kullanımı için belirlenen aşağıdaki kurallara eksiksiz olarak uymayı kabul ve taahhüt
+        ederim:
+      </p>
+
+      {sections.map(([heading, items]) => (
+        <>
+          <div class="doc-sec-title">{heading}</div>
+          <ul class="doc-list">
+            {items.map((item) => <li>{item}</li>)}
+          </ul>
+        </>
+      ))}
+
+      <table class="doc-sign-table">
+        <tr>
+          <td style="width:50%;"><b>ÖĞRENCİNİN</b><br /><br />Adı Soyadı:<br /><br />İmzası:</td>
+          <td style="width:50%;"><b>VELİSİNİN</b><br /><br />Adı Soyadı:<br />İletişim Tel:<br />İmzası:</td>
+        </tr>
+      </table>
+    </PrintableDocument>
+  </div>
+</BaseLayout>

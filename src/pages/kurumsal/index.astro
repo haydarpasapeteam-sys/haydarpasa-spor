@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ResponsiveImage from '../../components/ui/ResponsiveImage.astro';
+import Icon from '../../components/ui/Icon.astro';
+
+const degerler = [
+  ['Centilmenlik ve Fair-Play', 'Rakiplere, hakemlere ve sporun etik değerlerine duyulan koşulsuz saygı.'],
+  ['Takım Ruhu ve Dayanışma', 'Birlikte başarma arzusu, güçlü iletişim ve ortak hedeflere kenetlenme.'],
+  ['Disiplin ve Azim', 'Düzenli çalışma alışkanlığı, özdisiplin ve zorluklar karşısında vazgeçmeme bilinci.'],
+  ['Sağlıklı ve Aktif Yaşam', 'Sporu bir ders değil, yaşam boyu sürecek bir hayat felsefesi olarak benimseme.'],
+];
+const hedefler = [
+  ['Erişilebilirlik', 'Sporu her öğrencimiz için yaşam biçimi haline getirmek.'],
+  ['Mücadele Ruhu', 'Haydarpaşa Lisesi armasını her alanda gururla ve centilmenlikle temsil etmek.'],
+  ['Gelişim ve Yenilik', 'Bilimsel antrenman yaklaşımları ve modern projelerle spor eğitimini sürekli ileriye taşımak.'],
+  ['Sürdürülebilirlik', 'Köklü spor mirasımızı yeni nesillere aktararak gelenekselleştirmek.'],
+];
+---
+<BaseLayout title="Kurumsal" description="Haydarpaşa Lisesi Beden Eğitimi ve Spor Bölümü vizyon, değerler ve başarılarımız." path="/kurumsal/">
+  <div class="container page-stack">
+    <header class="page-header">
+      <Icon name="landmark" class="page-header-icon" />
+      <div>
+        <h1>Kurumsal</h1>
+        <p>Vizyonumuz, değerlerimiz, hedeflerimiz ve başarılarımız</p>
+      </div>
+    </header>
+
+    <section class="card text-section">
+      <h2>Vizyonumuz</h2>
+      <p>
+        Öğrencilerimizin fiziksel, zihinsel ve sosyal gelişimlerini hareket bilimi ve sporun birleştirici gücüyle
+        desteklemek; ulusal ve uluslararası alanda hem sportif başarıları hem de örnek sporcu duruşlarıyla fark
+        yaratan yetkin bireyler yetiştirmektir.
+      </p>
+      <div class="supporting-image">
+        <ResponsiveImage src="/media/images/kurumsal/vizyonumuz.png" alt="Vizyonumuz" sizes="100vw" />
+      </div>
+    </section>
+
+    <section class="card text-section">
+      <h2>Değerlerimiz</h2>
+      <div class="value-grid">
+        {degerler.map(([title, desc]) => (
+          <div class="value-item"><strong>{title}</strong><p>{desc}</p></div>
+        ))}
+      </div>
+
+      <h2 style="margin-top:1.5rem;">Hedefler</h2>
+      <div class="value-grid">
+        {hedefler.map(([title, desc]) => (
+          <div class="value-item"><strong>{title}</strong><p>{desc}</p></div>
+        ))}
+      </div>
+      <div class="supporting-image">
+        <ResponsiveImage src="/media/images/kurumsal/degerlerimiz-ve-hedeflerimiz.png" alt="Değerlerimiz ve Hedeflerimiz" sizes="100vw" />
+      </div>
+    </section>
+
+    <section class="card text-section">
+      <h2>Başarılarımız</h2>
+      <p>
+        <strong>Futsal Takımımız Türkiye İkincisi!</strong> Okul futsal takımımız, Beden Eğitimi Öğretmenimiz
+        Nurullah Çayırcık liderliğinde katıldığı Okul Sporları Liseler Arası Gençler Futsal Şampiyonası'nda harika
+        bir mücadele sergileyerek ikincilik kupasının sahibi oldu.
+      </p>
+      <p>
+        İstanbul 5.si olarak okulumuzu Türkiye Şampiyonası Aksaray Grup maçlarında temsil eden kız masa tenisi
+        takımımız, Aksaray bölgesinde 6. olarak bu yılki okul sporları resmi müsabakalarını tamamlamıştır.
+      </p>
+      <p>
+        Üsküdar ilçesi liseler arası voleybol müsabakalarında okul voleybol takımımız Üsküdar 3.sü olmuştur.
+      </p>
+      <div class="supporting-image">
+        <ResponsiveImage
+          src="/media/images/kurumsal/basarilarimiz.png"
+          alt="Futsal Türkiye ikinciliği, masa tenisi ve voleybol başarıları"
+          sizes="100vw"
+        />
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-stack { padding-block: 1.5rem 3rem; display: flex; flex-direction: column; gap: 1.5rem; }
+  .page-header { display: flex; align-items: center; gap: 0.85rem; }
+  .page-header-icon { width: 30px; height: 30px; background: var(--color-amber-light); color: #1e293b; padding: 0.5rem; border-radius: var(--radius-card-sm); }
+  .page-header h1 { font-size: 1.4rem; font-weight: 900; text-transform: uppercase; margin: 0; }
+  .page-header p { font-size: 0.78rem; color: #ffdede; margin: 0.2rem 0 0; }
+  .text-section { padding: 1.5rem; }
+  .text-section h2 { font-size: 1.15rem; font-weight: 900; margin: 0 0 0.6rem; color: var(--color-primary); }
+  .text-section > p { font-size: 0.9rem; line-height: 1.6; color: var(--color-ink-soft); }
+  .value-grid { display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
+  @media (min-width: 640px) { .value-grid { grid-template-columns: repeat(2, 1fr); } }
+  .value-item { background: #f8fafc; border-radius: var(--radius-card-sm); padding: 0.85rem; }
+  .value-item strong { font-size: 0.85rem; color: var(--color-primary); }
+  .value-item p { margin: 0.3rem 0 0; font-size: 0.8rem; color: var(--color-muted); line-height: 1.4; }
+  .supporting-image { margin-top: 1.25rem; border-radius: var(--radius-card-sm); overflow: hidden; }
+</style>

@@ -1,0 +1,172 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ResponsiveImage from '../components/ui/ResponsiveImage.astro';
+import AnnouncementCard from '../components/announcements/AnnouncementCard.astro';
+import Icon from '../components/ui/Icon.astro';
+import { withBase } from '../lib/url';
+import { getActiveAnnouncements } from '../lib/queries';
+import site from '../data/site.json';
+
+const announcements = (await getActiveAnnouncements()).slice(0, 4);
+
+const quickLinks = [
+  { label: 'Duyurular', path: '/duyurular/', icon: 'bell-ring' as const },
+  { label: 'Maçlar', path: '/maclar/', icon: 'trophy' as const },
+  { label: 'Takımlar', path: '/takimlar/', icon: 'users' as const },
+  { label: 'Turnuvalar', path: '/turnuvalar/', icon: 'flame' as const },
+  { label: 'Belgeler', path: '/belgeler/', icon: 'file-text' as const },
+  { label: 'İletişim', path: '/iletisim/', icon: 'mail' as const },
+];
+---
+<BaseLayout path="/" description={site.defaultSeoDescription}>
+  <div class="container home-stack">
+    <section class="hero card">
+      <ResponsiveImage
+        src="/media/images/anasayfa/anasayfa-banner.png"
+        alt="Haydarpaşa Lisesi Beden Eğitimi ve Spor Bölümü"
+        priority={true}
+        sizes="100vw"
+        imgClass="hero-img"
+      />
+      <div class="hero-text">
+        <p class="hero-quote">“Güç, Disiplin ve Takım Ruhu”</p>
+        <p>
+          Öğrencilerimizin fiziksel gelişimini, spor kültürünü ve hareket bilimini temele alan çağdaş bir eğitim
+          anlayışı sunuyoruz.
+        </p>
+      </div>
+    </section>
+
+    <section class="quick-links" aria-label="Hızlı bağlantılar">
+      {quickLinks.map((link) => (
+        <a href={withBase(link.path)} class="quick-link touch-target">
+          <Icon name={link.icon} class="quick-link-icon" />
+          <span>{link.label}</span>
+        </a>
+      ))}
+    </section>
+
+    <section class="announcements-section">
+      <div class="section-heading">
+        <div class="section-heading-icon"><Icon name="bell-ring" /></div>
+        <div>
+          <h2>Duyurular Panosu</h2>
+          <p>Takım seçmeleri ve güncel turnuvalar</p>
+        </div>
+      </div>
+      {announcements.length > 0 ? (
+        <div class="announcements-grid">
+          {announcements.map((entry) => <AnnouncementCard entry={entry} />)}
+        </div>
+      ) : (
+        <p class="empty-state">Şu anda aktif bir duyuru bulunmuyor.</p>
+      )}
+      <a href={withBase('/duyurular/')} class="btn btn-secondary touch-target" style="margin-top:1rem;">
+        Tüm Duyurular
+      </a>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .home-stack {
+    padding-block: 1.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .hero {
+    overflow: hidden;
+  }
+  .hero :global(.hero-img) {
+    width: 100%;
+    height: auto;
+  }
+  .hero-text {
+    padding: 1.25rem;
+    font-size: 0.9rem;
+    color: var(--color-ink-soft);
+  }
+  .hero-quote {
+    font-weight: 900;
+    font-size: 1.1rem;
+    color: var(--color-primary);
+    margin: 0 0 0.4rem;
+  }
+  .quick-links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+  }
+  @media (min-width: 640px) {
+    .quick-links {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
+  .quick-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: var(--radius-card-sm);
+    padding: 0.85rem 0.5rem;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-align: center;
+  }
+  .quick-link:hover {
+    background: rgba(255, 255, 255, 0.22);
+  }
+  .quick-link-icon {
+    width: 22px;
+    height: 22px;
+  }
+  .section-heading {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  .section-heading-icon {
+    background: var(--color-amber-light);
+    color: #1e293b;
+    padding: 0.5rem;
+    border-radius: var(--radius-card-sm);
+    display: flex;
+  }
+  .section-heading h2 {
+    font-size: 1.15rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .section-heading p {
+    font-size: 0.72rem;
+    color: #ffdede;
+    margin: 0.15rem 0 0;
+  }
+  .announcements-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  @media (min-width: 768px) {
+    .announcements-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  .empty-state {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-card-sm);
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #ffdede;
+  }
+</style>

@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PrintableDocument from '../../components/documents/PrintableDocument.astro';
+
+const path = '/belgeler/saglik-durumu-beyan-formu';
+---
+<BaseLayout title="Sağlık Durumu Beyan Formu" path={path}>
+  <div class="container" style="padding-block: 1.5rem;">
+    <PrintableDocument docTitle="📄 SAĞLIK DURUMU BEYAN FORMU">
+      <div class="doc-header">
+        <div class="doc-school-title">HAYDARPAŞA LİSESİ</div>
+        <div class="doc-title">BEDEN EĞİTİMİ VE SPOR DERSİ / OKUL İÇİ FAALİYETLER SAĞLIK DURUM BEYAN FORMU</div>
+      </div>
+
+      <table class="doc-info-table">
+        <tr>
+          <td><b>Öğrencinin Adı Soyadı:</b> .................................................</td>
+          <td><b>Sınıfı / Şubesi:</b> .......................</td>
+        </tr>
+        <tr>
+          <td><b>T.C. Kimlik No:</b> .............................................................</td>
+          <td><b>Okul Numarası:</b> .......................</td>
+        </tr>
+        <tr>
+          <td><b>Doğum Tarihi:</b> .............................................................</td>
+          <td><b>Kan Grubu:</b> ............................</td>
+        </tr>
+      </table>
+
+      <div class="doc-directorate">HAYDARPAŞA LİSESİ MÜDÜRLÜĞÜNE</div>
+
+      <p class="doc-body-text">
+        Velisi bulunduğum yukarıda açık kimlik bilgileri yazılı okulunuz öğrencisinin; 2026-2027 Eğitim-Öğretim Yılı
+        süresince Beden Eğitimi ve Spor dersleri, okul içi spor turnuvaları, egzersiz antrenmanları ve fiziksel
+        aktivitelere katılımına ilişkin sağlık bilgileri aşağıda doğru ve eksiksiz olarak beyan edilmiştir.
+      </p>
+
+      <div class="table-scroll">
+        <table class="doc-info-table" role="table" aria-label="Sağlık durumu kontrol maddeleri">
+          <thead>
+            <tr>
+              <th style="text-align:left;">Sağlık Durumu / Kontrol Maddesi</th>
+              <th style="text-align:center; width:60px;">VAR</th>
+              <th style="text-align:center; width:60px;">YOK</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              'Kalp-damar rahatsızlığı veya ritim bozukluğu',
+              'Solunum yolu rahatsızlığı (Astım, bronşit vb.)',
+              'Ortopedik engel, eklem veya omurga rahatsızlığı',
+              'Epilepsi (Sara), diyabet veya kronik rahatsızlık',
+              'Düzenli kullanılan ilaç veya acil durum alerjisi',
+            ].map((item) => (
+              <tr>
+                <td>{item}</td>
+                <td style="text-align:center;">&nbsp;</td>
+                <td style="text-align:center;">&nbsp;</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="doc-warning-box">
+        *(Yukarıdaki maddelerden herhangi birine "VAR" yanıtı verilmişse veya öğrencinin spora katılımını
+        engelleyen/kısıtlayan bir durum söz konusu ise, ilgili uzman hekim/sağlık kurulu raporunun bu forma
+        eklenmesi zorunludur.)
+      </div>
+
+      <div class="doc-sec-title">VELİ SAĞLIK BEYANI VE ONAY</div>
+      <p class="doc-body-text">
+        Yukarıda beyan ettiğim bilgilerin doğruluğunu, öğrencimin spor yapmasında bilinen sakıncalı bir durum
+        olmadığını; süreç içerisinde sağlık durumunda oluşabilecek her türlü değişikliği derhal okul idaresine ve
+        Beden Eğitimi zümresine bildireceğimi taahhüt ederim.
+      </p>
+
+      <table class="doc-sign-table">
+        <tr>
+          <td style="width:50%;">
+            <b>VELİ BİLGİLERİ VE ONAY</b><br /><br />
+            <b>Veli Adı ve Soyadı:</b> .........................................<br />
+            <b>Yakınlık Derecesi:</b> (Anne / Baba / Vasi)<br />
+            <b>Telefon (Cep):</b> .............................................<br />
+            <b>Acil Durum Tel:</b> ...........................................
+          </td>
+          <td style="width:50%;">
+            <br />
+            <b>Tarih:</b> ..... / ..... / 2026<br /><br /><br />
+            <b>İmza:</b> ...........................................................
+          </td>
+        </tr>
+      </table>
+
+      <p class="doc-footer-note">
+        Bu beyan formu, öğrencinin Beden Eğitimi ve Spor dersi sağlık ve güvenlik takip dosyasında muhafaza
+        edilecektir.
+      </p>
+    </PrintableDocument>
+  </div>
+</BaseLayout>
