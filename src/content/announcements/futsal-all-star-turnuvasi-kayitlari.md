@@ -13,4 +13,4 @@ relatedUrl: "https://forms.gle/QxvR7VJhBeYzdGJv9"
 relatedTournament: "futsal-all-star-turnuvasi-2026-2027"
 ---
 
-HPL Sınıflararası Futsal All-Star Turnuvası için takım kayıtları devam etmektedir.
+HPL Sınıflararası Futsal All-Star Turnuvası düzenlenmektedir. Yukarıdaki bağlantı, turnuvada görevli/gönüllü olmak isteyenler içindir ("Futsal Turnuvası Görevli Başvuru Formu") — bir takım kaptanı kayıt bağlantısı henüz teyit edilmemiştir.

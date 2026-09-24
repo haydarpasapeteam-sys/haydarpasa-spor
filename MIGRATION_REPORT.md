@@ -152,3 +152,98 @@ Futsal), which appears on `anasayfa.png`'s branch icons and in
 "Erkek Futbol"/"Kız Futbol" categories, the final `sports` collection has
 12 entries rather than the summary graphic's 9. This is a faithful, not an
 inflated, reading of the actual source material.
+
+## Addendum: reconciling 24 live hand-edits to legacy `index.html` (2026-09-24)
+
+While this rebuild was in progress, `main` received 24 more commits (all
+2026-09-24, 16:03–19:47 +03:00) directly hand-editing the legacy
+`index.html` on GitHub's web UI — the exact workflow this project
+replaces. These were merged into `feat/astro-rebuild` via a normal
+`git merge` (not a rebase), and every meaningful change was individually
+classified below. Full diff inspected: `git diff acbac31 origin/main`
+(3 files: `index.html`, `pickleball.png`, `Pickleballseçmeler.png`).
+
+### Migrated (legitimate new content)
+
+- **Pickleball Takım Seçimi** (new tryout announcement). Verified from
+  the poster image itself (not guessed): **30 Eylül 2026 Çarşamba, saat
+  12.00, Tenis Kortu**. Real Google Form URL preserved. Poster moved from
+  the repo root into `public/media/images/duyurular/pickleball-takim-secimi.png`
+  (clean ASCII kebab-case, optimized by `scripts/optimize-images.mjs`
+  like every other announcement image — not left in a legacy directory).
+  New content file: `src/content/announcements/pickleball-takim-secimi.md`.
+- **Erkek Voleybol seçme sonuçları**. The tryout announcement
+  (`erkek-voleybol-takimi-secmeleri.md`) no longer presents the tryout as
+  merely upcoming — historical tryout info (date, venue, original
+  application/veli-izni links) is preserved verbatim, and a real Canva
+  results-board URL (`https://www.canva.com/design/DAHWHPOy3CI/r7ocJt5lkWaa1WS59RNB2Q/view`)
+  was added. This didn't fit any existing field cleanly, so the smallest
+  generic schema addition was made: a new optional `resultsUrl` field on
+  the **Announcements** collection (mirroring the field of the same name
+  and purpose that already existed on Tournaments) — added to
+  `content.config.ts`, `.pages.yml` ("Sonuçlar Bağlantısı"),
+  `validate-content.mjs`, and rendered as a "Sonuç Listesini Gör" button
+  on the announcement detail page. Fully editable through Pages CMS.
+  `expiresAt` was extended (a results notice has a longer useful shelf
+  life than a same-day tryout reminder).
+
+### Rejected (known-bad changes — not migrated)
+
+- **Erkek Voleybol "Veli İzni" → `ogrenci_taahhutnamesi.pdf`.** The live
+  hand-edit repointed this button at the zero-byte legacy PDF. Not
+  adopted — the original working Google Form URL was kept. The empty PDF
+  remains at `pending-documents/ogrenci-taahhutnamesi-BEKLENIYOR.pdf`,
+  outside `public/`, and the "Dosya Bekleniyor" notice on `/belgeler/` is
+  unchanged.
+- **Futsal "Fikstür" → `fiksturler.png`.** The live hand-edit repointed
+  the fixture link at the empty title-slide placeholder documented
+  earlier in this report as having zero real fixture data. Not adopted.
+  This project's `/turnuvalar/` page does not present any fixture as
+  real until a genuine one is supplied — the honest not-yet-published
+  state is retained.
+- **Basketbol "İzin Belgesi" → `https://forms.gle/vRLhL45pMhG55e1W8`.**
+  Investigated per instruction, without submitting any data: this URL
+  returns **HTTP 404** — it does not resolve to a real form at all. Not
+  adopted. The existing, working link (`ders-disi-egzersiz-izin-belgesi`,
+  referenced via `relatedDocument`) was kept. **Action needed from the
+  teacher:** if a Google Form was actually intended to replace the local
+  PDF for this permission, please supply the correct, working URL — the
+  one currently on the live legacy page does not work.
+- **Futsal "Takım Kayıt" → `https://forms.gle/QXvR7VJhbEYzdGJv9`.** This
+  differs from the existing recorded URL
+  (`https://forms.gle/QxvR7VJhBeYzdGJv9`) only in the case of two
+  letters. Checked both, without submitting anything: the new one also
+  returns **HTTP 404** (almost certainly a typo introduced while
+  hand-retyping the HTML). Not adopted — the existing URL was kept.
+
+### Self-correction found during this same investigation
+
+Checking the existing, *working* futsal URL
+(`https://forms.gle/QxvR7VJhBeYzdGJv9`) turned up a labeling mistake from
+the **original** migration (not something `main`'s edits introduced):
+that URL's real Google Form title is **"Futsal Turnuvası Görevli Başvuru
+Formu"** — a staff/volunteer sign-up form, not a team-captain
+registration form, even though the legacy button was labeled "Takım
+Kayıt". Corrected: the Futsal All-Star tournament's `applicationUrl` was
+moved to `staffApplicationUrl` (already an existing Tournaments field,
+now also rendered in `TournamentCard.astro` as "Görevli Başvurusu",
+which it previously was not), and both the tournament's and the related
+announcement's body text now describe the link accurately. No verified
+team-captain registration link exists, so `applicationUrl` is left
+unset rather than guessing — **the teacher should confirm whether a
+separate team-registration form exists and, if so, supply its URL.**
+
+### Duplicate / already represented / obsolete (no action needed)
+
+- `Pickleballseçmeler.png` — byte-identical duplicate of `pickleball.png`
+  (verified: same git blob hash). Not migrated separately.
+- The entire carousel/scroll-arrow/layout restructuring of the legacy
+  `index.html` announcement strip, the "SEKME" comment-prefix renames,
+  and the resized/recentred Canva embed — all presentational changes to
+  the single-page app this project replaces entirely with real routes
+  and components. No content to extract; `index.html` itself was not
+  restored (per instruction).
+- Minor copy trims across the Basketbol/Erkek Voleybol/Kız Voleybol/
+  Futsal cards (e.g. "25 Eylül Cuma • 12.00" → "25 Eyl • 12.00", dropping
+  the day-of-week) — purely cosmetic; this project's own copy already
+  independently states full dates, so nothing was changed to match.

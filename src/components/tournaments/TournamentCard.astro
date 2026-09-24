@@ -7,7 +7,7 @@ interface Props {
   sportName: string;
 }
 const { entry, sportName } = Astro.props;
-const { title, status, summary, startDate, applicationUrl, resultsUrl } = entry.data;
+const { title, status, summary, startDate, applicationUrl, staffApplicationUrl, resultsUrl } = entry.data;
 const dateLabel = startDate
   ? new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Istanbul' }).format(startDate)
   : null;
@@ -31,6 +31,9 @@ const statusColors: Record<string, string> = {
   <div class="tournament-actions">
     {applicationUrl && isSafeExternalUrl(applicationUrl) && (
       <a href={applicationUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary touch-target">Başvuru</a>
+    )}
+    {staffApplicationUrl && isSafeExternalUrl(staffApplicationUrl) && (
+      <a href={staffApplicationUrl} target="_blank" rel="noopener noreferrer" class="btn btn-secondary touch-target">Görevli Başvurusu</a>
     )}
     {resultsUrl && isSafeExternalUrl(resultsUrl) && (
       <a href={resultsUrl} target="_blank" rel="noopener noreferrer" class="btn btn-secondary touch-target">Sonuçlar</a>

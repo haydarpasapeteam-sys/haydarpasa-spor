@@ -15,18 +15,18 @@ const istanbulDate = () =>
     .pipe(z.date());
 
 const slugField = () =>
-  z.string().refine(isValidSlug, 'Slug yalnızca küçük harf, rakam ve tire (kebab-case) içerebilir.');
+  z
+    .string()
+    .refine(isValidSlug, 'Slug yalnızca küçük harf, rakam ve tire (kebab-case) içerebilir.');
 
 const safeUrl = () =>
-  z
-    .url('Geçerli bir URL giriniz.')
-    .refine((value) => {
-      try {
-        return ['https:', 'http:', 'mailto:', 'tel:'].includes(new URL(value).protocol);
-      } catch {
-        return false;
-      }
-    }, 'Yalnızca http(s), mailto veya tel bağlantılarına izin verilir.');
+  z.url('Geçerli bir URL giriniz.').refine((value) => {
+    try {
+      return ['https:', 'http:', 'mailto:', 'tel:'].includes(new URL(value).protocol);
+    } catch {
+      return false;
+    }
+  }, 'Yalnızca http(s), mailto veya tel bağlantılarına izin verilir.');
 
 /**
  * Cover images are NOT modeled with Astro's built-in content-collection
@@ -81,6 +81,7 @@ const announcements = defineCollection({
       coverImage: coverImagePath().optional(),
       coverImageAlt: z.string().min(1).optional(),
       relatedUrl: safeUrl().optional(),
+      resultsUrl: safeUrl().optional(),
       relatedDocument: reference('documents').optional(),
       relatedMatch: reference('matches').optional(),
       relatedTournament: reference('tournaments').optional(),
@@ -233,7 +234,11 @@ const tournaments = defineCollection({
           path: ['endDate'],
         });
       }
-      if (entry.applicationStart && entry.applicationEnd && entry.applicationEnd < entry.applicationStart) {
+      if (
+        entry.applicationStart &&
+        entry.applicationEnd &&
+        entry.applicationEnd < entry.applicationStart
+      ) {
         ctx.addIssue({
           code: 'custom' as const,
           message: 'Başvuru bitiş tarihi başvuru başlangıç tarihinden önce olamaz.',
@@ -253,7 +258,10 @@ const documents = defineCollection({
     slug: slugField(),
     category: z.enum(['İzin Belgesi', 'Sağlık Beyanı', 'Taahhütname', 'İSG Talimatı', 'Diğer']),
     summary: z.string().min(1),
-    file: z.string().min(1).startsWith('/media/documents/', 'file yalnızca /media/documents/ altında olabilir.'),
+    file: z
+      .string()
+      .min(1)
+      .startsWith('/media/documents/', 'file yalnızca /media/documents/ altında olabilir.'),
     printablePage: z.string().startsWith('/belgeler/').optional(),
     versionDate: istanbulDate(),
     schoolYear: z.string().min(1),
@@ -284,4 +292,12 @@ const galleries = defineCollection({
     .superRefine(requireAltWithCover),
 });
 
-export const collections = { announcements, sports, teams, matches, tournaments, documents, galleries };
+export const collections = {
+  announcements,
+  sports,
+  teams,
+  matches,
+  tournaments,
+  documents,
+  galleries,
+};

@@ -116,6 +116,10 @@ content:
         label: "İlgili Bağlantı"
         type: string
         description: "Google Form, Drive vb. dış bağlantı (https:// ile başlamalı)."
+      - name: resultsUrl
+        label: "Sonuçlar Bağlantısı"
+        type: string
+        description: "Seçme/başvuru sonuçlarının duyurulduğu sayfa (örn. Canva sonuç listesi). Sonuçlar açıklandığında doldurun."
       - name: relatedDocument
         label: "İlgili Belge"
         type: reference

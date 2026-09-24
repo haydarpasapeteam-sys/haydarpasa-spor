@@ -91,6 +91,7 @@ for (const { collection, slug, file, data } of entries) {
     if (data.category && !ANNOUNCEMENT_CATEGORIES.includes(data.category)) fail(file, `geçersiz category: "${data.category}"`);
     if (data.status && !ANNOUNCEMENT_STATUSES.includes(data.status)) fail(file, `geçersiz status: "${data.status}"`);
     if (data.relatedUrl && !isSafeUrl(data.relatedUrl)) fail(file, `relatedUrl geçersiz protokol: "${data.relatedUrl}"`);
+    if (data.resultsUrl && !isSafeUrl(data.resultsUrl)) fail(file, `resultsUrl geçersiz protokol: "${data.resultsUrl}"`);
   }
   if (collection === 'matches') {
     if (data.status && !MATCH_STATUSES.includes(data.status)) fail(file, `geçersiz status: "${data.status}"`);

@@ -20,7 +20,7 @@ export async function getStaticPaths() {
 
 const { entry, prev, next } = Astro.props;
 const { Content } = await render(entry);
-const { title, summary, category, coverImage, coverImageAlt, publishAt, expiresAt, relatedUrl, relatedDocument, relatedMatch, relatedTournament, status } = entry.data;
+const { title, summary, category, coverImage, coverImageAlt, publishAt, expiresAt, relatedUrl, resultsUrl, relatedDocument, relatedMatch, relatedTournament, status } = entry.data;
 
 const relatedDocEntry = relatedDocument ? await getEntry('documents', relatedDocument.id) : null;
 const relatedMatchEntry = relatedMatch ? await getEntry('matches', relatedMatch.id) : null;
@@ -51,11 +51,16 @@ const isExpired = status === 'Arşivlendi' || (expiresAt ? new Date() >= expires
           <Content />
         </div>
 
-        {(relatedUrl || relatedDocEntry || relatedMatchEntry || relatedTournamentEntry) && (
+        {(relatedUrl || resultsUrl || relatedDocEntry || relatedMatchEntry || relatedTournamentEntry) && (
           <div class="detail-links">
             {relatedUrl && isSafeExternalUrl(relatedUrl) && (
               <a href={relatedUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary touch-target">
                 <Icon name="external-link" class="btn-icon" /> Bağlantıyı Aç
+              </a>
+            )}
+            {resultsUrl && isSafeExternalUrl(resultsUrl) && (
+              <a href={resultsUrl} target="_blank" rel="noopener noreferrer" class="btn btn-secondary touch-target">
+                <Icon name="external-link" class="btn-icon" /> Sonuç Listesini Gör
               </a>
             )}
             {relatedDocEntry && (
