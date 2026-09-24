@@ -527,13 +527,43 @@
         counterEl.textContent = count.toLocaleString('tr-TR');
       }
     }
+// OTOMATİK AKICI KAYDIRMA
+    let autoScrollTimer = null;
+    function startAutoScroll() {
+      const container = document.getElementById('duyuruContainer');
+      if (!container) return;
+      if (autoScrollTimer) clearInterval(autoScrollTimer);
+      autoScrollTimer = setInterval(() => {
+        if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 5) {
+          container.scrollLeft = 0;
+        } else {
+          container.scrollLeft += 1;
+        }
+      }, 30);
+    }
+
+    function stopAutoScroll() {
+      if (autoScrollTimer) clearInterval(autoScrollTimer);
+    }
 
     document.addEventListener('DOMContentLoaded', () => {
       if (window.lucide) {
         lucide.createIcons();
       }
       initCounter();
+
+      const container = document.getElementById('duyuruContainer');
+      if (container) {
+        startAutoScroll();
+        // Fare üzerine gelince dursun, çekilince devam etsin
+        container.addEventListener('mouseenter', stopAutoScroll);
+        container.addEventListener('mouseleave', startAutoScroll);
+        // Dokunmatik ekranda basınca dursun, bırakınca devam etsin
+        container.addEventListener('touchstart', stopAutoScroll);
+        container.addEventListener('touchend', () => {
+          setTimeout(startAutoScroll, 2000);
+        });
+      }
     });
-  </script>
 </body>
 </html>
