@@ -142,6 +142,15 @@ src/content/
 src/data/site.json # Site Ayarları — school name, contact info, SEO defaults
 ```
 
+> **Expected benign warning:** `astro sync`/`build`/`check` print
+> `[glob-loader] No files found matching ... in directory ".../src/content/matches"`.
+> This is not an error (exit code 0) — it's Astro's glob content loader
+> correctly reporting that the Matches collection has no entries yet (see
+> above). It goes away on its own once a real match is added through
+> Pages CMS; see the comment above the `matches` collection in
+> `src/content.config.ts` for why this isn't worked around with a
+> placeholder entry.
+
 Every collection's schema (required fields, enums, date rules, cross-field
 validation) lives in `src/content.config.ts`. Business rules — announcement
 visibility, match-winner computation, slug/date validation — live in
@@ -171,7 +180,23 @@ error list.
   header/nav reachability, document print-layout A4 checks, route-status
   checks, broken-link checks, and an axe-core accessibility scan (WCAG
   2 A/AA) on every primary route. 184 passing checks across 6 viewport
-  projects, `tests/e2e/`.
+  projects, `tests/e2e/`. Requires the production build to be running
+  first (`astro preview` cannot be auto-spawned by Playwright — see the
+  comment in `playwright.config.ts`):
+  ```bash
+  pnpm run build && pnpm run preview &
+  pnpm run test:e2e
+  ```
+- **Lighthouse audit** (`pnpm run lighthouse`, `scripts/lighthouse-check.mjs`):
+  a real, reproducible Lighthouse run (mobile, simulated throttling)
+  against the actual production build served under `/haydarpasa-spor/`
+  (not an estimate) — same prerequisite as above (preview server running).
+  Checks the homepage and one content-heavy page against spec §20's
+  thresholds (Performance ≥90, Accessibility/Best Practices/SEO ≥95,
+  CLS <0.1), exits non-zero if any route falls short, and writes full
+  JSON reports to `lighthouse-reports/` (gitignored — regenerate anytime).
+  Runs in CI on every PR/push as part of `validate.yml`, with the JSON
+  reports uploaded as a workflow artifact regardless of pass/fail.
 
 ## Production build
 
@@ -213,8 +238,17 @@ Required repository settings (**Settings → Pages**):
   expiry actually take effect without a human clicking anything (see
   [Scheduled publishing limitations](#scheduled-publishing-limitations)).
 
-All three pin action versions (`@v4`/`@v5`) and cache the pnpm store and
-the generated image derivatives to keep runs fast.
+All three pin every third-party action to a full, immutable 40-character
+commit SHA (not a moving major-version tag like `@v4`) with a `# vX.Y.Z`
+comment for human readability, and cache the pnpm store and the generated
+image derivatives to keep runs fast. Each SHA was resolved and verified
+against the action's own repository (dereferencing annotated tags to their
+underlying commit where needed — `pnpm/action-setup@v4` is one such
+annotated tag) rather than copied from a tag name. To intentionally bump
+one later, resolve the new tag's commit SHA the same way (e.g.
+`gh api repos/actions/checkout/git/refs/tags/v5`, dereferencing via
+`git/tags/<sha>` if `object.type` is `"tag"` rather than `"commit"`) and
+update both the SHA and its version comment.
 
 ## Pages CMS setup
 

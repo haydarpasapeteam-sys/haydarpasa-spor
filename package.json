@@ -20,11 +20,13 @@
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "migrate:legacy": "node scripts/migrate-legacy-content.mjs",
-    "validate": "node scripts/validate-content.mjs && node scripts/validate-links.mjs && node scripts/validate-documents.mjs",
+    "validate": "node scripts/validate-content.mjs && node scripts/validate-links.mjs && node scripts/validate-documents.mjs && node scripts/validate-pages-cms-config.mjs",
     "validate:content": "node scripts/validate-content.mjs",
     "validate:links": "node scripts/validate-links.mjs",
     "validate:documents": "node scripts/validate-documents.mjs",
-    "optimize:images": "node scripts/optimize-images.mjs"
+    "optimize:images": "node scripts/optimize-images.mjs",
+    "validate:pages-cms": "node scripts/validate-pages-cms-config.mjs",
+    "lighthouse": "node scripts/lighthouse-check.mjs"
   },
   "dependencies": {
     "astro": "^7.3.4",
@@ -49,7 +51,8 @@
     "typescript-eslint": "^8.70.1",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "@eslint/js": "^9.39.5",
-    "globals": "^15.14.0"
+    "globals": "^15.14.0",
+    "lighthouse": "^13.5.0"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

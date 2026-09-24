@@ -5,7 +5,14 @@
 # commit — GitHub Actions then validates and rebuilds the site (see
 # .github/workflows/validate.yml and deploy.yml).
 #
-# Sidebar order below intentionally follows spec §8's grouping:
+# Verified against the current official docs (pagescms.org/docs/configuration/*)
+# on 2026-09-24: every `type: collection`/`type: file` marker, `operations`
+# object, `select` field's `options.values`, `image`/`file` field's
+# `options.media`, and `view.sort`/`view.default` shape below were checked
+# against the live documentation, not guessed. See scripts/validate-pages-cms-config.mjs
+# for an automated regression check of these same structural rules.
+#
+# Sidebar order below intentionally follows the grouping:
 #   1. Hızlı İçerik      -> Duyurular, Maçlar, Turnuvalar
 #   2. Takımlar/Branşlar -> Takımlar, Branşlar
 #   3. Belgeler
@@ -13,6 +20,22 @@
 #   5. Site Ayarları
 #   (Medya sources are configured separately below and appear as the
 #   built-in Pages CMS media picker, not a content collection.)
+#
+# `coverImage`/`coverImageAlt` are intentionally repeated as flat sibling
+# fields on every collection below, rather than factored into a shared
+# Pages CMS `components:` entry — a components/`object` field always
+# nests its sub-fields in the saved frontmatter, which would require
+# restructuring the flat schema already defined in src/content.config.ts
+# and re-migrating all existing content files. Not done without a
+# separate, deliberate data-shape migration.
+
+settings:
+  commit:
+    templates:
+      create: "İçerik eklendi: {path} ({userName})"
+      update: "İçerik güncellendi: {path} ({userName})"
+      delete: "İçerik arşivlendi/kaldırıldı: {path} ({userName})"
+      rename: "{oldPath} → {newPath} olarak yeniden adlandırıldı ({userName})"
 
 content:
   # ---------------------------------------------------------------------
@@ -20,18 +43,21 @@ content:
   # ---------------------------------------------------------------------
   - name: announcements
     label: "Duyurular"
+    type: collection
     path: src/content/announcements
     format: yaml-frontmatter
     subfolders: false
     view:
       fields: [title, category, status, publishAt, expiresAt, featured]
-      sort: [{ field: publishAt, direction: desc }]
+      sort: [publishAt, title]
       search: [title, summary]
       default:
-        field: publishAt
-        direction: desc
-    create: true
-    delete: false # Arşivle: durumu "Arşivlendi" yap, silme.
+        sort: publishAt
+        order: desc
+    operations:
+      create: true
+      rename: true # Hiçbir başka kayıt duyuru slug'ına referans vermez.
+      delete: false # Arşivle: durumu "Arşivlendi" yap, silme.
     fields:
       - name: title
         label: "Başlık"
@@ -51,12 +77,14 @@ content:
         label: "Kategori"
         type: select
         required: true
-        options: ["Duyuru", "Takım Seçmeleri", "Turnuva", "Maç Sonucu", "Belge", "Etkinlik"]
+        options:
+          values: ["Duyuru", "Takım Seçmeleri", "Turnuva", "Maç Sonucu", "Belge", "Etkinlik"]
       - name: status
         label: "Durum"
         type: select
         required: true
-        options: ["Taslak", "Yayınlandı", "Arşivlendi"]
+        options:
+          values: ["Taslak", "Yayınlandı", "Arşivlendi"]
         description: "Taslak: sitede görünmez. Yayınlandı: Yayın Tarihi geldiğinde görünür. Arşivlendi: aktif listede görünmez, arşivde kalır."
       - name: publishAt
         label: "Yayın Tarihi"
@@ -79,7 +107,7 @@ content:
         label: "Kapak Görseli"
         type: image
         options:
-          source: images
+          media: images
       - name: coverImageAlt
         label: "Görsel Açıklaması"
         type: string
@@ -109,14 +137,20 @@ content:
 
   - name: matches
     label: "Maçlar"
+    type: collection
     path: src/content/matches
     format: yaml-frontmatter
     view:
       fields: [dateTime, sport, homeTeam, awayTeam, homeScore, awayScore, status]
-      sort: [{ field: dateTime, direction: desc }]
+      sort: [dateTime, title]
       search: [title, homeTeam, awayTeam]
-    create: true
-    delete: false # Sonucu düzelt veya durumu "İptal Edildi" yap, silme.
+      default:
+        sort: dateTime
+        order: desc
+    operations:
+      create: true
+      rename: false # Duyurular "relatedMatch" ile bu slug'a referans verebilir.
+      delete: false # Sonucu düzelt veya durumu "İptal Edildi" yap, silme.
     fields:
       - name: title
         label: "Başlık"
@@ -162,7 +196,8 @@ content:
         label: "Maç Sonucu / Durumu"
         type: select
         required: true
-        options: ["Planlandı", "Canlı", "Tamamlandı", "Ertelendi", "İptal Edildi"]
+        options:
+          values: ["Planlandı", "Canlı", "Tamamlandı", "Ertelendi", "İptal Edildi"]
       - name: homeScore
         label: "Ev Sahibi Skoru"
         type: number
@@ -178,7 +213,7 @@ content:
         label: "Kapak Görseli"
         type: image
         options:
-          source: images
+          media: images
       - name: coverImageAlt
         label: "Görsel Açıklaması"
         type: string
@@ -200,14 +235,20 @@ content:
 
   - name: tournaments
     label: "Turnuvalar"
+    type: collection
     path: src/content/tournaments
     format: yaml-frontmatter
     view:
       fields: [title, sport, status, startDate, endDate, published]
-      sort: [{ field: startDate, direction: desc }]
+      sort: [startDate, title]
       search: [title, summary]
-    create: true
-    delete: false # Durumu "İptal Edildi" yap, silme.
+      default:
+        sort: startDate
+        order: desc
+    operations:
+      create: true
+      rename: false # Duyurular "relatedTournament" ile bu slug'a referans verebilir.
+      delete: false # Durumu "İptal Edildi" yap, silme.
     fields:
       - name: title
         label: "Başlık"
@@ -231,7 +272,8 @@ content:
         label: "Durum"
         type: select
         required: true
-        options: ["Yaklaşan", "Başvurular Açık", "Devam Ediyor", "Tamamlandı", "İptal Edildi"]
+        options:
+          values: ["Yaklaşan", "Başvurular Açık", "Devam Ediyor", "Tamamlandı", "İptal Edildi"]
       - name: startDate
         label: "Başlangıç Tarihi"
         type: datetime
@@ -253,7 +295,7 @@ content:
         label: "Kapak Görseli"
         type: image
         options:
-          source: images
+          media: images
       - name: coverImageAlt
         label: "Görsel Açıklaması"
         type: string
@@ -285,14 +327,20 @@ content:
   # ---------------------------------------------------------------------
   - name: teams
     label: "Takımlar"
+    type: collection
     path: src/content/teams
     format: yaml-frontmatter
     view:
       fields: [name, sport, season, active, order]
-      sort: [{ field: order, direction: asc }]
+      sort: [order, name]
       search: [name]
-    create: true
-    delete: false # Aktif değilse "active" alanını kapatın, silmeyin.
+      default:
+        sort: order
+        order: asc
+    operations:
+      create: true
+      rename: true # Hiçbir başka kayıt takım slug'ına referans vermez.
+      delete: false # Aktif değilse "active" alanını kapatın, silmeyin.
     fields:
       - name: name
         label: "Takım Adı"
@@ -327,7 +375,7 @@ content:
         label: "Kapak Görseli"
         type: image
         options:
-          source: images
+          media: images
       - name: coverImageAlt
         label: "Görsel Açıklaması"
         type: string
@@ -346,13 +394,19 @@ content:
 
   - name: sports
     label: "Branşlar"
+    type: collection
     path: src/content/sports
     format: yaml-frontmatter
     view:
       fields: [name, icon, order, active]
-      sort: [{ field: order, direction: asc }]
-    create: true
-    delete: true
+      sort: [order, name]
+      default:
+        sort: order
+        order: asc
+    operations:
+      create: true
+      rename: false # Takımlar, maçlar ve turnuvalar "sport" ile bu slug'a referans verir.
+      delete: true
     fields:
       - name: name
         label: "Branş Adı"
@@ -366,7 +420,8 @@ content:
         label: "Simge"
         type: select
         required: true
-        options: ["top", "raket", "hedef"]
+        options:
+          values: ["top", "raket", "hedef"]
         description: "top: takım/topla oynanan sporlar, raket: raket sporları, hedef: isabet sporları (dart vb.)"
       - name: description
         label: "Açıklama"
@@ -386,14 +441,20 @@ content:
   # ---------------------------------------------------------------------
   - name: documents
     label: "Belgeler"
+    type: collection
     path: src/content/documents
     format: yaml-frontmatter
     view:
       fields: [title, category, versionDate, status, approved]
-      sort: [{ field: order, direction: asc }]
+      sort: [order, title, versionDate]
       search: [title, summary]
-    create: true
-    delete: false # "Dosya Bekleniyor" veya "Güncelliğini Kaybetti" durumunu kullanın, silmeyin.
+      default:
+        sort: order
+        order: asc
+    operations:
+      create: true
+      rename: false # "file"/"printablePage" geliştirici tarafından bu slug'a eşlenmiştir; ayrıca duyurular ve turnuvalar buna referans verebilir.
+      delete: false # "Dosya Bekleniyor" veya "Güncelliğini Kaybetti" durumunu kullanın, silmeyin.
     fields:
       - name: title
         label: "Belge Adı"
@@ -407,7 +468,8 @@ content:
         label: "Kategori"
         type: select
         required: true
-        options: ["İzin Belgesi", "Sağlık Beyanı", "Taahhütname", "İSG Talimatı", "Diğer"]
+        options:
+          values: ["İzin Belgesi", "Sağlık Beyanı", "Taahhütname", "İSG Talimatı", "Diğer"]
       - name: summary
         label: "Özet"
         type: text
@@ -417,7 +479,7 @@ content:
         type: file
         required: true
         options:
-          source: documents
+          media: documents
       - name: printablePage
         label: "Sitedeki Görüntüleme Sayfası"
         type: string
@@ -435,7 +497,8 @@ content:
         label: "Durum"
         type: select
         required: true
-        options: ["Taslak", "Aktif", "Güncelliğini Kaybetti", "Dosya Bekleniyor"]
+        options:
+          values: ["Taslak", "Aktif", "Güncelliğini Kaybetti", "Dosya Bekleniyor"]
         description: "Yalnızca Aktif ve onaylanmış (approved) belgeler sitede yayınlanır."
       - name: approved
         label: "Onaylandı"
@@ -451,13 +514,19 @@ content:
   # ---------------------------------------------------------------------
   - name: galleries
     label: "Galeriler"
+    type: collection
     path: src/content/galleries
     format: yaml-frontmatter
     view:
       fields: [title, year, event, published]
-      sort: [{ field: order, direction: asc }]
-    create: true
-    delete: true
+      sort: [order, year, title]
+      default:
+        sort: order
+        order: asc
+    operations:
+      create: true
+      rename: true # Hiçbir başka kayıt galeri slug'ına referans vermez.
+      delete: true
     fields:
       - name: title
         label: "Başlık"
@@ -479,7 +548,7 @@ content:
         label: "Kapak Görseli"
         type: image
         options:
-          source: images
+          media: images
       - name: coverImageAlt
         label: "Görsel Açıklaması"
         type: string
@@ -501,14 +570,17 @@ content:
         default: true
 
   # ---------------------------------------------------------------------
-  # 5. Site Ayarları (tekil dosya — silinemez)
+  # 5. Site Ayarları (tekil dosya)
   # ---------------------------------------------------------------------
   - name: site-settings
     label: "Site Ayarları"
     type: file
     path: src/data/site.json
     format: json
-    delete: false
+    operations:
+      create: false # Tekil ayar dosyası — kopyalanamaz.
+      rename: false
+      delete: false
     fields:
       - name: schoolName
         label: "Okul Adı"
@@ -565,6 +637,8 @@ content:
 # Medya kaynakları — Pages CMS'in görsel/dosya seçici arayüzü.
 # Görseller ve belgeler ayrı klasörlerde, ayrı izin verilen uzantılarla
 # tutulur; çalıştırılabilir dosya veya arşiv (.zip, .exe vb.) YÜKLENEMEZ.
+# `rename: safe` her yüklemede dosya adını güvenli (ASCII, kebab-case)
+# bir slug'a çevirir.
 # ---------------------------------------------------------------------------
 media:
   - name: images
@@ -573,9 +647,11 @@ media:
     output: /media/images
     extensions: ["png", "jpg", "jpeg", "webp", "avif"]
     categories: ["image"]
+    rename: safe
   - name: documents
     label: "Belge Dosyaları (PDF)"
     input: public/media/documents
     output: /media/documents
     extensions: ["pdf"]
     categories: ["document"]
+    rename: safe

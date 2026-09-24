@@ -12,12 +12,18 @@ export default defineConfig({
     baseURL: `http://localhost:${PORT}`,
     trace: 'retain-on-failure',
   },
-  webServer: {
-    command: 'pnpm run preview',
-    url: `http://localhost:${PORT}${BASE_PATH}/`,
-    reuseExistingServer: !process.env.CI,
-    timeout: 60_000,
-  },
+  // No `webServer` block: verified empirically that Astro 7's `astro
+  // preview` cannot be auto-spawned by Playwright's webServer feature —
+  // it detaches from the process Playwright launches, which Playwright
+  // then reports as "Process from config.webServer exited early" even
+  // though the server itself keeps running. `astro preview` is the only
+  // server that understands this project's `base: '/haydarpasa-spor/'`
+  // path (a generic static file server does not), so instead of fighting
+  // that, the server is started as an explicit prior step, both locally
+  // (`pnpm run build && pnpm run preview`, see README's Testing section)
+  // and in CI (see the "Start preview server" step in
+  // .github/workflows/validate.yml) — Playwright just talks to whatever
+  // is already listening on `baseURL` when the suite runs.
   projects: [
     { name: 'mobile-320', use: { viewport: { width: 320, height: 568 } } },
     { name: 'mobile-360', use: { viewport: { width: 360, height: 800 } } },

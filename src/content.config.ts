@@ -1,4 +1,5 @@
-import { defineCollection, reference, z } from 'astro:content';
+import { defineCollection, reference } from 'astro:content';
+import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
 import { isValidSlug } from './lib/slug';
 import { parseIstanbulDate } from './lib/dates';
@@ -18,7 +19,6 @@ const slugField = () =>
 
 const safeUrl = () =>
   z
-    .string()
     .url('Geçerli bir URL giriniz.')
     .refine((value) => {
       try {
@@ -136,6 +136,19 @@ const teams = defineCollection({
 
 // ---------------------------------------------------------------------------
 // Maçlar / Matches
+//
+// This collection is intentionally empty at the time of writing — see
+// MIGRATION_REPORT.md: no genuine single-match (home team vs away team,
+// final score) data existed anywhere in the legacy repository, and none
+// was fabricated to fill it. `astro sync`/`astro build`/`astro check` will
+// print a benign `[glob-loader] No files found matching ... in directory
+// ".../src/content/matches"` warning as a result. This is expected and
+// harmless (exit code 0, empty-state UI on /maclar/, not a build error) —
+// Astro's glob loader (see node_modules/astro/dist/content/loaders/glob.d.ts,
+// `GlobOptions`) has no flag to suppress it for a deliberately-empty
+// directory, and this project does not work around that with a
+// placeholder/dummy entry. It disappears on its own the first time a real
+// match is added through Pages CMS.
 // ---------------------------------------------------------------------------
 const matches = defineCollection({
   loader: glob({ pattern: '**/[^_]*.md', base: './src/content/matches' }),
