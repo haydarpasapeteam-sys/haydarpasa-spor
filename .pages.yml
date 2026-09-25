@@ -7,20 +7,27 @@ content:
     label: Duyurular Panosu
     type: collection
     path: duyurular
+    format: json
     fields:
       - name: baslik
         label: Duyuru / Branş Adı
         type: string
         required: true
-      - name: aciklama
-        label: Açıklama
-        type: text
+      - name: kategori
+        label: Kategori (Örn: 🏓 TURNUVA, 🏐 SEÇMELER, ⚽ ETKİNLİK)
+        type: string
       - name: tarih_saat
         label: Tarih ve Saat (Örn: 30 Eyl • 12.00)
         type: string
+      - name: aciklama
+        label: Açıklama
+        type: text
       - name: resim
         label: Afiş Görseli
         type: image
       - name: form_linki
         label: Başvuru / Form Linki
+        type: string
+      - name: belge_linki
+        label: Veli İzni / Belge Linki
         type: string
