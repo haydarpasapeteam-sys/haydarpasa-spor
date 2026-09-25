@@ -64,7 +64,7 @@
         <img src="anasayfa.png" alt="Haydarpaşa Lisesi" class="w-full h-auto object-cover block" />
       </section>
 
-      <!-- DUYURULAR / SEÇMELER / TURNUVALAR ŞERİDİ -->
+      <!-- DUYURULAR PANOSU -->
       <section class="space-y-4">
         <div class="flex items-center justify-between px-2 pb-2 border-b border-red-500/30">
           <div class="flex items-center gap-3">
@@ -90,7 +90,7 @@
         <!-- SÜREKLİ VE AKICI KAYAN DUYURU ŞERİDİ (6 KART) -->
         <div id="duyuruContainer" class="flex gap-4 overflow-x-auto pb-4 pt-1 w-full no-scrollbar" style="-webkit-overflow-scrolling: touch;">
           
-          <!-- KART 0: Erkek Voleybol Seçme Sonuçları (EN BAŞTA) -->
+          <!-- KART 0: Erkek Voleybol Seçme Sonuçları -->
           <div class="w-[300px] shrink-0 bg-white rounded-2xl p-4 flex flex-col justify-between shadow-lg border-t-4 border-t-blue-600 hover:shadow-xl transition">
             <div>
               <div class="w-full h-36 rounded-xl overflow-hidden bg-slate-900 border border-slate-100 mb-3 shadow-inner">
@@ -133,7 +133,7 @@
             </div>
           </div>
 
-          <!-- KART 2: Basketbol -->
+          <!-- KART 2: Basketbol (Veli İzin Belgesi PDF Olarak Güncellendi) -->
           <div class="w-[300px] shrink-0 bg-white rounded-2xl p-4 flex flex-col justify-between shadow-lg border-t-4 border-t-amber-500 hover:shadow-xl transition">
             <div>
               <div class="w-full h-36 rounded-xl overflow-hidden bg-slate-900 border border-slate-100 mb-3 shadow-inner">
@@ -147,7 +147,7 @@
               <p class="text-xs text-slate-500 mt-1 leading-snug">Hazırlık ve 9. sınıflar için spor salonunda yapılacaktır.</p>
             </div>
             <div class="flex gap-2 mt-4 pt-3 border-t border-slate-100">
-              <a href="https://forms.gle/vRLhL45pMhG55e1W8" target="_blank" class="flex-1 py-1.5 px-3 rounded-lg bg-red-600 hover:bg-red-700 text-white font-bold text-xs text-center transition">
+              <a href="Haydarpasa_Lisesi_Veli_Izin_Belgesi.pdf" target="_blank" class="flex-1 py-1.5 px-3 rounded-lg bg-red-600 hover:bg-red-700 text-white font-bold text-xs text-center transition">
                 İzin Belgesi
               </a>
               <a href="ChatGPT Image 21 Eyl 2026 18_06_30.png" target="_blank" class="py-1.5 px-3 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs text-center transition">
@@ -173,7 +173,7 @@
               <a href="https://docs.google.com/forms/d/e/1FAIpQLSfav-UBj3jUEG2RiOJELR-N3DpY_oSjpXyClurtsZw6U-PVhA/viewform?usp=header" target="_blank" class="flex-1 py-1.5 px-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs text-center transition">
                 Başvuru Formu
               </a>
-              <a href="ogrenci_taahhutnamesi.pdf" target="_blank" class="py-1.5 px-3 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs text-center transition">
+              <a href="Haydarpasa_Lisesi_Veli_Izin_Belgesi.pdf" target="_blank" class="py-1.5 px-3 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs text-center transition">
                 Veli İzni
               </a>
             </div>
@@ -543,7 +543,7 @@
           counterEl.textContent = count.toLocaleString('tr-TR');
         }
       } catch (e) {
-        console.error('Sayaç çalıştırılamadı:', e);
+        console.error('Sayaç hatası:', e);
       }
     }
 
@@ -559,13 +559,12 @@
       autoScrollTimer = setInterval(() => {
         if (isPaused) return;
 
-        // Listenin sonuna gelince başa dön
         if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 2) {
           container.scrollLeft = 0;
         } else {
           container.scrollLeft += 1;
         }
-      }, 30); // Rahatça okunabilecek ideal kayma hızı
+      }, 30);
     }
 
     function stopAutoScroll() {
@@ -586,11 +585,11 @@
       if (container) {
         startAutoScroll();
 
-        // Fare kartların üzerine gelince durur, çıkınca devam eder
+        // Kartların üzerine gelince kayma dursun
         container.addEventListener('mouseenter', stopAutoScroll);
         container.addEventListener('mouseleave', resumeAutoScroll);
 
-        // Dokunmatik ekranda dokununca durur, parmak çekildikten 2.5 saniye sonra devam eder
+        // Mobilde dokunulduğunda dursun
         container.addEventListener('touchstart', stopAutoScroll, { passive: true });
         container.addEventListener('touchend', () => {
           setTimeout(resumeAutoScroll, 2500);
