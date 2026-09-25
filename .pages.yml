@@ -1,0 +1,26 @@
+media:
+  input: ""
+  output: ""
+
+content:
+  - name: duyurular
+    label: Duyurular Panosu
+    type: collection
+    path: duyurular
+    fields:
+      - name: baslik
+        label: Duyuru / Branş Adı
+        type: string
+        required: true
+      - name: aciklama
+        label: Açıklama
+        type: text
+      - name: tarih_saat
+        label: Tarih ve Saat (Örn: 30 Eyl • 12.00)
+        type: string
+      - name: resim
+        label: Afiş Görseli
+        type: image
+      - name: form_linki
+        label: Başvuru / Form Linki
+        type: string
