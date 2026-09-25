@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Haydarpaşa Lisesi - Veli İzin Belgesi</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 15mm;
+    }
+    body {
+      font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+      color: #222;
+      background-color: #f7f9fa;
+      margin: 0;
+      padding: 20px;
+    }
+    .sheet {
+      background: #fff;
+      max-width: 210mm;
+      min-height: 260mm;
+      margin: 0 auto;
+      padding: 30mm 20mm 25mm 20mm;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      box-sizing: border-box;
+      position: relative;
+    }
+    .text-center { text-align: center; }
+    .header-title {
+      font-size: 16pt;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin: 0 0 6px 0;
+    }
+    .sub-title {
+      font-size: 13pt;
+      font-weight: 700;
+      color: #333;
+      margin: 0 0 20px 0;
+    }
+    .date-row {
+      text-align: right;
+      font-size: 11pt;
+      margin-bottom: 25px;
+    }
+    .petition-body {
+      font-size: 11.5pt;
+      line-height: 1.9;
+      text-align: justify;
+      margin-bottom: 25px;
+    }
+    .fill-line {
+      display: inline-block;
+      border-bottom: 1px dotted #555;
+      min-width: 90px;
+      height: 18px;
+      vertical-align: middle;
+    }
+    .fill-line-lg { min-width: 230px; }
+    .section-title {
+      font-size: 10.5pt;
+      font-weight: 700;
+      background-color: #f1f3f5;
+      padding: 6px 10px;
+      border-left: 4px solid #c40018;
+      margin-top: 15px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 10px;
+    }
+    td {
+      padding: 6px 8px;
+      font-size: 10.5pt;
+      vertical-align: middle;
+    }
+    td.label {
+      width: 30%;
+      font-weight: 600;
+      color: #444;
+    }
+    td.dots {
+      border-bottom: 1px dotted #888;
+    }
+    .signature-area {
+      margin-top: 25px;
+      text-align: right;
+      padding-right: 25px;
+    }
+    .signature-box {
+      display: inline-block;
+      text-align: center;
+      font-size: 11pt;
+    }
+    .signature-space {
+      height: 45px;
+    }
+    .footer-note {
+      position: absolute;
+      bottom: 15mm;
+      left: 20mm;
+      right: 20mm;
+      border-top: 1px solid #ddd;
+      padding-top: 8px;
+      font-size: 8.5pt;
+      color: #666;
+      line-height: 1.4;
+    }
+    .print-bar {
+      max-width: 210mm;
+      margin: 0 auto 15px auto;
+      text-align: right;
+    }
+    .btn-print {
+      background-color: #c40018;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .btn-print:hover { background-color: #990012; }
+
+    @media print {
+      body {
+        background: none;
+        padding: 0;
+      }
+      .print-bar { display: none; }
+      .sheet {
+        box-shadow: none;
+        padding: 0;
+        margin: 0;
+        min-height: auto;
+      }
+      .footer-note {
+        position: fixed;
+        bottom: 10mm;
+        left: 0;
+        right: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="print-bar">
+    <button class="btn-print" onclick="window.print()">Yazdır / PDF Olarak Kaydet</button>
+  </div>
+
+  <div class="sheet">
+    <div class="text-center">
+      <h1 class="header-title">HAYDARPAŞA LİSESİ MÜDÜRLÜĞÜNE</h1>
+      <h2 class="sub-title">VELİ İZİN BELGESİ</h2>
+    </div>
+
+    <div class="date-row">
+      Tarih: ..... / ..... / 202...
+    </div>
+
+    <div class="petition-body">
+      Okulunuz <span class="fill-line" style="min-width: 70px;"></span> sınıfı, <span class="fill-line" style="min-width: 70px;"></span> numaralı öğrencisi <span class="fill-line fill-line-lg"></span>'in velisiyim.
+      <br><br>
+      Öğrencimin, okulunuz bünyesinde düzenlenecek olan <span class="fill-line fill-line-lg"></span> <strong>turnuvalarına / seçmelerine</strong> katılmasına izin veriyorum.
+      <br><br>
+      Gereğini arz ederim.
+    </div>
+
+    <div class="section-title">Öğrenci Bilgileri</div>
+    <table>
+      <tr>
+        <td class="label">Adı Soyadı:</td>
+        <td class="dots"></td>
+      </tr>
+      <tr>
+        <td class="label">Sınıfı / Şubesi:</td>
+        <td class="dots"></td>
+      </tr>
+      <tr>
+        <td class="label">Okul Numarası:</td>
+        <td class="dots"></td>
+      </tr>
+      <tr>
+        <td class="label">T.C. Kimlik No:</td>
+        <td class="dots"></td>
+      </tr>
+    </table>
+
+    <div class="section-title">Veli Bilgileri</div>
+    <table>
+      <tr>
+        <td class="label">Adı Soyadı:</td>
+        <td class="dots"></td>
+      </tr>
+      <tr>
+        <td class="label">Yakınlık Derecesi:</td>
+        <td class="dots"></td>
+      </tr>
+      <tr>
+        <td class="label">T.C. Kimlik No:</td>
+        <td class="dots"></td>
+      </tr>
+      <tr>
+        <td class="label">İletişim Tel:</td>
+        <td class="dots"></td>
+      </tr>
+    </table>
+
+    <div class="signature-area">
+      <div class="signature-box">
+        Velinin Adı, Soyadı ve İmzası<br>
+        <div class="signature-space"></div>
+        İmza: .......................................
+      </div>
+    </div>
+
+    <div class="footer-note">
+      <strong>Açıklama:</strong> Bu belge veli tarafından eksiksiz doldurulup imzalandıktan sonra seçme komisyonuna / ilgili okul idaresine teslim edilmelidir. İmzalanmamış veya veli bilgileri eksik formlar işleme alınmaz.
+    </div>
+  </div>
+
+</body>
+</html>
