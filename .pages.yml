@@ -5,34 +5,29 @@ media:
 content:
   - name: duyurular
     label: Duyurular Panosu
-    type: file
-    path: duyurular.json
+    type: collection
+    path: duyurular
+    format: json
     fields:
-      - name: liste
-        label: Duyuru Listesi
-        type: list
-        field:
-          type: object
-          label: Duyuru Kartı
-          fields:
-            - name: baslik
-              label: Duyuru Başlığı
-              type: string
-            - name: kategori
-              label: Kategori (Örn: TURNUVA, SEÇMELER)
-              type: string
-            - name: tarih_saat
-              label: Tarih ve Saat
-              type: string
-            - name: aciklama
-              label: Açıklama
-              type: text
-            - name: resim
-              label: Afiş Resmi
-              type: image
-            - name: form_linki
-              label: Başvuru / Form Linki
-              type: string
-            - name: belge_linki
-              label: Veli İzni / Belge Linki
-              type: string
+      - name: baslik
+        label: Duyuru Basligi
+        type: string
+        required: true
+      - name: kategori
+        label: Kategori
+        type: string
+      - name: tarih_saat
+        label: Tarih ve Saat
+        type: string
+      - name: aciklama
+        label: Aciklama
+        type: text
+      - name: resim
+        label: Afis Resmi
+        type: image
+      - name: form_linki
+        label: Form Linki
+        type: string
+      - name: belge_linki
+        label: Belge Linki
+        type: string
