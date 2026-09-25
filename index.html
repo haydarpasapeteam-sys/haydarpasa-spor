@@ -76,7 +76,6 @@
               <p class="text-[11px] sm:text-xs text-red-100 mt-1 font-semibold">Takım seçmeleri, sonuçlar ve turnuvalar (Üzerine gelindiğinde durur)</p>
             </div>
           </div>
-          <!-- Manuel Kaydırma Okları -->
           <div class="flex items-center gap-1.5">
             <button onclick="scrollCards('left')" aria-label="Geri" class="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition backdrop-blur-sm">
               <i data-lucide="chevron-left" class="w-4 h-4"></i>
@@ -87,9 +86,37 @@
           </div>
         </div>
 
-        <!-- SÜREKLİ VE AKICI KAYAN DUYURU ŞERİDİ (6 KART) -->
+        <!-- SÜREKLİ VE AKICI KAYAN DUYURU ŞERİDİ -->
         <div id="duyuruContainer" class="flex gap-4 overflow-x-auto pb-4 pt-1 w-full no-scrollbar" style="-webkit-overflow-scrolling: touch;">
           
+          <!-- KART: Masa Tenisi Turnuvası -->
+          <div class="w-[300px] shrink-0 bg-white rounded-2xl p-4 flex flex-col justify-between shadow-lg border-t-4 border-t-red-600 hover:shadow-xl transition">
+            <div>
+              <div class="w-full h-36 rounded-xl overflow-hidden bg-slate-900 border border-slate-100 mb-3 shadow-inner">
+                <img src="masatenisi_afis.png" alt="Masa Tenisi Turnuvası" class="w-full h-full object-cover" />
+              </div>
+              <div class="flex items-center justify-between text-[11px] mb-1.5">
+                <span class="font-black text-red-600 bg-red-50 px-2 py-0.5 rounded-md">🏓 TURNUVA</span>
+                <span class="text-slate-400 font-bold">29 Eyl • 12.00</span>
+              </div>
+              <h3 class="text-sm font-black text-slate-900">Masa Tenisi Turnuvası</h3>
+              <p class="text-xs text-slate-500 mt-1 leading-snug">Masa tenisi salonunda buluşuyoruz. Haydi Haydarpaşa, masada buluşalım!</p>
+            </div>
+            <div class="flex flex-col gap-2 mt-4 pt-3 border-t border-slate-100">
+              <div class="flex gap-2">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd1b_TlbGyDgCK_zDv2FX08LTzzREwZ57wK47IqUtVJFzCwEQ/viewform" target="_blank" class="flex-1 py-1.5 px-3 rounded-lg bg-red-600 hover:bg-red-700 text-white font-bold text-center text-xs shadow-sm transition">
+                  Turnuva Kayıt
+                </a>
+                <a href="turnuva-veli-izin.html" target="_blank" class="flex-1 py-1.5 px-3 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-bold text-center text-xs shadow-sm transition">
+                  Veli İzni
+                </a>
+              </div>
+              <a href="masatenisi_afis.png" target="_blank" class="w-full py-1 px-3 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs text-center transition">
+                Afişi İncele
+              </a>
+            </div>
+          </div>
+
           <!-- KART 0: Erkek Voleybol Seçme Sonuçları -->
           <div class="w-[300px] shrink-0 bg-white rounded-2xl p-4 flex flex-col justify-between shadow-lg border-t-4 border-t-blue-600 hover:shadow-xl transition">
             <div>
@@ -227,7 +254,7 @@
 
         </div>
 
-        <!-- CANLI FUTSAL SKOR TABLOSU (KÜÇÜLTÜLMÜŞ & ORTALANMIŞ) -->
+        <!-- CANLI FUTSAL SKOR TABLOSU -->
         <div class="max-w-3xl mx-auto w-full mt-4 rounded-xl overflow-hidden shadow-lg border border-amber-300/40 bg-slate-900">
           <div style="position: relative; width: 100%; height: 0; padding-top: 42%; overflow: hidden;">
             <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;"
@@ -472,7 +499,6 @@
             <a href="mailto:haydarpasapeteam@gmail.com" class="px-4 py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold shadow flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4"></i><span>E-posta</span></a>
           </div>
         </div>
-        <!-- Google Harita -->
         <div class="rounded-2xl overflow-hidden border-2 border-red-200 shadow-inner h-96 w-full">
           <iframe src="https://maps.google.com/maps?q=Haydarpa%C5%9Fa%20Lisesi%20Altunizade&t=&z=16&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
@@ -488,7 +514,6 @@
         <p class="font-bold text-sm">Haydarpaşa Lisesi — Beden Eğitimi ve Spor Bölümü</p>
         <p class="text-red-200 text-xs mt-1">© 2026 Tüm Hakları Saklıdır.</p>
       </div>
-      <!-- Ziyaretçi Sayacı -->
       <div class="flex items-center gap-2 bg-red-950/60 px-3.5 py-1.5 rounded-xl border border-red-400/20 shadow-inner">
         <i data-lucide="users" class="w-4 h-4 text-amber-300"></i>
         <span class="text-red-200 font-semibold text-xs">Toplam Ziyaretçi:</span>
@@ -527,7 +552,6 @@
       }
     }
 
-    // Güvenli Ziyaretçi Sayacı
     function initCounter() {
       try {
         let count = localStorage.getItem('hpl_ziyaretci_sayisi');
@@ -547,7 +571,6 @@
       }
     }
 
-    // Otomatik Sakin Kayan Şerit Motoru
     let autoScrollTimer = null;
     let isPaused = false;
 
@@ -585,11 +608,9 @@
       if (container) {
         startAutoScroll();
 
-        // Kartların üzerine gelince kayma dursun
         container.addEventListener('mouseenter', stopAutoScroll);
         container.addEventListener('mouseleave', resumeAutoScroll);
 
-        // Mobilde dokunulduğunda dursun
         container.addEventListener('touchstart', stopAutoScroll, { passive: true });
         container.addEventListener('touchend', () => {
           setTimeout(resumeAutoScroll, 2500);
