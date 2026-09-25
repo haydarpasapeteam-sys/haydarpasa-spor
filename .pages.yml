@@ -10,7 +10,7 @@ content:
     format: json
     fields:
       - name: baslik
-        label: Duyuru Basligi
+        label: Baslik
         type: string
         required: true
       - name: kategori
@@ -33,21 +33,21 @@ content:
         type: string
 
   - name: isg_belgeleri
-    label: İş Sağlığı ve Güvenliği (İSG)
+    label: ISG Belgeleri
     type: collection
     path: isg
     format: json
     fields:
       - name: baslik
-        label: Belge / Talimat Adı
+        label: Belge Adi
         type: string
         required: true
       - name: aciklama
-        label: Kısa Açıklama (Örn: Salon ve Havuz Kuralları)
+        label: Aciklama
         type: string
       - name: dosya
-        label: PDF veya Belge Dosyası
+        label: Dosya
         type: file
       - name: link
-        label: Harici Link (Drive vb. varsa)
+        label: Harici Baglanti
         type: string
