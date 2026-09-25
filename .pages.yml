@@ -31,3 +31,23 @@ content:
       - name: belge_linki
         label: Belge Linki
         type: string
+
+  - name: isg_belgeleri
+    label: İş Sağlığı ve Güvenliği (İSG)
+    type: collection
+    path: isg
+    format: json
+    fields:
+      - name: baslik
+        label: Belge / Talimat Adı
+        type: string
+        required: true
+      - name: aciklama
+        label: Kısa Açıklama (Örn: Salon ve Havuz Kuralları)
+        type: string
+      - name: dosya
+        label: PDF veya Belge Dosyası
+        type: file
+      - name: link
+        label: Harici Link (Drive vb. varsa)
+        type: string
