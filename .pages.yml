@@ -11,25 +11,28 @@ content:
       - name: liste
         label: Duyuru Listesi
         type: list
-        fields:
-          - name: baslik
-            label: Duyuru Basligi
-            type: string
-          - name: kategori
-            label: Kategori
-            type: string
-          - name: tarih_saat
-            label: Tarih ve Saat
-            type: string
-          - name: aciklama
-            label: Aciklama
-            type: text
-          - name: resim
-            label: Afis Resmi
-            type: image
-          - name: form_linki
-            label: Form Linki
-            type: string
-          - name: belge_linki
-            label: Belge Linki
-            type: string
+        field:
+          type: object
+          label: Duyuru Kartı
+          fields:
+            - name: baslik
+              label: Duyuru Başlığı
+              type: string
+            - name: kategori
+              label: Kategori (Örn: TURNUVA, SEÇMELER)
+              type: string
+            - name: tarih_saat
+              label: Tarih ve Saat
+              type: string
+            - name: aciklama
+              label: Açıklama
+              type: text
+            - name: resim
+              label: Afiş Resmi
+              type: image
+            - name: form_linki
+              label: Başvuru / Form Linki
+              type: string
+            - name: belge_linki
+              label: Veli İzni / Belge Linki
+              type: string
