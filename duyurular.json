@@ -7,7 +7,7 @@
       "aciklama": "Masa tenisi salonunda buluşuyoruz. Haydi Haydarpaşa, masada buluşalım!",
       "resim": "masatenisi_afis.png",
       "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
-      "belge_linki": "Veli-İzin Belgesi.pdf"
+      "belge_linki": "turnuva_izin.html"
     },
     {
       "baslik": "Futsal Erkek Takımı Seçmeleri",
@@ -16,7 +16,7 @@
       "aciklama": "Sen de takımda yerini al! Spor salonunda yapılacak futsal takımı seçmelerine uygun spor kıyafeti ve veli izin belgesi ile katılabilirsiniz.",
       "resim": "Futsalerkeksecme.png",
       "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
-      "belge_linki": "Veli-İzin Belgesi.pdf"
+      "belge_linki": "turnuva_izin.html"
     },
     {
       "baslik": "Pickleball Takım Seçimi",
@@ -25,7 +25,7 @@
       "aciklama": "Tenis kortunda buluşuyoruz. Enerji ve takım ruhu için sen de katıl!",
       "resim": "pickleball.png",
       "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
-      "belge_linki": "Veli-İzin Belgesi.pdf"
+      "belge_linki": "turnuva_izin.html"
     },
     {
       "baslik": "Erkek Voleybol Takımı Seçmeleri",
@@ -34,7 +34,7 @@
       "aciklama": "Takım ruhuyla daha güçlüyüz! Spor salonundaki erkek voleybol takımı seçmeleri için spor kıyafetleriniz ve veli izin belgenizle hazır bulununuz.",
       "resim": "erkekvoleybol.png",
       "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
-      "belge_linki": "Veli-İzin Belgesi.pdf"
+      "belge_linki": "turnuva_izin.html"
     },
     {
       "baslik": "Kız Voleybol Takımı",
@@ -43,7 +43,7 @@
       "aciklama": "Bir Takım Daha Fazlasıdır — Tüm öğrencileri bekliyoruz.",
       "resim": "kizvoleybol.png",
       "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLSc4DfWhC0wkvuSSyG5kll6HMdy8Nykycv7qy4NYp2p2CXSrWg/viewform?usp=header",
-      "belge_linki": "Veli-İzin Belgesi.pdf"
+      "belge_linki": "turnuva_izin.html"
     }
   ]
 }
