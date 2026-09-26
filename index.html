@@ -422,18 +422,17 @@
       isPaused = false;
     }
 
-    // KESİN VE BOZULMAYAN DUYURU MOTORU
+    // KESİN, TAKILMAYAN VE AFİŞLERİ TAM GÖSTEREN MOTOR
     function loadDuyurular() {
       const container = document.getElementById('duyuruContainer');
       if (!container) return;
 
-      // Tüm veriler doğrudan burada, dış dosyaya ihtiyaç yok
       const anaListe = [
         {
-          "baslik": "Masa Tenisi Turnuvası Başlıyor!",
+          "baslik": "Masa Tenisi Turnuvası",
           "kategori": "TURNUVA",
           "tarih_saat": "29 Eyl • 12:00",
-          "aciklama": "Haydi Haydarpaşa Masada Buluşalım! Masa tenisi salonundaki turnuvaya tüm öğrencilerimiz davetlidir.",
+          "aciklama": "Masa tenisi salonunda buluşuyoruz. Haydi Haydarpaşa, masada buluşalım!",
           "resim": "masatenisi_afis.png",
           "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
           "belge_linki": "Veli-İzin Belgesi.pdf"
@@ -448,10 +447,10 @@
           "belge_linki": "Veli-İzin Belgesi.pdf"
         },
         {
-          "baslik": "Pickleball Takımında Yer Almak İster misin?",
+          "baslik": "Pickleball Takım Seçimi",
           "kategori": "SEÇMELER",
           "tarih_saat": "30 Eyl • 12:00",
-          "aciklama": "Enerji, takım ruhu, eğlence ve yeni bir deneyim! Tenis kortunda gerçekleşecek seçmelere tüm öğrencilerimizi bekliyoruz.",
+          "aciklama": "Tenis kortunda buluşuyoruz. Enerji ve takım ruhu için sen de katıl!",
           "resim": "pickleball.png",
           "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
           "belge_linki": "Veli-İzin Belgesi.pdf"
@@ -464,10 +463,19 @@
           "resim": "erkekvoleybol.png",
           "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
           "belge_linki": "Veli-İzin Belgesi.pdf"
+        },
+        {
+          "baslik": "Kız Voleybol Takımı Seçmeleri",
+          "kategori": "SEÇMELER",
+          "tarih_saat": "2 Eki • 12:00",
+          "aciklama": "Bir Takım Daha Fazlasıdır — Tüm öğrencileri spor salonuna bekliyoruz.",
+          "resim": "kizvoleybol.png",
+          "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLSc4DfWhC0wkvuSSyG5kll6HMdy8Nykycv7qy4NYp2p2CXSrWg/viewform?usp=header",
+          "belge_linki": "Veli-İzin Belgesi.pdf"
         }
       ];
 
-      // Akışın takılmadan dönmesi için sonsuz döngü listesi
+      // Akışın takılmadan pürüzsüz dönmesi için sonsuz döngü listesi
       const renderList = [...anaListe, ...anaListe];
 
       container.innerHTML = renderList.map(item => {
