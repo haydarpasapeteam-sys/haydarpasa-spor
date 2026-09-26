@@ -88,7 +88,7 @@
 
         <!-- DİNAMİK KAYAN ŞERİT -->
         <div id="duyuruContainer" class="flex gap-4 overflow-x-auto pb-4 pt-2 w-full no-scrollbar" style="-webkit-overflow-scrolling: touch;">
-          <!-- Kartlar JavaScript ile doldurulacak -->
+          <!-- Kartlar script ile doldurulacak -->
         </div>
 
         <!-- CANLI FUTSAL SKOR TABLOSU -->
@@ -178,7 +178,7 @@
             </a>
           </section>
 
-          <!-- YENİ RESMİ VELİ İZİN FORMU -->
+          <!-- YENİ RESMİ VELİ İZİN FORMU (404 HATASI VERMEYEN DOĞRUDAN BAĞLANTI) -->
           <section class="p-6 rounded-3xl bg-white text-slate-800 shadow-xl border-2 border-teal-500 flex flex-col justify-between space-y-4">
             <div class="space-y-1.5">
               <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-teal-100 text-teal-900 text-[11px] font-black uppercase">
@@ -421,6 +421,7 @@
       isPaused = false;
     }
 
+    // DOĞRUDAN ÇALIŞAN GARANTİLİ DUYURU LİSTESİ
     function loadDuyurular() {
       const container = document.getElementById('duyuruContainer');
       if (!container) return;
@@ -440,7 +441,7 @@
           "kategori": "SEÇMELER",
           "tarih_saat": "29 Eyl • 12:00",
           "aciklama": "Sen de takımda yerini al! Spor salonundaki futsal seçmelerine uygun spor kıyafeti ile katılabilirsiniz.",
-          "resim": "afis_futsal.png",
+          "resim": "Futsalerkeksecme.png",
           "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
           "belge_linki": "Veli-İzin Belgesi.pdf"
         },
@@ -491,7 +492,7 @@
           <div class="w-[280px] shrink-0 bg-white rounded-2xl p-4 flex flex-col justify-between shadow-lg border-t-4 border-t-red-600 hover:shadow-xl transition select-none">
             <div>
               <div class="w-full h-48 rounded-xl overflow-hidden bg-slate-900 border border-slate-100 mb-3 shadow-inner">
-                <img src="${item.resim}" alt="${item.baslik}" class="w-full h-full object-cover object-top" onerror="this.src='Futsalerkeksecme.png'" />
+                <img src="${item.resim}" alt="${item.baslik}" class="w-full h-full object-cover object-top" onerror="this.src='anasayfa.png'" />
               </div>
               <div class="flex items-center justify-between text-[11px] mb-1.5">
                 <span class="font-black text-red-600 bg-red-50 px-2 py-0.5 rounded-md">${item.kategori}</span>
