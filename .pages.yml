@@ -11,6 +11,7 @@ content:
       - name: liste
         label: Duyuru Listesi
         type: list
+        type: object
         fields:
           - name: baslik
             label: Başlık
