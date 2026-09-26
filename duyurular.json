@@ -6,17 +6,17 @@
       "tarih_saat": "29 Eyl • 12.00",
       "aciklama": "Masa tenisi salonunda buluşuyoruz. Haydi Haydarpaşa, masada buluşalım!",
       "resim": "masatenisi_afis.png",
-      "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLSd1b_TlbGyDgCK_zDv2FX08LTzzREwZ57wK47IqUtVJFzCwEQ/viewform",
-      "belge_linki": "turnuva-veli-izin.html"
+      "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
+      "belge_linki": "Veli-İzin Belgesi.pdf"
     },
     {
-      "baslik": "Erkek Voleybol Seçme Sonuçları",
-      "kategori": "SONUÇLAR",
-      "tarih_saat": "Açıklandı",
-      "aciklama": "Takım seçmeleri tamamlanmıştır. Asil ve yedek liste sonuçlarını inceleyebilirsiniz.",
-      "resim": "erkekvoleybol.png",
-      "form_linki": "https://www.canva.com/design/DAHWHPOy3CI/r7ocJt5lkWaa1WS59RNB2Q/view",
-      "belge_linki": ""
+      "baslik": "Futsal Erkek Takımı Seçmeleri",
+      "kategori": "SEÇMELER",
+      "tarih_saat": "29 Eyl • 12.00",
+      "aciklama": "Sen de takımda yerini al! Spor salonunda yapılacak futsal takımı seçmelerine uygun spor kıyafeti ve veli izin belgesi ile katılabilirsiniz.",
+      "resim": "Futsalerkeksecme.png",
+      "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
+      "belge_linki": "Veli-İzin Belgesi.pdf"
     },
     {
       "baslik": "Pickleball Takım Seçimi",
@@ -24,35 +24,26 @@
       "tarih_saat": "30 Eyl • 12.00",
       "aciklama": "Tenis kortunda buluşuyoruz. Enerji ve takım ruhu için sen de katıl!",
       "resim": "pickleball.png",
-      "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScI2VCayu5gGfFIkQmezeztRWjfEQEmPxYaFTKIYL40zD7Thw/viewform?usp=header",
-      "belge_linki": "pickleball.png"
+      "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
+      "belge_linki": "Veli-İzin Belgesi.pdf"
     },
     {
-      "baslik": "Basketbol Okul Takımı",
+      "baslik": "Erkek Voleybol Takımı Seçmeleri",
       "kategori": "SEÇMELER",
-      "tarih_saat": "25 Eyl • 12.00",
-      "aciklama": "Hazırlık ve 9. sınıflar için spor salonunda yapılacaktır.",
-      "resim": "ChatGPT Image 21 Eyl 2026 18_06_30.png",
-      "form_linki": "Haydarpasa_Lisesi_Veli_Izin_Belgesi.pdf",
-      "belge_linki": "ChatGPT Image 21 Eyl 2026 18_06_30.png"
+      "tarih_saat": "1 Eki • 12.00",
+      "aciklama": "Takım ruhuyla daha güçlüyüz! Spor salonundaki erkek voleybol takımı seçmeleri için spor kıyafetleriniz ve veli izin belgenizle hazır bulununuz.",
+      "resim": "erkekvoleybol.png",
+      "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
+      "belge_linki": "Veli-İzin Belgesi.pdf"
     },
     {
       "baslik": "Kız Voleybol Takımı",
       "kategori": "SEÇMELER",
       "tarih_saat": "2 Eki • 12.00",
       "aciklama": "Bir Takım Daha Fazlasıdır — Tüm öğrencileri bekliyoruz.",
-      "resim": "kızvoleybol.png",
-      "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLSc4DfWhC0wkvuSsyG5k1l6HMdy8Nykycv7qy4NYp2p2CXSrWg/viewform?usp=header",
-      "belge_linki": "kızvoleybol.png"
-    },
-    {
-      "baslik": "Futsal All–Star Turnuvası",
-      "kategori": "TURNUVA",
-      "tarih_saat": "Aktif Kayıt",
-      "aciklama": "Sınıflararası futsal heyecanı başladı! Takımını kur, kayıt ol.",
-      "resim": "HPL_Sınıflararası_Futsal_Turnuvası.png",
-      "form_linki": "https://forms.gle/QXvR7VJhbEYzdGJv9",
-      "belge_linki": "fiksturler.png"
+      "resim": "kizvoleybol.png",
+      "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLSc4DfWhC0wkvuSSyG5kll6HMdy8Nykycv7qy4NYp2p2CXSrWg/viewform?usp=header",
+      "belge_linki": "Veli-İzin Belgesi.pdf"
     }
   ]
 }
