@@ -4,44 +4,54 @@ media:
 
 content:
   - name: duyurular
-    label: Duyurular Panosu
+    label: "Duyurular Panosu"
     type: file
-    path: duyurular.json
+    path: "duyurular.json"
     fields:
       - name: liste
-        label: Duyuru Listesi
+        label: "Duyuru Listesi"
         type: list
-        type: object
         fields:
           - name: baslik
-            label: Başlık
+            label: "Duyuru Başlığı"
             type: string
             required: true
           - name: kategori
-            label: Kategori
+            label: "Kategori (örn: TURNUVA, SEÇMELER, SONUÇLAR)"
             type: string
           - name: tarih_saat
-            label: Tarih ve Saat
+            label: "Tarih ve Saat (örn: 29 Eyl • 12:00)"
             type: string
           - name: aciklama
-            label: Açıklama
+            label: "Kısa Açıklama"
             type: text
           - name: resim
-            label: Afiş Resmi
-            type: image
+            label: "Afiş Görseli (Dosyadan Seç/Yükle)"
+            type: file
           - name: form_linki
-            label: Form Linki
+            label: "Başvuru Formu veya Sonuç Linki"
             type: string
           - name: belge_linki
-            label: Belge Linki
-            type: string
+            label: "Veli İzin Belgesi / Dosya (Dosyadan Seç/Yükle)"
+            type: file
 
-  - name: isg_belgeleri
-    label: ISG Belgeleri
-    type: collection
-    path: isg
-    format: json
+  - name: resmi_belgeler
+    label: "Okul Resmi Evrakları ve İzin Formları"
+    type: file
+    path: "belgeler.json"
     fields:
-      - name: baslik
-        label: Başlık
+      - name: veli_izin_pdf
+        label: "Takım Seçmeleri & Turnuva Veli İzin Belgesi (PDF Seç/Yükle)"
+        type: file
+      - name: taahhutname_link
+        label: "Kullanım Taahhütnamesi Sayfası / Dosyası"
         type: string
+        default: "taahhutname.html"
+      - name: ders_disi_link
+        label: "Ders Dışı Egzersiz İzin Formu Sayfası / Dosyası"
+        type: string
+        default: "ders_disi_egzersiz.html"
+      - name: saglik_beyan_link
+        label: "Sağlık Beyan Formu Sayfası / Dosyası"
+        type: string
+        default: "saglik_durumu.html"
