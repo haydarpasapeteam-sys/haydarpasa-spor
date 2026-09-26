@@ -10,13 +10,14 @@ content:
     fields:
       - name: liste
         label: "Duyuru Listesi"
-        type: list
+        type: object
+        list: true
         fields:
           - name: baslik
             label: "Duyuru Başlığı"
             type: string
           - name: kategori
-            label: "Kategori (TURNUVA, SEÇMELER vb.)"
+            label: "Kategori (örn: TURNUVA, SEÇMELER, SONUÇLAR)"
             type: string
           - name: tarih_saat
             label: "Tarih ve Saat"
@@ -26,10 +27,10 @@ content:
             type: text
           - name: resim
             label: "Afiş Görseli"
-            type: file
+            type: image
           - name: form_linki
-            label: "Başvuru Formu / Sonuç Linki"
+            label: "Başvuru Formu / Canva Sonuç Linki"
             type: string
           - name: belge_linki
-            label: "Veli İzin Belgesi"
+            label: "Veli İzin Belgesi / Dosya"
             type: file
