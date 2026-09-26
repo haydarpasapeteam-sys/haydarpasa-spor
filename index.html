@@ -86,8 +86,9 @@
           </div>
         </div>
 
-        <!-- DİNAMİK KAYAN ŞERİT -->
+        <!-- DİNAMİK KAYAN ŞERİT (Pages CMS duyurular.json'dan beslenir) -->
         <div id="duyuruContainer" class="flex gap-4 overflow-x-auto pb-4 pt-1 w-full no-scrollbar" style="-webkit-overflow-scrolling: touch;">
+          <div class="text-center py-8 text-white/80 font-bold text-sm w-full">Duyurular yükleniyor...</div>
         </div>
 
         <!-- CANLI FUTSAL SKOR TABLOSU -->
@@ -188,7 +189,7 @@
             </a>
           </section>
 
-          <!-- E-Portfolyo 1 -->
+          <!-- E-Portfolyo -->
           <section class="p-6 rounded-3xl bg-white text-slate-800 shadow-xl border-2 border-indigo-300 flex flex-col justify-between space-y-4">
             <div class="space-y-1.5">
               <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-900 text-[11px] font-black uppercase">E-Portfolyo 1</span>
@@ -200,7 +201,6 @@
             </a>
           </section>
 
-          <!-- E-Portfolyo 2 -->
           <section class="p-6 rounded-3xl bg-white text-slate-800 shadow-xl border-2 border-amber-300 flex flex-col justify-between space-y-4">
             <div class="space-y-1.5">
               <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 text-[11px] font-black uppercase">E-Portfolyo 2</span>
@@ -212,7 +212,6 @@
             </a>
           </section>
 
-          <!-- İSG Talimatları -->
           <section class="p-6 rounded-3xl bg-white text-slate-800 shadow-xl border-2 border-purple-400 flex flex-col justify-between space-y-4 md:col-span-2">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div class="space-y-1.5">
@@ -440,90 +439,65 @@
       isPaused = false;
     }
 
-    // Duyuruları Doğrudan Yükleyen Motor
-    function loadDuyurular() {
+    // Duyuruları JSON'dan Yükleyen Motor
+    async function loadDuyurular() {
       const container = document.getElementById('duyuruContainer');
-      const duyurular = [
-        {
-          "baslik": "Masa Tenisi Takım Seçmeleri ve Veli İzin Belgesi",
-          "kategori": "SEÇMELER",
-          "tarih_saat": "2026 - 2027",
-          "aciklama": "Masa tenisi okul takımı seçmelerine katılacak öğrencilerin veli izin belgesini eksiksiz doldurarak zümreye teslim etmesi gerekmektedir.",
-          "resim": "anasayfa.png",
-          "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
-          "belge_linki": "Veli-İzin Belgesi.pdf"
-        },
-        {
-          "baslik": "Voleybol Kız Takımı Seçmeleri",
-          "kategori": "SEÇMELER",
-          "tarih_saat": "2026 - 2027",
-          "aciklama": "Okul voleybol kız takımı seçmeleri spor salonumuzda gerçekleştirilecektir. Katılım için başvuru formunu doldurunuz.",
-          "resim": "kızvoleybol.png",
-          "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
-          "belge_linki": "turnuva_izin.html"
-        },
-        {
-          "baslik": "Voleybol Erkek Takımı Seçmeleri",
-          "kategori": "SEÇMELER",
-          "tarih_saat": "2026 - 2027",
-          "aciklama": "Voleybol erkek okul takımı antrenman ve seçme programı başlamıştır. Lisans ve izin formlarınızı teslim ediniz.",
-          "resim": "erkekvoleybol.png",
-          "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
-          "belge_linki": "turnuva_izin.html"
-        },
-        {
-          "baslik": "Futsal Okul Turnuvası Başvuruları",
-          "kategori": "TURNUVA",
-          "tarih_saat": "2026 - 2027",
-          "aciklama": "Sınıflar arası futsal turnuvası fikstür ve takım listeleri oluşturulmaktadır. Takım kaptanları başvurularını tamamlamalıdır.",
-          "resim": "kızfutsal.png",
-          "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
-          "belge_linki": "turnuva_izin.html"
-        }
-      ];
+      try {
+        const response = await fetch('duyurular.json?v=' + Date.now());
+        if (!response.ok) throw new Error('Veri alınamadı');
+        const data = await response.json();
+        const duyurular = data.liste || [];
 
-      container.innerHTML = duyurular.map(item => {
-        let buttonsHtml = '';
-        if (item.form_linki && item.belge_linki) {
-          buttonsHtml = `
-            <div class="flex gap-2">
-              <a href="${item.form_linki}" target="_blank" class="flex-1 py-1.5 px-3 rounded-lg bg-red-600 hover:bg-red-700 text-white font-bold text-center text-xs shadow-sm transition">
-                Başvuru / Form
-              </a>
-              <a href="${item.belge_linki}" target="_blank" class="flex-1 py-1.5 px-3 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-bold text-center text-xs shadow-sm transition">
-                İzin Belgesi
-              </a>
-            </div>
-          `;
-        } else if (item.form_linki) {
-          buttonsHtml = `
-            <a href="${item.form_linki}" target="_blank" class="w-full block py-2 px-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs text-center transition shadow">
-              Detay / Sonuç Listesi
-            </a>
-          `;
+        if (duyurular.length === 0) {
+          container.innerHTML = '<div class="text-center py-8 text-white/80 font-bold text-sm w-full">Henüz aktif duyuru bulunmuyor.</div>';
+          return;
         }
 
-        return `
-          <div class="w-[300px] shrink-0 bg-white rounded-2xl p-4 flex flex-col justify-between shadow-lg border-t-4 border-t-red-600 hover:shadow-xl transition">
-            <div>
-              <div class="w-full h-36 rounded-xl overflow-hidden bg-slate-900 border border-slate-100 mb-3 shadow-inner">
-                <img src="${item.resim || 'anasayfa.png'}" alt="${item.baslik}" class="w-full h-full object-cover" onerror="this.src='anasayfa.png'" />
+        container.innerHTML = duyurular.map(item => {
+          let buttonsHtml = '';
+          if (item.form_linki && item.belge_linki) {
+            buttonsHtml = `
+              <div class="flex gap-2">
+                <a href="${item.form_linki}" target="_blank" class="flex-1 py-1.5 px-3 rounded-lg bg-red-600 hover:bg-red-700 text-white font-bold text-center text-xs shadow-sm transition">
+                  Başvuru / Form
+                </a>
+                <a href="${item.belge_linki}" target="_blank" class="flex-1 py-1.5 px-3 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-bold text-center text-xs shadow-sm transition">
+                  İzin Belgesi
+                </a>
               </div>
-              <div class="flex items-center justify-between text-[11px] mb-1.5">
-                <span class="font-black text-red-600 bg-red-50 px-2 py-0.5 rounded-md">${item.kategori || 'DUYURU'}</span>
-                <span class="text-slate-400 font-bold">${item.tarih_saat || ''}</span>
-              </div>
-              <h3 class="text-sm font-black text-slate-900">${item.baslik}</h3>
-              <p class="text-xs text-slate-500 mt-1 leading-snug">${item.aciklama || ''}</p>
-            </div>
-            <div class="mt-4 pt-3 border-t border-slate-100">
-              ${buttonsHtml}
-            </div>
-          </div>
-        `;
-      }).join('');
+            `;
+          } else if (item.form_linki) {
+            buttonsHtml = `
+              <a href="${item.form_linki}" target="_blank" class="w-full block py-2 px-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs text-center transition shadow">
+                Detay / Sonuç Listesi
+              </a>
+            `;
+          }
 
-      startAutoScroll();
+          return `
+            <div class="w-[300px] shrink-0 bg-white rounded-2xl p-4 flex flex-col justify-between shadow-lg border-t-4 border-t-red-600 hover:shadow-xl transition">
+              <div>
+                <div class="w-full h-36 rounded-xl overflow-hidden bg-slate-900 border border-slate-100 mb-3 shadow-inner">
+                  <img src="${item.resim || 'anasayfa.png'}" alt="${item.baslik}" class="w-full h-full object-cover" onerror="this.src='anasayfa.png'" />
+                </div>
+                <div class="flex items-center justify-between text-[11px] mb-1.5">
+                  <span class="font-black text-red-600 bg-red-50 px-2 py-0.5 rounded-md">${item.kategori || 'DUYURU'}</span>
+                  <span class="text-slate-400 font-bold">${item.tarih_saat || ''}</span>
+                </div>
+                <h3 class="text-sm font-black text-slate-900">${item.baslik}</h3>
+                <p class="text-xs text-slate-500 mt-1 leading-snug">${item.aciklama || ''}</p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-slate-100">
+                ${buttonsHtml}
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        startAutoScroll();
+      } catch (err) {
+        console.error('Duyuru hatası:', err);
+      }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
