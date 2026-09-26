@@ -5,32 +5,35 @@ media:
 content:
   - name: duyurular
     label: Duyurular Panosu
-    type: collection
-    path: duyurular
-    format: json
+    type: file
+    path: duyurular.json
     fields:
-      - name: baslik
-        label: Baslik
-        type: string
-        required: true
-      - name: kategori
-        label: Kategori
-        type: string
-      - name: tarih_saat
-        label: Tarih ve Saat
-        type: string
-      - name: aciklama
-        label: Aciklama
-        type: text
-      - name: resim
-        label: Afis Resmi
-        type: image
-      - name: form_linki
-        label: Form Linki
-        type: string
-      - name: belge_linki
-        label: Belge Linki
-        type: string
+      - name: liste
+        label: Duyuru Listesi
+        type: list
+        fields:
+          - name: baslik
+            label: Başlık
+            type: string
+            required: true
+          - name: kategori
+            label: Kategori
+            type: string
+          - name: tarih_saat
+            label: Tarih ve Saat
+            type: string
+          - name: aciklama
+            label: Açıklama
+            type: text
+          - name: resim
+            label: Afiş Resmi
+            type: image
+          - name: form_linki
+            label: Form Linki
+            type: string
+          - name: belge_linki
+            label: Belge Linki
+            type: string
 
   - name: isg_belgeleri
     label: ISG Belgeleri
@@ -39,15 +42,5 @@ content:
     format: json
     fields:
       - name: baslik
-        label: Belge Adi
-        type: string
-        required: true
-      - name: aciklama
-        label: Aciklama
-        type: string
-      - name: dosya
-        label: Dosya
-        type: file
-      - name: link
-        label: Harici Baglanti
+        label: Başlık
         type: string
