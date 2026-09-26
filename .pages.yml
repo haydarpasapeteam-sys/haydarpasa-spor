@@ -15,9 +15,8 @@ content:
           - name: baslik
             label: "Duyuru Başlığı"
             type: string
-            required: true
           - name: kategori
-            label: "Kategori (örn: TURNUVA, SEÇMELER, SONUÇLAR)"
+            label: "Kategori (TURNUVA, SEÇMELER vb.)"
             type: string
           - name: tarih_saat
             label: "Tarih ve Saat"
@@ -27,28 +26,10 @@ content:
             type: text
           - name: resim
             label: "Afiş Görseli"
-            type: image
+            type: file
           - name: form_linki
-            label: "Başvuru Formu / Canva Sonuç Linki"
+            label: "Başvuru Formu / Sonuç Linki"
             type: string
           - name: belge_linki
-            label: "Veli İzin Belgesi / Dosya"
+            label: "Veli İzin Belgesi"
             type: file
-
-  - name: resmi_belgeler
-    label: "Okul Resmi Evrakları ve İzin Formları"
-    type: file
-    path: "belgeler.json"
-    fields:
-      - name: veli_izin_pdf
-        label: "Veli İzin Belgesi (PDF Seç/Yükle)"
-        type: file
-      - name: taahhutname_link
-        label: "Kullanım Taahhütnamesi Linki"
-        type: string
-      - name: ders_disi_link
-        label: "Ders Dışı Egzersiz İzin Formu Linki"
-        type: string
-      - name: saglik_beyan_link
-        label: "Sağlık Beyan Formu Linki"
-        type: string
