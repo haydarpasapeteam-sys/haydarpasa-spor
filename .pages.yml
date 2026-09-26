@@ -11,6 +11,7 @@ content:
       - name: liste
         label: "Duyuru Listesi"
         type: list
+        type: object
         fields:
           - name: baslik
             label: "Duyuru Başlığı"
@@ -20,19 +21,19 @@ content:
             label: "Kategori (örn: TURNUVA, SEÇMELER, SONUÇLAR)"
             type: string
           - name: tarih_saat
-            label: "Tarih ve Saat (örn: 29 Eyl • 12:00)"
+            label: "Tarih ve Saat"
             type: string
           - name: aciklama
-            label: "Kısa Açıklama"
+            label: "Açıklama"
             type: text
           - name: resim
-            label: "Afiş Görseli (Dosyadan Seç/Yükle)"
-            type: file
+            label: "Afiş Görseli"
+            type: image
           - name: form_linki
-            label: "Başvuru Formu veya Sonuç Linki"
+            label: "Başvuru Formu / Canva Sonuç Linki"
             type: string
           - name: belge_linki
-            label: "Veli İzin Belgesi / Dosya (Dosyadan Seç/Yükle)"
+            label: "Veli İzin Belgesi / Dosya"
             type: file
 
   - name: resmi_belgeler
@@ -41,17 +42,14 @@ content:
     path: "belgeler.json"
     fields:
       - name: veli_izin_pdf
-        label: "Takım Seçmeleri & Turnuva Veli İzin Belgesi (PDF Seç/Yükle)"
+        label: "Veli İzin Belgesi (PDF Seç/Yükle)"
         type: file
       - name: taahhutname_link
-        label: "Kullanım Taahhütnamesi Sayfası / Dosyası"
+        label: "Kullanım Taahhütnamesi Linki"
         type: string
-        default: "taahhutname.html"
       - name: ders_disi_link
-        label: "Ders Dışı Egzersiz İzin Formu Sayfası / Dosyası"
+        label: "Ders Dışı Egzersiz İzin Formu Linki"
         type: string
-        default: "ders_disi_egzersiz.html"
       - name: saglik_beyan_link
-        label: "Sağlık Beyan Formu Sayfası / Dosyası"
+        label: "Sağlık Beyan Formu Linki"
         type: string
-        default: "saglik_durumu.html"
