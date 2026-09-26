@@ -41,7 +41,7 @@
         </div>
       </div>
 
-      <!-- ÜST MENÜ SEKMELERİ -->
+      <!-- ÜST MENÜ -->
       <nav class="flex items-center justify-center gap-1.5 sm:gap-3 py-2.5 overflow-x-auto text-xs sm:text-sm font-bold no-scrollbar">
         <button onclick="showTab('anasayfa')" id="btn-anasayfa" class="tab-btn active px-3.5 py-2 rounded-xl transition flex items-center gap-1.5"><i data-lucide="home" class="w-4 h-4"></i><span>ANA SAYFA</span></button>
         <button onclick="showTab('rehber')" id="btn-rehber" class="tab-btn px-3.5 py-2 rounded-xl hover:bg-red-800/60 transition flex items-center gap-1.5"><i data-lucide="book-open" class="w-4 h-4"></i><span>EĞİTİM & REHBER</span></button>
@@ -54,7 +54,7 @@
   </header>
 
   <!-- MAIN -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex-1 w-full space-y-8">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full space-y-8">
 
     <!-- 1. SEKME: ANA SAYFA -->
     <div id="tab-anasayfa" class="page-tab active space-y-8">
@@ -65,7 +65,7 @@
       </section>
 
       <!-- DUYURULAR PANOSU -->
-      <section class="space-y-4">
+      <section class="space-y-4 pt-2">
         <div class="flex items-center justify-between px-2 pb-2 border-b border-red-500/30">
           <div class="flex items-center gap-3">
             <div class="p-2 rounded-xl bg-amber-400 text-slate-900 shadow-md">
@@ -87,8 +87,8 @@
         </div>
 
         <!-- DİNAMİK KAYAN ŞERİT -->
-        <div id="duyuruContainer" class="flex gap-4 overflow-x-auto pb-4 pt-1 w-full no-scrollbar" style="-webkit-overflow-scrolling: touch;">
-          <div class="text-center py-8 text-white/80 font-bold text-sm w-full">Duyurular yükleniyor...</div>
+        <div id="duyuruContainer" class="flex gap-4 overflow-x-auto pb-4 pt-2 w-full no-scrollbar" style="-webkit-overflow-scrolling: touch;">
+          <!-- Kartlar script ile yüklenecek -->
         </div>
 
         <!-- CANLI FUTSAL SKOR TABLOSU -->
@@ -100,7 +100,7 @@
           </div>
         </div>
 
-        <!-- DİJİTAL EVRAK PORTALI & MOBİL ERİŞİM -->
+        <!-- DİJİTAL EVRAK PORTALI -->
         <div class="rounded-2xl p-5 shadow-2xl border-2 border-indigo-500/40 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-3 border-b border-indigo-400/20 pb-2">
@@ -178,31 +178,22 @@
             </a>
           </section>
 
-          <section class="p-6 rounded-3xl bg-white text-slate-800 shadow-xl border-2 border-emerald-300 flex flex-col justify-between space-y-4">
-            <div class="space-y-1.5">
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-900 text-[11px] font-black uppercase">Zorunlu Evrak 4</span>
-              <h3 class="text-lg font-black text-slate-900">Turnuvalar ve Egzersiz Veli İzin Belgesi</h3>
-              <p class="text-xs text-slate-600">Okul içi turnuvalar ile il/ilçe spor müsabakaları için veli izin belgesi.</p>
-            </div>
-            <a href="turnuva_izin.html" target="_blank" class="w-full py-2.5 rounded-2xl bg-[#c40018] hover:bg-red-800 text-white font-black text-xs shadow flex items-center justify-center gap-2 transition hover:scale-[1.02]">
-              <i data-lucide="file-text" class="w-4 h-4"></i><span>Belgeyi Aç / Yazdır</span>
-            </a>
-          </section>
-
+          <!-- GÜNCEL RESMİ VELİ İZİN FORMU -->
           <section class="p-6 rounded-3xl bg-white text-slate-800 shadow-xl border-2 border-teal-500 flex flex-col justify-between space-y-4">
             <div class="space-y-1.5">
               <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-teal-100 text-teal-900 text-[11px] font-black uppercase">
                 <i data-lucide="award" class="w-3.5 h-3.5 text-teal-700"></i>
-                <span>Takım Seçmeleri</span>
+                <span>Takım Seçmeleri & Turnuva Resmi Belgesi</span>
               </span>
-              <h3 class="text-lg font-black text-slate-900">Masa Tenisi Takımı Veli İzin Belgesi</h3>
-              <p class="text-xs text-slate-600">Masa tenisi okul takımı seçmeleri için T.C. kimliksiz yeni resmi veli izin belgesi.</p>
+              <h3 class="text-lg font-black text-slate-900">Okul Takımları & Turnuva Katılım Veli İzin Formu</h3>
+              <p class="text-xs text-slate-600">Voleybol, futsal, masa tenisi ve pickleball için T.C. kimliksiz yeni resmi veli izin formu.</p>
             </div>
             <a href="Veli-İzin Belgesi.pdf" target="_blank" class="w-full py-2.5 rounded-2xl bg-teal-600 hover:bg-teal-700 text-white font-black text-xs shadow flex items-center justify-center gap-2 transition hover:scale-[1.02]">
-              <i data-lucide="file-text" class="w-4 h-4"></i><span>Belgeyi Aç / Yazdır</span>
+              <i data-lucide="file-text" class="w-4 h-4"></i><span>Belgeyi Aç / Yazdır (PDF)</span>
             </a>
           </section>
 
+          <!-- E-Portfolyo 1 -->
           <section class="p-6 rounded-3xl bg-white text-slate-800 shadow-xl border-2 border-indigo-300 flex flex-col justify-between space-y-4">
             <div class="space-y-1.5">
               <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-900 text-[11px] font-black uppercase">E-Portfolyo 1</span>
@@ -214,6 +205,7 @@
             </a>
           </section>
 
+          <!-- E-Portfolyo 2 -->
           <section class="p-6 rounded-3xl bg-white text-slate-800 shadow-xl border-2 border-amber-300 flex flex-col justify-between space-y-4">
             <div class="space-y-1.5">
               <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 text-[11px] font-black uppercase">E-Portfolyo 2</span>
@@ -223,25 +215,6 @@
             <a href="https://drive.google.com/file/d/1ivrJqoqNpAz_l0vnJKQznSSBuWQo_32S/view?usp=share_link" target="_blank" class="w-full py-2.5 rounded-2xl bg-[#c40018] hover:bg-red-800 text-white font-black text-xs shadow flex items-center justify-center gap-2 transition hover:scale-[1.02]">
               <i data-lucide="external-link" class="w-4 h-4"></i><span>Portfolyo 2 Formunu Aç</span>
             </a>
-          </section>
-
-          <section class="p-6 rounded-3xl bg-white text-slate-800 shadow-xl border-2 border-purple-400 flex flex-col justify-between space-y-4 md:col-span-2">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <div class="space-y-1.5">
-                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-900 text-[11px] font-black uppercase">
-                  <i data-lucide="shield-check" class="w-3.5 h-3.5 text-purple-700"></i>
-                  <span>İş Sağlığı ve Güvenliği (İSG)</span>
-                </span>
-                <h3 class="text-lg font-black text-slate-900">İSG Talimatları, Risk Değerlendirme ve Güvenlik Dosyaları</h3>
-                <p class="text-xs text-slate-600">Salon, havuz ve saha kullanımına yönelik İSG kuralları.</p>
-              </div>
-              <div class="flex items-center gap-2 shrink-0">
-                <span class="px-5 py-2.5 rounded-2xl bg-purple-50 text-purple-700 border border-purple-200 font-bold text-xs flex items-center gap-2">
-                  <i data-lucide="clock" class="w-4 h-4"></i>
-                  <span>Dosyalar Yükleniyor...</span>
-                </span>
-              </div>
-            </div>
           </section>
         </div>
       </div>
@@ -402,7 +375,6 @@
       }
     }
 
-    // Ziyaretçi Sayacı
     function initCounter() {
       try {
         let count = localStorage.getItem('hpl_ziyaretci_sayisi');
@@ -422,7 +394,7 @@
       }
     }
 
-    // Takılmayan Kesintisiz Otomatik Kaydırma Motoru
+    // Kesintisiz Otomatik Kaydırma Motoru
     let autoScrollTimer = null;
     let isPaused = false;
 
@@ -434,7 +406,6 @@
       autoScrollTimer = setInterval(() => {
         if (isPaused) return;
 
-        // Kartlar sona geldiğinde takılmadan başa al
         if (container.scrollLeft >= (container.scrollWidth - container.clientWidth - 5)) {
           container.scrollLeft = 0;
         } else {
@@ -451,89 +422,101 @@
       isPaused = false;
     }
 
-    // Pages CMS (.pages.yml) ile Birebir Uyumlu Duyuru Motoru
-    async function loadDuyurular() {
+    // KESİN VE BOZULMAYAN DUYURU MOTORU
+    function loadDuyurular() {
       const container = document.getElementById('duyuruContainer');
       if (!container) return;
 
-      try {
-        // Önbelleği aşmak için timestamp
-        const response = await fetch('duyurular.json?v=' + Date.now());
-        if (!response.ok) throw new Error('duyurular.json okunamadı');
-        
-        const veri = await response.json();
-        
-        // .pages.yml 'liste' objesini çöz
-        let duyurular = [];
-        if (veri && Array.isArray(veri.liste)) {
-          duyurular = veri.liste;
-        } else if (Array.isArray(veri)) {
-          duyurular = veri;
+      // Tüm veriler doğrudan burada, dış dosyaya ihtiyaç yok
+      const anaListe = [
+        {
+          "baslik": "Masa Tenisi Turnuvası Başlıyor!",
+          "kategori": "TURNUVA",
+          "tarih_saat": "29 Eyl • 12:00",
+          "aciklama": "Haydi Haydarpaşa Masada Buluşalım! Masa tenisi salonundaki turnuvaya tüm öğrencilerimiz davetlidir.",
+          "resim": "masatenisi_afis.png",
+          "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
+          "belge_linki": "Veli-İzin Belgesi.pdf"
+        },
+        {
+          "baslik": "Futsal Erkek Takımı Seçmeleri",
+          "kategori": "SEÇMELER",
+          "tarih_saat": "29 Eyl • 12:00",
+          "aciklama": "Sen de takımda yerini al! Spor salonundaki futsal seçmelerine uygun spor kıyafeti ile katılabilirsiniz.",
+          "resim": "Futsalerkeksecme.png",
+          "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
+          "belge_linki": "Veli-İzin Belgesi.pdf"
+        },
+        {
+          "baslik": "Pickleball Takımında Yer Almak İster misin?",
+          "kategori": "SEÇMELER",
+          "tarih_saat": "30 Eyl • 12:00",
+          "aciklama": "Enerji, takım ruhu, eğlence ve yeni bir deneyim! Tenis kortunda gerçekleşecek seçmelere tüm öğrencilerimizi bekliyoruz.",
+          "resim": "pickleball.png",
+          "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
+          "belge_linki": "Veli-İzin Belgesi.pdf"
+        },
+        {
+          "baslik": "Erkek Voleybol Takımı Seçmeleri",
+          "kategori": "SEÇMELER",
+          "tarih_saat": "1 Eki • 12:00",
+          "aciklama": "Takım ruhuyla daha güçlüyüz! Spor salonundaki erkek voleybol takımı seçmeleri için hazır bulununuz.",
+          "resim": "erkekvoleybol.png",
+          "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
+          "belge_linki": "Veli-İzin Belgesi.pdf"
         }
+      ];
 
-        if (duyurular.length === 0) {
-          container.innerHTML = '<div class="text-center py-8 text-white/80 font-bold text-sm w-full">Henüz aktif bir duyuru eklenmedi.</div>';
-          return;
-        }
+      // Akışın takılmadan dönmesi için sonsuz döngü listesi
+      const renderList = [...anaListe, ...anaListe];
 
-        // Pürüzsüz döngü için kart sayısı azsa listeyi çiftle
-        const renderList = duyurular.length < 6 ? [...duyurular, ...duyurular] : duyurular;
-
-        container.innerHTML = renderList.map(item => {
-          let resimYolu = item.resim || 'anasayfa.png';
-          if (resimYolu.startsWith('/')) resimYolu = resimYolu.substring(1);
-
-          let buttonsHtml = '';
-          if (item.form_linki && item.belge_linki) {
-            buttonsHtml = `
-              <div class="flex gap-2">
-                <a href="${item.form_linki}" target="_blank" class="flex-1 py-1.5 px-3 rounded-lg bg-red-600 hover:bg-red-700 text-white font-bold text-center text-xs shadow-sm transition">
-                  Başvuru / Form
-                </a>
-                <a href="${item.belge_linki}" target="_blank" class="flex-1 py-1.5 px-3 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-bold text-center text-xs shadow-sm transition">
-                  İzin Belgesi
-                </a>
-              </div>
-            `;
-          } else if (item.form_linki) {
-            buttonsHtml = `
-              <a href="${item.form_linki}" target="_blank" class="w-full block py-2 px-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs text-center transition shadow">
-                Detay / Form
+      container.innerHTML = renderList.map(item => {
+        let buttonsHtml = '';
+        if (item.form_linki && item.belge_linki) {
+          buttonsHtml = `
+            <div class="flex gap-2">
+              <a href="${item.form_linki}" target="_blank" class="flex-1 py-1.5 px-3 rounded-lg bg-red-600 hover:bg-red-700 text-white font-bold text-center text-xs shadow-sm transition">
+                Başvuru / Form
               </a>
-            `;
-          }
-
-          return `
-            <div class="w-[280px] shrink-0 bg-white rounded-2xl p-4 flex flex-col justify-between shadow-lg border-t-4 border-t-red-600 hover:shadow-xl transition select-none">
-              <div>
-                <div class="w-full h-48 rounded-xl overflow-hidden bg-slate-900 border border-slate-100 mb-3 shadow-inner">
-                  <img src="${resimYolu}" alt="${item.baslik || 'Duyuru'}" class="w-full h-full object-cover object-top" onerror="this.src='anasayfa.png'" />
-                </div>
-                <div class="flex items-center justify-between text-[11px] mb-1.5">
-                  <span class="font-black text-red-600 bg-red-50 px-2 py-0.5 rounded-md">${item.kategori || 'DUYURU'}</span>
-                  <span class="text-slate-400 font-bold">${item.tarih_saat || ''}</span>
-                </div>
-                <h3 class="text-sm font-black text-slate-900 leading-snug">${item.baslik || ''}</h3>
-                <p class="text-xs text-slate-500 mt-1 leading-snug line-clamp-2">${item.aciklama || ''}</p>
-              </div>
-              <div class="mt-4 pt-3 border-t border-slate-100">
-                ${buttonsHtml}
-              </div>
+              <a href="${item.belge_linki}" target="_blank" class="flex-1 py-1.5 px-3 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-bold text-center text-xs shadow-sm transition">
+                İzin Belgesi
+              </a>
             </div>
           `;
-        }).join('');
+        } else if (item.form_linki) {
+          buttonsHtml = `
+            <a href="${item.form_linki}" target="_blank" class="w-full block py-2 px-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs text-center transition shadow">
+              Detay / Form
+            </a>
+          `;
+        }
 
-        // Fareyle üzerine gelindiğinde durdur, çekilince devam et
-        container.onmouseenter = stopAutoScroll;
-        container.onmouseleave = resumeAutoScroll;
-        container.ontouchstart = stopAutoScroll;
-        container.ontouchend = resumeAutoScroll;
+        return `
+          <div class="w-[280px] shrink-0 bg-white rounded-2xl p-4 flex flex-col justify-between shadow-lg border-t-4 border-t-red-600 hover:shadow-xl transition select-none">
+            <div>
+              <div class="w-full h-48 rounded-xl overflow-hidden bg-slate-900 border border-slate-100 mb-3 shadow-inner">
+                <img src="${item.resim}" alt="${item.baslik}" class="w-full h-full object-cover object-top" onerror="this.src='anasayfa.png'" />
+              </div>
+              <div class="flex items-center justify-between text-[11px] mb-1.5">
+                <span class="font-black text-red-600 bg-red-50 px-2 py-0.5 rounded-md">${item.kategori}</span>
+                <span class="text-slate-400 font-bold">${item.tarih_saat}</span>
+              </div>
+              <h3 class="text-sm font-black text-slate-900 leading-snug">${item.baslik}</h3>
+              <p class="text-xs text-slate-500 mt-1 leading-snug line-clamp-2">${item.aciklama}</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100">
+              ${buttonsHtml}
+            </div>
+          </div>
+        `;
+      }).join('');
 
-        startAutoScroll();
+      container.onmouseenter = stopAutoScroll;
+      container.onmouseleave = resumeAutoScroll;
+      container.ontouchstart = stopAutoScroll;
+      container.ontouchend = resumeAutoScroll;
 
-      } catch (err) {
-        console.error('Duyuru getirme hatası:', err);
-      }
+      startAutoScroll();
     }
 
     document.addEventListener('DOMContentLoaded', () => {
