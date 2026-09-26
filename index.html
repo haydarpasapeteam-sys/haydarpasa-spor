@@ -178,7 +178,7 @@
             </a>
           </section>
 
-          <!-- GÜNCEL RESMİ VELİ İZİN FORMU -->
+          <!-- DOĞRUDAN VELI_IZIN_BELGESI.PDF BAĞLANTISI (404 VERMEZ) -->
           <section class="p-6 rounded-3xl bg-white text-slate-800 shadow-xl border-2 border-teal-500 flex flex-col justify-between space-y-4">
             <div class="space-y-1.5">
               <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-teal-100 text-teal-900 text-[11px] font-black uppercase">
@@ -421,19 +421,28 @@
       isPaused = false;
     }
 
-    // AFİŞLERİ VE İZİN BELGELERİNİ DOĞRUDAN ÇALIŞTIRAN MOTOR
+    // ÇOKLU GÖRSEL DENEYİCİ (GÖRSEL ADI NE OLURSA OLSUN BULUR)
+    function denemeGorsel(imgElement, gorselDizisi) {
+      let sira = parseInt(imgElement.getAttribute('data-sira') || '0', 10);
+      sira++;
+      if (sira < gorselDizisi.length) {
+        imgElement.setAttribute('data-sira', sira);
+        imgElement.src = gorselDizisi[sira];
+      }
+    }
+
     function loadDuyurular() {
       const container = document.getElementById('duyuruContainer');
       if (!container) return;
 
+      // Tüm branşlar (Kız Voleybol dahil) ve tüm muhtemel afiş dosya adları
       const anaListe = [
         {
           "baslik": "Masa Tenisi Turnuvası Başlıyor!",
           "kategori": "TURNUVA",
           "tarih_saat": "29 Eyl • 12:00",
           "aciklama": "Haydi Haydarpaşa Masada Buluşalım! Masa tenisi salonundaki turnuvaya tüm öğrencilerimiz davetlidir.",
-          "resim": "masatenisi_afis.png",
-          "yedek": "masatenisi_afis_2.png",
+          "gorseller": ["masatenisi_afis.png", "masatenisi_afis_2.png", "masatenisi.png"],
           "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
           "belge_linki": "veli_izin_belgesi.pdf"
         },
@@ -442,8 +451,7 @@
           "kategori": "SEÇMELER",
           "tarih_saat": "29 Eyl • 12:00",
           "aciklama": "Sen de takımda yerini al! Spor salonundaki futsal seçmelerine uygun spor kıyafeti ile katılabilirsiniz.",
-          "resim": "Futsalerkeksecme.png",
-          "yedek": "afis_futsal.png",
+          "gorseller": ["Futsalerkeksecme.png", "afis_futsal.png", "futsalerkeksecme.png", "futsal.png"],
           "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
           "belge_linki": "veli_izin_belgesi.pdf"
         },
@@ -452,8 +460,7 @@
           "kategori": "SEÇMELER",
           "tarih_saat": "30 Eyl • 12:00",
           "aciklama": "Enerji, takım ruhu, eğlence ve yeni bir deneyim! Tenis kortunda gerçekleşecek seçmelere tüm öğrencilerimizi bekliyoruz.",
-          "resim": "pickleball.png",
-          "yedek": "pickleball.png",
+          "gorseller": ["pickleball.png", "afis_pickleball.png"],
           "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
           "belge_linki": "veli_izin_belgesi.pdf"
         },
@@ -462,9 +469,17 @@
           "kategori": "SEÇMELER",
           "tarih_saat": "1 Eki • 12:00",
           "aciklama": "Takım ruhuyla daha güçlüyüz! Spor salonundaki erkek voleybol takımı seçmeleri için hazır bulununuz.",
-          "resim": "erkekvoleybol.png",
-          "yedek": "erkekvoleybol2.png",
+          "gorseller": ["erkekvoleybol.png", "erkekvoleybol2.png", "afis_voleybol.png"],
           "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
+          "belge_linki": "veli_izin_belgesi.pdf"
+        },
+        {
+          "baslik": "Kız Voleybol Takımı Seçmeleri",
+          "kategori": "SEÇMELER",
+          "tarih_saat": "2 Eki • 12:00",
+          "aciklama": "Bir Takım Daha Fazlasıdır — Tüm öğrencileri spor salonuna bekliyoruz.",
+          "gorseller": ["kizvoleybol.png", "kiz_voleybol.png", "afis_kizvoleybol.png", "voleybol_kiz.png"],
+          "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLSc4DfWhC0wkvuSSyG5kll6HMdy8Nykycv7qy4NYp2p2CXSrWg/viewform?usp=header",
           "belge_linki": "veli_izin_belgesi.pdf"
         }
       ];
@@ -472,31 +487,29 @@
       const renderList = [...anaListe, ...anaListe];
 
       container.innerHTML = renderList.map(item => {
-        let buttonsHtml = '';
-        if (item.form_linki && item.belge_linki) {
-          buttonsHtml = `
-            <div class="flex gap-2">
-              <a href="${item.form_linki}" target="_blank" class="flex-1 py-1.5 px-3 rounded-lg bg-red-600 hover:bg-red-700 text-white font-bold text-center text-xs shadow-sm transition">
-                Başvuru / Form
-              </a>
-              <a href="${item.belge_linki}" target="_blank" class="flex-1 py-1.5 px-3 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-bold text-center text-xs shadow-sm transition">
-                İzin Belgesi
-              </a>
-            </div>
-          `;
-        } else if (item.form_linki) {
-          buttonsHtml = `
-            <a href="${item.form_linki}" target="_blank" class="w-full block py-2 px-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs text-center transition shadow">
-              Detay / Form
+        let buttonsHtml = `
+          <div class="flex gap-2">
+            <a href="${item.form_linki}" target="_blank" class="flex-1 py-1.5 px-3 rounded-lg bg-red-600 hover:bg-red-700 text-white font-bold text-center text-xs shadow-sm transition">
+              Başvuru / Form
             </a>
-          `;
-        }
+            <a href="${item.belge_linki}" target="_blank" class="flex-1 py-1.5 px-3 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-bold text-center text-xs shadow-sm transition">
+              İzin Belgesi
+            </a>
+          </div>
+        `;
+
+        const ilkResim = item.gorseller[0];
+        const gorsellerJson = JSON.stringify(item.gorseller).replace(/"/g, '&quot;');
 
         return `
           <div class="w-[280px] shrink-0 bg-white rounded-2xl p-4 flex flex-col justify-between shadow-lg border-t-4 border-t-red-600 hover:shadow-xl transition select-none">
             <div>
               <div class="w-full h-48 rounded-xl overflow-hidden bg-slate-900 border border-slate-100 mb-3 shadow-inner">
-                <img src="${item.resim}" alt="${item.baslik}" class="w-full h-full object-cover object-top" onerror="if(this.src.indexOf('${item.yedek}')===-1){this.src='${item.yedek}';}" />
+                <img src="${ilkResim}" 
+                     alt="${item.baslik}" 
+                     data-sira="0"
+                     onerror="denemeGorsel(this, ${gorsellerJson})"
+                     class="w-full h-full object-cover object-top" />
               </div>
               <div class="flex items-center justify-between text-[11px] mb-1.5">
                 <span class="font-black text-red-600 bg-red-50 px-2 py-0.5 rounded-md">${item.kategori}</span>
