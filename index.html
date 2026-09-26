@@ -88,7 +88,7 @@
 
         <!-- DİNAMİK KAYAN ŞERİT -->
         <div id="duyuruContainer" class="flex gap-4 overflow-x-auto pb-4 pt-1 w-full no-scrollbar" style="-webkit-overflow-scrolling: touch;">
-          <div class="text-center py-8 text-white/80 font-bold text-sm w-full">Duyurular yükleniyor...</div>
+          <!-- Kartlar JavaScript ile doldurulacak -->
         </div>
 
         <!-- CANLI FUTSAL SKOR TABLOSU -->
@@ -189,7 +189,6 @@
             </a>
           </section>
 
-          <!-- MASA TENİSİ İZİN BELGESİ KARTI -->
           <section class="p-6 rounded-3xl bg-white text-slate-800 shadow-xl border-2 border-teal-500 flex flex-col justify-between space-y-4">
             <div class="space-y-1.5">
               <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-teal-100 text-teal-900 text-[11px] font-black uppercase">
@@ -204,7 +203,6 @@
             </a>
           </section>
 
-          <!-- E-Portfolyo 1 -->
           <section class="p-6 rounded-3xl bg-white text-slate-800 shadow-xl border-2 border-indigo-300 flex flex-col justify-between space-y-4">
             <div class="space-y-1.5">
               <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-900 text-[11px] font-black uppercase">E-Portfolyo 1</span>
@@ -216,7 +214,6 @@
             </a>
           </section>
 
-          <!-- E-Portfolyo 2 -->
           <section class="p-6 rounded-3xl bg-white text-slate-800 shadow-xl border-2 border-amber-300 flex flex-col justify-between space-y-4">
             <div class="space-y-1.5">
               <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 text-[11px] font-black uppercase">E-Portfolyo 2</span>
@@ -228,7 +225,6 @@
             </a>
           </section>
 
-          <!-- İSG Talimatları -->
           <section class="p-6 rounded-3xl bg-white text-slate-800 shadow-xl border-2 border-purple-400 flex flex-col justify-between space-y-4 md:col-span-2">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div class="space-y-1.5">
@@ -353,7 +349,6 @@
             <a href="mailto:haydarpasapeteam@gmail.com" class="px-4 py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold shadow flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4"></i><span>E-posta</span></a>
           </div>
         </div>
-        <!-- Google Harita -->
         <div class="rounded-2xl overflow-hidden border-2 border-red-200 shadow-inner h-96 w-full">
           <iframe src="https://maps.google.com/maps?q=Haydarpa%C5%9Fa%20Lisesi%20Altunizade&t=&z=16&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
@@ -369,7 +364,6 @@
         <p class="font-bold text-sm">Haydarpaşa Lisesi — Beden Eğitimi ve Spor Bölümü</p>
         <p class="text-red-200 text-xs mt-1">© 2026 Tüm Hakları Saklıdır.</p>
       </div>
-      <!-- Ziyaretçi Sayacı -->
       <div class="flex items-center gap-2 bg-red-950/60 px-3.5 py-1.5 rounded-xl border border-red-400/20 shadow-inner">
         <i data-lucide="users" class="w-4 h-4 text-amber-300"></i>
         <span class="text-red-200 font-semibold text-xs">Toplam Ziyaretçi:</span>
@@ -400,7 +394,7 @@
     function scrollCards(direction) {
       const container = document.getElementById('duyuruContainer');
       if (container) {
-        const scrollAmount = 320;
+        const scrollAmount = 300;
         container.scrollBy({
           left: direction === 'left' ? -scrollAmount : scrollAmount,
           behavior: 'smooth'
@@ -428,7 +422,7 @@
       }
     }
 
-    // Akıcı Otomatik Kaydırma Motoru
+    // Kesintisiz Otomatik Kaydırma Motoru
     let autoScrollTimer = null;
     let isPaused = false;
 
@@ -440,12 +434,13 @@
       autoScrollTimer = setInterval(() => {
         if (isPaused) return;
 
-        if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 2) {
+        // Son sınıra gelince takılmadan başa sıfırla
+        if (container.scrollLeft >= (container.scrollWidth - container.clientWidth - 5)) {
           container.scrollLeft = 0;
         } else {
           container.scrollLeft += 1;
         }
-      }, 30);
+      }, 25);
     }
 
     function stopAutoScroll() {
@@ -456,49 +451,52 @@
       isPaused = false;
     }
 
-    // Duyuruları Doğrudan Yükleyen Motor
+    // DÜNKÜ ÇALIŞAN GARANTİLİ STATİK DUYURU MOTORU
     function loadDuyurular() {
       const container = document.getElementById('duyuruContainer');
       if (!container) return;
 
-      const duyurular = [
+      const anaListe = [
         {
-          "baslik": "Masa Tenisi Takım Seçmeleri ve Veli İzin Belgesi",
-          "kategori": "SEÇMELER",
-          "tarih_saat": "2026 - 2027",
-          "aciklama": "Masa tenisi okul takımı seçmelerine katılacak öğrencilerin veli izin belgesini eksiksiz doldurarak zümreye teslim etmesi gerekmektedir.",
-          "resim": "anasayfa.png",
-          "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
-          "belge_linki": "Veli-İzin Belgesi.pdf"
-        },
-        {
-          "baslik": "Voleybol Kız Takımı Seçmeleri",
-          "kategori": "SEÇMELER",
-          "tarih_saat": "2026 - 2027",
-          "aciklama": "Okul voleybol kız takımı seçmeleri spor salonumuzda gerçekleştirilecektir. Katılım için başvuru formunu doldurunuz.",
-          "resim": "anasayfa.png",
-          "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
-          "belge_linki": "turnuva_izin.html"
-        },
-        {
-          "baslik": "Voleybol Erkek Takımı Seçmeleri",
-          "kategori": "SEÇMELER",
-          "tarih_saat": "2026 - 2027",
-          "aciklama": "Voleybol erkek okul takımı antrenman ve seçme programı başlamıştır. Lisans ve izin formlarınızı teslim ediniz.",
-          "resim": "anasayfa.png",
-          "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
-          "belge_linki": "turnuva_izin.html"
-        },
-        {
-          "baslik": "Futsal Okul Turnuvası Başvuruları",
+          "baslik": "Masa Tenisi Turnuvası Başlıyor!",
           "kategori": "TURNUVA",
-          "tarih_saat": "2026 - 2027",
-          "aciklama": "Sınıflar arası futsal turnuvası fikstür ve takım listeleri oluşturulmaktadır. Takım kaptanları başvurularını tamamlamalıdır.",
-          "resim": "anasayfa.png",
+          "tarih_saat": "29 Eylül Salı • 12:00",
+          "aciklama": "Haydi Haydarpaşa Masada Buluşalım! Masa Tenisi Salonunda gerçekleşecek turnuvaya tüm öğrencilerimiz davetlidir.",
+          "resim": "afis_masatenisi.png",
+          "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
+          "belge_linki": "turnuva_izin.html"
+        },
+        {
+          "baslik": "Futsal Erkek Takımı Seçmeleri",
+          "kategori": "SEÇMELER",
+          "tarih_saat": "29 Eylül Salı • 12:00",
+          "aciklama": "Sen de takımda yerini al! Spor salonunda yapılacak seçmelere uygun spor kıyafeti ve veli izin belgesi ile katılabilirsiniz.",
+          "resim": "afis_futsal.png",
+          "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
+          "belge_linki": "turnuva_izin.html"
+        },
+        {
+          "baslik": "Pickleball Takımında Yer Almak İster misin?",
+          "kategori": "SEÇMELER",
+          "tarih_saat": "30 Eylül Çarşamba • 12:00",
+          "aciklama": "Enerji, takım ruhu, eğlence ve yeni bir deneyim! Tenis kortunda gerçekleştirilecek seçmelere tüm öğrencilerimizi bekliyoruz.",
+          "resim": "afis_pickleball.png",
+          "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
+          "belge_linki": "turnuva_izin.html"
+        },
+        {
+          "baslik": "Erkek Voleybol Takımı Seçmeleri",
+          "kategori": "SEÇMELER",
+          "tarih_saat": "1 Ekim Perşembe • 12:00",
+          "aciklama": "Takım ruhuyla daha güçlüyüz! Spor salonundaki seçmeler için spor kıyafetleriniz ve veli izin belgenizle hazır bulununuz.",
+          "resim": "afis_voleybol.png",
           "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
           "belge_linki": "turnuva_izin.html"
         }
       ];
+
+      // Akışın takılmadan pürüzsüz dönmesi için sonsuz döngü listesi
+      const duyurular = [...anaListe, ...anaListe];
 
       container.innerHTML = duyurular.map(item => {
         let buttonsHtml = '';
@@ -522,17 +520,17 @@
         }
 
         return `
-          <div class="w-[300px] shrink-0 bg-white rounded-2xl p-4 flex flex-col justify-between shadow-lg border-t-4 border-t-red-600 hover:shadow-xl transition">
+          <div class="w-[280px] shrink-0 bg-white rounded-2xl p-4 flex flex-col justify-between shadow-lg border-t-4 border-t-red-600 hover:shadow-xl transition select-none">
             <div>
-              <div class="w-full h-36 rounded-xl overflow-hidden bg-slate-900 border border-slate-100 mb-3 shadow-inner">
-                <img src="${item.resim || 'anasayfa.png'}" alt="${item.baslik}" class="w-full h-full object-cover" onerror="this.src='anasayfa.png'" />
+              <div class="w-full h-52 rounded-xl overflow-hidden bg-slate-900 border border-slate-100 mb-3 shadow-inner">
+                <img src="${item.resim}" alt="${item.baslik}" class="w-full h-full object-cover object-top" onerror="this.src='anasayfa.png'" />
               </div>
               <div class="flex items-center justify-between text-[11px] mb-1.5">
-                <span class="font-black text-red-600 bg-red-50 px-2 py-0.5 rounded-md">${item.kategori || 'DUYURU'}</span>
-                <span class="text-slate-400 font-bold">${item.tarih_saat || ''}</span>
+                <span class="font-black text-red-600 bg-red-50 px-2 py-0.5 rounded-md">${item.kategori}</span>
+                <span class="text-slate-400 font-bold">${item.tarih_saat}</span>
               </div>
-              <h3 class="text-sm font-black text-slate-900">${item.baslik}</h3>
-              <p class="text-xs text-slate-500 mt-1 leading-snug">${item.aciklama || ''}</p>
+              <h3 class="text-sm font-black text-slate-900 leading-snug">${item.baslik}</h3>
+              <p class="text-xs text-slate-500 mt-1 leading-snug line-clamp-2">${item.aciklama}</p>
             </div>
             <div class="mt-4 pt-3 border-t border-slate-100">
               ${buttonsHtml}
@@ -541,15 +539,15 @@
         `;
       }).join('');
 
-      container.addEventListener('mouseenter', stopAutoScroll);
-      container.addEventListener('mouseleave', resumeAutoScroll);
-      container.addEventListener('touchstart', stopAutoScroll, { passive: true });
-      container.addEventListener('touchend', resumeAutoScroll, { passive: true });
+      container.onmouseenter = stopAutoScroll;
+      container.onmouseleave = resumeAutoScroll;
+      container.ontouchstart = stopAutoScroll;
+      container.ontouchend = resumeAutoScroll;
 
       startAutoScroll();
     }
 
-    // Sayfa Yüklendiğinde Otomatik Başlat
+    // Sayfa Açıldığında Çalıştır
     document.addEventListener('DOMContentLoaded', () => {
       loadDuyurular();
       initCounter();
