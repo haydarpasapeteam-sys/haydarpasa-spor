@@ -86,7 +86,7 @@
           </div>
         </div>
 
-        <!-- DİNAMİK KAYAN ŞERİT (Pages CMS duyurular.json'dan beslenir) -->
+        <!-- DİNAMİK KAYAN ŞERİT -->
         <div id="duyuruContainer" class="flex gap-4 overflow-x-auto pb-4 pt-1 w-full no-scrollbar" style="-webkit-overflow-scrolling: touch;">
           <div class="text-center py-8 text-white/80 font-bold text-sm w-full">Duyurular yükleniyor...</div>
         </div>
@@ -456,9 +456,11 @@
       isPaused = false;
     }
 
-   // Duyuruları Doğrudan Yükleyen Garantili Motor
+    // Duyuruları Doğrudan Yükleyen Motor
     function loadDuyurular() {
       const container = document.getElementById('duyuruContainer');
+      if (!container) return;
+
       const duyurular = [
         {
           "baslik": "Masa Tenisi Takım Seçmeleri ve Veli İzin Belgesi",
@@ -539,5 +541,22 @@
         `;
       }).join('');
 
+      container.addEventListener('mouseenter', stopAutoScroll);
+      container.addEventListener('mouseleave', resumeAutoScroll);
+      container.addEventListener('touchstart', stopAutoScroll, { passive: true });
+      container.addEventListener('touchend', resumeAutoScroll, { passive: true });
+
       startAutoScroll();
     }
+
+    // Sayfa Yüklendiğinde Otomatik Başlat
+    document.addEventListener('DOMContentLoaded', () => {
+      loadDuyurular();
+      initCounter();
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    });
+  </script>
+</body>
+</html>
