@@ -48,10 +48,8 @@
     {
       "baslik": "Basketbol Kız Okul Takımı",
       "kategori": "SEÇMELER",
-      "tarih_saat": "1.EKİM 2026 PERŞEMBE SAAT: 12.00 YER : SPOR SALONU",
+      "tarih_saat": "1 Eki • Öğle Arası",
       "aciklama": "Tüm sınıf düzeyindeki öğrencilerimiz seçmelere davetlidir. Spor salonunda buluşuyoruz. Katılacak öğrenciler veli izin dilekçesini unutmamalıdır.",
-      "resim": "kizbasketbol-1.png",
-      "belge_linki": "veli_izin_belgesi-1.pdf"
+      "resim": "kizbasketbol.png",
+      "belge_linki": "turnuva_izin.html"
     }
-  ]
-}
