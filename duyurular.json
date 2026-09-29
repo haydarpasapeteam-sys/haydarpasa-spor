@@ -14,7 +14,7 @@
       "kategori": "SEÇMELER",
       "tarih_saat": "29 Eyl • 12.00",
       "aciklama": "Sen de takımda yerini al! Spor salonunda yapılacak futsal takımı seçmelerine uygun spor kıyafeti ve veli izin belgesi ile katılabilirsiniz.",
-      "resim": "Futsalerkeksecme.png",
+      "resim": "afis_futsal.png",
       "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
       "belge_linki": "turnuva_izin.html"
     },
@@ -23,7 +23,7 @@
       "kategori": "SEÇMELER",
       "tarih_saat": "30 Eyl • 12.00",
       "aciklama": "Tenis kortunda buluşuyoruz. Enerji ve takım ruhu için sen de katıl!",
-      "resim": "pickleball.png",
+      "resim": "pickleballsecmeler.png",
       "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
       "belge_linki": "turnuva_izin.html"
     },
@@ -41,15 +41,17 @@
       "kategori": "SEÇMELER",
       "tarih_saat": "2 Eki • 12.00",
       "aciklama": "Bir Takım Daha Fazlasıdır — Tüm öğrencileri bekliyoruz.",
-      "resim": "kizvoleybol.png",
+      "resim": "afis_kizvoleybol.png",
       "form_linki": "https://docs.google.com/forms/d/e/1FAIpQLSc4DfWhC0wkvuSSyG5kll6HMdy8Nykycv7qy4NYp2p2CXSrWg/viewform?usp=header",
       "belge_linki": "turnuva_izin.html"
     },
     {
       "baslik": "Basketbol Kız Okul Takımı",
       "kategori": "SEÇMELER",
-      "tarih_saat": "1 Eki • Öğle Arası",
+      "tarih_saat": "1 Eki • 12.00",
       "aciklama": "Tüm sınıf düzeyindeki öğrencilerimiz seçmelere davetlidir. Spor salonunda buluşuyoruz. Katılacak öğrenciler veli izin dilekçesini unutmamalıdır.",
       "resim": "kizbasketbol.png",
       "belge_linki": "turnuva_izin.html"
     }
+  ]
+}
