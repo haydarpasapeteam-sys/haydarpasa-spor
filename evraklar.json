@@ -1,0 +1,52 @@
+{
+  "liste": [
+    {
+      "etiket": "ZORUNLU EVRAK 1",
+      "baslik": "Tesis, Havuz & Malzeme Kullanım Taahhütnamesi",
+      "aciklama": "Salon, havuz ve demirbaş kullanım kuralları taahhüt belgesi.",
+      "link": "taahhutname.html",
+      "buton_yazi": "Belgeyi Aç / Yazdır",
+      "renk": "amber"
+    },
+    {
+      "etiket": "ZORUNLU EVRAK 2",
+      "baslik": "Ders Dışı Eğitim ve Egzersiz Veli İzin Belgesi",
+      "aciklama": "Hafta içi/sonu antrenman ve egzersiz çalışmaları için veli onayı.",
+      "link": "ders_disi_egzersiz.html",
+      "buton_yazi": "Belgeyi Aç / Yazdır",
+      "renk": "red"
+    },
+    {
+      "etiket": "ZORUNLU EVRAK 3",
+      "baslik": "Sağlık Durumu Beyan Formu",
+      "aciklama": "Beden Eğitimi dersleri ve spor faaliyetleri sağlık bilgi formu.",
+      "link": "saglik_durumu.html",
+      "buton_yazi": "Belgeyi Aç / Yazdır",
+      "renk": "blue"
+    },
+    {
+      "etiket": "ZORUNLU EVRAK 4",
+      "baslik": "Turnuvalar ve Egzersiz Veli İzin Belgesi",
+      "aciklama": "Okul içi turnuvalar ile il/ilçe spor müsabakaları için veli izin belgesi.",
+      "link": "turnuva_izin.html",
+      "buton_yazi": "Belgeyi Aç / Yazdır",
+      "renk": "emerald"
+    },
+    {
+      "etiket": "E-PORTFOLYO 1",
+      "baslik": "Beden Eğitimi Dersi Öğrenci E-Portfolyo Detaylı Formu",
+      "aciklama": "Fiziksel profil, branş teknik gelişimi, dijital proje ve iş birliği değerlendirme formu.",
+      "link": "https://drive.google.com/file/d/16s5oAwvkPGmqaWai1vAoTRjFFg1M0XhK/view?usp=share_link",
+      "buton_yazi": "Portfolyo 1 Formunu Aç",
+      "renk": "indigo"
+    },
+    {
+      "etiket": "E-PORTFOLYO 2",
+      "baslik": "Öğrenci E-Portfolyo Özet Gelişim Dosyası Şablonu",
+      "aciklama": "Esneklik, denge testleri takip tablosu ve dönem sonu kontrol listesi.",
+      "link": "https://drive.google.com/file/d/1ivrJqoqNpAz_l0vnJKQznSSBuWQo_32S/view?usp=share_link",
+      "buton_yazi": "Portfolyo 2 Formunu Aç",
+      "renk": "amber"
+    }
+  ]
+}
