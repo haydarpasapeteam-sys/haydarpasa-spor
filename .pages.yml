@@ -1,4 +1,3 @@
-media: ""
 content:
   - name: duyurular
     label: "Duyurular Panosu"
@@ -13,7 +12,7 @@ content:
             label: "Duyuru Başlığı"
             type: string
           - name: kategori
-            label: "Kategori (örn: TURNUVA, SEÇMELER, SONUÇLAR)"
+            label: "Kategori (örn: TURNUVA, SEÇMELER)"
             type: string
           - name: tarih_saat
             label: "Tarih ve Saat"
@@ -25,36 +24,8 @@ content:
             label: "Afiş Görseli"
             type: image
           - name: form_linki
-            label: "Form Linki (isteğe bağlı)"
+            label: "Form Linki"
             type: string
           - name: belge_linki
-            label: "Belge Linki (isteğe bağlı)"
-            type: string
-
-  - name: evraklar
-    label: "Zorunlu Evraklar & Portfolyo"
-    type: file
-    path: evraklar.json
-    fields:
-      - name: liste
-        label: "Evrak ve Belge Listesi"
-        type: list
-        fields:
-          - name: etiket
-            label: "Etiket (Örn: ZORUNLU EVRAK 1, E-PORTFOLYO 1)"
-            type: string
-          - name: baslik
-            label: "Belge Başlığı"
-            type: string
-          - name: aciklama
-            label: "Açıklama"
-            type: text
-          - name: link
-            label: "Belge Linki (html dosyası veya Google Drive linki)"
-            type: string
-          - name: buton_yazi
-            label: "Buton Yazısı (Örn: Belgeyi Aç / Yazdır)"
-            type: string
-          - name: renk
-            label: "Kart Rengi (amber, red, blue, emerald, indigo)"
+            label: "Belge Linki"
             type: string
