@@ -6,7 +6,8 @@ content:
     fields:
       - name: liste
         label: "Duyuru Listesi"
-        type: list
+        type: object
+        list: true
         fields:
           - name: baslik
             label: "Duyuru Başlığı"
