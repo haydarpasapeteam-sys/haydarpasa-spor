@@ -55,3 +55,12 @@
     }
   ]
 }
+{
+      "baslik": "Dart Okul Takımı",
+      "kategori": "TAKIM SEÇİMİ",
+      "tarih_saat": "Aktif Kayıt",
+      "aciklama": "Odaklan, dikkatini güçlendir, takımın bir parçası ol! Dart takımına katılmak isteyen öğrencilerimiz katılım formunu doldurabilir.",
+      "resim": "darttakimi.png",
+      "form_linki": "https://forms.gle/e2Di4kLnwMNpFSzj7",
+      "belge_linki": "turnuva_izin.html"
+    },
