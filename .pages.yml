@@ -1,17 +1,13 @@
-media:
-  input: ""
-  output: ""
-
+media: ""
 content:
   - name: duyurular
     label: "Duyurular Panosu"
     type: file
-    path: "duyurular.json"
+    path: duyurular.json
     fields:
       - name: liste
         label: "Duyuru Listesi"
-        type: object
-        list: true
+        type: list
         fields:
           - name: baslik
             label: "Duyuru Başlığı"
@@ -29,8 +25,36 @@ content:
             label: "Afiş Görseli"
             type: image
           - name: form_linki
-            label: "Başvuru Formu / Canva Sonuç Linki"
+            label: "Form Linki (isteğe bağlı)"
             type: string
           - name: belge_linki
-            label: "Veli İzin Belgesi / Dosya"
-            type: file
+            label: "Belge Linki (isteğe bağlı)"
+            type: string
+
+  - name: evraklar
+    label: "Zorunlu Evraklar & Portfolyo"
+    type: file
+    path: evraklar.json
+    fields:
+      - name: liste
+        label: "Evrak ve Belge Listesi"
+        type: list
+        fields:
+          - name: etiket
+            label: "Etiket (Örn: ZORUNLU EVRAK 1, E-PORTFOLYO 1)"
+            type: string
+          - name: baslik
+            label: "Belge Başlığı"
+            type: string
+          - name: aciklama
+            label: "Açıklama"
+            type: text
+          - name: link
+            label: "Belge Linki (html dosyası veya Google Drive linki)"
+            type: string
+          - name: buton_yazi
+            label: "Buton Yazısı (Örn: Belgeyi Aç / Yazdır)"
+            type: string
+          - name: renk
+            label: "Kart Rengi (amber, red, blue, emerald, indigo)"
+            type: string
