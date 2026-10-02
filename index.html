@@ -88,7 +88,7 @@
 
         <!-- DİNAMİK KAYAN ŞERİT -->
         <div id="duyuruContainer" class="flex gap-4 overflow-x-auto pb-4 pt-1 w-full no-scrollbar" style="-webkit-overflow-scrolling: touch;">
-          <!-- Kartlar JavaScript ile anında doldurulacaktır -->
+          <!-- Kartlar yüklenecektir -->
         </div>
 
         <!-- CANLI FUTSAL SKOR TABLOSU -->
@@ -212,21 +212,22 @@
             </a>
           </section>
 
+          <!-- GOOGLE DRIVE İLE BAĞLANMIŞ İSG VE TÜM BELGELER KLASÖRÜ -->
           <section class="p-6 rounded-3xl bg-white text-slate-800 shadow-xl border-2 border-purple-400 flex flex-col justify-between space-y-4 md:col-span-2">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div class="space-y-1.5">
                 <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-900 text-[11px] font-black uppercase">
                   <i data-lucide="shield-check" class="w-3.5 h-3.5 text-purple-700"></i>
-                  <span>İş Sağlığı ve Güvenliği (İSG)</span>
+                  <span>İş Sağlığı ve Güvenliği (İSG) & Resmi Belgeler</span>
                 </span>
-                <h3 class="text-lg font-black text-slate-900">İSG Talimatları, Risk Değerlendirme ve Güvenlik Dosyaları</h3>
-                <p class="text-xs text-slate-600">Salon, havuz ve saha kullanımına yönelik İSG kuralları.</p>
+                <h3 class="text-lg font-black text-slate-900">İSG Talimatları, Risk Değerlendirme ve Tüm Resmi Belgeler Klasörü</h3>
+                <p class="text-xs text-slate-600">Salon, havuz ve saha güvenliği, acil durum talimatları ve tüm formlar tek klasörde toplanmıştır.</p>
               </div>
               <div class="flex items-center gap-2 shrink-0">
-                <span class="px-5 py-2.5 rounded-2xl bg-purple-50 text-purple-700 border border-purple-200 font-bold text-xs flex items-center gap-2">
-                  <i data-lucide="clock" class="w-4 h-4"></i>
-                  <span>Dosyalar Yükleniyor...</span>
-                </span>
+                <a href="https://drive.google.com/drive/folders/1hvcPh_lbN9EgD8Ps0aFRGGEFamSTh5gx?usp=sharing" target="_blank" class="px-6 py-3 rounded-2xl bg-purple-700 hover:bg-purple-800 text-white font-black text-xs shadow-lg flex items-center gap-2 transition hover:scale-105">
+                  <i data-lucide="folder-symlink" class="w-4 h-4"></i>
+                  <span>Klasörü Aç / Belgeleri İndir</span>
+                </a>
               </div>
             </div>
           </section>
@@ -361,7 +362,7 @@
     </div>
   </footer>
 
-  <!-- JAVASCRIPT MOTORU (DUYURULAR DOĞRUDAN İÇİNE GÖMÜLÜDÜR) -->
+  <!-- JAVASCRIPT MOTORU -->
   <script>
     const anaDuyurular = [
       {
@@ -521,7 +522,6 @@
           buttonsHtml = `<a href="${item.belge_linki}" target="_blank" class="w-full block py-2 px-3 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs text-center transition shadow">📄 Veli İzin Belgesi</a>`;
         }
 
-        // Pickleball için akıllı görsel kontrolü
         let fallbackCode = "this.src='anasayfa.png'";
         if (item.baslik && item.baslik.includes("Pickleball")) {
           fallbackCode = "if(!this.dataset.retried){this.dataset.retried=1;this.src='Pickleballseçmeler.png';}else{this.src='anasayfa.png';}";
@@ -547,10 +547,7 @@
     }
 
     async function loadDuyurular() {
-      // Önce doğrudan garantili gömülü duyuruları anında çiziyoruz (sıfır gecikme, sıfır takılma)
       renderCards(anaDuyurular);
-
-      // Arka planda JSON dosyasını dener; düzgünse onu alır, bozuksa mevcut panoyu hiç bozmaz
       try {
         const response = await fetch('duyurular.json?v=' + Date.now());
         if (response.ok) {
