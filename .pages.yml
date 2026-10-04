@@ -1,3 +1,7 @@
+media:
+  input: images
+  output: images
+
 content:
   - name: duyurular
     label: "Duyurular Panosu"
