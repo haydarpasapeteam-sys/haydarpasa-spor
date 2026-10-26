@@ -1,0 +1,24 @@
+backend:
+  name: github
+  repo: haydarpasapeteam-sys/haydarpasa-spor
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "duyurular"
+    label: "Duyurular Panosu"
+    file: "duyurular.json"
+    fields:
+      - label: "Duyuru Listesi"
+        name: "liste"
+        widget: "list"
+        fields:
+          - {label: "Duyuru Başlığı", name: "baslik", widget: "string"}
+          - {label: "Kategori (örn: TURNUVA, SEÇMELER)", name: "kategori", widget: "string"}
+          - {label: "Tarih ve Saat", name: "tarih_saat", widget: "string"}
+          - {label: "Açıklama", name: "aciklama", widget: "text"}
+          - {label: "Afiş Görseli", name: "resim", widget: "image"}
+          - {label: "Form Linki", name: "form_linki", widget: "string", required: false}
+          - {label: "Belge Linki", name: "belge_linki", widget: "string", required: false}
