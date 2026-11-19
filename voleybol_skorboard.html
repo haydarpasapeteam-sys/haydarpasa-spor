@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Haydarpaşa Lisesi — Voleybol Skorboard Paneli</title>
+  <style>
+    :root {
+      --maroon: #7A1C24;
+      --maroon-dark: #541117;
+      --navy: #1E3A5F;
+      --navy-dark: #13253D;
+      --gold: #F59E0B;
+      --bg: #0F172A;
+      --card: #1E293B;
+      --border: #334155;
+      --text: #F8FAFC;
+      --muted: #94A3B8;
+      --success: #10B981;
+      --danger: #EF4444;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 10px;
+      gap: 10px;
+    }
+
+    /* Üst Bilgi Barı */
+    header {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 10px 14px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      letter-spacing: 0.3px;
+    }
+
+    .brand span.badge {
+      background: var(--maroon);
+      color: #fff;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+    }
+
+    .controls-top {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    select, button.pill-btn {
+      background: #0F172A;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button.pill-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* Ana Skor Alanı */
+    .scoreboard {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      flex: 1;
+    }
+
+    @media (max-width: 540px) {
+      .scoreboard {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .team-card {
+      border-radius: 18px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+      position: relative;
+      border: 2px solid transparent;
+      transition: border-color 0.2s ease, transform 0.15s ease;
+    }
+
+    .team-home {
+      background: linear-gradient(160deg, var(--maroon) 0%, var(--maroon-dark) 100%);
+    }
+
+    .team-away {
+      background: linear-gradient(160deg, var(--navy) 0%, var(--navy-dark) 100%);
+    }
+
+    .team-card.serving {
+      border-color: var(--gold);
+      box-shadow: 0 0 18px rgba(245, 158, 11, 0.28);
+    }
+
+    .team-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .team-name-input {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 800;
+      padding: 6px 10px;
+      width: 100%;
+      text-align: center;
+      user-select: text;
+    }
+
+    .team-name-input:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    .serve-indicator {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      background: rgba(0, 0, 0, 0.3);
+      color: rgba(255, 255, 255, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .team-card.serving .serve-indicator {
+      background: var(--gold);
+      color: #111827;
+      border-color: var(--gold);
+    }
+
+    /* Set ve Mola Satırı */
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.22);
+      border-radius: 12px;
+      padding: 8px 12px;
+    }
+
+    .sets-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sets-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      opacity: 0.85;
+    }
+
+    .sets-value {
+      font-size: 1.4rem;
+      font-weight: 900;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 2px 12px;
+      border-radius: 8px;
+    }
+
+    .timeouts-box {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .timeout-btn {
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #fff;
+      border-radius: 8px;
+      padding: 5px 9px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .timeout-dots {
+      display: flex;
+      gap: 4px;
+    }
+
+    .dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--success);
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+
+    .dot.used {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* Büyük Dokunmatik Puan Alanı */
+    .score-display-btn {
+      background: rgba(0, 0, 0, 0.28);
+      border: 2px solid rgba(255, 255, 255, 0.14);
+      border-radius: 18px;
+      color: #fff;
+      font-size: clamp(4.2rem, 14vw, 6.8rem);
+      font-weight: 900;
+      line-height: 1;
+      padding: 20px 10px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.08s ease, background 0.15s ease;
+    }
+
+    .score-display-btn:active {
+      transform: scale(0.97);
+      background: rgba(255, 255, 255, 0.14);
+    }
+
+    .score-hint {
+      font-size: 0.72rem;
+      font-weight: 600;
+      opacity: 0.65;
+      margin-top: 6px;
+      letter-spacing: 0.4px;
+    }
+
+    /* Alt + / - Butonları */
+    .score-actions {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 8px;
+    }
+
+    .btn-minus, .btn-plus {
+      border: none;
+      border-radius: 12px;
+      font-size: 1.4rem;
+      font-weight: 900;
+      padding: 12px;
+      cursor: pointer;
+      color: #fff;
+    }
+
+    .btn-minus {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-plus {
+      background: rgba(255, 255, 255, 0.22);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+    }
+
+    .btn-minus:active, .btn-plus:active {
+      transform: scale(0.95);
+    }
+
+    /* Alt Durum & Set Geçmişi Çubuğu */
+    footer {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 10px 14px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .set-history {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      font-size: 0.82rem;
+    }
+
+    .set-chip {
+      background: #0F172A;
+      border: 1px solid var(--border);
+      padding: 4px 9px;
+      border-radius: 8px;
+      font-weight: 700;
+    }
+
+    .status-banner {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--gold);
+    }
+
+    .footer-actions {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .btn-danger {
+      background: rgba(239, 68, 68, 0.2) !important;
+      border-color: var(--danger) !important;
+      color: #FCA5A5 !important;
+    }
+
+    /* Mola Sayacı Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.88);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--card);
+      border: 2px solid var(--gold);
+      border-radius: 20px;
+      padding: 24px;
+      text-align: center;
+      max-width: 340px;
+      width: 100%;
+    }
+
+    .modal-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .modal-team {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .timer-big {
+      font-size: 4rem;
+      font-weight: 900;
+      margin: 10px 0 18px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .modal-close {
+      background: var(--maroon);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 24px;
+      font-size: 1rem;
+      font-weight: 800;
+      width: 100%;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ÜST BAR -->
+  <header>
+    <div class="brand">
+      <span class="badge">VOLEYBOL</span>
+      <span id="setTitle">1. SET</span>
+    </div>
+
+    <div class="controls-top">
+      <select id="matchFormat" onchange="changeFormat()" title="Maç Formatı">
+        <option value="3">3 Setlik (2 Kazanılan)</option>
+        <option value="5">5 Setlik (3 Kazanılan)</option>
+      </select>
+      <button class="pill-btn" onclick="swapSides()" title="Saha Değiştir">⇄ Saha Değiş</button>
+      <button class="pill-btn" onclick="undoLast()" title="Son İşlemi Geri Al">↶ Geri Al</button>
+    </div>
+  </header>
+
+  <!-- ANA SKORBOARD -->
+  <main class="scoreboard" id="boardContainer">
+    <!-- SOL / ÜST TAKIM (EV SAHİBİ) -->
+    <section class="team-card team-home serving" id="cardHome">
+      <div class="team-header">
+        <input type="text" class="team-name-input" id="nameHome" value="90. DÖNEM" aria-label="Ev Sahibi Takım Adı" />
+        <button class="serve-indicator" onclick="setServe('home')" id="serveHome">🏐 SERVİS</button>
+      </div>
+
+      <div class="meta-row">
+        <div class="sets-box">
+          <span class="sets-label">SET</span>
+          <span class="sets-value" id="setsHome">0</span>
+        </div>
+        <div class="timeouts-box">
+          <button class="timeout-btn" onclick="useTimeout('home')">MOLA</button>
+          <div class="timeout-dots" id="toDotsHome">
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+        </div>
+      </div>
+
+      <button class="score-display-btn" onclick="addPoint('home')" aria-label="Ev Sahibi Sayı Ekle">
+        <span id="scoreHome">0</span>
+        <span class="score-hint">SAYI EKLEMEK İÇİN DOKUN</span>
+      </button>
+
+      <div class="score-actions">
+        <button class="btn-minus" onclick="subPoint('home')" aria-label="Sayı Azalt">−1</button>
+        <button class="btn-plus" onclick="addPoint('home')" aria-label="Sayı Artır">+1 SAYI</button>
+      </div>
+    </section>
+
+    <!-- SAĞ / ALT TAKIM (DEPLASMAN) -->
+    <section class="team-card team-away" id="cardAway">
+      <div class="team-header">
+        <input type="text" class="team-name-input" id="nameAway" value="91. DÖNEM" aria-label="Deplasman Takım Adı" />
+        <button class="serve-indicator" onclick="setServe('away')" id="serveAway">🏐 SERVİS</button>
+      </div>
+
+      <div class="meta-row">
+        <div class="sets-box">
+          <span class="sets-label">SET</span>
+          <span class="sets-value" id="setsAway">0</span>
+        </div>
+        <div class="timeouts-box">
+          <button class="timeout-btn" onclick="useTimeout('away')">MOLA</button>
+          <div class="timeout-dots" id="toDotsAway">
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+        </div>
+      </div>
+
+      <button class="score-display-btn" onclick="addPoint('away')" aria-label="Deplasman Sayı Ekle">
+        <span id="scoreAway">0</span>
+        <span class="score-hint">SAYI EKLEMEK İÇİN DOKUN</span>
+      </button>
+
+      <div class="score-actions">
+        <button class="btn-minus" onclick="subPoint('away')" aria-label="Sayı Azalt">−1</button>
+        <button class="btn-plus" onclick="addPoint('away')" aria-label="Sayı Artır">+1 SAYI</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- ALT BAR -->
+  <footer>
+    <div class="set-history" id="setHistory">
+      <span style="color: var(--muted); font-weight: 700;">Set Geçmişi:</span>
+      <span class="set-chip">Henüz biten set yok</span>
+    </div>
+
+    <div class="status-banner" id="statusBanner"></div>
+
+    <div class="footer-actions">
+      <button class="pill-btn" onclick="finishSetManual()">✓ Seti Bitir</button>
+      <button class="pill-btn btn-danger" onclick="resetMatch()">⟲ Yeni Maç</button>
+    </div>
+  </footer>
+
+  <!-- MOLA SAYACI MODALI -->
+  <div class="modal-overlay" id="timeoutModal">
+    <div class="modal-box">
+      <div class="modal-title">⏱ TEKNİK / TAKIM MOLASI</div>
+      <div class="modal-team" id="timeoutTeamName">90. DÖNEM</div>
+      <div class="timer-big" id="timeoutTimer">30</div>
+      <button class="modal-close" onclick="closeTimeoutModal()">Molayı Bitir</button>
+    </div>
+  </div>
+
+  <script>
+    let state = {
+      scoreHome: 0,
+      scoreAway: 0,
+      setsHome: 0,
+      setsAway: 0,
+      toHome: 2,
+      toAway: 2,
+      serve: 'home',
+      maxSets: 3,
+      history: [],
+      undoStack: [],
+      swapped: false
+    };
+
+    let timeoutInterval = null;
+
+    function saveUndo() {
+      state.undoStack.push(JSON.parse(JSON.stringify({
+        scoreHome: state.scoreHome,
+        scoreAway: state.scoreAway,
+        setsHome: state.setsHome,
+        setsAway: state.setsAway,
+        toHome: state.toHome,
+        toAway: state.toAway,
+        serve: state.serve,
+        history: state.history
+      })));
+      if (state.undoStack.length > 30) state.undoStack.shift();
+    }
+
+    function undoLast() {
+      if (state.undoStack.length === 0) return;
+      const prev = state.undoStack.pop();
+      Object.assign(state, prev);
+      render();
+    }
+
+    function getCurrentSetNumber() {
+      return state.setsHome + state.setsAway + 1;
+    }
+
+    function getTargetPoints() {
+      const currentSet = getCurrentSetNumber();
+      return currentSet === state.maxSets ? 15 : 25;
+    }
+
+    function addPoint(side) {
+      const setsToWin = Math.ceil(state.maxSets / 2);
+      if (state.setsHome >= setsToWin || state.setsAway >= setsToWin) return;
+
+      saveUndo();
+      if (side === 'home') {
+        state.scoreHome++;
+        state.serve = 'home';
+      } else {
+        state.scoreAway++;
+        state.serve = 'away';
+      }
+      if (navigator.vibrate) navigator.vibrate(25);
+      checkSetAutoWin();
+      render();
+    }
+
+    function subPoint(side) {
+      if (side === 'home' && state.scoreHome > 0) {
+        saveUndo();
+        state.scoreHome--;
+      } else if (side === 'away' && state.scoreAway > 0) {
+        saveUndo();
+        state.scoreAway--;
+      }
+      render();
+    }
+
+    function setServe(side) {
+      saveUndo();
+      state.serve = side;
+      render();
+    }
+
+    function checkSetAutoWin() {
+      const target = getTargetPoints();
+      const diff = Math.abs(state.scoreHome - state.scoreAway);
+      if ((state.scoreHome >= target || state.scoreAway >= target) && diff >= 2) {
+        const winnerName = state.scoreHome > state.scoreAway
+          ? document.getElementById('nameHome').value
+          : document.getElementById('nameAway').value;
+        setTimeout(() => {
+          if (confirm(`Set bitti! (${state.scoreHome} - ${state.scoreAway})
+Seti "${winnerName}" hanesine yazıp yeni sete geçilsin mi?`)) {
+            completeSet();
+          }
+        }, 120);
+      }
+    }
+
+    function finishSetManual() {
+      if (state.scoreHome === 0 && state.scoreAway === 0) return;
+      if (state.scoreHome === state.scoreAway) {
+        alert("Berabere biten set tamamlanamaz.");
+        return;
+      }
+      saveUndo();
+      completeSet();
+      render();
+    }
+
+    function completeSet() {
+      const setNo = getCurrentSetNumber();
+      state.history.push(`${setNo}. Set: ${state.scoreHome}-${state.scoreAway}`);
+      if (state.scoreHome > state.scoreAway) {
+        state.setsHome++;
+      } else {
+        state.setsAway++;
+      }
+      state.scoreHome = 0;
+      state.scoreAway = 0;
+      state.toHome = 2;
+      state.toAway = 2;
+    }
+
+    function useTimeout(side) {
+      const teamName = side === 'home'
+        ? document.getElementById('nameHome').value
+        : document.getElementById('nameAway').value;
+
+      if (side === 'home') {
+        if (state.toHome <= 0) {
+          alert(`${teamName} bu setteki 2 mola hakkını doldurdu!`);
+          return;
+        }
+        saveUndo();
+        state.toHome--;
+      } else {
+        if (state.toAway <= 0) {
+          alert(`${teamName} bu setteki 2 mola hakkını doldurdu!`);
+          return;
+        }
+        saveUndo();
+        state.toAway--;
+      }
+      render();
+      startTimeoutTimer(teamName);
+    }
+
+    function startTimeoutTimer(teamName) {
+      clearInterval(timeoutInterval);
+      let sec = 30;
+      document.getElementById('timeoutTeamName').textContent = teamName;
+      document.getElementById('timeoutTimer').textContent = sec;
+      document.getElementById('timeoutModal').classList.add('active');
+
+      timeoutInterval = setInterval(() => {
+        sec--;
+        document.getElementById('timeoutTimer').textContent = sec;
+        if (sec <= 0) {
+          clearInterval(timeoutInterval);
+          if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+          document.getElementById('timeoutTimer').textContent = "SÜRE DOLDU";
+        }
+      }, 1000);
+    }
+
+    function closeTimeoutModal() {
+      clearInterval(timeoutInterval);
+      document.getElementById('timeoutModal').classList.remove('active');
+    }
+
+    function swapSides() {
+      const container = document.getElementById('boardContainer');
+      const homeCard = document.getElementById('cardHome');
+      const awayCard = document.getElementById('cardAway');
+      state.swapped = !state.swapped;
+      if (state.swapped) {
+        container.insertBefore(awayCard, homeCard);
+      } else {
+        container.insertBefore(homeCard, awayCard);
+      }
+    }
+
+    function changeFormat() {
+      state.maxSets = parseInt(document.getElementById('matchFormat').value, 10);
+      render();
+    }
+
+    function resetMatch() {
+      if (!confirm("Tüm skorlar ve setler sıfırlanacak. Emin misiniz?")) return;
+      state.scoreHome = 0;
+      state.scoreAway = 0;
+      state.setsHome = 0;
+      state.setsAway = 0;
+      state.toHome = 2;
+      state.toAway = 2;
+      state.serve = 'home';
+      state.history = [];
+      state.undoStack = [];
+      render();
+    }
+
+    function renderDots(elId, remaining) {
+      const dots = document.getElementById(elId).querySelectorAll('.dot');
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('used', idx >= remaining);
+      });
+    }
+
+    function render() {
+      document.getElementById('scoreHome').textContent = state.scoreHome;
+      document.getElementById('scoreAway').textContent = state.scoreAway;
+      document.getElementById('setsHome').textContent = state.setsHome;
+      document.getElementById('setsAway').textContent = state.setsAway;
+
+      document.getElementById('cardHome').classList.toggle('serving', state.serve === 'home');
+      document.getElementById('cardAway').classList.toggle('serving', state.serve === 'away');
+
+      renderDots('toDotsHome', state.toHome);
+      renderDots('toDotsAway', state.toAway);
+
+      const setsToWin = Math.ceil(state.maxSets / 2);
+      const setNo = getCurrentSetNumber();
+      const target = getTargetPoints();
+      const banner = document.getElementById('statusBanner');
+
+      if (state.setsHome >= setsToWin) {
+        document.getElementById('setTitle').textContent = "MAÇ SONUCU";
+        banner.textContent = `🏆 KAZANAN: ${document.getElementById('nameHome').value} (${state.setsHome}-${state.setsAway})`;
+      } else if (state.setsAway >= setsToWin) {
+        document.getElementById('setTitle').textContent = "MAÇ SONUCU";
+        banner.textContent = `🏆 KAZANAN: ${document.getElementById('nameAway').value} (${state.setsAway}-${state.setsHome})`;
+      } else {
+        document.getElementById('setTitle').textContent = `${setNo}. SET (${target} Sayı)`;
+        const homeName = document.getElementById('nameHome').value;
+        const awayName = document.getElementById('nameAway').value;
+        if (state.scoreHome >= target - 1 && state.scoreHome > state.scoreAway) {
+          banner.textContent = `🔥 ${homeName} İÇİN ${state.setsHome === setsToWin - 1 ? 'MAÇ' : 'SET'} SAYISI!`;
+        } else if (state.scoreAway >= target - 1 && state.scoreAway > state.scoreHome) {
+          banner.textContent = `🔥 ${awayName} İÇİN ${state.setsAway === setsToWin - 1 ? 'MAÇ' : 'SET'} SAYISI!`;
+        } else {
+          banner.textContent = "";
+        }
+      }
+
+      const histEl = document.getElementById('setHistory');
+      if (state.history.length === 0) {
+        histEl.innerHTML = `<span style="color: var(--muted); font-weight: 700;">Set Geçmişi:</span><span class="set-chip">Henüz biten set yok</span>`;
+      } else {
+        histEl.innerHTML = `<span style="color: var(--muted); font-weight: 700;">Set Geçmişi:</span>` +
+          state.history.map(item => `<span class="set-chip">${item}</span>`).join('');
+      }
+    }
+
+    render();
+  </script>
+</body>
+</html>
