@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Duyuru Paneli - HL Spor</title>
+<style>
+  *{box-sizing:border-box}
+  body{font-family:system-ui,sans-serif;background:#c40018;color:#1e293b;margin:0;padding:16px}
+  .wrap{max-width:900px;margin:0 auto;display:grid;gap:16px}
+  .card{background:#fff;border-radius:16px;padding:18px;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+  h1{color:#fff;margin:0 0 4px;font-size:22px}
+  h2{margin:0 0 12px;font-size:16px;color:#c40018}
+  label{display:block;font-size:12px;font-weight:700;margin:10px 0 4px}
+  input,textarea,select{width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:10px;font:inherit;font-size:14px}
+  textarea{min-height:70px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:600px){.row{grid-template-columns:1fr}}
+  button{padding:10px 14px;border:0;border-radius:10px;font-weight:700;cursor:pointer;background:#c40018;color:#fff;font-size:13px}
+  button.sec{background:#e2e8f0;color:#1e293b}
+  button.ok{background:#059669}
+  button.warn{background:#f59e0b}
+  .btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .item{display:flex;gap:10px;align-items:center;border:1px solid #e2e8f0;border-radius:12px;padding:10px;margin-bottom:8px}
+  .item img{width:56px;height:56px;object-fit:cover;border-radius:8px;background:#0f172a}
+  .item .t{flex:1;min-width:0}
+  .item .t b{display:block;font-size:14px}
+  .item .t small{color:#64748b}
+  .item .a{display:flex;gap:4px;flex-wrap:wrap}
+  .item .a button{padding:6px 9px}
+  #msg{font-size:13px;font-weight:700;margin-top:10px}
+  details summary{cursor:pointer;font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div><h1>📢 Duyuru Paneli</h1><div style="color:#fecaca;font-size:13px">Haydarpaşa Lisesi Beden Eğitimi ve Spor</div></div>
+
+  <div class="card">
+    <h2 id="formBaslik">Yeni Duyuru Ekle</h2>
+    <label>Başlık *</label><input id="baslik" placeholder="Örn: Basketbol Erkek Takımı Seçmeleri">
+    <div class="row">
+      <div><label>Kategori</label>
+        <select id="kategori"><option>SEÇMELER</option><option>TAKIM SEÇİMİ</option><option>TURNUVA</option><option>SONUÇ</option><option>DUYURU</option></select></div>
+      <div><label>Tarih / Saat</label><input id="tarih_saat" placeholder="Örn: 5 Kas • 12.00"></div>
+    </div>
+    <label>Açıklama</label><textarea id="aciklama"></textarea>
+    <label>Afiş görseli (dosya adı)</label><input id="resim" placeholder="Örn: afis_basketbol.png (repoya yüklediğiniz dosya)">
+    <div class="row">
+      <div><label>Form linki (isteğe bağlı)</label><input id="form_linki" placeholder="https://forms.gle/..."></div>
+      <div><label>Belge linki (isteğe bağlı)</label><input id="belge_linki" value="turnuva_izin.html"></div>
+    </div>
+    <div class="btns">
+      <button class="ok" onclick="kaydet()" id="kaydetBtn">➕ Listeye Ekle</button>
+      <button class="sec" onclick="formTemizle()">Temizle</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Mevcut Duyurular (<span id="sayi">0</span>)</h2>
+    <div id="liste"></div>
+    <div class="btns">
+      <button class="sec" onclick="siteyiYukle()">🔄 Sitedeki duyurular.json'u yükle</button>
+      <button onclick="indir()">⬇️ duyurular.json İndir</button>
+      <button class="sec" onclick="kopyala()">📋 JSON Kopyala</button>
+    </div>
+    <div style="font-size:12px;color:#64748b;margin-top:10px">İndirdiğiniz <b>duyurular.json</b> dosyasını GitHub'da ana klasöre yükleyip eskisinin üzerine yazın (Add file → Upload files → Commit).</div>
+  </div>
+
+  <div class="card">
+    <details>
+      <summary>🚀 Doğrudan GitHub'a yayınla (isteğe bağlı)</summary>
+      <div class="row">
+        <div><label>Kullanıcı / Organizasyon</label><input id="gh_owner" placeholder="kullaniciadi"></div>
+        <div><label>Repo adı</label><input id="gh_repo" placeholder="repo-adi"></div>
+        <div><label>Branch</label><input id="gh_branch" value="main"></div>
+        <div><label>Token (Contents: Read & Write)</label><input id="gh_token" type="password" placeholder="github_pat_..."></div>
+      </div>
+      <label style="font-weight:400"><input type="checkbox" id="gh_hatirla" style="width:auto"> Bu cihazda hatırla (güvenli olmayabilir, ortak bilgisayarda işaretlemeyin)</label>
+      <div class="btns"><button class="warn" onclick="githubaGonder()">GitHub'a Gönder</button></div>
+    </details>
+    <div id="msg"></div>
+  </div>
+</div>
+
+<script>
+const VARSAYILAN = [
+ {baslik:"Dart Okul Takımı",kategori:"TAKIM SEÇİMİ",tarih_saat:"Aktif Kayıt",aciklama:"Odaklan, dikkatini güçlendir, takımın bir parçası ol! Dart takımına katılmak isteyen öğrencilerimiz katılım formunu doldurabilir.",resim:"darttakimi.png",form_linki:"https://forms.gle/e2Di4kLnwMNpFSzj7",belge_linki:"turnuva_izin.html"},
+ {baslik:"Basketbol Kız Okul Takımı",kategori:"SEÇMELER",tarih_saat:"1 Eki • Öğle Arası",aciklama:"Tüm sınıf düzeyindeki öğrencilerimiz seçmelere davetlidir. Spor salonunda buluşuyoruz. Katılacak öğrenciler veli izin dilekçesini unutmamalıdır.",resim:"kizbasketbol.png",belge_linki:"turnuva_izin.html"},
+ {baslik:"Kız Voleybol Takımı",kategori:"SEÇMELER",tarih_saat:"2 Eki • 12.00",aciklama:"Bir Takım Daha Fazlasıdır — Tüm öğrencileri bekliyoruz.",resim:"afis_kizvoleybol.png",form_linki:"https://docs.google.com/forms/d/e/1FAIpQLSc4DfWhC0wkvuSSyG5kll6HMdy8Nykycv7qy4NYp2p2CXSrWg/viewform?usp=header",belge_linki:"turnuva_izin.html"},
+ {baslik:"Erkek Voleybol Takımı Seçmeleri",kategori:"SEÇMELER",tarih_saat:"1 Eki • 12.00",aciklama:"Takım ruhuyla daha güçlüyüz! Spor salonundaki erkek voleybol takımı seçmeleri için spor kıyafetleriniz ve veli izin belgenizle hazır bulununuz.",resim:"erkekvoleybol.png",form_linki:"https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",belge_linki:"turnuva_izin.html"},
+ {baslik:"Pickleball Takım Seçimi",kategori:"SEÇMELER",tarih_saat:"30 Eyl • 12.00",aciklama:"Tenis kortunda buluşuyoruz. Enerji ve takım ruhu için sen de katıl!",resim:"pickleball.png",form_linki:"https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",belge_linki:"turnuva_izin.html"},
+ {baslik:"Futsal Erkek Takımı Seçmeleri",kategori:"SEÇMELER",tarih_saat:"29 Eyl • 12.00",aciklama:"Sen de takımda yerini al! Spor salonunda yapılacak futsal takımı seçmelerine uygun spor kıyafeti ve veli izin belgesi ile katılabilirsiniz.",resim:"afis_futsal.png",form_linki:"https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",belge_linki:"turnuva_izin.html"},
+ {baslik:"Masa Tenisi Turnuvası",kategori:"TURNUVA",tarih_saat:"29 Eyl • 12.00",aciklama:"Masa tenisi salonunda buluşuyoruz. Haydi Haydarpaşa, masada buluşalım!",resim:"masatenisi_afis.png",form_linki:"https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",belge_linki:"turnuva_izin.html"}
+];
+let liste = [];
+let duzenle = -1;
+const $ = id => document.getElementById(id);
+const alanlar = ["baslik","kategori","tarih_saat","aciklama","resim","form_linki","belge_linki"];
+const esc = s => String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function mesaj(t,hata){const m=$("msg");m.textContent=t;m.style.color=hata?"#b91c1c":"#047857";}
+
+function ciz(){
+  $("sayi").textContent = liste.length;
+  $("liste").innerHTML = liste.map((d,i)=>`
+    <div class="item">
+      <img src="${esc(d.resim||'anasayfa.png')}" onerror="this.style.visibility='hidden'">
+      <div class="t"><b>${esc(d.baslik)}</b><small>${esc(d.kategori)} • ${esc(d.tarih_saat)}</small></div>
+      <div class="a">
+        <button class="sec" onclick="tasi(${i},-1)">↑</button>
+        <button class="sec" onclick="tasi(${i},1)">↓</button>
+        <button class="warn" onclick="duzenleBaslat(${i})">Düzenle</button>
+        <button onclick="sil(${i})">Sil</button>
+      </div>
+    </div>`).join("") || "<i>Liste boş</i>";
+  try{localStorage.setItem("hl_duyuru_taslak",JSON.stringify(liste));}catch(e){}
+}
+function formTemizle(){
+  alanlar.forEach(a=>{ if(a==="kategori") $(a).selectedIndex=0; else $(a).value = a==="belge_linki"?"turnuva_izin.html":""; });
+  duzenle=-1; $("formBaslik").textContent="Yeni Duyuru Ekle"; $("kaydetBtn").textContent="➕ Listeye Ekle";
+}
+function kaydet(){
+  const o={}; alanlar.forEach(a=>{const v=$(a).value.trim(); if(v) o[a]=v;});
+  if(!o.baslik){mesaj("Başlık zorunlu.",true);return;}
+  if(duzenle>=0) liste[duzenle]=o; else liste.unshift(o);
+  formTemizle(); ciz(); mesaj("Kaydedildi. Siteye yansıtmak için JSON'u indirip yükleyin veya GitHub'a gönderin.");
+}
+function duzenleBaslat(i){
+  const d=liste[i]; duzenle=i;
+  alanlar.forEach(a=>{
+    if(a==="kategori" && ![...$(a).options].some(o=>o.value===d[a])) $(a).add(new Option(d[a],d[a]));
+    $(a).value=d[a]||"";
+  });
+  $("formBaslik").textContent="Duyuruyu Düzenle"; $("kaydetBtn").textContent="💾 Değişikliği Kaydet";
+  scrollTo({top:0,behavior:"smooth"});
+}
+function sil(i){ if(confirm("Bu duyuru silinsin mi?")){liste.splice(i,1);ciz();} }
+function tasi(i,y){const j=i+y; if(j<0||j>=liste.length)return; [liste[i],liste[j]]=[liste[j],liste[i]]; ciz();}
+const jsonMetin = () => JSON.stringify({liste},null,2);
+function indir(){
+  const b=new Blob([jsonMetin()],{type:"application/json"}), a=document.createElement("a");
+  a.href=URL.createObjectURL(b); a.download="duyurular.json"; a.click();
+}
+async function kopyala(){ try{await navigator.clipboard.writeText(jsonMetin());mesaj("JSON kopyalandı.");}catch(e){mesaj("Kopyalanamadı.",true);} }
+async function siteyiYukle(){
+  try{
+    const r=await fetch("duyurular.json?v="+Date.now()); if(!r.ok) throw 0;
+    const d=await r.json(); if(!Array.isArray(d.liste)) throw 0;
+    liste=d.liste; ciz(); mesaj("Sitedeki liste yüklendi.");
+  }catch(e){ mesaj("duyurular.json bulunamadı (panel siteyle aynı klasörde olmalı). Varsayılan liste gösteriliyor.",true); }
+}
+function b64(s){return btoa(unescape(encodeURIComponent(s)));}
+async function githubaGonder(){
+  const o=$("gh_owner").value.trim(), r=$("gh_repo").value.trim(), br=$("gh_branch").value.trim()||"main", t=$("gh_token").value.trim();
+  if(!o||!r||!t){mesaj("Kullanıcı, repo ve token gerekli.",true);return;}
+  try{
+    if($("gh_hatirla").checked) localStorage.setItem("hl_gh",JSON.stringify({o,r,br,t})); else localStorage.removeItem("hl_gh");
+  }catch(e){}
+  const url=`https://api.github.com/repos/${o}/${r}/contents/duyurular.json`;
+  const h={Authorization:"Bearer "+t,Accept:"application/vnd.github+json"};
+  try{
+    let sha; const g=await fetch(url+"?ref="+encodeURIComponent(br),{headers:h});
+    if(g.ok) sha=(await g.json()).sha; else if(g.status!==404) throw new Error("Okuma hatası: "+g.status);
+    const p=await fetch(url,{method:"PUT",headers:h,body:JSON.stringify({message:"Duyurular güncellendi (panel)",content:b64(jsonMetin()),branch:br,sha})});
+    if(!p.ok) throw new Error("Yazma hatası: "+p.status+" "+(await p.text()));
+    mesaj("✅ Yayınlandı. Site birkaç dakika içinde güncellenir.");
+  }catch(e){ mesaj(e.message,true); }
+}
+
+(function(){
+  try{
+    const g=JSON.parse(localStorage.getItem("hl_gh")||"null");
+    if(g){$("gh_owner").value=g.o;$("gh_repo").value=g.r;$("gh_branch").value=g.br;$("gh_token").value=g.t;$("gh_hatirla").checked=true;}
+    const t=JSON.parse(localStorage.getItem("hl_duyuru_taslak")||"null");
+    liste = Array.isArray(t)&&t.length ? t : VARSAYILAN.slice();
+  }catch(e){ liste=VARSAYILAN.slice(); }
+  ciz();
+  siteyiYukle();
+})();
+</script>
+</body>
+</html>
