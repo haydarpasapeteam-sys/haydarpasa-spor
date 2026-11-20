@@ -588,23 +588,24 @@
       }
     }
 
-    // Ziyaretçi Sayacı
-    function initCounter() {
+        // Ziyaretçi Sayacı (gerçek, ortak sayaç - Abacus servisi)
+    const SAYAC_ALANI = 'haydarpasa-spor-sitesi';
+    const SAYAC_ANAHTAR = 'ziyaretci';
+    async function initCounter() {
+      const counterEl = document.getElementById('ziyaretciSayisi');
+      if (!counterEl) return;
+      let sayildi = false;
+      try { sayildi = sessionStorage.getItem('hpl_sayildi') === '1'; } catch (e) {}
+      const islem = sayildi ? 'get' : 'hit';
       try {
-        let count = localStorage.getItem('hpl_ziyaretci_sayisi');
-        if (!count) {
-          count = 1493;
-        } else {
-          count = parseInt(count, 10);
-        }
-        count += 1;
-        localStorage.setItem('hpl_ziyaretci_sayisi', count);
-        const counterEl = document.getElementById('ziyaretciSayisi');
-        if (counterEl) {
-          counterEl.textContent = count.toLocaleString('tr-TR');
-        }
+        const r = await fetch(`https://abacus.jasoncameron.dev/${islem}/${SAYAC_ALANI}/${SAYAC_ANAHTAR}`);
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        const veri = await r.json();
+        counterEl.textContent = Number(veri.value).toLocaleString('tr-TR');
+        try { sessionStorage.setItem('hpl_sayildi', '1'); } catch (e) {}
       } catch (e) {
-        console.error('Sayaç hatası:', e);
+        console.log('Sayaç yüklenemedi:', e);
+        counterEl.textContent = '—';
       }
     }
 
