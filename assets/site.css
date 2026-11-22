@@ -102,9 +102,9 @@ main { flex: 1; padding: 28px 0 56px; }
 .hizli .alt-yazi { font-size: 12px; color: var(--gri); line-height: 1.35; margin-top: -6px; }
 
 /* DUYURU ŞERİDİ */
-.serit { display: flex; gap: 16px; overflow-x: auto; padding: 4px 2px 18px; scrollbar-width: none; scroll-snap-type: x proximity; }
+.serit { display: flex; gap: 16px; overflow-x: auto; padding: 4px 2px 18px; scrollbar-width: none; }
 .serit::-webkit-scrollbar { display: none; }
-.duyuru { width: 272px; flex-shrink: 0; display: flex; flex-direction: column; background: #fff; border-radius: 18px; overflow: hidden; border: 1px solid var(--cizgi); box-shadow: var(--golge); scroll-snap-align: start; }
+.duyuru { width: 272px; flex-shrink: 0; display: flex; flex-direction: column; background: #fff; border-radius: 18px; overflow: hidden; border: 1px solid var(--cizgi); box-shadow: var(--golge); }
 .duyuru-gorsel { position: relative; display: block; width: 100%; aspect-ratio: 4 / 5; background: #efebe4; border: 0; padding: 0; overflow: hidden; }
 .duyuru-gorsel img { width: 100%; height: 100%; object-fit: contain; transition: transform .3s; }
 .duyuru-gorsel:hover img { transform: scale(1.03); }
