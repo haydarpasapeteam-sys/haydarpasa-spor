@@ -617,28 +617,52 @@
       }
     }
 
-        // Ziyaretçi Sayacı (gerçek, ortak sayaç - Abacus servisi)
-    const SAYAC_ALANI = 'haydarpasa-spor-sitesi';
-    const SAYAC_ANAHTAR = 'ziyaretci';
+    // Ziyaretçi Sayacı — iki ücretsiz sayaç servisi; biri çalışmazsa diğeri kullanılır.
+    // Hiçbiri cevap vermezse bu tarayıcıda en son görülen sayı gösterilir.
+    const SAYAC_SERVISLERI = [
+      { ad: 'abacus', url: islem => `https://abacus.jasoncameron.dev/${islem}/haydarpasa-spor-sitesi/ziyaretci` },
+      { ad: 'countapi', url: islem => `https://countapi.mileshilliard.com/api/v1/${islem}/haydarpasa-spor-sitesi-ziyaretci` }
+    ];
+
+    async function sayacIstek(url, ms) {
+      const ctrl = new AbortController();
+      const t = setTimeout(() => ctrl.abort(), ms);
+      try {
+        const r = await fetch(url, { signal: ctrl.signal, cache: 'no-store' });
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        const veri = await r.json();
+        const sayi = Number(veri.value);
+        if (!Number.isFinite(sayi)) throw new Error('Geçersiz cevap');
+        return sayi;
+      } finally {
+        clearTimeout(t);
+      }
+    }
+
     async function initCounter() {
       const counterEl = document.getElementById('ziyaretciSayisi');
       if (!counterEl) return;
       let sayildi = false;
       try { sayildi = sessionStorage.getItem('hpl_sayildi') === '1'; } catch (e) {}
       const islem = sayildi ? 'get' : 'hit';
-      try {
-        const ctrl = new AbortController();
-        const zamanAsimi = setTimeout(() => ctrl.abort(), 6000);
-        const r = await fetch(`https://abacus.jasoncameron.dev/${islem}/${SAYAC_ALANI}/${SAYAC_ANAHTAR}`, { signal: ctrl.signal });
-        clearTimeout(zamanAsimi);
-        if (!r.ok) throw new Error('HTTP ' + r.status);
-        const veri = await r.json();
-        counterEl.textContent = Number(veri.value).toLocaleString('tr-TR');
-        try { sessionStorage.setItem('hpl_sayildi', '1'); } catch (e) {}
-      } catch (e) {
-        console.log('Sayaç yüklenemedi:', e);
-        counterEl.textContent = '—';
+
+      for (const servis of SAYAC_SERVISLERI) {
+        try {
+          const sayi = await sayacIstek(servis.url(islem), 5000);
+          counterEl.textContent = sayi.toLocaleString('tr-TR');
+          try {
+            sessionStorage.setItem('hpl_sayildi', '1');
+            localStorage.setItem('hpl_son_sayi', String(sayi));
+          } catch (e) {}
+          return;
+        } catch (e) {
+          console.log('Sayaç servisi cevap vermedi (' + servis.ad + '):', e);
+        }
       }
+
+      let son = null;
+      try { son = localStorage.getItem('hpl_son_sayi'); } catch (e) {}
+      counterEl.textContent = son ? Number(son).toLocaleString('tr-TR') : '—';
     }
 
     // Akıcı Otomatik Kaydırma Motoru
