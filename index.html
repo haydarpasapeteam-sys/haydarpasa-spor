@@ -71,7 +71,7 @@
       
       <!-- Banner -->
       <section class="rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl bg-white">
-        <img src="anasayfa.png" alt="Haydarpaşa Lisesi Beden Eğitimi ve Spor Bölümü ana sayfa afişi" class="w-full h-auto object-cover block" />
+        <picture><source srcset="buyuk/anasayfa.webp" type="image/webp"><img src="anasayfa.png" alt="Haydarpaşa Lisesi Beden Eğitimi ve Spor Bölümü ana sayfa afişi" width="1366" height="1536" fetchpriority="high" class="w-full h-auto object-cover block" /></picture>
       </section>
 
       <!-- DUYURULAR PANOSU -->
@@ -190,7 +190,7 @@
             
             <div class="flex items-center gap-4 mt-2">
               <div class="w-24 h-24 bg-white p-1.5 rounded-xl shadow-md shrink-0 flex items-center justify-center">
-                <img src="haydarpasabedenegitimivespor.png" alt="Linktree QR" class="w-full h-full object-contain">
+                <picture><source srcset="buyuk/haydarpasabedenegitimivespor.webp" type="image/webp"><img src="haydarpasabedenegitimivespor.png" alt="Tüm formlara ulaşmak için QR kod" width="1000" height="1000" loading="lazy" class="w-full h-full object-contain"></picture>
               </div>
               <div>
                 <h4 class="text-white text-sm font-bold leading-tight">Mobil Hızlı Başvuru</h4>
@@ -355,20 +355,20 @@
     <!-- 2. SEKME: EĞİTİM & REHBER -->
     <div id="tab-rehber" class="page-tab space-y-8">
       <section class="rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl bg-white">
-        <img src="hareket_bilimi.png" alt="Hareket Bilimi" class="w-full h-auto object-cover block" />
+        <picture><source srcset="buyuk/hareket_bilimi.webp" type="image/webp"><img src="hareket_bilimi.png" alt="Hareket Bilimi ve Sağlıklı Yaşam" width="1366" height="5376" loading="lazy" class="w-full h-auto object-cover block" /></picture>
       </section>
       <section class="rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl bg-white">
-        <img src="brans_rehberimiz.png" alt="Branş Rehberi" class="w-full h-auto object-cover block" />
+        <picture><source srcset="buyuk/brans_rehberimiz.webp" type="image/webp"><img src="brans_rehberimiz.png" alt="Branş Rehberi" width="1366" height="4608" loading="lazy" class="w-full h-auto object-cover block" /></picture>
       </section>
     </div>
 
     <!-- 3. SEKME: KURUMSAL -->
     <div id="tab-kurumsal" class="page-tab space-y-8">
       <section class="rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl bg-white">
-        <img src="vizyonumuz.png" alt="Vizyonumuz" class="w-full h-auto object-cover block" />
+        <picture><source srcset="buyuk/vizyonumuz.webp" type="image/webp"><img src="vizyonumuz.png" alt="Vizyonumuz" width="1366" height="768" loading="lazy" class="w-full h-auto object-cover block" /></picture>
       </section>
       <section class="rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl bg-white">
-        <img src="degerlerimiz.png" alt="Değerlerimiz ve Hedeflerimiz" class="w-full h-auto object-cover block" onerror="this.src='Degerlerimiz ve Hedeflerimiz.png'" />
+        <picture><source srcset="buyuk/degerlerimiz.webp" type="image/webp"><img src="degerlerimiz.png" alt="Değerlerimiz ve Hedeflerimiz" width="1366" height="1536" loading="lazy" class="w-full h-auto object-cover block" onerror="this.src='Degerlerimiz ve Hedeflerimiz.png'" /></picture>
       </section>
     </div>
 
@@ -522,6 +522,23 @@
     </div>
   </footer>
 
+  <!-- BÜYÜK AFİŞ GÖRÜNÜMÜ -->
+  <div id="afisModal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="afisModalBaslik" onclick="if(event.target===this) afisKapat()">
+    <div class="relative w-full max-w-4xl max-h-full bg-white text-slate-900 rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row">
+      <button id="afisModalKapat" type="button" onclick="afisKapat()" aria-label="Kapat" class="absolute top-3 right-3 z-10 p-2 rounded-full bg-black/60 hover:bg-black/80 text-white">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <div class="bg-slate-100 md:w-3/5 flex items-center justify-center">
+        <img id="afisModalImg" src="" alt="" class="w-full max-h-[60vh] md:max-h-[85vh] object-contain" />
+      </div>
+      <div class="p-5 md:p-6 md:w-2/5 flex flex-col gap-3 overflow-y-auto">
+        <h3 id="afisModalBaslik" class="text-lg font-black text-[#c40018] leading-snug pr-8"></h3>
+        <p id="afisModalAciklama" class="text-sm text-slate-600 leading-relaxed"></p>
+        <div id="afisModalButonlar" class="mt-auto pt-2"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- JAVASCRIPT MOTORU -->
   <script>
     const anaDuyurular = [
@@ -565,7 +582,7 @@
         kategori: "SEÇMELER",
         tarih_saat: "30 Eyl • 12.00",
         aciklama: "Tenis kortunda buluşuyoruz. Enerji ve takım ruhu için sen de katıl!",
-        resim: "pickleball.png",
+        resim: "pickleball-1.png",
         form_linki: "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
         belge_linki: "turnuva_izin.html"
       },
@@ -716,60 +733,105 @@
       if (window.lucide) lucide.createIcons();
     }
 
+    // Güvenli metin (duyuru içeriğindeki < > & " karakterleri sayfayı bozmasın)
+    function esc(t) {
+      return String(t == null ? '' : t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    // Görsel yolları: önce hafif kopya (kucuk/ veya buyuk/ klasöründeki .webp), yoksa orijinal dosya
+    function gorselYolu(klasor, resim) {
+      return encodeURI(klasor + '/' + resim.replace(/\.[^./]+$/, '') + '.webp');
+    }
+    function gorselHata(img) {
+      const asil = img.dataset.asil;
+      if (asil && img.dataset.deneme !== '1') { img.dataset.deneme = '1'; img.src = asil; }
+      else { img.onerror = null; img.src = 'buyuk/anasayfa.webp'; }
+    }
+
+    let gosterilenDuyurular = [];
+
+    function butonlar(item, buyuk) {
+      const pad = buyuk ? 'py-2.5 text-sm' : 'py-2 text-xs';
+      const form = item.form_linki ? `<a href="${esc(item.form_linki)}" target="_blank" rel="noopener" class="flex-1 ${pad} px-3 rounded-xl bg-[#c40018] hover:bg-red-800 text-white font-bold text-center shadow-sm transition">Başvuru / Form</a>` : '';
+      const belge = item.belge_linki ? `<a href="${esc(item.belge_linki)}" target="_blank" rel="noopener" class="flex-1 ${pad} px-3 rounded-xl bg-slate-900 hover:bg-slate-700 text-white font-bold text-center shadow-sm transition">Veli İzin Belgesi</a>` : '';
+      return (form || belge) ? `<div class="flex gap-2">${form}${belge}</div>` : '';
+    }
+
     function renderCards(duyurular) {
       const container = document.getElementById('duyuruContainer');
       if (!container) return;
-      container.innerHTML = duyurular.map(item => {
-        let buttonsHtml = '';
-        if (item.form_linki && item.belge_linki) {
-          buttonsHtml = `
-            <div class="flex gap-2">
-              <a href="${item.form_linki}" target="_blank" class="flex-1 py-1.5 px-3 rounded-lg bg-red-600 hover:bg-red-700 text-white font-bold text-center text-xs shadow-sm transition">Başvuru / Form</a>
-              <a href="${item.belge_linki}" target="_blank" class="flex-1 py-1.5 px-3 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-bold text-center text-xs shadow-sm transition">İzin Belgesi</a>
-            </div>`;
-        } else if (item.form_linki) {
-          buttonsHtml = `<a href="${item.form_linki}" target="_blank" class="w-full block py-2 px-3 rounded-lg bg-red-600 hover:bg-red-700 text-white font-bold text-xs text-center transition shadow">Başvuru / Form Linki</a>`;
-        } else if (item.belge_linki) {
-          buttonsHtml = `<a href="${item.belge_linki}" target="_blank" class="w-full block py-2 px-3 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs text-center transition shadow">📄 Veli İzin Belgesi</a>`;
-        }
-
-        let fallbackCode = "this.src='anasayfa.png'";
-        if (item.baslik && item.baslik.includes("Pickleball")) {
-          fallbackCode = "if(!this.dataset.retried){this.dataset.retried=1;this.src='Pickleballseçmeler.png';}else{this.src='anasayfa.png';}";
-        }
-
+      gosterilenDuyurular = duyurular;
+      container.innerHTML = duyurular.map((item, i) => {
+        const resim = item.resim || '';
+        const kucuk = resim ? gorselYolu('kucuk', resim) : 'buyuk/anasayfa.webp';
+        const asil = resim ? encodeURI(resim) : '';
         return `
-          <div class="w-[300px] shrink-0 bg-white rounded-2xl p-4 flex flex-col justify-between shadow-lg border-t-4 border-t-red-600 hover:shadow-xl transition">
-            <div>
-              <div class="w-full h-36 rounded-xl overflow-hidden bg-slate-900 border border-slate-100 mb-3 shadow-inner">
-                <img src="${item.resim || 'anasayfa.png'}" alt="${item.baslik}" class="w-full h-full object-cover" onerror="${fallbackCode}" />
+          <article class="w-[260px] sm:w-[280px] shrink-0 bg-white rounded-2xl overflow-hidden flex flex-col shadow-lg hover:shadow-2xl transition">
+            <button type="button" onclick="afisAc(${i})" aria-label="${esc(item.baslik)} afişini büyüt" class="group relative block w-full aspect-[4/5] bg-slate-100 overflow-hidden">
+              <img src="${kucuk}" data-asil="${asil}" alt="${esc(item.baslik)}" loading="lazy" decoding="async" class="w-full h-full object-contain transition duration-300 group-hover:scale-[1.03]" onerror="gorselHata(this)" />
+              <span class="absolute bottom-2 right-2 inline-flex items-center gap-1 rounded-full bg-black/60 text-white text-[10px] font-bold px-2 py-1 opacity-90">
+                <i data-lucide="maximize-2" class="w-3 h-3"></i> Büyüt
+              </span>
+            </button>
+            <div class="p-4 flex flex-col gap-2 flex-1 border-t border-slate-100">
+              <div class="flex items-center justify-between gap-2 text-[11px]">
+                <span class="font-black text-[#c40018] bg-red-50 px-2 py-0.5 rounded-md uppercase truncate">${esc(item.kategori || 'Duyuru')}</span>
+                <span class="text-slate-500 font-bold shrink-0">${esc(item.tarih_saat)}</span>
               </div>
-              <div class="flex items-center justify-between text-[11px] mb-1.5">
-                <span class="font-black text-red-600 bg-red-50 px-2 py-0.5 rounded-md">${item.kategori || 'DUYURU'}</span>
-                <span class="text-slate-400 font-bold">${item.tarih_saat || ''}</span>
-              </div>
-              <h3 class="text-sm font-black text-slate-900 leading-snug">${item.baslik}</h3>
-              <p class="text-xs text-slate-500 mt-1 leading-snug">${item.aciklama || ''}</p>
+              <h3 class="text-sm font-black text-slate-900 leading-snug">${esc(item.baslik)}</h3>
+              <p class="text-xs text-slate-600 leading-snug line-clamp-3">${esc(item.aciklama)}</p>
+              <div class="mt-auto pt-2">${butonlar(item, false)}</div>
             </div>
-            <div class="mt-4 pt-3 border-t border-slate-100">${buttonsHtml}</div>
-          </div>`;
+          </article>`;
       }).join('');
+      if (window.lucide) lucide.createIcons();
       startAutoScroll();
     }
 
+    // Büyük afiş görünümü
+    function afisAc(i) {
+      const item = gosterilenDuyurular[i];
+      if (!item) return;
+      const modal = document.getElementById('afisModal');
+      const img = document.getElementById('afisModalImg');
+      img.onerror = function () { gorselHata(this); };
+      img.dataset.deneme = '';
+      img.dataset.asil = item.resim ? encodeURI(item.resim) : '';
+      img.src = item.resim ? gorselYolu('buyuk', item.resim) : 'buyuk/anasayfa.webp';
+      img.alt = item.baslik || 'Duyuru afişi';
+      document.getElementById('afisModalBaslik').textContent = item.baslik || '';
+      document.getElementById('afisModalAciklama').textContent = item.aciklama || '';
+      document.getElementById('afisModalButonlar').innerHTML = butonlar(item, true);
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+      isPaused = true;
+      document.getElementById('afisModalKapat').focus();
+    }
+    function afisKapat() {
+      const modal = document.getElementById('afisModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+      if (!userPaused) isPaused = false;
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') afisKapat(); });
+
     async function loadDuyurular() {
-      renderCards(anaDuyurular);
+      // Önce güncel listeyi (duyurular.json) dener; ulaşılamazsa sayfadaki hazır listeyi gösterir
       try {
         const response = await fetch('duyurular.json?v=' + Date.now());
         if (response.ok) {
           const data = await response.json();
-          if (data && data.liste && Array.isArray(data.liste) && data.liste.length > 0) {
+          if (data && Array.isArray(data.liste) && data.liste.length > 0) {
             renderCards(data.liste);
+            return;
           }
         }
       } catch (e) {
-        console.log('JSON yüklenemedi, hazır liste korunuyor.');
+        console.log('JSON yüklenemedi, hazır liste gösteriliyor.');
       }
+      renderCards(anaDuyurular);
     }
 
     document.addEventListener('DOMContentLoaded', () => {
