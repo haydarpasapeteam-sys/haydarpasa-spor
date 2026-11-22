@@ -19,628 +19,672 @@
   <meta property="og:image" content="https://haydarpasapeteam-sys.github.io/haydarpasa-spor/anasayfa.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="logo.jpg">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
-    .tab-btn.active { background-color: #ffffff; color: #c40018 !important; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-    .page-tab { display: none; }
-    .page-tab.active { display: block; animation: fadeIn 0.2s ease-in-out; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css?v=1">
+  <script src="https://unpkg.com/lucide@latest" defer></script>
 </head>
-<body class="bg-[#c40018] text-white min-h-screen flex flex-col justify-between antialiased selection:bg-white selection:text-[#c40018]">
+<body>
 
-  <!-- HEADER -->
-  <header class="bg-[#c40018] border-b border-red-800 sticky top-0 z-40 shadow-lg">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
-      <div class="flex items-center justify-between py-3 border-b border-red-500/30">
-        <div class="flex items-center gap-3 cursor-pointer" onclick="showTab('anasayfa')">
-          <img src="logo.jpg" alt="Haydarpaşa Lisesi" class="w-12 h-12 sm:w-14 sm:h-14 rounded-full object-cover border-2 border-white shadow" onerror="this.src='spor kulübü logo.jpg'" />
-          <div>
-            <h1 class="font-black text-lg sm:text-xl tracking-wider text-white leading-none">HAYDARPAŞA LİSESİ</h1>
-            <p class="text-[11px] sm:text-xs font-semibold text-red-100 tracking-wide mt-1">Beden Eğitimi ve Spor Bölümü</p>
-          </div>
-        </div>
-        <div class="flex items-center gap-2 text-xs font-semibold bg-red-800/60 px-3.5 py-1.5 rounded-full border border-red-400/30">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span>2026 - 2027 Dönemi</span>
-        </div>
+  <!-- ÜST BÖLÜM -->
+  <header class="ust">
+    <div class="icerik">
+      <div class="ust-satir">
+        <button type="button" class="marka" onclick="showTab('anasayfa')" aria-label="Ana sayfaya dön">
+          <img src="logo.jpg" alt="" width="52" height="52" onerror="this.src='spor kulübü logo.jpg'" />
+          <span>
+            <span class="marka-ad" style="display:block">HAYDARPAŞA LİSESİ</span>
+            <span class="marka-alt" style="display:block">Beden Eğitimi ve Spor Bölümü</span>
+          </span>
+        </button>
+        <span class="donem">2026 - 2027 Dönemi</span>
       </div>
-
-      <!-- ÜST MENÜ SEKMELERİ -->
-      <nav class="flex items-center justify-start sm:justify-center gap-1.5 sm:gap-3 py-2.5 overflow-x-auto text-xs sm:text-sm font-bold no-scrollbar">
-        <button onclick="showTab('anasayfa')" id="btn-anasayfa" class="tab-btn active px-3.5 py-2 rounded-xl transition flex items-center gap-1.5"><i data-lucide="home" class="w-4 h-4"></i><span>ANA SAYFA</span></button>
-        <button onclick="showTab('rehber')" id="btn-rehber" class="tab-btn px-3.5 py-2 rounded-xl hover:bg-red-800/60 transition flex items-center gap-1.5"><i data-lucide="book-open" class="w-4 h-4"></i><span>EĞİTİM & REHBER</span></button>
-        <button onclick="showTab('kurumsal')" id="btn-kurumsal" class="tab-btn px-3.5 py-2 rounded-xl hover:bg-red-800/60 transition flex items-center gap-1.5"><i data-lucide="landmark" class="w-4 h-4"></i><span>KURUMSAL</span></button>
-        <button onclick="showTab('takimlar')" id="btn-takimlar" class="tab-btn px-3.5 py-2 rounded-xl hover:bg-red-800/60 transition flex items-center gap-1.5"><i data-lucide="trophy" class="w-4 h-4"></i><span>TAKIMLAR</span></button>
-        <button onclick="showTab('sporfest')" id="btn-sporfest" class="tab-btn px-3.5 py-2 rounded-xl hover:bg-red-800/60 transition flex items-center gap-1.5"><i data-lucide="flame" class="w-4 h-4"></i><span>SPORFEST</span></button>
-        <button onclick="showTab('iletisim')" id="btn-iletisim" class="tab-btn px-3.5 py-2 rounded-xl hover:bg-red-800/60 transition flex items-center gap-1.5"><i data-lucide="mail" class="w-4 h-4"></i><span>İLETİŞİM</span></button>
+      <nav class="menu" role="tablist" aria-label="Site bölümleri">
+        <button role="tab" id="btn-anasayfa" aria-controls="tab-anasayfa" aria-selected="true" onclick="showTab('anasayfa')"><i data-lucide="home" class="ikon-k"></i>ANA SAYFA</button>
+        <button role="tab" id="btn-rehber" aria-controls="tab-rehber" aria-selected="false" onclick="showTab('rehber')"><i data-lucide="book-open" class="ikon-k"></i>EĞİTİM &amp; REHBER</button>
+        <button role="tab" id="btn-kurumsal" aria-controls="tab-kurumsal" aria-selected="false" onclick="showTab('kurumsal')"><i data-lucide="landmark" class="ikon-k"></i>KURUMSAL</button>
+        <button role="tab" id="btn-takimlar" aria-controls="tab-takimlar" aria-selected="false" onclick="showTab('takimlar')"><i data-lucide="trophy" class="ikon-k"></i>TAKIMLAR</button>
+        <button role="tab" id="btn-sporfest" aria-controls="tab-sporfest" aria-selected="false" onclick="showTab('sporfest')"><i data-lucide="flame" class="ikon-k"></i>SPORFEST</button>
+        <button role="tab" id="btn-iletisim" aria-controls="tab-iletisim" aria-selected="false" onclick="showTab('iletisim')"><i data-lucide="mail" class="ikon-k"></i>İLETİŞİM</button>
       </nav>
     </div>
   </header>
 
-  <!-- MAIN -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex-1 w-full space-y-8">
+  <main>
+    <div class="icerik">
 
-    <!-- 1. SEKME: ANA SAYFA -->
-    <div id="tab-anasayfa" class="page-tab active space-y-8">
-      
-      <!-- Banner -->
-      <section class="rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl bg-white">
-        <picture><source srcset="buyuk/anasayfa.webp" type="image/webp"><img src="anasayfa.png" alt="Haydarpaşa Lisesi Beden Eğitimi ve Spor Bölümü ana sayfa afişi" width="1366" height="1536" fetchpriority="high" class="w-full h-auto object-cover block" /></picture>
-      </section>
+      <!-- ===================== 1. ANA SAYFA ===================== -->
+      <div id="tab-anasayfa" class="sekme aktif" role="tabpanel" aria-labelledby="btn-anasayfa">
+        <h1 class="gizli-baslik">Haydarpaşa Lisesi Beden Eğitimi ve Spor Bölümü</h1>
 
-      <!-- DUYURULAR PANOSU -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between px-2 pb-2 border-b border-red-500/30">
-          <div class="flex items-center gap-3">
-            <div class="p-2 rounded-xl bg-amber-400 text-slate-900 shadow-md">
-              <i data-lucide="bell-ring" class="w-5 h-5"></i>
-            </div>
+        <section class="afis-kart">
+          <picture><source srcset="buyuk/anasayfa.webp" type="image/webp"><img src="anasayfa.png" alt="Haydarpaşa Lisesi Beden Eğitimi ve Spor Bölümü: Güç, Disiplin ve Takım Ruhu. Branşlarımız ve eğitim yaklaşımımız." width="1366" height="1536" fetchpriority="high" /></picture>
+        </section>
+
+        <!-- HIZLI ERİŞİM -->
+        <section aria-labelledby="hizli-baslik">
+          <div class="bolum-baslik"><div><span class="ust-yazi">Kısa yollar</span><h2 id="hizli-baslik">Hızlı Erişim</h2></div></div>
+          <div class="hizli">
+            <a href="#duyurular"><span class="rozet-ikon"><i data-lucide="bell-ring" class="ikon"></i></span><strong>Duyurular</strong><span class="alt-yazi">Seçmeler ve turnuvalar</span></a>
+            <a href="#evraklar"><span class="rozet-ikon"><i data-lucide="file-signature" class="ikon"></i></span><strong>Veli İzin Belgeleri</strong><span class="alt-yazi">Zorunlu evraklar</span></a>
+            <a href="https://forms.gle/afHY8jvaj9GwxfAi7" target="_blank" rel="noopener"><span class="rozet-ikon"><i data-lucide="upload-cloud" class="ikon"></i></span><strong>Performans Ödevi</strong><span class="alt-yazi">Ödevini yükle</span></a>
+            <a href="#sonuclar"><span class="rozet-ikon"><i data-lucide="table-2" class="ikon"></i></span><strong>Fikstür ve Sonuçlar</strong><span class="alt-yazi">Canlı turnuva tablosu</span></a>
+            <button type="button" onclick="showTab('takimlar')"><span class="rozet-ikon"><i data-lucide="trophy" class="ikon"></i></span><strong>Okul Takımları</strong><span class="alt-yazi">2025-2026 ve 2026-2027</span></button>
+            <a href="https://linktr.ee/haydarpasabedenegitimivespor" target="_blank" rel="noopener"><span class="rozet-ikon"><i data-lucide="link" class="ikon"></i></span><strong>Tüm Formlar</strong><span class="alt-yazi">Linktree</span></a>
+          </div>
+        </section>
+
+        <!-- DUYURULAR PANOSU -->
+        <section id="duyurular" aria-labelledby="duyuru-baslik">
+          <div class="bolum-baslik">
             <div>
-              <h2 class="text-xl sm:text-2xl font-black tracking-wide text-white uppercase leading-none">Duyurular Panosu</h2>
-              <p class="text-[11px] sm:text-xs text-red-100 mt-1 font-semibold">Takım seçmeleri, sonuçlar ve turnuvalar</p>
+              <span class="ust-yazi">Güncel</span>
+              <h2 id="duyuru-baslik">Duyurular Panosu</h2>
+              <p>Takım seçmeleri, sonuçlar ve turnuvalar. Afişi büyütmek için üzerine dokunun.</p>
+            </div>
+            <div class="serit-kontrol">
+              <button type="button" class="ikon-dugme" id="duraklatBtn" onclick="toggleAutoScroll()" aria-label="Kaydırmayı duraklat" aria-pressed="false"><i data-lucide="pause" class="ikon-k"></i></button>
+              <button type="button" class="ikon-dugme" onclick="scrollCards('left')" aria-label="Geri"><i data-lucide="chevron-left" class="ikon-k"></i></button>
+              <button type="button" class="ikon-dugme" onclick="scrollCards('right')" aria-label="İleri"><i data-lucide="chevron-right" class="ikon-k"></i></button>
             </div>
           </div>
-          <div class="flex items-center gap-1.5">
-            <button id="duraklatBtn" onclick="toggleAutoScroll()" aria-label="Kaydırmayı duraklat" aria-pressed="false" class="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition backdrop-blur-sm">
-              <i data-lucide="pause" class="w-4 h-4"></i>
-            </button>
-            <button onclick="scrollCards('left')" aria-label="Geri" class="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition backdrop-blur-sm">
-              <i data-lucide="chevron-left" class="w-4 h-4"></i>
-            </button>
-            <button onclick="scrollCards('right')" aria-label="İleri" class="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition backdrop-blur-sm">
-              <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            </button>
-          </div>
-        </div>
+          <div id="duyuruContainer" class="serit"></div>
+        </section>
 
-        <!-- DİNAMİK KAYAN ŞERİT -->
-        <div id="duyuruContainer" class="flex gap-4 overflow-x-auto pb-4 pt-1 w-full no-scrollbar" style="-webkit-overflow-scrolling: touch;">
-          <!-- Kartlar yüklenecektir -->
-        </div>
-
-        <!-- BRANŞ DUYURULARI VE ANTRENMAN PROGRAMI (3'LÜ CANVA GRİDİ) -->
-        <div class="mt-8 space-y-3">
-          <div class="flex items-center gap-2.5 px-2">
-            <div class="p-1.5 rounded-lg bg-amber-400 text-slate-900">
-              <i data-lucide="calendar-clock" class="w-5 h-5"></i>
-            </div>
+        <!-- BRANŞ DUYURULARI VE ANTRENMAN PROGRAMI -->
+        <section aria-labelledby="program-baslik">
+          <div class="bolum-baslik">
             <div>
-              <h3 class="text-lg sm:text-xl font-black tracking-wide text-white uppercase leading-none">
-                Branş Duyuruları ve Antrenman Programı
-              </h3>
-              <p class="text-[11px] sm:text-xs text-red-100 mt-0.5 font-semibold">
-                Voleybol ve futsal duyuruları, haftalık antrenman günleri ve branş sorumlu öğretmenleri
-              </p>
+              <span class="ust-yazi">Haftalık program</span>
+              <h2 id="program-baslik">Branş Duyuruları ve Antrenman Programı</h2>
+              <p>Voleybol ve futsal duyuruları, haftalık antrenman günleri ve branş sorumlu öğretmenleri.</p>
+            </div>
+          </div>
+          <div class="izgara iz-3">
+            <article class="gomulu">
+              <div class="gomulu-ust">
+                <h3><i data-lucide="volleyball" class="ikon"></i><span>Voleybol Duyuruları</span></h3>
+                <a class="tam-ekran" href="https://www.canva.com/design/DAHW2flVoKc/raJ6MqozAwLLez6GUwzG-A/view" target="_blank" rel="noopener">Tam ekran <i data-lucide="external-link" class="ikon-k"></i></a>
+              </div>
+              <div class="oran-16-9"><iframe title="Voleybol Duyuruları" loading="lazy" src="https://www.canva.com/design/DAHW2flVoKc/raJ6MqozAwLLez6GUwzG-A/view?embed" allowfullscreen allow="fullscreen"></iframe></div>
+            </article>
+            <article class="gomulu">
+              <div class="gomulu-ust">
+                <h3><i data-lucide="goal" class="ikon"></i><span>Futsal Duyuruları</span></h3>
+                <a class="tam-ekran" href="https://www.canva.com/design/DAHWAiKceMM/2gsHrKzP-ie6Cd9LBlMcQA/view" target="_blank" rel="noopener">Tam ekran <i data-lucide="external-link" class="ikon-k"></i></a>
+              </div>
+              <div class="oran-16-9"><iframe title="Futsal Duyuruları" loading="lazy" src="https://www.canva.com/design/DAHWAiKceMM/2gsHrKzP-ie6Cd9LBlMcQA/view?embed" allowfullscreen allow="fullscreen"></iframe></div>
+            </article>
+            <article class="gomulu">
+              <div class="gomulu-ust">
+                <h3><i data-lucide="calendar-clock" class="ikon"></i><span>Antrenman ve Sorumlu Öğretmen Günleri</span></h3>
+                <a class="tam-ekran" href="https://www.canva.com/design/DAHW4RLog-A/213yLZcGNGnrEwJ6s3YuHQ/view" target="_blank" rel="noopener">Tam ekran <i data-lucide="external-link" class="ikon-k"></i></a>
+              </div>
+              <div class="oran-16-9"><iframe title="Antrenman ve Sorumlu Öğretmen Günleri" loading="lazy" src="https://www.canva.com/design/DAHW4RLog-A/213yLZcGNGnrEwJ6s3YuHQ/view?embed" allowfullscreen allow="fullscreen"></iframe></div>
+            </article>
+          </div>
+        </section>
+
+        <!-- FİKSTÜR VE SONUÇLAR -->
+        <section id="sonuclar" aria-labelledby="sonuc-baslik">
+          <div class="bolum-baslik">
+            <div>
+              <span class="ust-yazi">Canlı tablo</span>
+              <h2 id="sonuc-baslik">Geleneksel All Star Voleybol Turnuvası — Fikstür ve Sonuçlar</h2>
+              <p>89–93. Dönem maç programı ve skorlar. Skorlar girildikçe tablo güncellenir; görmüyorsan sayfayı yenile.</p>
+            </div>
+            <a href="https://docs.google.com/spreadsheets/d/1Vb1rNuEPVsCMdGh08lOxLfPwMLx8DNQKZFZzAs5qP5Y/edit?usp=sharing" target="_blank" rel="noopener" class="dugme dugme-kirmizi"><i data-lucide="external-link" class="ikon-k"></i>Tabloyu Tam Ekran Aç</a>
+          </div>
+          <div class="gomulu">
+            <div class="tablo-kutu"><iframe title="Turnuva fikstürü ve sonuçları" loading="lazy" src="https://docs.google.com/spreadsheets/d/1Vb1rNuEPVsCMdGh08lOxLfPwMLx8DNQKZFZzAs5qP5Y/preview" allowfullscreen></iframe></div>
+          </div>
+        </section>
+
+        <!-- EVRAKLAR -->
+        <section id="evraklar" aria-labelledby="evrak-baslik">
+          <div class="bolum-baslik">
+            <div>
+              <span class="ust-yazi">2026 - 2027 Eğitim Dönemi</span>
+              <h2 id="evrak-baslik">Resmi Evraklar, İSG ve Öğrenci İşlemleri</h2>
+              <p>Belgeleri açıp yazdırabilir, imzalı hallerini Beden Eğitimi öğretmenlerinize teslim edebilirsiniz.</p>
             </div>
           </div>
 
-          <div class="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            
-            <!-- 1. KART: VOLEYBOL DUYURULAR -->
-            <div class="rounded-2xl overflow-hidden shadow-2xl border-2 border-amber-400/40 bg-slate-950 flex flex-col justify-between">
-              <div class="bg-gradient-to-r from-red-950 via-slate-900 to-red-950 px-4 py-2.5 border-b border-red-500/20 flex items-center justify-between">
-                <span class="text-xs font-black uppercase text-amber-300 flex items-center gap-1.5 truncate">
-                  🏐 Voleybol Duyurular
-                </span>
-                <a href="https://www.canva.com/design/DAHW2flVoKc/raJ6MqozAwLLez6GUwzG-A/view" target="_blank" class="text-[11px] font-bold text-red-200 hover:text-white transition flex items-center gap-1 shrink-0 ml-2">
-                  <span>Tam Ekran</span> <i data-lucide="external-link" class="w-3 h-3"></i>
-                </a>
-              </div>
-              <div style="position: relative; width: 100%; height: 0; padding-top: 56.25%; overflow: hidden;">
-                <iframe title="Voleybol Duyurular" loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;"
-                  src="https://www.canva.com/design/DAHW2flVoKc/raJ6MqozAwLLez6GUwzG-A/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
-                </iframe>
-              </div>
+          <div class="kart one-cikan">
+            <div>
+              <span class="ust-yazi">Performans ödevi</span>
+              <h3>Beden Eğitimi Dersi Performans Ödevi Teslim Formu</h3>
+              <p>Dönem performans ödevlerinizi, video, sunum ve çalışma belgelerinizi buradan Google Form üzerinden sisteme yükleyebilirsiniz.</p>
             </div>
-
-            <!-- 2. KART: FUTSAL DUYURULAR -->
-            <div class="rounded-2xl overflow-hidden shadow-2xl border-2 border-amber-400/40 bg-slate-950 flex flex-col justify-between">
-              <div class="bg-gradient-to-r from-red-950 via-slate-900 to-red-950 px-4 py-2.5 border-b border-red-500/20 flex items-center justify-between">
-                <span class="text-xs font-black uppercase text-amber-300 flex items-center gap-1.5 truncate">
-                  ⚽ Futsal Duyurular
-                </span>
-                <a href="https://www.canva.com/design/DAHWAiKceMM/2gsHrKzP-ie6Cd9LBlMcQA/view" target="_blank" class="text-[11px] font-bold text-red-200 hover:text-white transition flex items-center gap-1 shrink-0 ml-2">
-                  <span>Tam Ekran</span> <i data-lucide="external-link" class="w-3 h-3"></i>
-                </a>
-              </div>
-              <div style="position: relative; width: 100%; height: 0; padding-top: 56.25%; overflow: hidden;">
-                <iframe title="Futsal Duyurular" loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;"
-                  src="https://www.canva.com/design/DAHWAiKceMM/2gsHrKzP-ie6Cd9LBlMcQA/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
-                </iframe>
-              </div>
-            </div>
-
-            <!-- 3. KART: ANTRENMAN VE SORUMLU ÖĞRETMEN GÜNLERİ -->
-            <div class="rounded-2xl overflow-hidden shadow-2xl border-2 border-amber-400/40 bg-slate-950 flex flex-col justify-between md:col-span-2 lg:col-span-1">
-              <div class="bg-gradient-to-r from-red-950 via-slate-900 to-red-950 px-4 py-2.5 border-b border-red-500/20 flex items-center justify-between">
-                <span class="text-xs font-black uppercase text-amber-300 flex items-center gap-1.5 truncate">
-                  🔥 Antrenman ve Sorumlu Öğretmen Günleri
-                </span>
-                <a href="https://www.canva.com/design/DAHW4RLog-A/213yLZcGNGnrEwJ6s3YuHQ/view" target="_blank" class="text-[11px] font-bold text-red-200 hover:text-white transition flex items-center gap-1 shrink-0 ml-2">
-                  <span>Tam Ekran</span> <i data-lucide="external-link" class="w-3 h-3"></i>
-                </a>
-              </div>
-              <div style="position: relative; width: 100%; height: 0; padding-top: 56.25%; overflow: hidden;">
-                <iframe title="Antrenman ve Sorumlu Öğretmen Günleri" loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;"
-                  src="https://www.canva.com/design/DAHW4RLog-A/213yLZcGNGnrEwJ6s3YuHQ/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
-                </iframe>
-              </div>
-            </div>
-
+            <a href="https://forms.gle/afHY8jvaj9GwxfAi7" target="_blank" rel="noopener" class="dugme dugme-kirmizi"><i data-lucide="send" class="ikon-k"></i>Ödevini Yükle / Formu Aç</a>
           </div>
-        </div>
 
-        <!-- DİJİTAL EVRAK PORTALI & MOBİL ERİŞİM -->
-        <div class="rounded-2xl p-5 shadow-2xl border-2 border-indigo-500/40 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 flex flex-col justify-between mt-6">
-          <div>
-            <div class="flex items-center justify-between mb-3 border-b border-indigo-400/20 pb-2">
-              <span class="text-xs font-black uppercase text-indigo-300 flex items-center gap-2">
-                📁 DİJİTAL EVRAK & HIZLI ERİŞİM
-              </span>
-              <span class="text-[10px] font-bold text-emerald-300 bg-emerald-950/80 border border-emerald-500/40 px-2 py-0.5 rounded-full">
-                AKTİF
-              </span>
+          <div class="izgara iz-4" style="margin-top:18px">
+            <article class="kart evrak">
+              <div class="evrak-ust"><span class="evrak-ikon"><i data-lucide="building-2" class="ikon"></i></span><span class="evrak-no">Zorunlu evrak 1</span></div>
+              <h3>Tesis, Havuz ve Malzeme Kullanım Taahhütnamesi</h3>
+              <p>Salon, havuz ve demirbaş kullanım kuralları taahhüt belgesi.</p>
+              <a href="taahhutname.html" target="_blank" rel="noopener" class="dugme dugme-koyu dugme-tam"><i data-lucide="printer" class="ikon-k"></i>Belgeyi Aç / Yazdır</a>
+            </article>
+            <article class="kart evrak">
+              <div class="evrak-ust"><span class="evrak-ikon"><i data-lucide="clock" class="ikon"></i></span><span class="evrak-no">Zorunlu evrak 2</span></div>
+              <h3>Ders Dışı Egzersiz Veli İzin Belgesi</h3>
+              <p>Hafta içi/sonu antrenman ve egzersiz çalışmaları için veli onayı.</p>
+              <a href="ders_disi_egzersiz.html" target="_blank" rel="noopener" class="dugme dugme-koyu dugme-tam"><i data-lucide="printer" class="ikon-k"></i>Belgeyi Aç / Yazdır</a>
+            </article>
+            <article class="kart evrak">
+              <div class="evrak-ust"><span class="evrak-ikon"><i data-lucide="heart-pulse" class="ikon"></i></span><span class="evrak-no">Zorunlu evrak 3</span></div>
+              <h3>Sağlık Durumu Beyan Formu</h3>
+              <p>Beden Eğitimi dersleri ve spor faaliyetleri sağlık bilgi formu.</p>
+              <a href="saglik_durumu.html" target="_blank" rel="noopener" class="dugme dugme-koyu dugme-tam"><i data-lucide="printer" class="ikon-k"></i>Belgeyi Aç / Yazdır</a>
+            </article>
+            <article class="kart evrak">
+              <div class="evrak-ust"><span class="evrak-ikon"><i data-lucide="medal" class="ikon"></i></span><span class="evrak-no">Zorunlu evrak 4</span></div>
+              <h3>Turnuva ve Egzersiz Veli İzin Belgesi</h3>
+              <p>Okul içi turnuvalar ile il/ilçe spor müsabakaları için veli izin belgesi.</p>
+              <a href="turnuva_izin.html" target="_blank" rel="noopener" class="dugme dugme-koyu dugme-tam"><i data-lucide="printer" class="ikon-k"></i>Belgeyi Aç / Yazdır</a>
+            </article>
+          </div>
+
+          <div class="izgara iz-3" style="margin-top:18px">
+            <article class="kart evrak">
+              <div class="evrak-ust"><span class="evrak-ikon"><i data-lucide="clipboard-list" class="ikon"></i></span><span class="evrak-no">E-Portfolyo 1</span></div>
+              <h3>Öğrenci E-Portfolyo Detaylı Formu</h3>
+              <p>Fiziksel profil, branş teknik gelişimi, dijital proje ve iş birliği değerlendirme formu.</p>
+              <a href="https://drive.google.com/file/d/16s5oAwvkPGmqaWai1vAoTRjFFg1M0XhK/view?usp=share_link" target="_blank" rel="noopener" class="dugme dugme-cizgi dugme-tam"><i data-lucide="external-link" class="ikon-k"></i>Dosyayı Aç</a>
+            </article>
+            <article class="kart evrak">
+              <div class="evrak-ust"><span class="evrak-ikon"><i data-lucide="line-chart" class="ikon"></i></span><span class="evrak-no">E-Portfolyo 2</span></div>
+              <h3>E-Portfolyo Özet Gelişim Dosyası Şablonu</h3>
+              <p>Esneklik, denge testleri takip tablosu ve dönem sonu kontrol listesi.</p>
+              <a href="https://drive.google.com/file/d/1ivrJqoqNpAz_l0vnJKQznSSBuWQo_32S/view?usp=share_link" target="_blank" rel="noopener" class="dugme dugme-cizgi dugme-tam"><i data-lucide="external-link" class="ikon-k"></i>Dosyayı Aç</a>
+            </article>
+            <article class="kart evrak">
+              <div class="evrak-ust"><span class="evrak-ikon"><i data-lucide="shield-check" class="ikon"></i></span><span class="evrak-no">İSG ve resmi belgeler</span></div>
+              <h3>İSG Talimatları ve Tüm Resmi Belgeler</h3>
+              <p>Salon, havuz ve saha güvenliği, acil durum talimatları, risk değerlendirme ve tüm formlar tek klasörde.</p>
+              <a href="https://drive.google.com/drive/folders/1hvcPh_lbN9EgD8Ps0aFRGGEFamSTh5gx?usp=sharing" target="_blank" rel="noopener" class="dugme dugme-cizgi dugme-tam"><i data-lucide="folder-open" class="ikon-k"></i>Klasörü Aç</a>
+            </article>
+          </div>
+
+          <div class="kart kart-ic" style="margin-top:18px">
+            <div class="qr-kutu">
+              <div class="qr"><picture><source srcset="buyuk/haydarpasabedenegitimivespor.webp" type="image/webp"><img src="haydarpasabedenegitimivespor.png" alt="Tüm formlara ulaşmak için QR kod" width="1000" height="1000" loading="lazy"></picture></div>
+              <div style="flex:1">
+                <span class="ust-yazi">Mobil hızlı başvuru</span>
+                <h3 style="font-size:17px;font-weight:800">Tüm formlar tek ekranda</h3>
+                <p style="color:var(--gri);font-size:14px;margin:4px 0 12px">Kameranızla okutarak veli izin belgeleri, turnuva kayıtları ve takım formlarına tek ekrandan ulaşın.</p>
+                <div class="dugme-grup">
+                  <a href="https://linktr.ee/haydarpasabedenegitimivespor" target="_blank" rel="noopener" class="dugme dugme-kirmizi dugme-k"><i data-lucide="link" class="ikon-k"></i>Tüm Formlar</a>
+                  <a href="https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header" target="_blank" rel="noopener" class="dugme dugme-cizgi dugme-k"><i data-lucide="upload" class="ikon-k"></i>Evrak Yükle</a>
+                </div>
+              </div>
             </div>
-            
-            <div class="flex items-center gap-4 mt-2">
-              <div class="w-24 h-24 bg-white p-1.5 rounded-xl shadow-md shrink-0 flex items-center justify-center">
-                <picture><source srcset="buyuk/haydarpasabedenegitimivespor.webp" type="image/webp"><img src="haydarpasabedenegitimivespor.png" alt="Tüm formlara ulaşmak için QR kod" width="1000" height="1000" loading="lazy" class="w-full h-full object-contain"></picture>
+          </div>
+        </section>
+      </div>
+
+      <!-- ===================== 2. EĞİTİM & REHBER ===================== -->
+      <div id="tab-rehber" class="sekme" role="tabpanel" aria-labelledby="btn-rehber">
+        <section aria-labelledby="hareket-baslik">
+          <div class="bolum-baslik"><div><span class="ust-yazi">Eğitim</span><h2 id="hareket-baslik">Hareket Bilimi ve Sağlıklı Yaşam</h2><div class="cizgi-alt"></div></div></div>
+          <div class="giris">
+            <div>
+              <p class="giris-metin">Haydarpaşa Lisesi Beden Eğitimi ve Spor Bölümü olarak, öğrencilerimize sadece sportif beceriler değil; hareket biliminin temel ilkelerini, anatomik farkındalığı ve sağlıklı yaşam alışkanlıklarını kazandırıyoruz. Doğru egzersiz teknikleri, dengeli beslenme ve düzenli hareket bilinciyle öğrencilerimizi hayat boyu zinde ve sağlıklı bireyler olmaya hazırlıyoruz.</p>
+              <div class="izgara iz-2" style="margin-top:22px">
+                <div class="kart ozellik"><span class="evrak-ikon"><i data-lucide="dna" class="ikon"></i></span><div><h3>Kineziyoloji ve Anatomi</h3><p>Beden mekaniğini ve hareket bilimini kavrama.</p></div></div>
+                <div class="kart ozellik"><span class="evrak-ikon"><i data-lucide="apple" class="ikon"></i></span><div><h3>Sağlıklı Beslenme</h3><p>Performansı ve genel sağlığı destekleyen beslenme bilinci.</p></div></div>
+                <div class="kart ozellik"><span class="evrak-ikon"><i data-lucide="person-standing" class="ikon"></i></span><div><h3>Postür ve Denge</h3><p>Doğru duruş, esneklik ve sakatlık riskini en aza indirme.</p></div></div>
+                <div class="kart ozellik"><span class="evrak-ikon"><i data-lucide="activity" class="ikon"></i></span><div><h3>Performans ve Takip</h3><p>Fiziksel gelişim ve dayanıklılık ölçümleri.</p></div></div>
+              </div>
+            </div>
+            <button type="button" class="genis-gorsel" onclick="tekGorselAc('gorseller/rehber/hareket-afis.webp','Sağlam Kafa Sağlam Vücutta Bulunur','2026-2027 Eğitim-Öğretim Yılı fiziksel uygunluk afişi.')" aria-label="Fiziksel uygunluk afişini büyüt">
+              <img src="gorseller/rehber/hareket-afis.webp" alt="Haydarpaşa Lisesi 2026-2027 fiziksel uygunluk afişi: Sağlam kafa sağlam vücutta bulunur" width="679" height="1012" loading="lazy" style="max-height:620px;width:100%;object-fit:cover;object-position:top" />
+            </button>
+          </div>
+        </section>
+
+        <section aria-labelledby="test-baslik">
+          <div class="bolum-baslik"><div><span class="ust-yazi">Ölçme ve değerlendirme</span><h2 id="test-baslik">Fiziksel Uygunluk Testleri</h2><p>Postür analizi, şınav, mekik, 20 m koşu, flamingo denge ve otur-eriş testleri. Rehberi büyütmek için görsele dokunun.</p></div></div>
+          <button type="button" class="genis-gorsel" onclick="tekGorselAc('gorseller/rehber/fiziksel-uygunluk-testleri.webp','Fiziksel Uygunluk Testleri','Ölçüm ve değerlendirme rehberi.')" aria-label="Fiziksel uygunluk testleri rehberini büyüt">
+            <img src="gorseller/rehber/fiziksel-uygunluk-testleri.webp" alt="Fiziksel uygunluk testleri: ölçüm ve değerlendirme rehberi" width="1408" height="768" loading="lazy" />
+          </button>
+          <h3 style="font-size:19px;font-weight:800;margin:28px 0 14px">Performans Testlerimiz — Öğrenci Görsel Rehberleri</h3>
+          <div class="belge-izgara" id="testGaleri"></div>
+        </section>
+
+        <section aria-labelledby="brans-baslik">
+          <div class="bolum-baslik"><div><span class="ust-yazi">2026-2027 Eğitim ve Öğretim Yılı</span><h2 id="brans-baslik">Ders İçerik Rehberi</h2><div class="cizgi-alt"></div></div></div>
+          <p class="giris-metin" style="max-width:900px">Beden Eğitimi ve Spor derslerimizde, öğrencilerimizin hem bireysel yeteneklerini hem de takım koordinasyonunu geliştirmeyi hedefleyen kapsamlı bir müfredat uygulanmaktadır. Bu eğitim-öğretim yılında uygulamalı ve teorik olarak işlenecek spor branşları şunlardır:</p>
+          <div class="izgara iz-3" style="margin-top:22px">
+            <div class="kart kategori"><h3><i data-lucide="users" class="ikon" style="color:var(--kirmizi)"></i>Takım Sporları</h3><ul><li>Basketbol</li><li>Voleybol</li><li>Futsal</li><li>Korfbol</li><li>Yakantop</li><li>Badminton</li></ul></div>
+            <div class="kart kategori"><h3><i data-lucide="target" class="ikon" style="color:var(--kirmizi)"></i>Raket Sporları</h3><ul><li>Kort Tenisi</li><li>Pickleball</li></ul></div>
+            <div class="kart kategori"><h3><i data-lucide="crosshair" class="ikon" style="color:var(--kirmizi)"></i>Hedef ve Koordinasyon Sporları</h3><ul><li>Dart</li></ul></div>
+          </div>
+          <h3 style="font-size:19px;font-weight:800;margin:28px 0 14px">Branş Rehberlerimiz</h3>
+          <div class="belge-izgara" id="bransGaleri"></div>
+        </section>
+      </div>
+
+      <!-- ===================== 3. KURUMSAL ===================== -->
+      <div id="tab-kurumsal" class="sekme" role="tabpanel" aria-labelledby="btn-kurumsal">
+        <section class="alinti">
+          <span class="ust-yazi">Güç, Disiplin ve Takım Ruhu</span>
+          <p>Öğrencilerimizin fiziksel gelişimini, spor kültürünü ve hareket bilimini temele alan çağdaş bir eğitim anlayışı sunuyoruz.</p>
+        </section>
+
+        <section aria-labelledby="vizyon-baslik">
+          <div class="giris">
+            <div>
+              <span class="ust-yazi">Kurumsal</span>
+              <h2 id="vizyon-baslik" style="font-size:clamp(24px,3vw,32px);font-weight:800">Vizyonumuz</h2>
+              <div class="cizgi-alt" style="margin-bottom:18px"></div>
+              <p class="giris-metin">Öğrencilerimizin fiziksel, zihinsel ve sosyal gelişimlerini hareket bilimi ve sporun birleştirici gücüyle desteklemek; ulusal ve uluslararası alanda hem sportif başarıları hem de örnek sporcu duruşlarıyla fark yaratan yetkin bireyler yetiştirmek.</p>
+            </div>
+            <div class="foto-izgara">
+              <img src="gorseller/kurumsal/vizyon-1-k.webp" alt="Haydarpaşa Lisesi öğrencileri spor salonunda" loading="lazy" width="480" height="320" />
+              <img src="gorseller/kurumsal/vizyon-2-k.webp" alt="Haydarpaşa Lisesi voleybol takımı" loading="lazy" width="480" height="320" />
+              <img src="gorseller/kurumsal/vizyon-3-k.webp" alt="Haydarpaşa Lisesi takım sporları" loading="lazy" width="480" height="320" />
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="yaklasim-baslik">
+          <div class="bolum-baslik"><div><span class="ust-yazi">Nasıl çalışıyoruz</span><h2 id="yaklasim-baslik">Eğitim Yaklaşımımız</h2></div></div>
+          <div class="izgara iz-4">
+            <div class="kart ozellik ozellik-dikey"><span class="evrak-ikon"><i data-lucide="landmark" class="ikon"></i></span><div><h3>Köklü Miras</h3><p>1934'ten bu yana sporu ve sporcu ahlakını okul kültürünün merkezinde tutan geleneksel yapı.</p></div></div>
+            <div class="kart ozellik ozellik-dikey"><span class="evrak-ikon"><i data-lucide="layout-grid" class="ikon"></i></span><div><h3>Geniş Branş Çeşitliliği</h3><p>Takım sporlarından raket ve hedef sporlarına kadar öğrencilerin potansiyelini ortaya çıkaran zengin müfredat.</p></div></div>
+            <div class="kart ozellik ozellik-dikey"><span class="evrak-ikon"><i data-lucide="calendar-heart" class="ikon"></i></span><div><h3>Spor Kültürü ve Etkinlikler</h3><p>Okul içi turnuvalar, geleneksel SporFest organizasyonları ve kulüpler arası lig katılımı.</p></div></div>
+            <div class="kart ozellik ozellik-dikey"><span class="evrak-ikon"><i data-lucide="flask-conical" class="ikon"></i></span><div><h3>Bilimsel ve Çağdaş Yaklaşım</h3><p>Hareket bilimi, fizyolojik gelişim ve sağlıklı yaşam farkındalığını temel alan eğitim anlayışı.</p></div></div>
+          </div>
+        </section>
+
+        <section aria-labelledby="deger-baslik">
+          <div class="bolum-baslik"><div><span class="ust-yazi">Bizi biz yapan</span><h2 id="deger-baslik">Değerlerimiz</h2></div></div>
+          <div class="izgara iz-4">
+            <div class="kart ozellik ozellik-dikey"><span class="evrak-ikon"><i data-lucide="handshake" class="ikon"></i></span><div><h3>Centilmenlik ve Fair-Play</h3><p>Rakiplere, hakemlere ve sporun etik değerlerine duyulan koşulsuz saygı.</p></div></div>
+            <div class="kart ozellik ozellik-dikey"><span class="evrak-ikon"><i data-lucide="users" class="ikon"></i></span><div><h3>Takım Ruhu ve Dayanışma</h3><p>Birlikte başarma arzusu, güçlü iletişim ve ortak hedeflere kenetlenme.</p></div></div>
+            <div class="kart ozellik ozellik-dikey"><span class="evrak-ikon"><i data-lucide="dumbbell" class="ikon"></i></span><div><h3>Disiplin ve Azim</h3><p>Düzenli çalışma alışkanlığı, özdisiplin ve zorluklar karşısında vazgeçmeme bilinci.</p></div></div>
+            <div class="kart ozellik ozellik-dikey"><span class="evrak-ikon"><i data-lucide="heart-pulse" class="ikon"></i></span><div><h3>Sağlıklı ve Aktif Yaşam</h3><p>Sporu bir ders değil, yaşam boyu sürecek bir hayat felsefesi olarak benimseme.</p></div></div>
+          </div>
+        </section>
+
+        <section aria-labelledby="hedef-baslik">
+          <div class="bolum-baslik"><div><span class="ust-yazi">Nereye gidiyoruz</span><h2 id="hedef-baslik">Hedeflerimiz</h2></div></div>
+          <div class="izgara iz-4">
+            <div class="kart ozellik ozellik-dikey"><span class="evrak-ikon"><i data-lucide="accessibility" class="ikon"></i></span><div><h3>Erişilebilirlik</h3><p>Sporu her öğrencimiz için yaşam biçimi haline getirmek.</p></div></div>
+            <div class="kart ozellik ozellik-dikey"><span class="evrak-ikon"><i data-lucide="flag" class="ikon"></i></span><div><h3>Mücadele Ruhu</h3><p>Haydarpaşa Lisesi armasını her alanda gururla ve centilmenlikle temsil etmek.</p></div></div>
+            <div class="kart ozellik ozellik-dikey"><span class="evrak-ikon"><i data-lucide="lightbulb" class="ikon"></i></span><div><h3>Gelişim ve Yenilik</h3><p>Bilimsel antrenman yaklaşımları ve modern projelerle spor eğitimini sürekli ileriye taşımak.</p></div></div>
+            <div class="kart ozellik ozellik-dikey"><span class="evrak-ikon"><i data-lucide="sprout" class="ikon"></i></span><div><h3>Sürdürülebilirlik</h3><p>Köklü spor mirasımızı yeni nesillere aktararak gelenekselleştirmek.</p></div></div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ===================== 4. TAKIMLAR ===================== -->
+      <div id="tab-takimlar" class="sekme" role="tabpanel" aria-labelledby="btn-takimlar">
+        <section aria-labelledby="takim-baslik">
+          <div class="bolum-baslik"><div><span class="ust-yazi">Okul takımlarımız</span><h2 id="takim-baslik">Takımlarımız</h2><p>Her sezonun takım tanıtımları. Sunumu büyütmek için "Tam ekran" bağlantısını kullanın.</p></div></div>
+          <div class="izgara iz-2">
+            <article class="gomulu">
+              <div class="gomulu-ust">
+                <h3><i data-lucide="trophy" class="ikon"></i><span>2025-2026 Takımlar</span></h3>
+                <a class="tam-ekran" href="https://www.canva.com/design/DAHbpAxsl6o/TDXws096ADbf_btFCZym2Q/view" target="_blank" rel="noopener">Tam ekran <i data-lucide="external-link" class="ikon-k"></i></a>
+              </div>
+              <div class="oran-16-9"><iframe title="2025-2026 Takımlar" loading="lazy" src="https://www.canva.com/design/DAHbpAxsl6o/TDXws096ADbf_btFCZym2Q/view?embed" allowfullscreen allow="fullscreen"></iframe></div>
+            </article>
+            <article class="gomulu">
+              <div class="gomulu-ust">
+                <h3><i data-lucide="trophy" class="ikon"></i><span>2026-2027 Takımlar</span></h3>
+                <a class="tam-ekran" href="https://www.canva.com/design/DAHXCL5C-k4/vjntYIdNBNkpmArmyoP3Xw/view" target="_blank" rel="noopener">Tam ekran <i data-lucide="external-link" class="ikon-k"></i></a>
+              </div>
+              <div class="oran-16-9"><iframe title="2026-2027 Takımlar" loading="lazy" src="https://www.canva.com/design/DAHXCL5C-k4/vjntYIdNBNkpmArmyoP3Xw/view?embed" allowfullscreen allow="fullscreen"></iframe></div>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <!-- ===================== 5. SPORFEST ===================== -->
+      <div id="tab-sporfest" class="sekme" role="tabpanel" aria-labelledby="btn-sporfest">
+        <section aria-labelledby="fest-baslik">
+          <div class="fest-ust" style="margin-bottom:22px">
+            <div style="display:flex;align-items:center;gap:18px">
+              <div class="fest-logolar">
+                <img src="sporfest2026_logo.jpg" alt="SporFest 2026 logosu" width="76" height="76" onerror="this.src='logo.jpg'" />
+                <img src="sporfest2025ve%20o%CC%88ncesi.jpg" alt="SporFest 2025 ve öncesi logosu" width="76" height="76" onerror="this.src='logo.jpg'" />
               </div>
               <div>
-                <h4 class="text-white text-sm font-bold leading-tight">Mobil Hızlı Başvuru</h4>
-                <p class="text-slate-300 text-xs mt-1 leading-relaxed">
-                  Kameranızla okutarak veli izin belgeleri, turnuva kayıtları ve takım formlarına tek ekrandan ulaşın.
-                </p>
+                <span class="ust-yazi">HL SporFest '27</span>
+                <h2 id="fest-baslik" style="font-size:clamp(22px,3vw,30px);font-weight:800">HL SporFest Arşivi</h2>
+                <p style="color:var(--gri);font-size:14.5px">Haydarpaşa Lisesi'nin köklü spor geleneği</p>
               </div>
             </div>
+            <a href="https://www.canva.com/design/DAHZHjLC2Y4/_FD9gElWJ2OHxJRRPXEp_g/view" target="_blank" rel="noopener" class="dugme dugme-kirmizi"><i data-lucide="external-link" class="ikon-k"></i>Canva'da Tam Ekran Aç</a>
           </div>
-
-          <div class="grid grid-cols-2 gap-2 mt-4">
-            <a href="https://linktr.ee/haydarpasabedenegitimivespor" target="_blank" class="py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs text-center transition shadow-lg flex items-center justify-center gap-1.5">
-              🔗 Tüm Formlar
-            </a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header" target="_blank" class="py-2.5 px-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs text-center transition shadow-lg flex items-center justify-center gap-1.5">
-              📄 Evrak Yükle
-            </a>
+          <div class="gomulu">
+            <div class="oran-16-9"><iframe title="HL SporFest Arşivi" loading="lazy" src="https://www.canva.com/design/DAHZHjLC2Y4/_FD9gElWJ2OHxJRRPXEp_g/view?embed" allowfullscreen allow="fullscreen"></iframe></div>
           </div>
-        </div>
-
-      </section>
-      <!-- MAÇ SONUÇLARI (Google Sheets canlı tablo) -->
-      <section id="sonuclar" class="p-6 sm:p-8 rounded-3xl bg-white text-slate-800 shadow-2xl border-2 border-white space-y-5">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
-          <div class="space-y-1">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-100 text-[#c40018] text-xs font-black uppercase">Canlı Tablo</span>
-            <h3 class="text-xl sm:text-2xl font-black text-[#c40018]">Geleneksel All Star Voleybol Turnuvası — Fikstür ve Sonuçlar</h3>
-            <p class="text-xs sm:text-sm text-slate-600">89–93. Dönem maç programı ve skorlar. Skorlar girildikçe tablo güncellenir; görmüyorsan sayfayı yenile.</p>
+          <div class="alinti" style="margin-top:22px">
+            <span class="ust-yazi">Gençliğin enerjisi sahalarda</span>
+            <p style="font-weight:600;font-size:16.5px">Haydarpaşa Lisesi’nin köklü spor geleneğini gençliğin sınırsız enerjisiyle buluşturan HL SporFest '27, İstanbul’un seçkin liselerini kıyasıya rekabet ve dostluk çatısı altında bir kez daha bir araya getiriyor. Futsal, voleybol, basketbol ve masa tenisi başta olmak üzere geniş bir yelpazede düzenlenen turnuvalarımızda; centilmenlik, takım ruhu ve yüksek mücadele gücü sahalara yansıyor.</p>
           </div>
-          <a href="https://docs.google.com/spreadsheets/d/1Vb1rNuEPVsCMdGh08lOxLfPwMLx8DNQKZFZzAs5qP5Y/edit?usp=sharing" target="_blank" rel="noopener" class="px-6 py-3 rounded-2xl bg-[#c40018] hover:bg-red-800 text-white font-black text-xs sm:text-sm shadow-xl flex items-center gap-2.5 shrink-0 transition hover:scale-105">
-            <i data-lucide="external-link" class="w-4 h-4"></i><span>Tabloyu Tam Ekran Aç</span>
-          </a>
-        </div>
-        <div class="rounded-2xl overflow-hidden border-2 border-red-200 bg-slate-50" style="height: 70vh; min-height: 480px;">
-          <iframe title="Turnuva fikstürü ve sonuçları" loading="lazy" src="https://docs.google.com/spreadsheets/d/1Vb1rNuEPVsCMdGh08lOxLfPwMLx8DNQKZFZzAs5qP5Y/preview" style="width:100%;height:100%;border:0;" allowfullscreen></iframe>
-        </div>
-      </section>
-      
-      <!-- ZORUNLU EVRAKLAR, İSG VE PERFORMANS ÖDEVİ BÖLÜMÜ -->
-      <div class="space-y-6">
-        <div class="flex items-center gap-2 px-2">
-          <i data-lucide="folder-open" class="w-5 h-5 text-amber-300"></i>
-          <h4 class="text-lg font-black tracking-wide text-white uppercase">Zorunlu Resmi Evraklar, İSG ve Öğrenci İşlemleri</h4>
-        </div>
+        </section>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-          <!-- PERFORMANS ÖDEVİ TESLİM PORTALI -->
-          <section class="p-6 rounded-3xl bg-white text-slate-800 shadow-xl border-4 border-emerald-500 flex flex-col justify-between space-y-4 md:col-span-2 bg-gradient-to-r from-emerald-50/70 via-white to-teal-50/70">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <div class="space-y-1.5">
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-black uppercase">
-                  <i data-lucide="upload-cloud" class="w-4 h-4 text-emerald-600"></i>
-                  <span>2026 - 2027 EĞİTİM DÖNEMİ</span>
-                </span>
-                <h3 class="text-xl sm:text-2xl font-black text-slate-900 flex items-center gap-2">
-                  <span>📝 Beden Eğitimi Dersi Performans Ödevi Teslim Formu</span>
-                </h3>
-                <p class="text-xs sm:text-sm text-slate-600">
-                  Dönem performans ödevlerinizi, video, sunum ve çalışma belgelerinizi buradan Google Form üzerinden sisteme yükleyebilirsiniz.
-                </p>
-              </div>
-              <div class="shrink-0">
-                <a href="https://forms.gle/afHY8jvaj9GwxfAi7" target="_blank" class="px-7 py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-sm shadow-xl flex items-center justify-center gap-2 transition hover:scale-105">
-                  <i data-lucide="send" class="w-4 h-4"></i>
-                  <span>Ödevini Yükle / Formu Aç</span>
-                </a>
-              </div>
-            </div>
-          </section>
-
-          <section class="p-6 rounded-3xl bg-white text-slate-800 shadow-xl border-2 border-amber-400 flex flex-col justify-between space-y-4">
-            <div class="space-y-1.5">
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 text-[11px] font-black uppercase">Zorunlu Evrak 1</span>
-              <h3 class="text-lg font-black text-slate-900">Tesis, Havuz & Malzeme Kullanım Taahhütnamesi</h3>
-              <p class="text-xs text-slate-600">Salon, havuz ve demirbaş kullanım kuralları taahhüt belgesi.</p>
-            </div>
-            <a href="taahhutname.html" target="_blank" class="w-full py-2.5 rounded-2xl bg-[#c40018] hover:bg-red-800 text-white font-black text-xs shadow flex items-center justify-center gap-2 transition hover:scale-[1.02]">
-              <i data-lucide="file-text" class="w-4 h-4"></i><span>Belgeyi Aç / Yazdır</span>
-            </a>
-          </section>
-
-          <section class="p-6 rounded-3xl bg-white text-slate-800 shadow-xl border-2 border-red-300 flex flex-col justify-between space-y-4">
-            <div class="space-y-1.5">
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-red-100 text-[#c40018] text-[11px] font-black uppercase">Zorunlu Evrak 2</span>
-              <h3 class="text-lg font-black text-slate-900">Ders Dışı Eğitim ve Egzersiz Veli İzin Belgesi</h3>
-              <p class="text-xs text-slate-600">Hafta içi/sonu antrenman ve egzersiz çalışmaları için veli onayı.</p>
-            </div>
-            <a href="ders_disi_egzersiz.html" target="_blank" class="w-full py-2.5 rounded-2xl bg-[#c40018] hover:bg-red-800 text-white font-black text-xs shadow flex items-center justify-center gap-2 transition hover:scale-[1.02]">
-              <i data-lucide="file-text" class="w-4 h-4"></i><span>Belgeyi Aç / Yazdır</span>
-            </a>
-          </section>
-
-          <section class="p-6 rounded-3xl bg-white text-slate-800 shadow-xl border-2 border-blue-300 flex flex-col justify-between space-y-4">
-            <div class="space-y-1.5">
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-900 text-[11px] font-black uppercase">Zorunlu Evrak 3</span>
-              <h3 class="text-lg font-black text-slate-900">Sağlık Durumu Beyan Formu</h3>
-              <p class="text-xs text-slate-600">Beden Eğitimi dersleri ve spor faaliyetleri sağlık bilgi formu.</p>
-            </div>
-            <a href="saglik_durumu.html" target="_blank" class="w-full py-2.5 rounded-2xl bg-[#c40018] hover:bg-red-800 text-white font-black text-xs shadow flex items-center justify-center gap-2 transition hover:scale-[1.02]">
-              <i data-lucide="file-text" class="w-4 h-4"></i><span>Belgeyi Aç / Yazdır</span>
-            </a>
-          </section>
-
-          <section class="p-6 rounded-3xl bg-white text-slate-800 shadow-xl border-2 border-emerald-300 flex flex-col justify-between space-y-4">
-            <div class="space-y-1.5">
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-900 text-[11px] font-black uppercase">Zorunlu Evrak 4</span>
-              <h3 class="text-lg font-black text-slate-900">Turnuvalar ve Egzersiz Veli İzin Belgesi</h3>
-              <p class="text-xs text-slate-600">Okul içi turnuvalar ile il/ilçe spor müsabakaları için veli izin belgesi.</p>
-            </div>
-            <a href="turnuva_izin.html" target="_blank" class="w-full py-2.5 rounded-2xl bg-[#c40018] hover:bg-red-800 text-white font-black text-xs shadow flex items-center justify-center gap-2 transition hover:scale-[1.02]">
-              <i data-lucide="file-text" class="w-4 h-4"></i><span>Belgeyi Aç / Yazdır</span>
-            </a>
-          </section>
-
-          <!-- E-Portfolyo -->
-          <section class="p-6 rounded-3xl bg-white text-slate-800 shadow-xl border-2 border-indigo-300 flex flex-col justify-between space-y-4">
-            <div class="space-y-1.5">
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-900 text-[11px] font-black uppercase">E-Portfolyo 1</span>
-              <h3 class="text-lg font-black text-slate-900">Beden Eğitimi Dersi Öğrenci E-Portfolyo Detaylı Formu</h3>
-              <p class="text-xs text-slate-600">Fiziksel profil, branş teknik gelişimi, dijital proje ve iş birliği değerlendirme formu.</p>
-            </div>
-            <a href="https://drive.google.com/file/d/16s5oAwvkPGmqaWai1vAoTRjFFg1M0XhK/view?usp=share_link" target="_blank" class="w-full py-2.5 rounded-2xl bg-[#c40018] hover:bg-red-800 text-white font-black text-xs shadow flex items-center justify-center gap-2 transition hover:scale-[1.02]">
-              <i data-lucide="external-link" class="w-4 h-4"></i><span>Portfolyo 1 Dosyasını Aç</span>
-            </a>
-          </section>
-
-          <section class="p-6 rounded-3xl bg-white text-slate-800 shadow-xl border-2 border-amber-300 flex flex-col justify-between space-y-4">
-            <div class="space-y-1.5">
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 text-[11px] font-black uppercase">E-Portfolyo 2</span>
-              <h3 class="text-lg font-black text-slate-900">Öğrenci E-Portfolyo Özet Gelişim Dosyası Şablonu</h3>
-              <p class="text-xs text-slate-600">Esneklik, denge testleri takip tablosu ve dönem sonu kontrol listesi.</p>
-            </div>
-            <a href="https://drive.google.com/file/d/1ivrJqoqNpAz_l0vnJKQznSSBuWQo_32S/view?usp=share_link" target="_blank" class="w-full py-2.5 rounded-2xl bg-[#c40018] hover:bg-red-800 text-white font-black text-xs shadow flex items-center justify-center gap-2 transition hover:scale-[1.02]">
-              <i data-lucide="external-link" class="w-4 h-4"></i><span>Portfolyo 2 Dosyasını Aç</span>
-            </a>
-          </section>
-
-          <!-- GOOGLE DRIVE İLE BAĞLANMIŞ İSG VE TÜM BELGELER KLASÖRÜ -->
-          <section class="p-6 rounded-3xl bg-white text-slate-800 shadow-xl border-2 border-purple-400 flex flex-col justify-between space-y-4 md:col-span-2">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <div class="space-y-1.5">
-                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-900 text-[11px] font-black uppercase">
-                  <i data-lucide="shield-check" class="w-3.5 h-3.5 text-purple-700"></i>
-                  <span>İş Sağlığı ve Güvenliği (İSG) & Resmi Belgeler</span>
-                </span>
-                <h3 class="text-lg font-black text-slate-900">İSG Talimatları, Risk Değerlendirme ve Tüm Resmi Belgeler Klasörü</h3>
-                <p class="text-xs text-slate-600">Salon, havuz ve saha güvenliği, acil durum talimatları ve tüm formlar tek klasörde toplanmıştır.</p>
-              </div>
-              <div class="flex items-center gap-2 shrink-0">
-                <a href="https://drive.google.com/drive/folders/1hvcPh_lbN9EgD8Ps0aFRGGEFamSTh5gx?usp=sharing" target="_blank" class="px-6 py-3 rounded-2xl bg-purple-700 hover:bg-purple-800 text-white font-black text-xs shadow-lg flex items-center gap-2 transition hover:scale-105">
-                  <i data-lucide="folder-symlink" class="w-4 h-4"></i>
-                  <span>Klasörü Aç / Belgeleri İndir</span>
-                </a>
-              </div>
-            </div>
-          </section>
-        </div>
+        <section aria-labelledby="arsiv-baslik">
+          <div class="bolum-baslik"><div><span class="ust-yazi">2018'den bugüne</span><h2 id="arsiv-baslik">Yıllara Göre Arşiv</h2></div></div>
+          <div class="izgara iz-3">
+            <a class="kart arsiv" href="https://drive.google.com/drive/folders/1-Jvmvv6LJ6oU6lONosSRNVnRgJPZOyjj" target="_blank" rel="noopener"><span class="yil">2026</span><strong>SporFest '26</strong><span>Fotoğraf ve video arşivi (Drive) <i data-lucide="arrow-up-right" class="ikon-k"></i></span></a>
+            <a class="kart arsiv" href="https://linktr.ee/Haydarpasasporfest_25" target="_blank" rel="noopener"><span class="yil">2025</span><strong>SporFest '25</strong><span>Festival albümü (Linktree) <i data-lucide="arrow-up-right" class="ikon-k"></i></span></a>
+            <a class="kart arsiv" href="https://linktr.ee/sporfest2024" target="_blank" rel="noopener"><span class="yil">2024</span><strong>SporFest '24</strong><span>Festival albümü (Linktree) <i data-lucide="arrow-up-right" class="ikon-k"></i></span></a>
+            <a class="kart arsiv" href="https://linktr.ee/haydarpasasf2023" target="_blank" rel="noopener"><span class="yil">2023</span><strong>SporFest '23</strong><span>Festival albümü (Linktree) <i data-lucide="arrow-up-right" class="ikon-k"></i></span></a>
+            <a class="kart arsiv" href="https://linktr.ee/hlsporfest" target="_blank" rel="noopener"><span class="yil">2022</span><strong>SporFest '22</strong><span>Festival albümü (Linktree) <i data-lucide="arrow-up-right" class="ikon-k"></i></span></a>
+            <a class="kart arsiv" href="https://drive.google.com/drive/folders/1_jQU71bsRt7Bct_fREmbUtUj5IDkVXZ5" target="_blank" rel="noopener"><span class="yil">2018</span><strong>SporFest '18</strong><span>İlk yılın arşivi (Drive) <i data-lucide="arrow-up-right" class="ikon-k"></i></span></a>
+          </div>
+        </section>
       </div>
-    </div>
 
-    <!-- 2. SEKME: EĞİTİM & REHBER -->
-    <div id="tab-rehber" class="page-tab space-y-8">
-      <section class="rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl bg-white">
-        <picture><source srcset="buyuk/hareket_bilimi.webp" type="image/webp"><img src="hareket_bilimi.png" alt="Hareket Bilimi ve Sağlıklı Yaşam" width="1366" height="5376" loading="lazy" class="w-full h-auto object-cover block" /></picture>
-      </section>
-      <section class="rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl bg-white">
-        <picture><source srcset="buyuk/brans_rehberimiz.webp" type="image/webp"><img src="brans_rehberimiz.png" alt="Branş Rehberi" width="1366" height="4608" loading="lazy" class="w-full h-auto object-cover block" /></picture>
-      </section>
-    </div>
-
-    <!-- 3. SEKME: KURUMSAL -->
-    <div id="tab-kurumsal" class="page-tab space-y-8">
-      <section class="rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl bg-white">
-        <picture><source srcset="buyuk/vizyonumuz.webp" type="image/webp"><img src="vizyonumuz.png" alt="Vizyonumuz" width="1366" height="768" loading="lazy" class="w-full h-auto object-cover block" /></picture>
-      </section>
-      <section class="rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl bg-white">
-        <picture><source srcset="buyuk/degerlerimiz.webp" type="image/webp"><img src="degerlerimiz.png" alt="Değerlerimiz ve Hedeflerimiz" width="1366" height="1536" loading="lazy" class="w-full h-auto object-cover block" onerror="this.src='Degerlerimiz ve Hedeflerimiz.png'" /></picture>
-      </section>
-    </div>
-
-<!-- 4. SEKME: TAKIMLAR -->
-    <div id="tab-takimlar" class="page-tab space-y-8">
-      <div class="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-5">
-        
-        <!-- 1. KART: 2025-2026 TAKIMLAR -->
-        <div class="rounded-2xl overflow-hidden shadow-2xl border-2 border-amber-400/40 bg-slate-950 flex flex-col justify-between">
-          <div class="bg-gradient-to-r from-red-950 via-slate-900 to-red-950 px-4 py-2.5 border-b border-red-500/20 flex items-center justify-between">
-            <span class="text-xs font-black uppercase text-amber-300 flex items-center gap-1.5 truncate">
-              🏆 2025-2026 Takımlar
-            </span>
-            <a href="https://www.canva.com/design/DAHbpAxsl6o/TDXws096ADbf_btFCZym2Q/view" target="_blank" class="text-[11px] font-bold text-red-200 hover:text-white transition flex items-center gap-1 shrink-0 ml-2">
-              <span>Tam Ekran</span> <i data-lucide="external-link" class="w-3 h-3"></i>
-            </a>
-          </div>
-          <div style="position: relative; width: 100%; height: 0; padding-top: 56.25%; overflow: hidden;">
-            <iframe title="2025-2026 Takımlar" loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;"
-              src="https://www.canva.com/design/DAHbpAxsl6o/TDXws096ADbf_btFCZym2Q/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
-            </iframe>
-          </div>
-        </div>
-
-        <!-- 2. KART: 2026-2027 TAKIMLAR -->
-        <div class="rounded-2xl overflow-hidden shadow-2xl border-2 border-amber-400/40 bg-slate-950 flex flex-col justify-between">
-          <div class="bg-gradient-to-r from-red-950 via-slate-900 to-red-950 px-4 py-2.5 border-b border-red-500/20 flex items-center justify-between">
-            <span class="text-xs font-black uppercase text-amber-300 flex items-center gap-1.5 truncate">
-              🏆 2026-2027 Takımlar
-            </span>
-            <a href="https://www.canva.com/design/DAHXCL5C-k4/vjntYIdNBNkpmArmyoP3Xw/view" target="_blank" class="text-[11px] font-bold text-red-200 hover:text-white transition flex items-center gap-1 shrink-0 ml-2">
-              <span>Tam Ekran</span> <i data-lucide="external-link" class="w-3 h-3"></i>
-            </a>
-          </div>
-          <div style="position: relative; width: 100%; height: 0; padding-top: 56.25%; overflow: hidden;">
-            <iframe title="2026-2027 Takımlar" loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;"
-              src="https://www.canva.com/design/DAHXCL5C-k4/vjntYIdNBNkpmArmyoP3Xw/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
-            </iframe>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  <!-- 5. SEKME: SPORFEST -->
-    <div id="tab-sporfest" class="page-tab space-y-8">
-      <section class="p-6 sm:p-8 rounded-3xl bg-white text-slate-800 shadow-2xl border-2 border-white space-y-6">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-slate-100 pb-6">
-          <div class="flex items-center gap-4">
-            <div class="flex items-center gap-2.5 shrink-0">
-              <img src="sporfest2026_logo.jpg" alt="SporFest 2026 Logosu" class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border-2 border-[#c40018] shadow-lg" onerror="this.src='logo.jpg'" title="SporFest 2026 Logosu" />
-              <img src="sporfest2025ve%20o%CC%88ncesi.jpg" alt="SporFest 2025 ve Öncesi Logosu" class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border-2 border-amber-500 shadow-lg" onerror="this.src='logo.jpg'" title="SporFest 2025 ve Öncesi Logosu" />
-            </div>
-            <div class="space-y-1">
-              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-100 text-[#c40018] text-xs font-black uppercase">
-                <i data-lucide="flame" class="w-3.5 h-3.5"></i>
-                <span>HL SporFest '27</span>
-              </span>
-              <h3 class="text-xl sm:text-2xl font-black text-[#c40018]">HL SporFest Arşivi</h3>
-              <p class="text-xs text-slate-600 font-medium">Haydarpaşa Lisesi'nin köklü spor geleneği:</p>
+      <!-- ===================== 6. İLETİŞİM ===================== -->
+      <div id="tab-iletisim" class="sekme" role="tabpanel" aria-labelledby="btn-iletisim">
+        <section aria-labelledby="iletisim-baslik">
+          <div class="bolum-baslik"><div><span class="ust-yazi">Bize ulaşın</span><h2 id="iletisim-baslik">Beden Eğitimi Zümresi İletişim ve Konum</h2></div></div>
+          <div class="izgara" style="grid-template-columns:1fr">
+            <div class="izgara iz-2" style="align-items:stretch">
+              <div class="kart kart-ic">
+                <div class="iletisim-satir"><span class="evrak-ikon"><i data-lucide="map-pin" class="ikon"></i></span><div><strong>Adres</strong><span class="d">Altunizade Mah., Okul Çıkmazı Sk. No:2 Üsküdar / İstanbul</span></div></div>
+                <div class="iletisim-satir"><span class="evrak-ikon"><i data-lucide="mail" class="ikon"></i></span><div><strong>E-posta</strong><a href="mailto:haydarpasapeteam@gmail.com">haydarpasapeteam@gmail.com</a></div></div>
+                <div class="iletisim-satir"><span class="evrak-ikon"><i data-lucide="instagram" class="ikon"></i></span><div><strong>Instagram</strong><a href="https://www.instagram.com/haydarpasaspor" target="_blank" rel="noopener">@haydarpasaspor</a></div></div>
+                <div class="iletisim-satir"><span class="evrak-ikon"><i data-lucide="globe" class="ikon"></i></span><div><strong>Resmi okul sitesi</strong><a href="https://haydarpasalisesi.meb.k12.tr/" target="_blank" rel="noopener">haydarpasalisesi.meb.k12.tr</a></div></div>
+              </div>
+              <div class="gomulu"><div class="harita"><iframe title="Haydarpaşa Lisesi konumu" src="https://maps.google.com/maps?q=Haydarpa%C5%9Fa%20Lisesi%20Altunizade&t=&z=16&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div></div>
             </div>
           </div>
-          <a href="https://www.canva.com/design/DAHZHjLC2Y4/_FD9gElWJ2OHxJRRPXEp_g/view" target="_blank" class="px-6 py-3.5 rounded-2xl bg-[#c40018] hover:bg-red-800 text-white font-black text-xs sm:text-sm shadow-xl flex items-center gap-2.5 shrink-0 transition hover:scale-105">
-            <i data-lucide="external-link" class="w-4 h-4"></i>
-            <span>Canva Tam Ekran Aç</span>
-          </a>
-        </div>
-
-        <!-- YENİ SPORFEST CANVA GÖMMÜ (EMBED) KARTI -->
-        <div class="rounded-2xl overflow-hidden shadow-2xl border-2 border-amber-400/40 bg-slate-950">
-          <div style="position: relative; width: 100%; height: 0; padding-top: 56.25%; overflow: hidden;">
-            <iframe title="HL SporFest Arşivi" loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;"
-              src="https://www.canva.com/design/DAHZHjLC2Y4/_FD9gElWJ2OHxJRRPXEp_g/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
-            </iframe>
-          </div>
-        </div>
-
-        <!-- AÇIKLAMA METNİ -->
-        <div class="p-6 rounded-2xl bg-amber-50/80 border border-amber-200 text-slate-800 text-center space-y-2">
-          <h4 class="text-base sm:text-lg font-black text-[#c40018]">Gençliğin Enerjisi Sahalarda!</h4>
-          <p class="text-xs sm:text-sm text-slate-700 leading-relaxed max-w-4xl mx-auto">
-            Haydarpaşa Lisesi’nin köklü spor geleneğini gençliğin sınırsız enerjisiyle buluşturan <strong>HL SporFest '27</strong>, İstanbul’un seçkin liselerini kıyasıya rekabet ve dostluk çatısı altında bir kez daha bir araya getiriyor. <strong>Futsal, voleybol, basketbol ve masa tenisi</strong> başta olmak üzere geniş bir yelpazede düzenlenen turnuvalarımızda; centilmenlik, takım ruhu ve yüksek mücadele gücü sahalara yansıyor.
-          </p>
-        </div>
-
-        <!-- YILLARA GÖRE ARŞİV LİNKLERİ -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-4 border-t border-slate-100">
-          <a href="https://drive.google.com/drive/folders/1-Jvmvv6LJ6oU6lONosSRNVnRgJPZOyjj" target="_blank" class="p-4 rounded-2xl bg-amber-50 border border-amber-200 block hover:border-amber-400 transition">
-            <strong class="text-amber-800 block text-sm font-black">2026 — SporFest '26 (Drive)</strong>
-            <span class="text-xs text-slate-600">Fotoğraf ve video arşivi →</span>
-          </a>
-          <a href="https://linktr.ee/Haydarpasasporfest_25" target="_blank" class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 block hover:border-emerald-400 transition">
-            <strong class="text-emerald-800 block text-sm font-black">2025 — SporFest '25 (Linktree)</strong>
-            <span class="text-xs text-slate-600">Festival albümü →</span>
-          </a>
-          <a href="https://linktr.ee/sporfest2024" target="_blank" class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 block hover:border-emerald-400 transition">
-            <strong class="text-emerald-800 block text-sm font-black">2024 — SporFest '24 (Linktree)</strong>
-            <span class="text-xs text-slate-600">Festival albümü →</span>
-          </a>
-          <a href="https://linktr.ee/haydarpasasf2023" target="_blank" class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 block hover:border-emerald-400 transition">
-            <strong class="text-emerald-800 block text-sm font-black">2023 — SporFest '23 (Linktree)</strong>
-            <span class="text-xs text-slate-600">Festival albümü →</span>
-          </a>
-          <a href="https://linktr.ee/hlsporfest" target="_blank" class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 block hover:border-emerald-400 transition">
-            <strong class="text-emerald-800 block text-sm font-black">2022 — SporFest '22 (Linktree)</strong>
-            <span class="text-xs text-slate-600">Festival albümü →</span>
-          </a>
-          <a href="https://drive.google.com/drive/folders/1_jQU71bsRt7Bct_fREmbUtUj5IDkVXZ5" target="_blank" class="p-4 rounded-2xl bg-amber-50 border border-amber-200 block hover:border-amber-400 transition">
-            <strong class="text-amber-800 block text-sm font-black">2018 — SporFest '18 (Drive)</strong>
-            <span class="text-xs text-slate-600">İlk yılın arşivi →</span>
-          </a>
-        </div>
-      </section>
-    </div>
-
-    <!-- 6. SEKME: İLETİŞİM -->
-    <div id="tab-iletisim" class="page-tab space-y-8">
-      <div class="rounded-3xl bg-white text-slate-800 p-6 sm:p-8 shadow-2xl space-y-6 border-2 border-white">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
-          <div>
-            <h3 class="font-black text-2xl text-[#c40018] flex items-center gap-2"><i data-lucide="map-pin" class="w-7 h-7"></i><span>Beden Eğitimi Zümresi İletişim & Konum</span></h3>
-            <p class="text-xs sm:text-sm text-slate-600 mt-1">Altunizade Mah., Okul Çıkmazı Sk. No:2 Üsküdar / İstanbul</p>
-          </div>
-          <div class="flex flex-wrap items-center gap-2.5">
-            <a href="https://haydarpasalisesi.meb.k12.tr/" target="_blank" class="px-4 py-2.5 rounded-xl bg-red-700 hover:bg-red-800 text-white text-xs font-bold shadow flex items-center gap-2"><i data-lucide="globe" class="w-4 h-4"></i><span>Resmi Okul Sitesi</span></a>
-            <a href="https://www.instagram.com/haydarpasaspor?igsi=MXNmYjVvd3ViYWV4bw%3D%3D&utm_source=qr" target="_blank" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#833ab4] via-[#fd1d1d] to-[#fcb045] text-white text-xs font-bold shadow flex items-center gap-2"><i data-lucide="instagram" class="w-4 h-4"></i><span>@haydarpasaspor</span></a>
-            <a href="mailto:haydarpasapeteam@gmail.com" class="px-4 py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold shadow flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4"></i><span>E-posta</span></a>
-          </div>
-        </div>
-        <!-- Google Harita -->
-        <div class="rounded-2xl overflow-hidden border-2 border-red-200 shadow-inner h-96 w-full">
-          <iframe title="Haydarpaşa Lisesi konumu" src="https://maps.google.com/maps?q=Haydarpa%C5%9Fa%20Lisesi%20Altunizade&t=&z=16&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
+        </section>
       </div>
-    </div>
 
+    </div>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="border-t border-red-800 bg-[#990012] py-8 text-center text-xs text-white space-y-4 shadow-inner">
-    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div>
-        <p class="font-bold text-sm">Haydarpaşa Lisesi — Beden Eğitimi ve Spor Bölümü</p>
-        <p class="text-red-200 text-xs mt-1">© 2026 Tüm Hakları Saklıdır.</p>
+  <!-- ALT BİLGİ -->
+  <footer class="alt">
+    <div class="icerik">
+      <div class="alt-izgara">
+        <div>
+          <div class="alt-marka">
+            <img src="logo.jpg" alt="" width="48" height="48" onerror="this.src='spor kulübü logo.jpg'" />
+            <div><strong>Haydarpaşa Lisesi</strong>Beden Eğitimi ve Spor Bölümü</div>
+          </div>
+          <p style="margin-top:14px;max-width:380px;color:#b9b9b9">1934'ten bu yana sporu ve sporcu ahlakını okul kültürünün merkezinde tutan köklü bir gelenek.</p>
+        </div>
+        <nav aria-label="Alt menü">
+          <h2>Sayfalar</h2>
+          <ul>
+            <li><button type="button" class="baglanti" onclick="showTab('anasayfa')">Ana Sayfa</button></li>
+            <li><button type="button" class="baglanti" onclick="showTab('rehber')">Eğitim &amp; Rehber</button></li>
+            <li><button type="button" class="baglanti" onclick="showTab('kurumsal')">Kurumsal</button></li>
+            <li><button type="button" class="baglanti" onclick="showTab('takimlar')">Takımlar</button></li>
+            <li><button type="button" class="baglanti" onclick="showTab('sporfest')">SporFest</button></li>
+            <li><button type="button" class="baglanti" onclick="showTab('iletisim')">İletişim</button></li>
+          </ul>
+        </nav>
+        <div>
+          <h2>İletişim</h2>
+          <ul>
+            <li>Altunizade Mah., Okul Çıkmazı Sk. No:2 Üsküdar / İstanbul</li>
+            <li><a href="mailto:haydarpasapeteam@gmail.com">haydarpasapeteam@gmail.com</a></li>
+            <li><a href="https://www.instagram.com/haydarpasaspor" target="_blank" rel="noopener">Instagram: @haydarpasaspor</a></li>
+            <li><a href="https://haydarpasalisesi.meb.k12.tr/" target="_blank" rel="noopener">Resmi okul sitesi</a></li>
+            <li><a href="https://linktr.ee/haydarpasabedenegitimivespor" target="_blank" rel="noopener">Tüm formlar (Linktree)</a></li>
+          </ul>
+        </div>
       </div>
-      <!-- Ziyaretçi Sayacı -->
-      <div class="flex items-center gap-2 bg-red-950/60 px-3.5 py-1.5 rounded-xl border border-red-400/20 shadow-inner">
-        <i data-lucide="users" class="w-4 h-4 text-amber-300"></i>
-        <span class="text-red-200 font-semibold text-xs">Toplam Ziyaretçi:</span>
-        <span id="ziyaretciSayisi" class="px-2 py-0.5 rounded-md bg-red-800 text-white font-black text-xs tracking-wider">...</span>
+      <div class="alt-alt">
+        <span>© 2026 Haydarpaşa Lisesi Beden Eğitimi ve Spor Bölümü. Tüm hakları saklıdır.</span>
+        <span class="sayac"><i data-lucide="users" class="ikon-k"></i>Toplam ziyaretçi: <b id="ziyaretciSayisi">...</b></span>
       </div>
     </div>
   </footer>
 
-  <!-- BÜYÜK AFİŞ GÖRÜNÜMÜ -->
-  <div id="afisModal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="afisModalBaslik" onclick="if(event.target===this) afisKapat()">
-    <div class="relative w-full max-w-4xl max-h-full bg-white text-slate-900 rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row">
-      <button id="afisModalKapat" type="button" onclick="afisKapat()" aria-label="Kapat" class="absolute top-3 right-3 z-10 p-2 rounded-full bg-black/60 hover:bg-black/80 text-white">
-        <i data-lucide="x" class="w-5 h-5"></i>
-      </button>
-      <div class="bg-slate-100 md:w-3/5 flex items-center justify-center">
-        <img id="afisModalImg" src="" alt="" class="w-full max-h-[60vh] md:max-h-[85vh] object-contain" />
-      </div>
-      <div class="p-5 md:p-6 md:w-2/5 flex flex-col gap-3 overflow-y-auto">
-        <h3 id="afisModalBaslik" class="text-lg font-black text-[#c40018] leading-snug pr-8"></h3>
-        <p id="afisModalAciklama" class="text-sm text-slate-600 leading-relaxed"></p>
-        <div id="afisModalButonlar" class="mt-auto pt-2"></div>
+  <!-- BÜYÜK GÖRÜNÜM (afiş ve rehberler) -->
+  <div id="goruntuleyici" class="goruntuleyici" role="dialog" aria-modal="true" aria-labelledby="gorBaslik" onclick="if(event.target===this) gorKapat()">
+    <div class="gor-kutu" id="gorKutu">
+      <button type="button" class="gor-kapat" id="gorKapatBtn" onclick="gorKapat()" aria-label="Kapat"><i data-lucide="x" class="ikon"></i></button>
+      <button type="button" class="gor-ok sol" onclick="gorKaydir(-1)" aria-label="Önceki"><i data-lucide="chevron-left" class="ikon"></i></button>
+      <button type="button" class="gor-ok sag" onclick="gorKaydir(1)" aria-label="Sonraki"><i data-lucide="chevron-right" class="ikon"></i></button>
+      <div class="gor-resim"><img id="gorResim" src="" alt="" /></div>
+      <div class="gor-bilgi">
+        <span class="gor-sayac" id="gorSayac"></span>
+        <h3 id="gorBaslik"></h3>
+        <p id="gorAciklama"></p>
+        <div class="dugme-grup" id="gorDugmeler"></div>
       </div>
     </div>
   </div>
 
-  <!-- JAVASCRIPT MOTORU -->
   <script>
+    // ---------- Yedek duyuru listesi (duyurular.json okunamazsa gösterilir) ----------
     const anaDuyurular = [
-      {
-        baslik: "Dart Okul Takımı",
-        kategori: "TAKIM SEÇİMİ",
-        tarih_saat: "Aktif Kayıt",
-        aciklama: "Odaklan, dikkatini güçlendir, takımın bir parçası ol! Dart takımına katılmak isteyen öğrencilerimiz katılım formunu doldurabilir.",
-        resim: "darttakimi.png",
-        form_linki: "https://forms.gle/e2Di4kLnwMNpFSzj7",
-        belge_linki: "turnuva_izin.html"
-      },
-      {
-        baslik: "Basketbol Kız Okul Takımı",
-        kategori: "SEÇMELER",
-        tarih_saat: "1 Eki • Öğle Arası",
-        aciklama: "Tüm sınıf düzeyindeki öğrencilerimiz seçmelere davetlidir. Spor salonunda buluşuyoruz. Katılacak öğrenciler veli izin dilekçesini unutmamalıdır.",
-        resim: "kizbasketbol.png",
-        belge_linki: "turnuva_izin.html"
-      },
-      {
-        baslik: "Kız Voleybol Takımı",
-        kategori: "SEÇMELER",
-        tarih_saat: "2 Eki • 12.00",
-        aciklama: "Bir Takım Daha Fazlasıdır — Tüm öğrencileri bekliyoruz.",
-        resim: "afis_kizvoleybol.png",
-        form_linki: "https://docs.google.com/forms/d/e/1FAIpQLSc4DfWhC0wkvuSSyG5kll6HMdy8Nykycv7qy4NYp2p2CXSrWg/viewform?usp=header",
-        belge_linki: "turnuva_izin.html"
-      },
-      {
-        baslik: "Erkek Voleybol Takımı Seçmeleri",
-        kategori: "SEÇMELER",
-        tarih_saat: "1 Eki • 12.00",
-        aciklama: "Takım ruhuyla daha güçlüyüz! Spor salonundaki erkek voleybol takımı seçmeleri için spor kıyafetleriniz ve veli izin belgenizle hazır bulununuz.",
-        resim: "erkekvoleybol.png",
-        form_linki: "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
-        belge_linki: "turnuva_izin.html"
-      },
-      {
-        baslik: "Pickleball Takım Seçimi",
-        kategori: "SEÇMELER",
-        tarih_saat: "30 Eyl • 12.00",
-        aciklama: "Tenis kortunda buluşuyoruz. Enerji ve takım ruhu için sen de katıl!",
-        resim: "pickleball-1.png",
-        form_linki: "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
-        belge_linki: "turnuva_izin.html"
-      },
-      {
-        baslik: "Futsal Erkek Takımı Seçmeleri",
-        kategori: "SEÇMELER",
-        tarih_saat: "29 Eyl • 12.00",
-        aciklama: "Sen de takımda yerini al! Spor salonunda yapılacak futsal takımı seçmelerine uygun spor kıyafeti ve veli izin belgesi ile katılabilirsiniz.",
-        resim: "afis_futsal.png",
-        form_linki: "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
-        belge_linki: "turnuva_izin.html"
-      },
-      {
-        baslik: "Masa Tenisi Turnuvası",
-        kategori: "TURNUVA",
-        tarih_saat: "29 Eyl • 12.00",
-        aciklama: "Masa tenisi salonunda buluşuyoruz. Haydi Haydarpaşa, masada buluşalım!",
-        resim: "masatenisi_afis.png",
-        form_linki: "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header",
-        belge_linki: "turnuva_izin.html"
-      }
+      { baslik: "Dart Okul Takımı", kategori: "TAKIM SEÇİMİ", tarih_saat: "Aktif Kayıt", aciklama: "Odaklan, dikkatini güçlendir, takımın bir parçası ol! Dart takımına katılmak isteyen öğrencilerimiz katılım formunu doldurabilir.", resim: "darttakimi.png", form_linki: "https://forms.gle/e2Di4kLnwMNpFSzj7", belge_linki: "turnuva_izin.html" },
+      { baslik: "Basketbol Kız Okul Takımı", kategori: "SEÇMELER", tarih_saat: "1 Eki • Öğle Arası", aciklama: "Tüm sınıf düzeyindeki öğrencilerimiz seçmelere davetlidir. Spor salonunda buluşuyoruz. Katılacak öğrenciler veli izin dilekçesini unutmamalıdır.", resim: "kizbasketbol.png", belge_linki: "turnuva_izin.html" },
+      { baslik: "Kız Voleybol Takımı", kategori: "SEÇMELER", tarih_saat: "2 Eki • 12.00", aciklama: "Bir Takım Daha Fazlasıdır — Tüm öğrencileri bekliyoruz.", resim: "afis_kizvoleybol.png", form_linki: "https://docs.google.com/forms/d/e/1FAIpQLSc4DfWhC0wkvuSSyG5kll6HMdy8Nykycv7qy4NYp2p2CXSrWg/viewform?usp=header", belge_linki: "turnuva_izin.html" },
+      { baslik: "Erkek Voleybol Takımı Seçmeleri", kategori: "SEÇMELER", tarih_saat: "1 Eki • 12.00", aciklama: "Takım ruhuyla daha güçlüyüz! Spor salonundaki erkek voleybol takımı seçmeleri için spor kıyafetleriniz ve veli izin belgenizle hazır bulununuz.", resim: "erkekvoleybol.png", form_linki: "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header", belge_linki: "turnuva_izin.html" },
+      { baslik: "Pickleball Takım Seçimi", kategori: "SEÇMELER", tarih_saat: "30 Eyl • 12.00", aciklama: "Tenis kortunda buluşuyoruz. Enerji ve takım ruhu için sen de katıl!", resim: "pickleball-1.png", form_linki: "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header", belge_linki: "turnuva_izin.html" },
+      { baslik: "Futsal Erkek Takımı Seçmeleri", kategori: "SEÇMELER", tarih_saat: "29 Eyl • 12.00", aciklama: "Sen de takımda yerini al! Spor salonunda yapılacak futsal takımı seçmelerine uygun spor kıyafeti ve veli izin belgesi ile katılabilirsiniz.", resim: "afis_futsal.png", form_linki: "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header", belge_linki: "turnuva_izin.html" },
+      { baslik: "Masa Tenisi Turnuvası", kategori: "TURNUVA", tarih_saat: "29 Eyl • 12.00", aciklama: "Masa tenisi salonunda buluşuyoruz. Haydi Haydarpaşa, masada buluşalım!", resim: "masatenisi_afis.png", form_linki: "https://docs.google.com/forms/d/e/1FAIpQLScykpm39nLL4BJODWtwRbSNh0yAHsZNr7RJEVoOpPdDJ1vYeg/viewform?usp=header", belge_linki: "turnuva_izin.html" }
     ];
 
-    function showTab(tabName) {
-      document.querySelectorAll('.page-tab').forEach(tab => tab.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      
-      const targetTab = document.getElementById('tab-' + tabName);
-      const targetBtn = document.getElementById('btn-' + tabName);
-      
-      if (targetTab) targetTab.classList.add('active');
-      if (targetBtn) targetBtn.classList.add('active');
-      
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    // ---------- Rehber galerileri ----------
+    const testRehberleri = [
+      { baslik: "Otur-Eriş (Sit and Reach) Testi", dosya: "testler/otur-eris" },
+      { baslik: "Flamingo Denge Testi", dosya: "testler/flamingo-denge" },
+      { baslik: "Mekik (Sit-Up) Testi", dosya: "testler/mekik" },
+      { baslik: "Şınav (Push-Up) Testi", dosya: "testler/sinav" },
+      { baslik: "20 Metre Mekik Koşusu Testi", dosya: "testler/20m-mekik-kosu" },
+      { baslik: "Durarak Uzun Atlama Testi", dosya: "testler/durarak-uzun-atlama" },
+      { baslik: "Referans ve Norm Tablosu", dosya: "testler/norm-tablosu" }
+    ];
+    const bransRehberleri = [
+      { baslik: "Basketbol", dosya: "branslar/basketbol" },
+      { baslik: "Voleybol", dosya: "branslar/voleybol" },
+      { baslik: "Korfbol", dosya: "branslar/korfbol" },
+      { baslik: "Yakantop", dosya: "branslar/yakantop" },
+      { baslik: "Flag Futbol", dosya: "branslar/flag-futbol" },
+      { baslik: "Badminton", dosya: "branslar/badminton" },
+      { baslik: "Masa Tenisi", dosya: "branslar/masa-tenisi" },
+      { baslik: "Kort Tenisi", dosya: "branslar/kort-tenisi" },
+      { baslik: "Pickleball", dosya: "branslar/pickleball" },
+      { baslik: "Dart", dosya: "branslar/dart" }
+    ];
 
-      if (window.lucide) {
-        lucide.createIcons();
+    function esc(t) {
+      return String(t == null ? '' : t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+    function ikonlariCiz() { if (window.lucide) lucide.createIcons(); }
+
+    // ---------- Sekmeler (adres çubuğunda #takimlar gibi bağlantılarla da açılır) ----------
+    const SEKMELER = ['anasayfa', 'rehber', 'kurumsal', 'takimlar', 'sporfest', 'iletisim'];
+    function showTab(ad, kaydirma) {
+      if (!SEKMELER.includes(ad)) ad = 'anasayfa';
+      SEKMELER.forEach(s => {
+        document.getElementById('tab-' + s).classList.toggle('aktif', s === ad);
+        document.getElementById('btn-' + s).setAttribute('aria-selected', s === ad ? 'true' : 'false');
+      });
+      if (location.hash !== '#' + ad && ad !== 'anasayfa') history.replaceState(null, '', '#' + ad);
+      if (ad === 'anasayfa' && SEKMELER.includes(location.hash.slice(1))) history.replaceState(null, '', location.pathname + location.search);
+      if (kaydirma !== false) window.scrollTo({ top: 0, behavior: 'smooth' });
+      ikonlariCiz();
+    }
+    // Ana sayfadaki #duyurular, #evraklar gibi bağlantılar: önce ana sayfayı aç, sonra bölüme git
+    document.addEventListener('click', e => {
+      const a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      const hedef = a.getAttribute('href').slice(1);
+      if (SEKMELER.includes(hedef)) { e.preventDefault(); showTab(hedef); return; }
+      const el = document.getElementById(hedef);
+      if (el) {
+        e.preventDefault();
+        showTab('anasayfa', false);
+        const ustYukseklik = document.querySelector('.ust').offsetHeight + 12;
+        window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - ustYukseklik, behavior: 'smooth' });
       }
+    });
+
+    // ---------- Duyuru şeridi ----------
+    function scrollCards(yon) {
+      const c = document.getElementById('duyuruContainer');
+      if (c) c.scrollBy({ left: yon === 'left' ? -300 : 300, behavior: 'smooth' });
     }
 
-    function scrollCards(direction) {
-      const container = document.getElementById('duyuruContainer');
-      if (container) {
-        const scrollAmount = 320;
-        container.scrollBy({
-          left: direction === 'left' ? -scrollAmount : scrollAmount,
-          behavior: 'smooth'
-        });
-      }
+    function gorselYolu(klasor, resim) {
+      return encodeURI(klasor + '/' + resim.replace(/\.[^./]+$/, '') + '.webp');
+    }
+    function gorselHata(img) {
+      const asil = img.dataset.asil;
+      if (asil && img.dataset.deneme !== '1') { img.dataset.deneme = '1'; img.src = asil; }
+      else { img.onerror = null; img.src = 'buyuk/anasayfa.webp'; }
     }
 
-    // Ziyaretçi Sayacı — iki ücretsiz sayaç servisi; biri çalışmazsa diğeri kullanılır.
-    // Hiçbiri cevap vermezse bu tarayıcıda en son görülen sayı gösterilir.
+    function butonlar(item) {
+      const form = item.form_linki ? `<a href="${esc(item.form_linki)}" target="_blank" rel="noopener" class="dugme dugme-kirmizi">Başvuru / Form</a>` : '';
+      const belge = item.belge_linki ? `<a href="${esc(item.belge_linki)}" target="_blank" rel="noopener" class="dugme dugme-koyu">Veli İzin Belgesi</a>` : '';
+      return form + belge;
+    }
+
+    let gosterilenDuyurular = [];
+    function renderCards(duyurular) {
+      const c = document.getElementById('duyuruContainer');
+      if (!c) return;
+      gosterilenDuyurular = duyurular;
+      c.innerHTML = duyurular.map((item, i) => {
+        const resim = item.resim || '';
+        const kucuk = resim ? gorselYolu('kucuk', resim) : 'buyuk/anasayfa.webp';
+        const asil = resim ? encodeURI(resim) : '';
+        return `
+          <article class="duyuru">
+            <button type="button" class="duyuru-gorsel" onclick="afisAc(${i})" aria-label="${esc(item.baslik)} afişini büyüt">
+              <img src="${kucuk}" data-asil="${asil}" alt="${esc(item.baslik)}" loading="lazy" decoding="async" onerror="gorselHata(this)" />
+              <span class="buyut-etiket"><i data-lucide="maximize-2" class="ikon-k"></i>Büyüt</span>
+            </button>
+            <div class="duyuru-govde">
+              <div class="duyuru-ust"><span class="etiket">${esc(item.kategori || 'Duyuru')}</span><span class="tarih">${esc(item.tarih_saat)}</span></div>
+              <h3>${esc(item.baslik)}</h3>
+              <p>${esc(item.aciklama)}</p>
+              <div class="duyuru-dugmeler">${butonlar(item)}</div>
+            </div>
+          </article>`;
+      }).join('');
+      ikonlariCiz();
+      startAutoScroll();
+    }
+
+    async function loadDuyurular() {
+      try {
+        const r = await fetch('duyurular.json?v=' + Date.now());
+        if (r.ok) {
+          const data = await r.json();
+          if (data && Array.isArray(data.liste) && data.liste.length > 0) { renderCards(data.liste); return; }
+        }
+      } catch (e) { console.log('JSON yüklenemedi, hazır liste gösteriliyor.'); }
+      renderCards(anaDuyurular);
+    }
+
+    // Otomatik kaydırma (duraklat düğmesi ve "hareketi azalt" ayarına uyar)
+    let autoScrollTimer = null, isPaused = false, autoPos = 0, userPaused = false;
+    try { userPaused = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+    function startAutoScroll() {
+      const c = document.getElementById('duyuruContainer');
+      if (!c) return;
+      if (autoScrollTimer) clearInterval(autoScrollTimer);
+      autoScrollTimer = setInterval(() => {
+        if (isPaused || document.hidden) return;
+        if (c.scrollLeft + c.clientWidth >= c.scrollWidth - 2) { c.scrollLeft = 0; autoPos = 0; }
+        else {
+          if (Math.abs(c.scrollLeft - autoPos) > 2) autoPos = c.scrollLeft;
+          autoPos += 1; c.scrollLeft = autoPos;
+        }
+      }, 30);
+    }
+    function stopAutoScroll() { isPaused = true; }
+    function resumeAutoScroll() { if (!userPaused && !gorAcik()) isPaused = false; }
+    function toggleAutoScroll() { userPaused = !userPaused; isPaused = userPaused; updatePauseButton(); }
+    function updatePauseButton() {
+      const b = document.getElementById('duraklatBtn');
+      if (!b) return;
+      b.setAttribute('aria-pressed', userPaused ? 'true' : 'false');
+      b.setAttribute('aria-label', userPaused ? 'Kaydırmayı başlat' : 'Kaydırmayı duraklat');
+      b.innerHTML = `<i data-lucide="${userPaused ? 'play' : 'pause'}" class="ikon-k"></i>`;
+      ikonlariCiz();
+    }
+
+    // ---------- Büyük görünüm (afiş, rehber galerisi) ----------
+    let galeri = [], galeriSira = 0;
+    function gorAcik() { return document.getElementById('goruntuleyici').classList.contains('acik'); }
+    function gorGoster(o) {
+      const img = document.getElementById('gorResim');
+      img.dataset.deneme = ''; img.dataset.asil = o.asil || '';
+      img.onerror = o.asil ? function () { gorselHata(this); } : null;
+      img.src = o.src; img.alt = o.baslik || '';
+      document.getElementById('gorBaslik').textContent = o.baslik || '';
+      document.getElementById('gorAciklama').textContent = o.aciklama || '';
+      document.getElementById('gorDugmeler').innerHTML = o.dugmeler || '';
+      document.getElementById('gorSayac').textContent = galeri.length > 1 ? `${galeriSira + 1} / ${galeri.length}` : '';
+      document.getElementById('gorKutu').classList.toggle('yan', !!o.yan);
+    }
+    function gorAc(liste, sira) {
+      galeri = liste; galeriSira = sira;
+      const g = document.getElementById('goruntuleyici');
+      g.classList.toggle('galeri', liste.length > 1);
+      gorGoster(liste[sira]);
+      g.classList.add('acik');
+      document.body.style.overflow = 'hidden';
+      isPaused = true;
+      ikonlariCiz();
+      document.getElementById('gorKapatBtn').focus();
+    }
+    function gorKapat() {
+      document.getElementById('goruntuleyici').classList.remove('acik');
+      document.body.style.overflow = '';
+      if (!userPaused) isPaused = false;
+    }
+    function gorKaydir(adim) {
+      if (galeri.length < 2) return;
+      galeriSira = (galeriSira + adim + galeri.length) % galeri.length;
+      gorGoster(galeri[galeriSira]);
+    }
+    document.addEventListener('keydown', e => {
+      if (!gorAcik()) return;
+      if (e.key === 'Escape') gorKapat();
+      if (e.key === 'ArrowRight') gorKaydir(1);
+      if (e.key === 'ArrowLeft') gorKaydir(-1);
+    });
+    function afisAc(i) {
+      const liste = gosterilenDuyurular.map(d => ({
+        src: d.resim ? gorselYolu('buyuk', d.resim) : 'buyuk/anasayfa.webp',
+        asil: d.resim ? encodeURI(d.resim) : '',
+        baslik: d.baslik, aciklama: [d.tarih_saat, d.aciklama].filter(Boolean).join(' — '),
+        dugmeler: butonlar(d), yan: true
+      }));
+      gorAc(liste, i);
+    }
+    function tekGorselAc(src, baslik, aciklama) { gorAc([{ src, baslik, aciklama }], 0); }
+
+    function galeriCiz(kapId, liste, aciklama) {
+      const kap = document.getElementById(kapId);
+      if (!kap) return;
+      const ogeler = liste.map(r => ({ src: `gorseller/${r.dosya}.webp`, baslik: r.baslik, aciklama }));
+      kap.innerHTML = liste.map((r, i) => `
+        <button type="button" class="belge" data-sira="${i}" aria-label="${esc(r.baslik)} rehberini aç">
+          <span class="belge-gorsel"><img src="gorseller/${r.dosya}-k.webp" alt="" loading="lazy" decoding="async" /></span>
+          <span>${esc(r.baslik)}<i data-lucide="maximize-2" class="ikon-k"></i></span>
+        </button>`).join('');
+      kap.querySelectorAll('.belge').forEach(b => b.addEventListener('click', () => gorAc(ogeler, Number(b.dataset.sira))));
+    }
+
+    // ---------- Ziyaretçi sayacı ----------
+    // İki ücretsiz sayaç servisi; biri çalışmazsa diğeri kullanılır. Hiçbiri cevap vermezse bu tarayıcıda en son görülen sayı gösterilir.
     const SAYAC_SERVISLERI = [
       { ad: 'abacus', url: islem => `https://abacus.jasoncameron.dev/${islem}/haydarpasa-spor-sitesi/ziyaretci` },
       { ad: 'countapi', url: islem => `https://countapi.mileshilliard.com/api/v1/${islem}/haydarpasa-spor-sitesi-ziyaretci` }
     ];
-
     async function sayacIstek(url, ms) {
       const ctrl = new AbortController();
       const t = setTimeout(() => ctrl.abort(), ms);
@@ -651,208 +695,49 @@
         const sayi = Number(veri.value);
         if (!Number.isFinite(sayi)) throw new Error('Geçersiz cevap');
         return sayi;
-      } finally {
-        clearTimeout(t);
-      }
+      } finally { clearTimeout(t); }
     }
-
     async function initCounter() {
-      const counterEl = document.getElementById('ziyaretciSayisi');
-      if (!counterEl) return;
+      const el = document.getElementById('ziyaretciSayisi');
+      if (!el) return;
       let sayildi = false;
       try { sayildi = sessionStorage.getItem('hpl_sayildi') === '1'; } catch (e) {}
       const islem = sayildi ? 'get' : 'hit';
-
-      for (const servis of SAYAC_SERVISLERI) {
+      for (const s of SAYAC_SERVISLERI) {
         try {
-          const sayi = await sayacIstek(servis.url(islem), 5000);
-          counterEl.textContent = sayi.toLocaleString('tr-TR');
-          try {
-            sessionStorage.setItem('hpl_sayildi', '1');
-            localStorage.setItem('hpl_son_sayi', String(sayi));
-          } catch (e) {}
+          const sayi = await sayacIstek(s.url(islem), 5000);
+          el.textContent = sayi.toLocaleString('tr-TR');
+          try { sessionStorage.setItem('hpl_sayildi', '1'); localStorage.setItem('hpl_son_sayi', String(sayi)); } catch (e) {}
           return;
-        } catch (e) {
-          console.log('Sayaç servisi cevap vermedi (' + servis.ad + '):', e);
-        }
+        } catch (e) { console.log('Sayaç servisi cevap vermedi (' + s.ad + '):', e); }
       }
-
       let son = null;
       try { son = localStorage.getItem('hpl_son_sayi'); } catch (e) {}
-      counterEl.textContent = son ? Number(son).toLocaleString('tr-TR') : '—';
+      el.textContent = son ? Number(son).toLocaleString('tr-TR') : '—';
     }
 
-    // Akıcı Otomatik Kaydırma Motoru
-    let autoScrollTimer = null;
-    let isPaused = false;
-    let autoPos = 0;
-
-    function startAutoScroll() {
-      const container = document.getElementById('duyuruContainer');
-      if (!container) return;
-      if (autoScrollTimer) clearInterval(autoScrollTimer);
-
-      autoScrollTimer = setInterval(() => {
-        if (isPaused) return;
-
-        if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 2) {
-          container.scrollLeft = 0;
-          autoPos = 0;
-        } else {
-          if (Math.abs(container.scrollLeft - autoPos) > 2) autoPos = container.scrollLeft;
-          autoPos += 1;
-          container.scrollLeft = autoPos;
-        }
-      }, 30);
-    }
-
-    // Kullanıcı duraklat düğmesine bastıysa (veya cihazında hareket azaltma açıksa) otomatik kaydırma kapalı kalır
-    let userPaused = false;
-    try { userPaused = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
-
-    function stopAutoScroll() {
-      isPaused = true;
-    }
-
-    function resumeAutoScroll() {
-      if (!userPaused) isPaused = false;
-    }
-
-    function toggleAutoScroll() {
-      userPaused = !userPaused;
-      isPaused = userPaused;
-      updatePauseButton();
-    }
-
-    function updatePauseButton() {
-      const btn = document.getElementById('duraklatBtn');
-      if (!btn) return;
-      btn.setAttribute('aria-pressed', userPaused ? 'true' : 'false');
-      btn.setAttribute('aria-label', userPaused ? 'Kaydırmayı başlat' : 'Kaydırmayı duraklat');
-      btn.innerHTML = `<i data-lucide="${userPaused ? 'play' : 'pause'}" class="w-4 h-4"></i>`;
-      if (window.lucide) lucide.createIcons();
-    }
-
-    // Güvenli metin (duyuru içeriğindeki < > & " karakterleri sayfayı bozmasın)
-    function esc(t) {
-      return String(t == null ? '' : t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-    }
-
-    // Görsel yolları: önce hafif kopya (kucuk/ veya buyuk/ klasöründeki .webp), yoksa orijinal dosya
-    function gorselYolu(klasor, resim) {
-      return encodeURI(klasor + '/' + resim.replace(/\.[^./]+$/, '') + '.webp');
-    }
-    function gorselHata(img) {
-      const asil = img.dataset.asil;
-      if (asil && img.dataset.deneme !== '1') { img.dataset.deneme = '1'; img.src = asil; }
-      else { img.onerror = null; img.src = 'buyuk/anasayfa.webp'; }
-    }
-
-    let gosterilenDuyurular = [];
-
-    function butonlar(item, buyuk) {
-      const pad = buyuk ? 'py-2.5 text-sm' : 'py-2 text-xs';
-      const form = item.form_linki ? `<a href="${esc(item.form_linki)}" target="_blank" rel="noopener" class="flex-1 ${pad} px-3 rounded-xl bg-[#c40018] hover:bg-red-800 text-white font-bold text-center shadow-sm transition">Başvuru / Form</a>` : '';
-      const belge = item.belge_linki ? `<a href="${esc(item.belge_linki)}" target="_blank" rel="noopener" class="flex-1 ${pad} px-3 rounded-xl bg-slate-900 hover:bg-slate-700 text-white font-bold text-center shadow-sm transition">Veli İzin Belgesi</a>` : '';
-      return (form || belge) ? `<div class="flex gap-2">${form}${belge}</div>` : '';
-    }
-
-    function renderCards(duyurular) {
-      const container = document.getElementById('duyuruContainer');
-      if (!container) return;
-      gosterilenDuyurular = duyurular;
-      container.innerHTML = duyurular.map((item, i) => {
-        const resim = item.resim || '';
-        const kucuk = resim ? gorselYolu('kucuk', resim) : 'buyuk/anasayfa.webp';
-        const asil = resim ? encodeURI(resim) : '';
-        return `
-          <article class="w-[260px] sm:w-[280px] shrink-0 bg-white rounded-2xl overflow-hidden flex flex-col shadow-lg hover:shadow-2xl transition">
-            <button type="button" onclick="afisAc(${i})" aria-label="${esc(item.baslik)} afişini büyüt" class="group relative block w-full aspect-[4/5] bg-slate-100 overflow-hidden">
-              <img src="${kucuk}" data-asil="${asil}" alt="${esc(item.baslik)}" loading="lazy" decoding="async" class="w-full h-full object-contain transition duration-300 group-hover:scale-[1.03]" onerror="gorselHata(this)" />
-              <span class="absolute bottom-2 right-2 inline-flex items-center gap-1 rounded-full bg-black/60 text-white text-[10px] font-bold px-2 py-1 opacity-90">
-                <i data-lucide="maximize-2" class="w-3 h-3"></i> Büyüt
-              </span>
-            </button>
-            <div class="p-4 flex flex-col gap-2 flex-1 border-t border-slate-100">
-              <div class="flex items-center justify-between gap-2 text-[11px]">
-                <span class="font-black text-[#c40018] bg-red-50 px-2 py-0.5 rounded-md uppercase truncate">${esc(item.kategori || 'Duyuru')}</span>
-                <span class="text-slate-500 font-bold shrink-0">${esc(item.tarih_saat)}</span>
-              </div>
-              <h3 class="text-sm font-black text-slate-900 leading-snug">${esc(item.baslik)}</h3>
-              <p class="text-xs text-slate-600 leading-snug line-clamp-3">${esc(item.aciklama)}</p>
-              <div class="mt-auto pt-2">${butonlar(item, false)}</div>
-            </div>
-          </article>`;
-      }).join('');
-      if (window.lucide) lucide.createIcons();
-      startAutoScroll();
-    }
-
-    // Büyük afiş görünümü
-    function afisAc(i) {
-      const item = gosterilenDuyurular[i];
-      if (!item) return;
-      const modal = document.getElementById('afisModal');
-      const img = document.getElementById('afisModalImg');
-      img.onerror = function () { gorselHata(this); };
-      img.dataset.deneme = '';
-      img.dataset.asil = item.resim ? encodeURI(item.resim) : '';
-      img.src = item.resim ? gorselYolu('buyuk', item.resim) : 'buyuk/anasayfa.webp';
-      img.alt = item.baslik || 'Duyuru afişi';
-      document.getElementById('afisModalBaslik').textContent = item.baslik || '';
-      document.getElementById('afisModalAciklama').textContent = item.aciklama || '';
-      document.getElementById('afisModalButonlar').innerHTML = butonlar(item, true);
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-      document.body.style.overflow = 'hidden';
-      isPaused = true;
-      document.getElementById('afisModalKapat').focus();
-    }
-    function afisKapat() {
-      const modal = document.getElementById('afisModal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-      document.body.style.overflow = '';
-      if (!userPaused) isPaused = false;
-    }
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') afisKapat(); });
-
-    async function loadDuyurular() {
-      // Önce güncel listeyi (duyurular.json) dener; ulaşılamazsa sayfadaki hazır listeyi gösterir
-      try {
-        const response = await fetch('duyurular.json?v=' + Date.now());
-        if (response.ok) {
-          const data = await response.json();
-          if (data && Array.isArray(data.liste) && data.liste.length > 0) {
-            renderCards(data.liste);
-            return;
-          }
-        }
-      } catch (e) {
-        console.log('JSON yüklenemedi, hazır liste gösteriliyor.');
-      }
-      renderCards(anaDuyurular);
-    }
-
+    // ---------- Başlat ----------
     document.addEventListener('DOMContentLoaded', () => {
-      if (window.lucide) {
-        lucide.createIcons();
-      }
+      const ilk = location.hash.slice(1);
+      if (SEKMELER.includes(ilk)) showTab(ilk, false);
+      galeriCiz('testGaleri', testRehberleri, 'Performans testi öğrenci görsel rehberi.');
+      galeriCiz('bransGaleri', bransRehberleri, 'Branş öğrenci görsel rehberi: saha ölçüleri, temel kurallar, teknik ve taktikler.');
+      ikonlariCiz();
       initCounter();
       isPaused = userPaused;
       updatePauseButton();
       loadDuyurular();
-
-      const container = document.getElementById('duyuruContainer');
-      if (container) {
-        container.addEventListener('mouseenter', stopAutoScroll);
-        container.addEventListener('mouseleave', resumeAutoScroll);
-        container.addEventListener('touchstart', stopAutoScroll, { passive: true });
-        container.addEventListener('touchend', () => {
-          setTimeout(resumeAutoScroll, 2500);
-        }, { passive: true });
+      const c = document.getElementById('duyuruContainer');
+      if (c) {
+        c.addEventListener('mouseenter', stopAutoScroll);
+        c.addEventListener('mouseleave', resumeAutoScroll);
+        c.addEventListener('focusin', stopAutoScroll);
+        c.addEventListener('focusout', resumeAutoScroll);
+        c.addEventListener('touchstart', stopAutoScroll, { passive: true });
+        c.addEventListener('touchend', () => setTimeout(resumeAutoScroll, 2500), { passive: true });
       }
     });
+    window.addEventListener('hashchange', () => { const h = location.hash.slice(1); if (SEKMELER.includes(h)) showTab(h); });
   </script>
 </body>
 </html>
