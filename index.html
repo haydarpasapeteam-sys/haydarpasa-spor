@@ -9,6 +9,16 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="HL Spor">
   <title>Haydarpaşa Lisesi - Beden Eğitimi ve Spor Bölümü</title>
+  <meta name="description" content="Haydarpaşa Lisesi Beden Eğitimi ve Spor Bölümü: duyurular, takım seçmeleri, okul takımları, turnuva fikstürleri, veli izin belgeleri ve SporFest arşivi.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="tr_TR">
+  <meta property="og:site_name" content="HL Spor">
+  <meta property="og:title" content="Haydarpaşa Lisesi - Beden Eğitimi ve Spor Bölümü">
+  <meta property="og:description" content="Duyurular, takım seçmeleri, okul takımları, turnuva fikstürleri, veli izin belgeleri ve SporFest arşivi.">
+  <meta property="og:url" content="https://haydarpasapeteam-sys.github.io/haydarpasa-spor/">
+  <meta property="og:image" content="https://haydarpasapeteam-sys.github.io/haydarpasa-spor/anasayfa.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="logo.jpg">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
@@ -73,10 +83,13 @@
             </div>
             <div>
               <h2 class="text-xl sm:text-2xl font-black tracking-wide text-white uppercase leading-none">Duyurular Panosu</h2>
-              <p class="text-[11px] sm:text-xs text-red-100 mt-1 font-semibold">Takım seçmeleri, sonuçlar ve turnuvalar (Üzerine gelince / dokununca durur)</p>
+              <p class="text-[11px] sm:text-xs text-red-100 mt-1 font-semibold">Takım seçmeleri, sonuçlar ve turnuvalar</p>
             </div>
           </div>
           <div class="flex items-center gap-1.5">
+            <button id="duraklatBtn" onclick="toggleAutoScroll()" aria-label="Kaydırmayı duraklat" aria-pressed="false" class="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition backdrop-blur-sm">
+              <i data-lucide="pause" class="w-4 h-4"></i>
+            </button>
             <button onclick="scrollCards('left')" aria-label="Geri" class="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition backdrop-blur-sm">
               <i data-lucide="chevron-left" class="w-4 h-4"></i>
             </button>
@@ -91,7 +104,7 @@
           <!-- Kartlar yüklenecektir -->
         </div>
 
-        <!-- ANTRENMAN VE SORUMLU ÖĞRETMEN GÜNLERİ (3'LÜ CANVA GRİDİ) -->
+        <!-- BRANŞ DUYURULARI VE ANTRENMAN PROGRAMI (3'LÜ CANVA GRİDİ) -->
         <div class="mt-8 space-y-3">
           <div class="flex items-center gap-2.5 px-2">
             <div class="p-1.5 rounded-lg bg-amber-400 text-slate-900">
@@ -99,10 +112,10 @@
             </div>
             <div>
               <h3 class="text-lg sm:text-xl font-black tracking-wide text-white uppercase leading-none">
-                Antrenman ve Sorumlu Öğretmen Günleri
+                Branş Duyuruları ve Antrenman Programı
               </h3>
               <p class="text-[11px] sm:text-xs text-red-100 mt-0.5 font-semibold">
-                Okul takımlarımızın haftalık çalışma programı ve branş sorumlu öğretmenleri
+                Voleybol ve futsal duyuruları, haftalık antrenman günleri ve branş sorumlu öğretmenleri
               </p>
             </div>
           </div>
@@ -411,9 +424,9 @@
             <div class="space-y-1">
               <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-100 text-[#c40018] text-xs font-black uppercase">
                 <i data-lucide="flame" class="w-3.5 h-3.5"></i>
-                <span>Haydarpaşa SporFest '27</span>
+                <span>HL SporFest '27</span>
               </span>
-              <h3 class="text-xl sm:text-2xl font-black text-[#c40018]">HL Sporfest '27 Arşivi</h3>
+              <h3 class="text-xl sm:text-2xl font-black text-[#c40018]">HL SporFest Arşivi</h3>
               <p class="text-xs text-slate-600 font-medium">Haydarpaşa Lisesi'nin köklü spor geleneği:</p>
             </div>
           </div>
@@ -426,7 +439,7 @@
         <!-- YENİ SPORFEST CANVA GÖMMÜ (EMBED) KARTI -->
         <div class="rounded-2xl overflow-hidden shadow-2xl border-2 border-amber-400/40 bg-slate-950">
           <div style="position: relative; width: 100%; height: 0; padding-top: 56.25%; overflow: hidden;">
-            <iframe title="HL Sporfest Arşivi" loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;"
+            <iframe title="HL SporFest Arşivi" loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;"
               src="https://www.canva.com/design/DAHZHjLC2Y4/_FD9gElWJ2OHxJRRPXEp_g/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
             </iframe>
           </div>
@@ -436,7 +449,7 @@
         <div class="p-6 rounded-2xl bg-amber-50/80 border border-amber-200 text-slate-800 text-center space-y-2">
           <h4 class="text-base sm:text-lg font-black text-[#c40018]">Gençliğin Enerjisi Sahalarda!</h4>
           <p class="text-xs sm:text-sm text-slate-700 leading-relaxed max-w-4xl mx-auto">
-            Haydarpaşa Lisesi’nin köklü spor geleneğini gençliğin sınırsız enerjisiyle buluşturan <strong>HL Sporfest '27</strong>, İstanbul’un seçkin liselerini kıyasıya rekabet ve dostluk çatısı altında bir kez daha bir araya getiriyor. <strong>Futsal, voleybol, basketbol ve masa tenisi</strong> başta olmak üzere geniş bir yelpazede düzenlenen turnuvalarımızda; centilmenlik, takım ruhu ve yüksek mücadele gücü sahalara yansıyor.
+            Haydarpaşa Lisesi’nin köklü spor geleneğini gençliğin sınırsız enerjisiyle buluşturan <strong>HL SporFest '27</strong>, İstanbul’un seçkin liselerini kıyasıya rekabet ve dostluk çatısı altında bir kez daha bir araya getiriyor. <strong>Futsal, voleybol, basketbol ve masa tenisi</strong> başta olmak üzere geniş bir yelpazede düzenlenen turnuvalarımızda; centilmenlik, takım ruhu ve yüksek mücadele gücü sahalara yansıyor.
           </p>
         </div>
 
@@ -614,7 +627,10 @@
       try { sayildi = sessionStorage.getItem('hpl_sayildi') === '1'; } catch (e) {}
       const islem = sayildi ? 'get' : 'hit';
       try {
-        const r = await fetch(`https://abacus.jasoncameron.dev/${islem}/${SAYAC_ALANI}/${SAYAC_ANAHTAR}`);
+        const ctrl = new AbortController();
+        const zamanAsimi = setTimeout(() => ctrl.abort(), 6000);
+        const r = await fetch(`https://abacus.jasoncameron.dev/${islem}/${SAYAC_ALANI}/${SAYAC_ANAHTAR}`, { signal: ctrl.signal });
+        clearTimeout(zamanAsimi);
         if (!r.ok) throw new Error('HTTP ' + r.status);
         const veri = await r.json();
         counterEl.textContent = Number(veri.value).toLocaleString('tr-TR');
@@ -649,12 +665,31 @@
       }, 30);
     }
 
+    // Kullanıcı duraklat düğmesine bastıysa (veya cihazında hareket azaltma açıksa) otomatik kaydırma kapalı kalır
+    let userPaused = false;
+    try { userPaused = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+
     function stopAutoScroll() {
       isPaused = true;
     }
 
     function resumeAutoScroll() {
-      isPaused = false;
+      if (!userPaused) isPaused = false;
+    }
+
+    function toggleAutoScroll() {
+      userPaused = !userPaused;
+      isPaused = userPaused;
+      updatePauseButton();
+    }
+
+    function updatePauseButton() {
+      const btn = document.getElementById('duraklatBtn');
+      if (!btn) return;
+      btn.setAttribute('aria-pressed', userPaused ? 'true' : 'false');
+      btn.setAttribute('aria-label', userPaused ? 'Kaydırmayı başlat' : 'Kaydırmayı duraklat');
+      btn.innerHTML = `<i data-lucide="${userPaused ? 'play' : 'pause'}" class="w-4 h-4"></i>`;
+      if (window.lucide) lucide.createIcons();
     }
 
     function renderCards(duyurular) {
@@ -718,6 +753,8 @@
         lucide.createIcons();
       }
       initCounter();
+      isPaused = userPaused;
+      updatePauseButton();
       loadDuyurular();
 
       const container = document.getElementById('duyuruContainer');
